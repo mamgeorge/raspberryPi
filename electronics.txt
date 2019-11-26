@@ -1,0 +1,709 @@
+https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart\\5Personal\Technology\raspberryPi\electronics.txt
+
+terminology [
+
+	ASIC Application Specific Integrated Circuit - customized IC
+	FTDI Future Technology Devices International - develops, manufactures, and supports devices and their related software drivers for converting RS-232 or TTL serial transmissions to USB signals
+]
+
+physics [
+
+	Kirchoffs law: current is the same at all points in closed circuits
+
+	ANODE ( + ) ---->|---- ( - ) CATHODE
+
+	electron flow
+
+		https://chemistry.stackexchange.com/questions/16785/positive-or-negative-anode-cathode-in-electrolytic-galvanic-cell
+
+	power ( batteries )
+
+		http://www.techlib.com/reference/batteries.html
+
+			type	volts	mAh: milliAmpHour
+			AAA		1.5		1000
+			AA		1.5		2400
+			C-cell	1.5		6000
+			D-cell	1.5		13000
+			6V		6.0		11000 , 4LR44/L1325 has 165 mAh
+			9V		9.0		500
+
+			xxxxxx	5V ~ 0.8A	2600 mAh / In&Out: 5V ~ 0.8A / TPLink PowerBank
+			PB5200	5V ~ 2.5A	5200 mAh / In&Out: 5V ~ 2.5A / TPLink PowerBank model: TLPB5200
+			PB10400	5V ~ 2.5A	10400 mAh/ In&Out: 5V ~ 2.5A / TPLink PowerBank model: TLPB10400
+
+			AA alkaline has about 2500 mAh , @ voltage of 1.2 V to 1.5V
+
+			AA aka R6 ( IEC 60086 ) , 15 ( ANSIC18 ) , HP7 ( historical )
+
+			note: max of 16mA per pin with total current from all pins <= 51mA
+
+		adding batteries:
+			in series adds voltage
+			parallel adds current ( supply remains constant but drain less ; each battery will be 1/2 total )
+			V = I * R
+
+		WPT ( Wireless Power Transfer ) calculating:
+			calculating electrical energy transfer in two electromagnetic coils
+			calculating wireless energy transfer in electromagnetic coil induction
+			example calculating distance requirement for electromagnetic coil induction
+
+			http://www.electronics-tutorials.ws/inductor/inductance.html
+			inductance units are Henry ( H ) or Webers per Ampere ( 1 H = 1 Wb/A )
+			VL = -L	* ( dI / dt ) , dI is deltaCurrent , dt is deltaTime
+			L = Vl / ( dI / dt ) = 1Volt / ( 1A / 1s ) = 1 Henry
+			L = N ( F / I ) , F or phi is Magnetic Flux Linkage
+
+			L =	( µ0 * N^2 * A ) / l
+				L is coefficient of self inductance in Henries
+				µ0 is the Permeability of Free Space ( 4*pi*10^-7 )
+				N is the Number of turns
+				A is the Inner Core Area ( pi*r^2 ) in m^2
+				l is the length of the Coil in metres
+
+	CircuitLab web software
+	https://www.circuitlab.com/
+
+	PCB etching
+	https://electronics.stackexchange.com/questions/42840/how-to-go-from-a-development-board-to-a-production-board
+]
+
+components ( resistor relay transistor diode inductor capacitor transceiver ) [
+
+	resistor [
+
+				1	2	3	M		| tolerance
+		0	blk	|	|	?	| 10^0	|
+		1	brn	|	|	?	| 10^1	| ± 1%
+		2	red	|	|	?	| 10^2	| ± 2%
+		3	ora	|	|	?	| 10^3	|
+		4	yel	|	|	?	| 10^4	|
+		5	grn	|	|	?	| 10^5	|
+		6	blu	|	|	?	| 10^6	|
+		7	vio	|	|	?	| 10^7	|
+		8	gra	|	|	?	| 10^8	|
+		9	wht	|	|	?	| 10^9	|
+		---------------------------------
+			gld				| 0.1	| ± 5%
+			slv				| 0.01	| ± 10%
+	]
+
+	relay [
+
+		switch , transistor , optocoupler , relay
+
+		optocoupler aka optoisolator
+
+			SHARP PC817
+			1 anode
+			2 cathode
+			3 emitter
+			4 collector
+
+		relay SRD-5VDC-SLC , Songle PN#: SRD-5VDC-SLC
+
+			requies 60 mA
+			SPDT Single Pole Double Throw
+
+			ratings: TUV ( Technischer Uberwachungsverein ) , UL ( more conservative )
+
+			SRD		model of relay
+			5VDC	nominal coil input voltage
+			S		Structure			( S:Sealed type F:Flux free type )
+			L		Coil sensitivity	( L:0.36W D:0.45W )
+			C		Contact form		( A:1 form A , B:1 form B , C:1 form C )
+	]
+
+	transistor [
+
+		base collector emitter , bases need current limiting resistor
+
+		BJT		Bipolar Junction Transistor
+
+				NPN	( low side switching ) current flows from C to E
+
+					2n2222
+					MPS22222A
+
+				PNP ( high side switching )	base emitter collector
+
+		FET		Field Effect Transistor
+
+		MOSFET	Metal Oxide Semiconductor FET
+	]
+
+	diode [ ( includes Photodiode, Zener , LEDs )
+
+		types
+
+			based on symbols: Diode , LED , Photodiode , Schottky , TVS , Tunnel , Varicap , Zener
+
+			based on function: Avalanche CatWhisker ( crystal ) constantCurrent Esaki ( tunnel ) Gunn LED Laser Thermal Perun PhotoDiodes PIN Schottky SuperBarrier GoldDoped SnapOff ( stepRecovery ) Stabistors ( forwardReference ) TVS Varicap Zener
+
+		silicon switching signal diode
+
+			comes in JEDEC DO ( lead-mounted axial cylinder with round leads ) or SOD ( Small Outline Diode ) semiconductor packages
+
+			1N914 , current limit 300mA , leakage current: 5 µA , Fairchild , see: 1	N4148
+			1N4148 , current limit 300mA , leakage current: 5 µA , Fairchild , see: 1N914 , NXP has leakage current: 25 nA
+
+		LED types [
+
+			First red LED developed in 1962 at General Electric
+
+			RGB ( Red-Green-Blue ) LEDs , includes anode lead or cathode lead
+
+			SMD ( Surface Mount Device ) / flashing LED / HighPower/ InfraRed / UltraViolet /
+
+			LEDs: common cathode diffused are easiest?
+				Anode types require special loading.
+				With a common anode you connect the anode to the +5v and each individual LED to a resistor each.
+				Connect that resistor to an output pin.
+				Then a write LOW to that pin will turn the LED on and a HIGH will turn it off.
+				This is called current sinking.
+				With a common cathode you connect the cathode to ground and connect each LED's anode through a resistor to the output pin.
+				Then a HIGH turns it on. This is called current sourcing.
+
+			LED basics [
+
+				https://learn.sparkfun.com/tutorials/light-emitting-diodes-leds/all
+				anode is a positive long lead , cathode is negative short lead with flattened lens ridge
+
+				RGB LED diffused , 10mm dia , 4 Pin /
+					red: 700 mcd	 , grn: 2100 mcd	 , blu: 900 mcd ( milliCandela typical brightness ) /
+					red: 623 nm		 , grn: 523 nm		 , blu: 467 nm ( wavelength ) /
+					red: 1.8-2.2V	 , grn: 3.0-3.4V	 , blu: 3.0-3.4V ( @ 20mA current ) /
+					50 degree viewing angle
+
+				V=IR
+
+					The datasheets on white 10mm LEDs says:
+						3.3v pwr
+						80mA Forward Current
+						30 degree viewing angle
+						16,000-20,000 MCD output
+
+					R = V/I 
+					
+						R_ohms = ( Vsource - Vforward ) / Iforward 
+						max 16mA in RPi GPIO pin 
+						max draw from 3.3V is 51 mA for ALL the 3V3 GPIO pins
+
+					R = 3.3v of res / 0.016mA = 206 ohms for 10mm led
+
+					R = 2.0v of res / 0.016mA = 125 ohms for rglr led
+
+						These leds take about 20mA current; regular leds take about 4mA
+
+				RGB LED CC / RGB LED diffused , 10 mm 4 Pin Common Cathode / pack of 10 /
+					Gikfun PN#: EK1760 , item #LYSB01C5N32NQ-ELECTRNCS
+
+					The common cathode ( negative ) uses main pin ( cathode ) for ground and requires each LED anode connected thru a resistor to the output pin. A HIGH turns it on. This is called current sourcing.
+
+						CATH.	+--|<--x ( + ) R ANODE
+						( - )---+--|<--x ( + ) G ANODE
+								+--|<--x ( + ) B ANODE
+
+				RGB LED CA / RGB LED diffused , 10 mm 4 Pin Common Anode.. / pack of 10 /
+					Gikfun PN#: EK1721 , item #LYSB0194Y6MW2-ELECTRNCS
+
+					The common anode ( positive ) uses main pin ( anode ) for +5 voltage and requires each LED cathode connected thru a resistor to an output pin. A LOW turns it on. This is called current sinking.
+
+						ANODE	+-->|--x ( - ) R CATHODE
+						( + )---+-->|--x ( - ) G CATHODE
+								+-->|--x ( - ) B CATHODE
+
+					more comon type ; longer lead goes to positive voltage
+					Multi-LED driver chips ( i.e. TLC5940 , TLC5941 ) are designed CA.
+				]
+
+			light wavelengths [
+
+				http://www.oksolar.com/led/led_color_chart.htm
+
+				name	Vf forward	wavelength nm	Ohms@5V/4mAh ( regular leds )
+				--		---------	-------------	---------
+				IR		1.5 - 1.6	940 > w < 760	850
+				--		---------	-------------	----
+				red		1.6 - 2.0	610 > w < 760	750
+				orn		2.0 - 2.1	590 > w < 610	725
+				yel		2.1 - 2.2	570 > w < 590	700
+				grn		1.9 - 4.0	500 > w < 570	725 - 250 ( depends on type )
+				blu		2.5 - 3.7	450 > w < 500	325
+				vio		2.8 - 4.0	400 > w < 450	375 - 250 ( depends on type )
+				--		---------	-------------	----
+				UV		3.0 - 4.1	w < 400			225
+				wht		2.8 - 4.2	4500K - 8000K	200
+
+				rPi Voltage assumed to be 5 V base
+				rPi Current assumed to be 4 mA
+				Vf above measured @ 20 mA
+				Viewing Angle mostly 15 deg
+			]
+		]	
+	]
+
+	inductor [
+
+		4R7 inductor is part of the dual buck regulator
+		PN# SRN4018-4R7M , value 4.7uH 20% , package SMD 4018
+	]
+
+	capacitor [
+
+		There are MANY ways to read a capacitor , this is just one.
+		For compact capacitors with 3 digit numbers only , the last number represnts an exponent of 10.
+		The result will be in picofarads.
+	]
+
+	transceiver [
+
+		any transmitter and receiver device
+		RS485 transceivers use RS485 serial communication protocols.
+	]
+]
+
+ICs ( includes ADC ) [
+
+	ICs	integrated circuits
+
+	ADC	Analog 2 Digital Converter
+
+	tools
+
+		AutoDesk	https://library.io/
+		virtronics	http://virtronics.com.au/Simulator-for-Arduino.html
+
+	Intel Compute Stick is a single-board computer uses an Atom Z3735F SoC CPU
+
+		STK2M3W64CC ships with Windows10
+
+	MCP3008 / 8-Channel 10-Bit ADC with SPI
+]
+
+controllers ( HBridge ULN2003 others ) [
+
+	controller ( hardware ) vs driver ( software )
+
+		( see: "\\5Personal\Technology\raspberryPi\hardware\hardware_motors.txt" )
+
+		motor drive controller ( aka SMD: stepper motor driver , MDS: motor drive shield )
+
+	HBridge ( switch circuit allow multiple directions ) [
+
+		L298N
+			dual HBridge Drive Controller Board Module
+			http://www.instructables.com/id/Control-DC-and-stepper-motors-with-L298N-Dual-Moto/?ALLSTEPS
+
+		L293D
+			drive controller with 16 pin IC that can control two DC motors in any direction /
+			allows bipolar motors , provides around 600 mA
+
+		SN754410
+			drive controller with 16 pin IC that can control two DC motors in any direction /
+			allows bipolar motors , provides around 1 mA
+			similar to newer technology , cheaper , handles more amperage
+	]
+
+	ULN2003 ( transistor array ) [
+
+		[ _ ] ( $15 ) pibrella ; peripheral connectors
+
+			pibrella has 4 outputs which use ULN2003A open collector driver chip
+			only unipolar motors , no HBridge ( or reversal )
+
+		http://www.ti.com/product/uln2003a
+
+			ULN2003A is a stepper motor driver ( aka relay driver circuit )
+
+				amplifies current to motor
+				has array of 7 NPN Darlington transistors capable of 500 mA , 50 V output
+				has common-cathode flyback diodes for switching inductive loads
+				can be PDIP , SOIC , SOP , TSSOP packaging
+				related: ULN2002A , ULN2004A , ULQ2003A , ULQ2004A , for other logic input levels
+
+			UL		Universal Linear , UD: Universal Digital
+			N		temp range -20c to +85c
+			2003	5v TTL CMOS, 2004 has larger base ( input ) resistor
+			A		plastic dip , L: surface mounted SOIC
+
+	]
+
+	I2C for multiple steppers [
+
+		MCP23017 / 16 bit port expander
+
+		DRV8847-s / dual H-Bridge motor driver
+	]
+
+	I2C for multiple servos [
+
+		AdaFruit 16 Channel PWM Servo HAT / handles 16 servos
+
+		Dexter PivotPi / handles 8 servos
+
+		PCA9685 / handles 16 servos / not precise
+
+		MSP430  controller 20 pin DIP chip ( TSSOP20 ) ; MSP430-F2013
+			MSP430 Mixed Signal low Power microcontroller
+			MCU ( Micro Controller Unit )
+	]
+
+	others [
+
+		https://www.raspberrypi.org/forums/viewtopic.php?f=37&t=117605
+		https://www.digikey.com/en/articles/techzone/2014/jan/motor-control-different-approaches-and-options-are-available
+
+		ATMEL ATXMEGA16D4-MHR / Atmel use AVRTools to program AVRs: Advanced Virtual RISC
+
+			ATMEL ATtiny RS485 Quad Motor Control board
+			uses ATiny2313 , 2 L293D , RS485
+			controls 4 motors bidirectionally , 8 unidirectionally
+
+		Microchip MTD6505T-E/NA / Microchip use MPLab to program PICs: Peripheral Interface Controller
+
+		ROB-10507 / 4 stepper motors / uses A4983
+		ROB-12779 / 8 stepper motors / uses A3967 Microstepping Driver
+		A3967 / upto 0.75A , by Allegro , implemented as EasyDriver 4.5
+		A4988 / upto 1.5A , by Allegro , 1/16 step , see DRV8825
+		DRV8825	1/32 step , higher current , new
+		L6460 / handles 2 DC motors , 1 stepper motor , 3 power supplies
+		UCN5804B / $17 , difficult to find
+		LV8411GR: 4-Channel H bridge Stepper Motor Driver / http://www.alldatasheet.com/view.jsp?Searchword=Lv8411gr
+
+		ZILOG Z16FMC64AG20SG
+		IXYS IXDP630PI
+		PIC16F877A
+	]
+]
+
+packaging ( SIP DIP PDIP SOIC SOP TSSOP ) [
+
+	https://en.wikipedia.org/wiki/List_of_integrated_circuit_packaging_types
+
+	PCB		Printed Circuit Board
+
+	SIP		Single Inline Package
+	DIP		Dual Inline Package
+	PDIP	Plastic Dip
+	SOIC	Small Outline Integrated Circuit
+	SOP		Small Outline Package
+	TSSOP	Thin Shrink Small Outline Package
+]
+
+interfaces ( SPI I2C UART RS232 ) [
+
+	UART ( Universal Asynchronous Receive/Transmit ) [
+
+		https://www.teachmemicro.com/raspberry-pi-serial-uart-tutorial/
+		https://electrosome.com/uart-raspberry-pi-python/
+		https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart
+		https://www.elinux.org/Serial_port_programming
+		https://elinux.org/RPi_Serial_Connection
+
+		UARTs are a computer hardware device for asynchronous serial communication
+		UARTs have data format and transmission speeds that are configurable
+		UARTs electric signaling levels and methods are handled by a driver circuit external to the UART
+		UARTs used with comm standards such as TIA ( formerly EIA ) RS-232 , RS-422 or RS-485
+		UARTs are usually part of an IC used for serial comm over a computer or peripheral device serial port
+		UARTs are now commonly included in microcontrollers
+		DUART or dual UART combines two UARTs into a single chip
+		QUART or quadruple UART combines four UARTs into one package , such as the NXP 28L194
+		OCTART or octal UART combines eight UARTs into one package , such as the Exar XR16L788 or the NXP SCC2698
+		USART or Universal Synchronous/Asynchronous Receiver/Transmitter also supports synchronous operation
+
+		UART hardware can use RS-232 protocol
+			often paired with D-subminiature connectors such as DB25 or DE9
+			DB25 sockets were used for the parallel printer ports
+			http://www.nullmodem.com/DB-9.htm
+
+		USB with PL2303 and 4 pins
+
+		see: libusb pyUSB java4usb
+
+			http://www.usbmadesimple.co.uk/ums_1.htm
+			http://www.beyondlogic.org/usbnutshell/usb1.shtml
+			http://electronicdesign.com/boards/how-create-and-program-usb-devices
+			http://libusb.info/
+
+			PIC ( Peripheral Interface Controller ) ; early type: PIC1650
+			PIC 18F4550
+			PIC USB HID Human Interface Device
+			http://www.waitingforfriday.com/index.php/Building_a_PIC18F_USB_device
+			http://electronics.stackexchange.com/questions/13665/what-is-the-simplest-and-cheapest-way-to-interface-with-usb
+			http://www.leonheller.com/usb/
+	]
+
+	I2C vs SPI [
+
+		( Inter Integrated Circuit ) vs ( Serial Peripheral Interface )
+
+		I2C is slower limited to 400 KHz	SPI supports faster full-duplex comm: 10Mbps
+		I2C uses only 2 wires: SDA, SCL		SPI uses 4 wire serial com: SCLK, MOSI, MISO, SS
+		I2C more complex programming		SPI clock & data lined up easily
+		I2C has multiple masters & slaves	SPI can only use one master with multiple slaves
+		I2C sync done by start sequence		SPI sync done by SS (Slave Select) going high
+		I2C cheaper							SPI expensive
+		I2C takes more power				SPI low power
+
+			I2C good compatibility , ensures data recieved , noise resistant, can be locked
+
+			SPI several variants , limited wire length
+	]
+
+	I2C ( Inter Integrated Circuit ) [
+
+		I2C is a com bus designed by Phillips also used for connecting sensors or port expanders
+
+			I2C protocol allows multiple "slave" digital integrated circuits ( "chips" ) to comm with one or more "master" chips
+			like SPI, it is intended for short distance communications within a single device
+			like Asynchronous Serial Interfaces ( RS-232 or UARTs ) it uses two signal wires for info
+
+			RPI SPI & I2C tutorial
+			https://www.instructables.com/id/Raspberry-Pi-I2C-Python/
+			https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
+
+		comm starts with a unique start sequence
+
+			SDA ( Serial Data ) is pulled low
+				a pull-down resistor connects unused input pins (OR and NOR gates) to ground (0V) to keep the given input LOW
+
+			SCL ( Serial Clock) is pulled high
+				Pull-ups are often used with buttons and switches
+				a pull-up resistor input pin will read a high state when the button is not pressed
+				a small amount of current is flowing between VCC and the input pin (not to ground)
+				the input pin reads close to VCC
+				when the button is pressed, it connects the input pin directly to ground
+
+		1# config [
+
+			$ sudo nano /etc/modprobe.d/raspi-blacklist.conf
+
+				blacklist spi-bcm2708
+				#blacklist 12c-bcm2708			// block this
+
+			$ sudo nano /etc/modules
+
+				snd-bcm2835
+				i2c-dev							// add this
+
+			$ sudo nano /boot/config.txt file
+
+				dtparam=i2c1=on					// add this
+				dtparam=i2c_arm=on				// add this
+		]
+
+		2# install [
+
+			// python uses spidev for SPI & smbus for I2C
+			// SMB ( System Management Bus ) is single ended two wire bus for lightweight com
+			// SMB often used by motherboards for com to power on/off instructions
+
+			$ sudo apt-get install i2c-tools	// add tools
+			$ sudo apt-get install python-smbus	// add tools
+
+			$ sudo adduser pi i2c				// config software
+			$ sudo reboot
+
+			$ sudo i2cdetect -y 1				// test to see connection ; also try "0"
+		]
+
+		3# connect [
+
+			connect power to V+ and V0 ground
+			connect SDA & SCL lines to RPi SDA & SCL
+
+			$ sudo i2cdetect -y 1				// rerun to see connection ; also try "0"
+		]
+
+		4# program [ CMPS03 , SRF08 , SSD1306
+
+			CMPS03 [
+
+				import smbus
+				import time
+				bus = smbus.SMBus(0)
+				address = 0x60
+
+				def bearing255():
+						bear = bus.read_byte_data(address, 1)
+						return bear
+
+				def bearing3599():
+						bear1 = bus.read_byte_data(address, 2)
+						bear2 = bus.read_byte_data(address, 3)
+						bear = (bear1 << 8) + bear2
+						bear = bear/10.0
+						return bear
+
+				while True:
+						bearing = bearing3599()     #this returns the value to 1 decimal place in degrees.
+						bear255 = bearing255()      #this returns the value as a byte between 0 and 255.
+						print bearing
+						print bear255
+						time.sleep(1)
+			]
+
+			SRF08 [
+
+				// HC-SR05
+
+				import smbus
+				import time
+				bus = smbus.SMBus(0)
+				address = 0x70
+
+				#SRF08 REQUIRES 5V
+
+				def write(value):
+						bus.write_byte_data(address, 0, value)
+						return -1
+
+				def lightlevel():
+						light = bus.read_byte_data(address, 1)
+						return light
+
+				def range():
+						range1 = bus.read_byte_data(address, 2)
+						range2 = bus.read_byte_data(address, 3)
+						range3 = (range1 << 8) + range2
+						return range3
+
+				while True:
+						write(0x51)
+						time.sleep(0.7)
+						lightlvl = lightlevel()
+						rng = range()
+						print lightlvl
+						print rng
+			]
+
+			SSD1306 [
+
+				https://github.com/adafruit/Adafruit_Python_SSD1306
+
+					$ sudo python -m pip install --upgrade pip setuptools wheel
+					$ git clone https://github.com/adafruit/Adafruit_Python_SSD1306.git
+					$ cd Adafruit_Python_SSD1306
+					$ sudo python setup.py install
+
+					$ cd examples
+					$ python shapes.py
+
+				OLED 128X64 SSD1306
+
+					SDA pin3 data
+					SCL pin5 clock
+					GND pin6 ground
+					VCC pin1 3.3v
+
+				sample.py [
+
+					import time
+					import datetime
+					import Adafruit_GPIO.SPI as SPI
+					import Adafruit_SSD1306
+					import subprocess
+
+					from PIL import Image
+					from PIL import ImageDraw
+					from PIL import ImageFont
+
+					# Raspberry Pi pin configuration:
+					RST = None     # on the PiOLED this pin isnt used
+
+					# 128x32 display with hardware I2C:
+					disp = Adafruit_SSD1306.SSD1306_128_32(rst=RST)
+					disp.begin()
+					disp.clear()
+					disp.display()
+
+					# Create blank image with mode '1' for 1-bit color
+					width = disp.width
+					height = disp.height
+					image = Image.new('1', (width, height))
+					draw = ImageDraw.Draw(image)
+					draw.rectangle((0,0,width,height), outline=0, fill=0)
+					font = ImageFont.load_default()
+
+					while True:
+
+						# Draw a black filled box to clear the image.
+						draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+						# Shell scripts for system monitoring from here : https://unix.stackexchange.com/questions/119126/command-to-display-memory-usage-disk-usage-and-cpu-load
+						cmd = "hostname -I | cut -d\' \' -f1"
+						IP = subprocess.check_output(cmd, shell = True )
+						dateTime = str( datetime.datetime.now( ) )
+
+						# Write two lines of text.
+						draw.text( ( 2, 0 ), "IP: " + str(IP),  font=font, fill=255)
+						draw.text( ( 2, 8 ), "Martin George", font=font, fill=255)
+						draw.text( ( 2, 16), "Praise God!",  font=font, fill=255)
+						draw.text( ( 2, 25), dateTime,  font=font, fill=255)
+
+						# Display image.
+						disp.image(image)
+						disp.display()
+						time.sleep(.1)
+				]
+			]
+		]
+	]
+
+	SPI	( Serial Peripheral Interface ) [
+
+		SPI bus is a synchronous serial comm interface spec used for short distance comm
+
+			SPI is used primarily in embedded systems
+			SPI was developed by Motorola in the late eighties and has become a de facto standard
+			SPI applications include Secure Digital cards and liquid crystal displays
+			SPI uses full duplex mode using a master-slave architecture with a single master
+			SPI master devices originate the frame for reading and writing
+			SPI multiple slave devices are supported through selection with individual slave select ( SS ) lines
+			SPI is sometimes called a 4 wire serial bus , contrasting with 3 , 2 , 1 wire serial buses
+			SPI is a synchronous serial interface , but NOT Synchronous Serial Interface ( SSI ) protocol
+			SSI is also a four-wire synchronous serial communication protocol
+			SSI employs differential signaling and provides only a single simplex communication channel
+
+		SCLK ( Serial Clock )
+		MOSI ( Master Out Slave In )
+		MISO ( Master In Slave Out )
+		SS	 ( Slave Select )
+	]
+
+	RS232 ( currently TIA-232-F ) [
+
+		A standard for serial communication that defines the signals connecting a
+			DTE ( data terminal equipment such as a computer terminal ) and a
+			DCE ( data circuit-terminating equipment or data communication equipment such as a modem )
+			It defines the electrical characteristics and timing & meaning of signals ,
+				and the physical size and pinout of connectors.
+	]
+]
+
+rPi SBC ( Single Board Computer ) [
+
+	Broadcom
+
+		BCM2835 ( uses ARM1176JZF-S processor )		A , B , B+ , 0
+		BCM2836 ( uses Cortex-A7 MPcore Processor )	Model2
+
+	GPIO
+
+		GPIO pins use 3.3 V rail and cannot exceed 16 mA of current
+
+		3.3 v has 50 mA to 500 mA for the B+
+		5.0 v has 1.5 A
+
+	GPIO is unsuitable for realtime or timing critical applications
+
+		1 Python garbage collecting is unpredictable
+		2 Linux kernel is multitasking O/S that can override CPU process priority
+		An Arduino can permit real-time performance and predictability.
+
+	GPIO
+		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+		$cat /proc/cpuinfo
+]
+----

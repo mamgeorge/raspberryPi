@@ -1,0 +1,412 @@
+\\5Personal\Technology\raspberryPi\sound.txt
+
+summary [
+
+	research
+
+		http://elinux.org/RPi_Text_to_Speech_( Speech_Synthesis )
+		http://shallowsky.com/blog/hardware/pi-zero-audio.html
+
+		https://learn.adafruit.com/introducing-the-raspberry-pi-zero/audio-outputs
+		https://learn.adafruit.com/adding-basic-audio-ouput-to-raspberry-pi-zero
+		https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/instructions
+		https://learn.adafruit.com/speech-synthesis-on-the-raspberry-pi/speak
+
+		VAC: http://stevenhickson.blogspot.com/2013/05/voice-command-v20-for-raspberry-pi.html
+
+	$ sudo raspi-config > Advanced Options > Audio > Auto
+
+	$ sudo modprobe snd_bcm2835
+	$ sudo apt-get install alsa-tools alsa-utils alsa-libs
+	$ sudo apt-get install espeak python-espeak
+
+	$ lsusb
+	$ dmesg | grep C-Media						// shows AudioCard CM108 chipset
+	$ cat /proc/asound/cards					// shows cards
+	$ cat /proc/asound/modules					// shows modules
+	$ jack_control start						// error issue
+
+	$ sudo nano /boot/config.txt				// may need dtparam=i2s=on ;#dtparam=audio=on blocks snd_bcm2835?
+	$ sudo nano /etc/modules					// may need snd_bcm2835
+	$ sudo nano /etc/alsa-base.conf				// blank
+	$ sudo nano /etc/modprobe.d/alsa.base.conf	// blank
+	$ sudo nano /etc/asound.conf				// defaults.ctl.card 1...
+	$ sudo nano .asoundrc						// blank
+	$ sudo nano /usr/share/alsa/alsa.conf		// defaults.ctl.card 1...
+
+	$ sudo alsamixer
+	$ speaker-test -c2							// test audio , white noise
+	$ speaker-test -c2 -D plughw:1,0			// test audio : PCM type , card number, device number
+	$ speaker-test -t wav -c2					// test audio
+	$ speaker-test -t wav -c2 -D plughw:1,0		// test audio
+
+	$ aplay -l									// lists devices
+	$ aplay Music/ping.wav						// play test wav, if sound card installed
+	$ aplay -D bluealsa Music/ping.wav			// play test wav, if bluetooth installed
+
+	$ arecord -l								// shows webcam list
+	$ arecord -d 3 -D plughw:1,0 Music/test.wav	// create test sound
+	$ aplay -D bluealsa Music/test.wav			// play test sound
+
+	$ espeak -f Music/genesis.txt				// test file
+	$ espeak "Greetings!"						// YES!
+	$ espeak -ven+m5 -k5 -s150 "Greetings!"		// -ven: voice english , m5: male 5, k5: pitch 5, -s150: speed 150wpm
+]
+
+hardware [
+
+	hardware
+
+		* USB sound card
+
+		* USB Virtual Sound Adapter" for
+			Speaker ( using jack ) , OR
+			Microphone/Headset ( using jack )
+
+		* bluetooth speakers can work , but produced choppy sound
+
+	$ sudo raspi-config > Advanced Options > Audio > Auto
+
+	$ sudo modprobe snd_bcm2835
+
+		// the hardware driver snd_bcm2835 is a LKM ( Loadable Kernel Module )
+		// it abstracts the audio I/O from the Broadcom 2835 SOC
+		// it is used by ALSA ( Advanced Linux Sound Architecture )
+		// modprobe is a Linux program used to add or remove an LKM to the Linux kernel
+
+		$ sudo modprobe bcm2835-v4l2			// uses "L" not "1" ; probably loaded by default
+
+		$ sudo nano /etc/modules
+			snd_bcm2835
+
+			// notice this may have "i2c-dev"
+
+	$ sudo apt-get install alsa-tools alsa-utils alsa-libs
+
+		$ sudo apt-get install espeak python-espeak
+
+		ALSA ( Advanced Linux Sound Architecture ) uses hardware driver snd_bcm2835
+
+			PCM ( Pulse Code Modulation )
+			ADC ( Analog to Digital Converter )
+			DAC ( Digital to Analog Converter )
+
+		DTB ( Device Tree Blob ) instantiates optional external interfaces ( I2C , I2S , SPI ):
+
+			SPI ( Serial Peripheral Interface ) is a faster , synchronous ( clocked ) protocol,
+				It is full duplex ( send and receive ) with master-slave architecture
+				It has good signal integrity , and fast.
+
+			I2C ( Inter-Integrated-Circuit , "I squared C" ) protocol for chips on a single PCB.
+				It is half-duplex ( one direction ) with two lines: SDA for data and SCL for clock.
+				It can handle multiple slaves.
+
+			I2S ( Inter-IC Sound , Integrated Interchip Sound, IIS ) is an audio serial bus protocol.
+				It is used to communicate PCM data between devices.
+				It is common for audio in phones & tablets.
+
+			the main PCM types are hw & plughw:
+				hw		opens PCM devices directly with parameters required by the application
+				plughw	used for activating the plug-in layer
+				format for PCM devices is: PCM type , card number, device number, for example, plughw:0,0.
+
+		https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/instructions
+
+		check /dev/sound ; if you many files there, youre using ALSA , if you have /dev/dsp0 , you have OSS
+
+		$ dmesg | grep Headphone	// means you have a CM-headphone chipset with a C-Media USB Headphone Set Driver
+		$ dmesg | grep cm109		// means you have a CM109 chipset , with a CM109 Phone Interface Driver
+		$ dmesg | grep C-Media		// means you have a CM108 chipset , this worked on RPI0
+		$ dmesg | grep General		// means you have a GeneralPlus chipset
+
+			pi@raspberrypi:~ $ dmesg | grep C-Media
+			[ 1.691477 ] usb 1-1: Manufacturer: C-Media Electronics Inc.
+			[ 1.707135 ] input: C-Media Electronics Inc.
+				USB PnP Sound Device as
+				/devices/platform/soc/20980000.usb/usb1/1-1/1-1:1.3/0003:8086:0808.0001/input/input0
+			[ 1.779712 ] hid-generic 0003:8086:0808.0001: input , hidraw0:
+				USB HID v1.00 Device [ C-Media Electronics Inc. USB PnP Sound Device ]
+				on usb-20980000.usb-1/input3
+
+			note: The AudioCard will NOT show up here if not plugged in.
+				The dongle failed to fully contact the AudioCard, and did not show up here.
+
+		// lsusb may show reference to: C-Media Electronics , Inc. CM108 Audio Adapter
+
+		$ lsusb
+			Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub // the basic root
+			Bus 001 Device 002: ID 8086:0808 Intel Corp.			// the AudioCard
+			Bus 001 Device 003: ID 058f:9254 Alcor Micro Corp. Hub	// ONLY shows if Hub is attached
+
+		$ cat /proc/asound/cards				// shows cards
+		$ cat /proc/asound/modules				// shows modules
+		$ aplay -l								// lists devices
+
+			## may be blank
+			$ sudo nano /etc/alsa-base.conf				// blank
+			$ sudo nano /etc/modprobe.d/alsa.base.conf	// blank
+			$ sudo nano /etc/asound.conf				// blank
+			$ sudo nano .asoundrc						// blank
+
+		$ sudo apt-get -y install mp321
+]
+
+config [
+
+	// have to reboot for this to work
+	$ sudo nano /boot/config.txt				// shows device tree overlays
+		https://www.raspberrypi.org/documentation/configuration/device-tree.md
+		https://www.raspberrypi.org/forums/viewtopic.php?f=44&t=98318
+		http://rowebots.com/en/products/unison-rtos-article/busses-i2c-i2s-spi-pcie-sdio
+		// defaults devices to off
+		// definitions in DTB ( Device Tree Blob )
+		// optional external interfaces ( I2C , I2S , SPI ) must be instantiated in the DTB
+
+		#dtparam=i2c_dev=on		// worked on RPi0 when off
+		#dtparam=i2s=on			// worked on RPi0 when off
+		#dtparam=audio=on 		// worked on RPi0 when off ; blocks snd_bcm2835
+
+	$ sudo nano /etc/asound.conf
+		defaults.ctl.card 1
+		defaults.pcm.card 1
+		defaults.timer.card 1
+		pcm.!default { type hw card 1 }
+		ctl.!default { type hw card 1 }
+
+	$ sudo nano /usr/share/alsa/alsa.conf		// lengthy config
+		defaults.ctl.card 1
+		defaults.pcm.card 1
+		defaults.pcm.device 0
+
+	$ sudo alsamixer							// use this to set speaker values
+
+		// set the audio output: 0=auto ( default ) , 1=analog ( headphone ) , 2=HDMI
+		$ amixer cset numid=3 1
+
+		// in some cases this may be needed IF forcing to HDMI
+		$ sudo nano /boot/config.txt
+			hdmi_drive=2
+
+	$ speaker-test -c2							// test audio , white noise
+	$ speaker-test -c2 -D plughw:1 , 0			// test audio : PCM type , card number, device number
+	$ speaker-test -t wav -c2					// test audio
+	$ speaker-test -t wav -c2 -D plughw:1 , 0	// test audio
+	$ espeak "Greetings!"
+]
+
+circuit [
+
+	uses circuit with GPIO pins
+
+		https://www.raspberrypi.org/blog/tinkernut-diy-pi-zero-audio/
+		https://learn.adafruit.com/adding-basic-lsaudio-ouput-to-raspberry-pi-zero/pi-zero-pwm-audio
+		http://shallowsky.com/blog/hardware/pi-zero-audio.html
+		https://theraspberryblonde.wordpress.com/2016/09/01/add-sound-to-your-pi-zero/
+
+		1 two 270 ohm resistors
+		2 two 150 ohm resistors
+		3 two 1µF ( or 10µF ) electrolytic capacitors
+		4 two 10 nF ( or 0.01 µf or 33nF ) polyester film capacitors
+		5 3.5mm headphone jack
+
+	$ sudo nano /boot/config.txt
+
+		//Enabling PWM audio through DTO ( device tree overlay )
+		dtoverlay=pwm-2chan , pin=18 , func=2pin2=13 , func2=4
+
+		//Enable audio ( loads snd_bcm2835 )
+		dtparam=audio=on
+
+	$ sudo raspi-config > Advanced Options > Audio > Headphone
+]
+
+testing [
+
+	// physical setup
+		$ alsamixer							// use this to set speaker values
+		$ arecord -l						// that is an "L"
+
+	// record
+		$ arecord -d 3 test.wav				// -d 3 means duration 3 seconds
+		$ arecord -D plughw:1 , 0 test.wav	// -D means associate to device "plughw:1 , 0"
+
+	// playback
+		$ aplay test.wav
+]
+
+tts [
+
+	tts espeak [
+
+		// eSpeak --version		( text-to-speech: 1.48.03  04.Mar.14 )
+			-f <text file>	Speaks a text file.
+			-a <integer> Sets amplitude (volume) in a range of 0 to 200. The default is 100.
+			-p <integer> Adjusts the pitch in a range of 0 to 99. The default is 50.
+			-s <integer> Sets the speed in words-per-minute. The default is 180.
+			-k <integer> Indicate words which begin with capital letters. Try -k5
+			-v <voice filename>[+<variant>] Sets a Voice
+			-w <wave file> Writes to WAV format
+			--version
+
+		$ sudo apt-get install espeak python-espeak
+		$ espeak --voices
+
+		$ espeak "Greetings!"
+		$ espeak -ven+m3 -k5 -s150 -a50 "Greetings!"
+		$ espeak -f xxxx.txt
+		$ espeak -m -vzh 'ni3 hao3. <break strength = "strong" /> wo3 shi4 qiao2 ma3 ding1!'
+
+		$ date '+year %Y month %m date %d <break strength = "strong" /> time %I:%M:%S%p' | espeak -m -ven+f5
+		$ date '+year %Y month %m date %d <break strength = "strong" /> time %I:%M:%S%p' | espeak -m -ven-us+m3 -p50 -k5 -s180 -a50
+		$ date '+year %Y month %m date %d <break strength = "strong" /> time %I:%M:%S%p' | espeak -m -ven-us+m3 -p50 -k5 -s180 -a50 --stdout | aplay -f cd -D bluealsa
+
+		$ sudo nano sample.py
+			#! /usr/bin/env python
+			from subprocess import call
+			call( [ ‘espeak "Pi initialized. Greetings!"’ ] , shell=True )
+	]
+
+	tts flite [
+
+		$ sudo apt-get install flite
+		$ flite -lv
+
+		$ flite -t "Hello , Dave."
+		$ flite -f anySpeech.txt
+		$ date "+%Y %m %d , %B %A , %H:%M %P" | flite
+	]
+
+	tts festival [
+
+		$ sudo apt-get install festival
+
+		$ echo "Greetings , Dave." | festival --tts
+		$ hostname -I | festival --tts
+	]
+
+	tts inet google [
+
+		$ nano anySpeech.sh		// create speech file
+
+			#!/bin/bash
+			say( ) { local IFS=+ ;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=$*&tl=en" ; }
+			say $*
+
+		$ chmod u+x anySpeech.sh
+
+		$ ./anySpeech.sh I have the greatest enthusiasm for the mission.
+	]
+
+	tts inet android [
+
+		$ sudo apt-get install libttspico-utils
+
+		$ pico2wave -w lookdave.wav "Wait a moment." && aplay lookdave.wav
+	]
+
+	pyttsx ( Python text-to-speech library ) [
+
+		$ wget https://pypi.python.org/packages/source/p/pyttsx/pyttsx-1.1.tar.gz
+		$ gunzip pyttsx-1.1.tar.gz
+		$ tar -xf pyttsx-1.1.tar
+		$ cd pyttsx-1.1/
+		$ sudo python setup.py install
+	]
+]
+
+VAC [
+
+	https://www.techradar.com/how-to/how-to-control-the-raspberry-pi-with-your-voice
+	https://maker.pro/raspberry-pi/tutorial/the-best-voice-recognition-software-for-raspberry-pi
+
+	https://www.instructables.com/id/Voice-Activated-Google-Assistant-for-Raspberry-Pi/
+	https://raspberrypi.stackexchange.com/questions/67715/perform-a-task-upon-a-voice-command
+
+	USB microphone
+
+		or webcam with builtin microphone
+		or microphone and AudioCard
+
+	raspberry pi speech recognition programs
+
+		online: Google Assistants API
+		RPi Voice Recognition by Oscar Liang
+		PocketSphinx , CMUSphinx
+		Jasper
+
+	online: Google Assistants API [
+
+		https://console.cloud.google.com/project
+
+			pivoice
+			goto API manager add Google Assistant
+			goto Credentials
+				487210436028-39dtnaadikgp05tsh32445mdr9j5t8tg.apps.googleusercontent.com
+				GJNri2jNIAZlJYIx2irqWdue
+
+		https://myaccount.google.com/activitycontrols
+
+			turn on: web , location , device , voice
+
+		updates
+
+			sudo apt-get update
+			sudo apt-get upgrade
+			sudo apt-get install python3-dev python3-venv
+			python3 -m venv env
+			env/bin/python -m pip install --upgrade pip setuptools
+			source env/bin/activate
+
+			python -m pip install https://github.com/googlesamples/assistant-sdk-python/releases/download/0.3.0/google_assistant_library-0.0.2-py2.py3-none-linux_armv7l.whl
+			python -m pip install –upgrade google-auth-oauthlib[tool]
+			google-oauthlib-tool –client-secrets /home/pi/Downloads/client_secret_client-id487210436028.json –scope https://www.googleapis.com/auth/assistant-sdk-prototype –save –headless
+
+			ERROR
+	]
+
+	RPi Voice Control by Steven Hickson [
+
+		-
+	]
+]
+
+ERRORS [
+
+	ERROR [ ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.xxxx
+
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.rear
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+
+		RESOLUTION ?
+			see changes above for "/etc/asound.conf" & "/usr/share/alsa/alsa.conf"
+
+			## supress error message
+			cards.pcm.front 1
+
+	]
+
+	ERROR
+		jack server is not running or cannot be started
+
+		RESOLUTION
+			$ jack_control start
+
+	ERROR
+		There was an error running option A4 Audio
+
+	ERROR
+		Cannot connect to server socket err = No such file or directory
+		Cannot connect to server request channel
+		ALSA lib pulse		.c:243:		(pulse_connect)			PulseAudio: Unable to connect: Connection refused
+		ALSA lib confmisc	.c:1281:	(snd_func_refer)		Unable to find definition 'defaults.bluealsa.device'
+		ALSA lib pcm		.c:2495:	(snd_pcm_open_noupdate)	Unknown PCM bluealsa
+
+]
+----

@@ -1,0 +1,72 @@
+\\5Personal\Technology\raspberryPi\html.nanorc
+
+	https://wolfgang-ziegler.com/blog/enable-javascript-syntax-highlighting-in-the-nano-text-editor
+	https://regex101.com
+
+###########################################################
+#### /usr/share/nano/python.nanorc
+###########################################################
+
+## Here is an example for Python.
+##
+syntax "python" "\.py$"
+header "^#!.*/python[-0-9._]*"
+icolor magenta "def [0-9A-Z_]+"
+color brightmagenta "[0-9]+"
+color brightcyan "['][^']*[^\\][']" "[']{3}.*[^\\][']{3}"
+color brightcyan "["][^"]*[^\\]["]" "["]{3}.*[^\\]["]{3}"
+color brightblue start=""""[^"]" end=""""" start="'''[^']" end="'''"
+color brightgreen "#.*$"
+color brightblue "\<(and|as|assert|break|class|continue|def|del|elif|else|excep$
+color brightblue "\<(finally|for|from|global|if|import|in|is|lambda|not|or|pass$
+color brightblue "\<(raise|return|try|while|with|yield)\>"
+color red "MLG|MEG|SAG|Jesus"
+
+###########################################################
+#### /usr/share/nano/html.nanorc
+###########################################################
+
+## Here is a short example for HTML.
+##
+syntax "html" "\.html$"
+
+## color yellow "&[^;[[:space:]]]*;"
+## color green start="<" end=">"
+
+color brightblue start="<" end=">"
+color red "&[^;[[:space:]]]*;"
+color brightcyan ""[^"]*"|qq\|.*\|"
+color magenta "(action|alt|bgcolor|height|href|id|label|longdesc|method|name|onclick|$
+color brightmagenta "\<(html|head|body|head|title|style|script|meta|link|)\>"
+color brightmagenta "\<(center|table|tr|td|form|input|hr|br|b|a|)\>"
+
+## comments
+color green start="<!--" end="-->"
+
+## Trailing spaces
+color ,green "[[:space:]]+$"
+
+###########################################################
+#### /usr/share/nano/js.nanorc
+###########################################################
+
+## Here is a short example for JavaScript.
+syntax "JavaScript" "\.js$"
+
+color brightblue "(var|express|require|session|port|host|address|console|log|)"
+color brightblue "(get|post|request|response|function|redirect)"
+color brightmagenta "(exec|execSync|spawn|JSON|stringify|chunk|stdin|stdout|write|\be$
+color brightmagenta "[0-9]+"
+color red "MLG|MEG|SAG|Jesus"
+
+color green "(^|[[:space:]])//.*"
+color green "/\*.+\*/"
+
+###########################################################
+#### nanorc
+###########################################################
+$ sudo nano /etc/nanorc
+	set tabsize 4
+
+	## JavaScript
+	include "/usr/share/nano/js.nanorc"

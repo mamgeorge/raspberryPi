@@ -1,0 +1,145 @@
+\\5Personal\Technology\raspberryPi\api_sensehat.txt
+
+API SenseHAT
+
+	notes
+	LED Matrix
+	sensors Environmental
+	sensors IMU
+	joystick
+
+notes [
+
+	https://pinout.xyz/pinout/sense_hat
+
+	https://pythonhosted.org/sense-hat/api/
+
+		pins 1 , 3 , 5 / 2 , 16 , 18 , 22 , 24
+	
+	summary	
+	
+		Made by Raspberry Pi
+		HAT form-factor
+		EEPROM auto configuration
+		Needs 5v and 3v3 power
+		Uses 6 GPIO pins
+		Communication over I2C
+		
+		0x5c: LPS25H
+		0x1c: LSM9DS1
+		0x5f: HTS221
+		0x46: LED2472G
+		0x6a: LSM9DS1
+
+	description [
+	
+	Sense HAT is an add-on board for Raspberry Pi comprising of:
+	
+		8×8 RGB LED matrix
+		five-button joystick
+		sensor: Gyroscope
+		sensor: Accelerometer
+		sensor: Magnetometer
+		sensor: Temperature
+		sensor: Barometric
+		sensor: Humidity
+
+	The shift register driving the LED Matrix is a:
+	
+		LED2472G connected via an 
+		Atmel ATTINY88 communicating via 
+		i2c at address 0x46 with the Pi
+		
+		The Multi-Directional SKRHABE010 Switch/Joystick is similarly controlled.
+
+	The sensors themselves also operate over the i2c bus:
+
+		The IMU (Accelerometer and Magnetometer) through a LSM9DS1 found 
+			at i2c address 0x1c(0x1e) and 0x6a(0x6b),
+			with Interrupts on the ATTINY88.
+
+		Environmental sensors are represented by a LPS25H Pressure/Temperature sensor
+			at address 0x5c and by a 
+			HTS221 Humidity/Temperature sensor at 0x5f on the i2c bus.
+
+	In addition, the Atmel chip can be reprogrammed via the SPI interface. 
+	
+		The pinout herein only maps the reset and chip select.
+		Adding a display or other SPI device alongside the Sense HAT should be possible 
+		with a few precautions.
+	]
+]
+
+LED Matrix [
+
+	from sense_hat import SenseHat
+	sense = SenseHat( )
+	sense.set_rotation( nnn )
+	sense.flip_h( )						# returns list
+	sense.flip_v( )						# returns list
+	sense.set_pixels( arrayPixels )
+	sense.get_pixels( )
+	sense.set_pixel( x , y , r , g , b )
+	sense.get_pixel( x , y )			# returns list
+	sense.load_image( "img.png" )		# returns list
+	sense.load_image( "img.png" , redraw=False ) # returns list
+	sense.clear( )						# no arguments defaults to off
+	sense.clear( rrr , ggg , bbb )		# passing in r , g and b values of a colour
+	sense.show_message( "text" , text_colour=[ rrr , ggg , bbb ] )
+	sense.show_message( "text" , scroll_speed=0.1 , text_colour=[ rrr , ggg , bbb ] , back_colour=[ rrr , ggg , bbb ] )
+	sense.show_letter( "t" )
+	sense.show_letter( "t" , text_colour=[ rrr , ggg , bbb ] , back_colour=[ rrr , ggg , bbb ] )
+	sense.low_light = True
+	sense.gamma = reversed( sense.gamma )
+	sense.gamma = [ 0 ] * 32			# Will turn the LED matrix off
+	sense.gamma_reset( )
+]
+
+sensors Environmental [
+
+	sense.get_humidity( )
+	sense.get_temperature( )
+	sense.get_temperature_from_humidity( )
+	sense.get_temperature_from_pressure( )
+	sense.get_pressure( )
+]
+
+sensors IMU [
+
+	IMU ( Inertial Measurement Unit )
+
+	sense.set_imu_config( True , True , True )	# compass gyroscope accelerometer
+	sense.get_orientation_radians( )	# print( "p: { pitch } , r: { roll } , y: { yaw }".format( **val_orientation_rad ) )
+	sense.get_orientation_degrees( )	# print( "p: { pitch } , r: { roll } , y: { yaw }".format( **val_orientation ) )
+	sense.get_orientation( )			# print( "p: { pitch } , r: { roll } , y: { yaw }".format( **val_orientation ) )
+
+	sense.get_compass_raw( )			# print( "x: { x } , y: { y } , z: { z }".format( **val_raw ) )
+	sense.get_gyroscope_raw( )			# print( "x: { x } , y: { y } , z: { z }".format( **val_raw ) )
+	sense.get_accelerometer_raw( )		# print( "x: { x } , y: { y } , z: { z }".format( **val_raw ) )
+
+	sense.get_compass( )				# print( "North: %s" % val_north )
+	sense.get_gyroscope( )				# print( "p: { pitch } , r: { roll } , y: { yaw }".format( **val_gyro_only ) )
+	sense.get_accelerometer( )			# print( "p: { pitch } , r: { roll } , y: { yaw }".format( **val_accel_only ) )
+]
+
+joystick [
+
+	InputEvent
+		timestamp	time
+		direction	"up" , "down" , "left" , "right" , "middle"
+		action		"pressed" , "released" , "held"
+
+	event = sense.stick.wait_for_event( )					# print( "The joystick was { } { }".format( event.action , event.direction ) )
+	event = sense.stick.wait_for_event( emptybuffer=True )	# print( "The joystick was { } { }".format( event.action , event.direction ) )
+	event = sense.stick.get_events( )						# print( "The joystick was { } { }".format( event.action , event.direction ) )
+
+	direction_up , direction_left , direction_right , direction_down , direction_middle , direction_any
+
+	event.action						# ACTION_PRESSED , ACTION_HELD , ACTION_RELEASED
+
+	sense.stick.direction_up
+	sense.stick.direction_down
+	sense.stick.direction_left
+	sense.stick.direction_right
+	sense.stick.direction_any
+]

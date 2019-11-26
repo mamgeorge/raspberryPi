@@ -1,0 +1,316 @@
+\5Personal\Technology\AI\coreNLP.txt
+
+	see: basics.txt
+
+NLP [
+
+	purposes
+
+		toy puppet
+		task manager or project tracker
+		develop consistency ; simple expression of mental & philosophy views
+		simple conceptual instruction
+
+		( guides - but not is - a friend , manager , logician . teacher )
+
+	initiate greeting
+
+		parse sentence into string array ; remove expletives
+		check if words defined
+		assign word type to map
+		identify grammar template
+
+		if interrogation question , then show word data
+		if declare statement , then define word
+		if declare command , then execute
+		if express interjection , then classify , respond to type ( help random initiate )
+
+		initiate topic
+
+	identify priorities
+	identify motivations , purposes , helpfulness
+] 
+
+motivations 2016/12 [
+
+	motivations MindMap / 1983 Shirley , 1974 Buzan
+
+		http://www.deepermind.com/02clarty.htm
+
+		The basic emotions according to Shirley have four basic states ( love state ):
+		I am	- Unity - Healthy Pride , assimilative self-awareness
+		I want	- Mobility -Desire , acquisitive movement
+		I love	- Affinity -Human love and friendship , herd sociability
+		I wonder - Variety - Curiosity , looking for something new , exploratory endeavors
+
+		When these emotions are reduced by frustration ( Neurotic State ):
+		Pride turns to Shame
+		Desire turns to Anger
+		Human love to Pathos ( extreme loneliness )
+		Curiosity to Distraction ( unfocused , anxious )
+
+		When these emotions are reduced to hopelessness we find ( Insane State ):
+		Shame turns to Contempt
+		Anger turns to Fear
+		Pathos turns to Hauteur ( repulsiveness )
+		Distraction turns to Disdain ( lack of notice )
+
+		http://www.iuo.it/emotions/The%20map%20of%20emotions.htm
+		http://learnv.ycdsb.edu.on.ca/lt/FMMC/hpdepartment.nsf/Files/mcmanad/$FILE/mmemo.html
+
+	motivations
+
+		1954 Maslow / 1953 McClelland / 2000 Reiss
+
+		5 ) Self actualization/achievement of full potential/can never be fully accomplished
+
+			Honor		need for loyalty to group values
+			Curiosity	need to learn
+
+		4 ) Self-esteem/Recognition/Achievement
+
+			Independence	need for individuality
+			Social status	need for social standing/importance
+
+		3 ) Social/Love/Friendship
+
+			5 ) Family			need to raise children ( reproduce )
+			4 ) Romance			need for sex and for beauty
+			3 ) SocialContact	need for friends ( peers )
+			2 ) Idealism		need for social justice
+			1 ) Acceptance		need for approval ( non-peers? )
+
+		2 ) Safety/Security/Shelter/Health
+
+			b ) Order		need for organized , stable , predictable environments
+			b ) Saving		need to collect
+			b ) Tranquility	need to be safe
+			a ) Power		need for influence of will
+			a ) Vengeance	need to strike back or compete
+
+		1 ) Physiology ( hunger , thirst , sleep , etc. )
+
+			Physical activity , need for exercise
+			Eating , need for food
+
+	motivations
+
+		love ( 1trust , 6support , 7protect , 8discovery , 9honesty , 0give )
+		hate ( distrust , destroy , expose , concealment , pride , take )
+
+		1 Only God			-
+		2 Accept Spirit		Accept Gods Definition
+		3 Pure Speech		Honor Gods Name
+		4 Keep Sabbath		Make Time
+		5 Honor Parents		Obey Leaders ( Modeling Priestly Behavior: ) Neat / Manage
+		6 Preserve Life		Gentle , Kind / Listen to People / No Hitting
+		7 Preserve Families	-
+		8 Respect Others	Accept Boundaries
+		9 Speak Truth		-
+		0 Be Thankful		Accept Possessions / Pray @ Meals / No Whining
+
+	motivations formulas
+
+		http://physics.info/equations/
+
+		2006 Temporal motivation theory
+
+			M = E x V / ( 1 + I x D )
+
+				Motivation , the desire for a particular outcome
+				Expectancy or self-efficacy is the probability of success
+				Value is the reward associated with the outcome
+				Impulsiveness is the individuals sensitivity to delay
+				Delay is the time to realization
+
+		2012 MPS ( motivating potential score )
+
+			MPS = ( Autonomy x Feedback ) x ( SkillVariety + TaskIdentity + TaskSignificance ) / 3
+]
+
+identity 2013/03 [
+
+	individual has a body soul spirit
+
+		spirit	trusts loves defines authority judges communes
+		soul	thinks calculates feels affection processes
+		body	io senses transport
+
+	individual has needs , capabilities , processing
+
+	1 ) needs / drives
+
+		spiritual	curiosity awareness
+		mental		processing conclusion abstraction
+		emotional	relational
+		physical	food , power
+
+	2 ) capabilities
+
+		we focus on capabilities needed with conversation only
+			contrasted to ASAT capabilities ( * means not applicable )
+			may be viewed as capabilities for response
+
+		brain		processor
+		sensor		visual:textual , audio , pressure:temperature , chemical
+		I/O			audio:sound , visual:lights ; textual display
+		* movement	articulation
+		* movement	transport
+
+	3 ) processing ( brain )
+
+		continuously scans/recieves senses ( sight sound touch smell taste needs text )
+
+		identifies information from capabilities of senses
+		prioritizes relevance ( threat need curiosity )
+		processes response
+
+		parses conversation text into concept
+]
+
+definitions 2011/03[
+
+	goal: artificially simulate or create communication
+
+		to do this requires an explicit understanding of communication
+			we define primary terms and attempt to scope their assumptions
+			the hope is that terms can be symbolically represented and processed
+			this analysis begins largely as a philosophical exercise
+
+		note "meaningful" is used with quotes for concepts that are contextual or intuitive
+			this is to emphasize where difficulties in abstracting are expected
+			it is possible that such concepts can not have symbolic representation
+			this may even be likely given AI GOFAI history
+
+	communication is the interaction of individuals
+
+		communication occurs in the context of a relationship
+
+			relationship is the interaction of individual identities
+
+		communication develops thru the interactions ( exchanges ) between individuals
+
+			interactions ( exchanges ) include
+
+				conversation ( speech ; verbal exchange )
+				shared experience
+				giving & recieving
+				empathy / sympathy
+				communion ( spiritual exchange )
+
+			we arbitrarily limit our analysis to conversation for convenience
+
+	conversation is "meaningful" verbal interaction ( exchanges ) between individuals
+
+		verbal implies speech ( or text )
+
+		"meaningful" implies ideas having some bearing on the individual
+
+			ideas representations of concepts in speech
+
+				concepts are nouns ( constructs of the world )
+
+					descriptions of constructs , images
+					summaries of constructs
+					applications of constructs
+
+				speech is a "meaningful" collection of auditory patterns
+
+?					collections are "meaningful" when arranged according to rules
+
+?					the arrangement contextually links concepts to auditory patterns
+
+?					auditory patterns are defined by grammar
+
+				auditory patterns include words , sentances , paragraphs
+
+					statements	to declare ideas
+					questions	to clarify ideas
+					imperatives	to declare initiative or direct action ( implying authority )
+
+					exclamations are non explicit speech
+					exclamations are a specialized subset of statement
+					exclamations may be associated to personal or emotional expression
+]
+
+speech [
+
+	schema
+
+		Spirit
+			longings/initiative: company
+			commune/connect
+			wonder/acknowledgement
+		Soul
+			longings/initiative: expression , puzzle
+			feeling
+			think
+			speech
+		Body
+			longings/initiative: food , movement
+			travel/movement
+			interaction
+			experience/log
+
+	symbolicSoul
+
+		listVocabulary
+
+			vocabuary array read from property file:
+
+				type	noun , adjective , verb , adverb , particle , interjection
+				word
+				definition
+
+			n , 	bird , 		animal can fly
+			n , 	animal , 	made alive
+			v , 	fly , 		travel air
+			v , 	make , 		root: make , made
+			n , 	alive , 	has breath
+			n , 	breath , 	root: breath
+
+	listenMechanically
+
+		listWords
+		handleInput
+		parseWords
+
+		parseSpeechParts
+		parseSentenceParts
+		identifyVerbTense
+		identifySubjectDirection
+
+	processInputWords
+
+		evaluateContentFromSpeaker
+
+			identifyContext
+			prioritizeSentence
+			identifyValuesInSentence
+			assignSentenceToPerson
+			identifyPersonValues
+
+		evaluateContentPersonally
+
+			evaluateReliability
+			assignValueToSentence
+			assignSentenceToKnowledge
+
+			considerImmediateLocalImplication
+			considerImmediateGlobalImplication
+			considerMotivationOfPerson
+			resetContextOfResponses
+
+		evaluateResponse
+
+			considerNeedsOfPerson
+			considerMotivationOfSelf
+			decideToReply
+
+	intiateOutputSpeaking
+
+		Statement
+		Question
+		Imperative
+		Action
+]

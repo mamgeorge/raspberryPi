@@ -1,0 +1,286 @@
+\5Personal\AI\basics.txt
+
+goals [
+
+	create NLP helper [
+
+		program a Artificial Intelligence ( AI ) Natural Language Processor ( NLP ) routine that can help others
+
+			create a word handling program that helps to
+
+				clarify and unify a consistent terminology and grammar
+				classify related ideas
+				identify beliefs and related terminology
+				identify and classify human interactions
+				assist in emotional , soul discovery by indentifying the boundaries of each
+				assist in developing a consistent expressible philosophy
+
+			attempt a thinking program , GOFAI ( GoodOldFasionedAI )
+
+				Hal9000 text samples hint at possible expectations for an AI interchange.
+
+				1# personality emulator would be a fun and interesting puzzle
+				2# mental map of info to help handle news or classify insights
+
+		modular articulation
+	]
+
+	components [
+
+		modular [ // modular component robot basic lightweight framework
+
+			( Raspbian Bash , NodeJs , Python )
+			RPi0w header male
+			memory MicroSDHC 32GB Class 10 ( UHS Speed Class 1 ) / Samsung EVO MP-MB32D
+			battery 5200 mAh portable / In&Out: 5V ~ 2.5A
+		]
+		
+		articulated	[ // articulated armature interactive skeleton brachium
+		
+			[2] SubMicro Gripper Kit / Actobotics PN: #637104 
+			[2] Hitec 31055S HS-55 Sub Micro Servo Universal Economy
+			[4] Stepper Motor 28BYJ-48 5V 
+			[4] Driver Board ULN2003
+		]
+		
+		transport [ // transport carriage carrier cart mover transport vehicle
+
+			HBridge L293D analog Motor Drive Shield
+			Tamiya PN: 70100 track and wheel set
+			Tamiya PN: 70168 Double Gearbox 4-Speed
+			[2] Tamiya PN: 980112M Mabuchi FA-130 Motor
+			battery 10400 mAh portable / In&Out: 5V ~ 2.5A
+		]
+		
+		sensory [ // aquisition sensing sensory ( io optical auditory ) exploratory security
+		
+			camera module V2.1 / 8 Megapixel 1080p 
+			speaker USB wireless bluetooth / INSIQ PN: 4326595940 
+			microphone USB mini / Kinobo PN: MI-305
+			LEDs 10mm RGB 4pin Common Anode / Diffused 
+	
+			LEDs 1W Cool White High Power Light / 10000K-15000K Cold Bulbs
+			Lasers 5mW Red Dot 650nm Diode Laser / 5v , 6mm 
+
+			I2c OLED		SSD1306 LCD Module / 128X64 , VCC: 3.3-5V
+			I2c Compass		HMC5883L Triple Axis Compass Magnetometer Sensor 
+			I2c Pressure	BMP180 Pressure, Temperature, Altitude Sensor / JBtek RP0088
+			I2c Distance	HCSR04 Distance Sensor Ultrasonic Module / range: 0.75 to 16ft 
+			I2c ports		MCP23017 16 bit port expander / by MicroChip
+		]
+		
+		ai [ // artificialIntelligence coded communication expressive hueristic nlp objectAnalysis ontology owl program simulated
+		
+		]
+	]
+
+	names [
+
+		A1T1	ai transport ; speech integration module , haltron 9000 , halport , halweb
+		ASAT	ai sensory articulation transport
+		B1M1	basic modular
+		B9M3	b9 class m3 GUNTHER ( general utility non theorizing environmental robot )
+		MARC	modular ai robotic cart
+		MASAT	modular ai sensory articulation transport
+		MAT		modular articulation transport
+		MOAB	modular optical articulation brachium
+		MRNAT	modular robot nlp articulation transport
+		RAMS	robotic ai modular system
+		SAMR	simulation ai modular robot
+		SHOLM	peace: ( simulated hueristic ontology lightweight modular )
+
+		BEN		basic expressive nlp
+	]
+
+	cautions [
+
+		( Pro 12:11 , 17:24 , 21:17 , 22:15 , 28:19 )
+	
+		Pro 12:11 He who tills his land will have plenty of bread, But he who pursues worthless things lacks sense.
+		Pro 17:24 Wisdom is in the presence of the one who has understanding, But the eyes of a fool are on the ends of the earth.
+		Pro 21:17 He who loves pleasure will become a poor man; He who loves wine and oil will not become rich.
+		Pro 22:15 Foolishness is bound up in the heart of a child; The rod of discipline will remove it far from him.
+		Pro 28:19 He who tills his land will have plenty of food, But he who follows empty pursuits will have poverty in plenty.
+	]
+]
+
+integration physical [
+
+	AI: GUI , TAXI , JSAPI
+
+		GUI ObjectAnalysis + ListMaker
+
+			ObjectAnalysis
+				reflection tool that shows all methods
+				shows variables , all list lengths
+
+			ListMaker ( BeanBased Dynamic GUI entry )
+				gui tool that takes a dynamic list of fields & constructs a form
+				permits editing rows in form , storing rows as file
+
+		TAXI
+
+			WordParser
+				stores words as array
+				abstracts sentance as psuedoCode idea
+				catalogs ideas
+				BRMS GUI Rules
+
+			Knowledge Representation
+				Taxonomic Definitions ; OWL , GKT
+				word , variations , idea , detail , layer ( senses )
+
+		JSAPI
+
+			Java ( Java Speech API aka JSAPI v1.0 ; also CloudGarden )
+
+				http://java.sun.com/products/java-media/speech/
+				http://freetts.sourceforge.net/docs/index.php
+
+			AI Eliza	http://chayden.net/eliza/Eliza.html
+			AI AliceBot	http://www.alicebot.org/downloads/programs.htm
+
+			Dialog: see "C:\Martin\5Personal\resources\gameAiHAL9000.txt"
+
+	SensorIO: basic IO ; sight sound touch ; power
+
+	Articulation/Manipulate: findObject getDescription evaluateUses chooseAction go
+
+	Transport/Movement: setDestination setSpeed getLocation calcDistance chooseProcess go
+]
+
+integration situations ; Georges Polti / 36 Dramatic Situations [
+
+	[ ambition violence foolishness justice loss love sacrifice ]
+
+	am	09	daring enterprise			a Bold Leader ; an Object ; an Adversary
+	am	11	the enigma					a Problem ; an Interrogator ; a Seeker
+	am	14	rival of kin				the Preferred Kinsman ; the Rejected Kinsman ; the Object of Rivalry
+	am	24	rival of super to lesser	Superior Rival ; an Inferior Rival ; the Object of Rivalry
+	am	30	ambition					an Ambitious Person ; a Thing Coveted ; an Adversary
+	am	31	conflict with a god			a Mortal ; an Immortal
+	am	35	recovery of a lost one		a Seeker ; the One Found
+
+	vi	08	revolt						a Tyrant ; a Conspirator
+	vi	13	enmity of kin				a Malevolent Kinsman ; a Hated or a reciprocally-hating Kinsman
+
+	fl	16	madness						a Madman ; a Victim
+	fl	17	fatal imprudence			the Imprudent ; a Victim or an Object Lost
+
+	js	03	crime pursued by vengeance	a Criminal ; an Avenger
+	js	04	vengeance on kin by kin		Guilty Kinsman ; an Avenging Kinsman ; remembrance of the Victim , a relative of both
+	js	05	pursuit						Punishment ; a Fugitive
+	js	01	supplication				a Persecutor ; a Supplicant ; a Power in authority , whose decision is doubtful.
+	js	12	obtaining					( a Solicitor & an Adversary who is refusing ) or ( an Arbitrator & Opposing Parties )
+
+	ls	06	disaster					a Vanquished Power ; a Victorious Enemy or a Messenger
+	ls	07	fall prey to misfortune		an Unfortunate ; a Master or a Misfortune
+	ls	10	abduction					an Abductor ; the Abducted ; a Guardian
+	ls	19	unrecognized slay of kin	the Slayer ; an Unrecognized Victim
+	ls	33	erroneous judgement			a Mistaken One ; a Victim of the Mistake ; a Cause or Author of the Mistake ; the Guilty One
+	ls	34	remorse						a Culprit ; a Victim or the Sin ; an Interrogator
+	ls	36	loss of loved ones			a Kinsman Slain ; a Kinsman Spectator ; an Executioner
+
+	lv	15	murderous adultery			two Adulterers ; a Betrayed Spouse
+	lv	18	involuntary crimes of love	a Lover ; a Beloved ; a Revealer
+	lv	25	adultery					two Adulterers ; a Deceived Spouse
+	lv	26	crimes of love				a Lover ; the Beloved
+	lv	27	lovers dishonor discovered	a Discoverer ; the Guilty One
+	lv	28	obstacles to love			two Lovers ; an Obstacle
+	lv	29	an enemy loved				a Lover ; the Beloved Enemy ; the Hater
+	lv	32	mistaken jealousy			a Jealous One ; an Object of whose Possession He is Jealous
+
+	sc	02	deliverance					an Unfortunate ; a Threatener ; a Rescuer
+	sc	20	sacrifice for an ideal		a Hero ; an Ideal ; a Creditor or a Person/Thing sacrificed
+	sc	21	sacrifice for kin			a Hero ; a Kinsman ; a Creditor or a Person/Thing sacrificed
+	sc	22	all sacrifice for passion	a Lover ; an Object of fatal Passion ; the Person/Thing sacrificed
+	sc	23	needed sacrifice of loved	a Hero ; a Beloved Victim ; the Necessity for the Sacrifice
+]
+
+classification knowledge ; GKT [
+
+	Knowledge Tree ( or classification schemes )
+
+	GKT ( George Knowledge Tree , which is a synthesis of the systems below with Genesis 1 )
+
+	01 Religion				Bible / Doctrine / Ethics / Apologetics ( *bibleOutline.b5 )
+
+	02 Science				Physics / Troposphere / Botany / Astronomy / Biology
+
+		02.01 Physics*		( Classification / Mathematics / ElementalPhysics / Chemistry )
+		02.02 Troposphere	( Meteorology / Geology / Geography / Oceanography )
+		02.03 Botany		( Genesis / Taxonomy / Synthesis / Phyla / Genetics )
+		02.04 Astronomy*	( Genesis / Taxonomy / Galactic / Solar )
+		02.05 Biology*		( Genesis / Taxonomy / Synthesis / Phyla / Fish / Aves / Mammalia / Dinosaurs / Insects / Oddities / Gen 06:15 / Lev 11:13 )
+							Health ( Foods / Kosher / Nutrients [ Protein / Salt / Sugar / Caffeine / Cholesterol ] )
+	03 Humanities*		Society / Arts / Technology / History ( files include BookList )
+
+		03.01 Society		Philosophy / Language / Politics / Law / Economics
+		03.02 Arts			Painting / Drawing / Music / Literature / Dance
+		03.03 Technology	Agriculture / Medicine / Engineering / Military
+		03.04 History*		World / Current / Local / Biography
+
+	04 Applied*			Spirit / Family / Ministry / Work / Personal ( health , study , ambitions , play )
+
+	MJA ( Mortimer J Adler ) , LOC ( Library of Congress ) , DDS ( Dewey Decimal System )
+		where MJA is the "Circle of Knowledge" framework used in Encyclopedia Britannica
+
+	Others include: Bliss , Colon , Universal Decimal , Thesaurus
+]
+
+classification knowledge ; OWL , Bloom [
+
+	OWL Web Ontology Language ( guessing market generated taxonomys will prevail )
+
+		Word Classification / Roget
+		http://virtual.cvut.cz/kifb/en/index.html
+		http://babel.altavista.com/tr
+		http://wiktionary.org/wiki/Wiktionary:Roget_Thesaurus_Classification
+
+		01 Words Expressing Abstract Relations: Existence Relation Quantity Order Number Time Change Causation
+
+		02 Words Relating to Space: Space Dimensions Form Motion
+
+		03 Words Relating to Matter: Matter Inorganic Organic
+
+		04 Words Relating to the Intellectual Faculties
+			Formation of Ideas: Operations Conditions Materials Processes Results Extension Creative
+			Communication of Ideas: Nature Modes Means
+
+		05 Words Relating to the Voluntary Powers: Individual Volition: General Prospective Voluntary Antagonism Results /
+			Intersocial Volition: General Special Conditional Possessive
+
+		06 Words Relating to the Sentient and Moral Powers: Affections in General / Personal Affections: Passive Discriminative Prospective Contemplative Extrinsic / Sympathetic Affections: Social Diffusive Special Retrospective / Moral Affections: Obligations Sentiments Conditions Practice Institutions / Religious Affections: Superhuman Doctrines Sentiments Acts Institutions
+
+	Blooms Taxonomy / Bloom
+
+		Knowledge: observation and recall of information / knowledge of dates , events , places / knowledge of major ideas / mastery of subject matter / Question Cues: list , define , tell , describe , identify , show , label , collect , examine , tabulate , quote , name , who , when , where , etc.
+
+		Comprehend: understanding information / grasp meaning / translate knowledge into new context / interpret facts , compare , contrast / order , group , infer causes / predict consequences / Question Cues: summarize , describe , interpret , contrast , predict , associate , distinguish , estimate , differentiate , discuss , extend
+
+		Application: use information / use methods , concepts , theories in new situations / solve problems using required skills or knowledge / Questions Cues: apply , demonstrate , calculate , complete , illustrate , show , solve , examine , modify , relate , change , classify , experiment , discover
+
+		Analysis: seeing patterns / organization of parts / recognition of hidden meanings / identification of components / Question Cues: analyze , separate , order , explain , connect , classify , arrange , divide , compare , select , explain , infer
+
+		Synthesis: use old ideas to create new ones / generalize from given facts / relate knowledge from several areas / predict , draw conclusions / Question Cues: combine , integrate , modify , rearrange , substitute , plan , create , design , invent , what if? , compose , formulate , prepare , generalize , rewrite
+
+		Evaluation: compare and discriminate between ideas / assess value of theories , presentations / make choices based on reasoned argument / verify value of evidence / recognize subjectivity / Question Cues: assess , decide , rank , grade , test , measure , recommend , convince , select , judge , explain , discriminate , support , conclude , compare , summarize
+]
+
+psychology [
+
+	+1949 "1000 Face Hero" / Joseph Campbell
+
+	+1916 "36 Dramatic Situations" / Georges Polti / categorize dramatic situation / continues Carlo Gozzi /
+		plots: 01 supplication 02 deliverance 03 crime pursued by vengeance 04 vengeance taken for kin on kin 05 pursuit 06 disaster 07 falling prey to cruelty 08 revolt 09 daring enterprise 10 abduction 11 the enigma 12 obtaining 13 enmity of kin 14 rivalry of kin 15 murderous adultery 16 madness 17 fatal imprudence 18 involuntary crimes of love 19 slaying of kin unrecognized 20 self-sacrifice for an ideal 21 self-sacrifice for kin 22 all sacrificed for passion 23 necessity of sacrificing 24 rivalry of superior vs inferior 25 adultery 26 crimes of love 27 discovery of dishonour 28 obstacles to love 29 an enemy loved 30 ambition 31 conflict with a god 32 mistaken jealousy 33 erroneous judgment 34 remorse 35 recovery of a lost one 36 loss of loved ones
+
+	+1928 "Folktale Morphology" / Vladimir Propp / identifies 31 irreducible narrative elements in stories / separates functions & characters /
+		plots ( functions ): 01 absentation 02 interdiction 03 violation 04 reconnaissance 05 delivery 06 trickery 07 complicity 08 villainy 09 mediation 10 beginning 11 departure 12 firstfunction 13 herosreaction 14 magical 15 guidance 16 struggle 17 branding 18 victory 19 liquidation 20 return 21 pursuit 22 rescue 23 unrecognized 24 unfounded claims 25 difficulty 26 solution 27 recognition 28 exposure 29 transfiguration 30 punishment 31 wedding
+
+		types: 1 villain 2 dispatcher 3 helper 4 princess 5 donor 6 hero 7 false hero
+
+	+2004 "7 Basic Plots" / Christopher Booker / 1 overcoming monster 2 rags2riches 3 quest 4 voyage and return 5 comedy 6 tragedy 7 rebirth
+
+	+2007 "What Story " / PMAI ( Pearson-Marr Archetype Indicator ) / derivative of MeyersBriggs /
+		types: 1 innocent 2 orphan 3 warrior 4 caregiver 5 seeker 6 lover 7 destroyer 8 creator 9 ruler 10 magician 11 sage 12 jester
+]

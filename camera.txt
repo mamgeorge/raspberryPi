@@ -1,0 +1,154 @@
+\\5Personal\Technology\raspberryPi\camera.txt
+
+	init
+	camera pix
+	camera video
+	webcam pix
+	webcam video 
+	extra
+
+init [
+
+	$ sudo raspi-config > Interfacing Options > camera > enable > finish > yes ( reboot )
+
+	$ sudo apt-get install fbi			# camera program
+	$ sudo apt-get install feh			# camera program xming?
+	$ sudo apt-get install fswebcam		# webcam program
+	$ sudo apt-get install omxplayer	# video player
+	$ sudo apt-get install mplayer		# movie player
+	$ sudo apt-get install motion		# motion detector
+]
+
+camera pix [
+
+	for Camera Module V2.1 / 8 Megapixel 1080p / RPI-CAM-V2 / Sony IMX219 8-megapixel sensor
+	for RPI0 Cam Cable 6.0 x 5/8 to 7/16 inch , 15 pin to 22 pin 
+	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1	
+
+	# RECORD
+
+		# assumes camera , not webcam
+		# the ribbon contact for zero faces down , for camera faces up
+		# must use direct HDMI video connection to rPi for fbi
+
+		$ raspistill -vf -o img.jpg						# -vf verticleFlip , -o output ( otherwise not saved )
+
+		// https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
+		$ raspistill -vf -o img.jpg	-w 640 -h 480 -v	# using width & height , -v verbose , -vf verticleFlip
+		$ raspistill -t 100 -vf -o img.jpg	-md 6		# -t time 100 ms , -md6 mode 6: 640x480	
+		$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10	# -q quality from 0 to 100
+		$ raspistill -ex night -vf						# -ex exposure mode?
+
+	# DISPLAY
+
+		$ fbi img.jpg						# CLI requires direct HDMI video connection
+
+			to use remote capability , rPi must STILL be attached to monitor
+			use remoting so USB ports & target screen are freed up
+			feh works but fbi and pqiv do not
+
+		$ sudo fbi -T 2 -a img.jpg			# -a autoZoom out , -T terminal
+
+			ERROR during remote:
+				https://raspberrypi.stackexchange.com/questions/8922/how-do-i-display-images-without-starting-x11
+				ioctl VT_GETSTATE: Inappropriate ioctl for device ( not a linux console? )
+
+				RESOLUTION:
+				only remote shell for commands , monitor MUST remain attached to rPi
+
+		$ feh -g 600x400 -d img.jpg			# -g geometrySize , -d drawFilename 
+]
+
+camera video [
+
+	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1	
+
+	# RECORD
+
+		$ raspivid -vf -t 0					# acts as monitor ( when plugged in )
+
+			// http://blog.whaleygeek.co.uk/x11-on-raspberry-pi-remote-login-from-your-laptop/
+			$ raspivid -vf -t 0 -w 640 -h 480 -o - | 192.168.1.12:0
+			$ raspivid -vf -t 0 -w 640 -h 480 -o - &
+
+		$ raspivid -t 5000 -vf -o cam.h264 
+
+	# DISPLAY
+
+		$ omxplayer cam.h264
+]
+
+webcam pix [
+
+	# RECORD
+
+		# usb hub may fail , may need a direct connection to USB
+		# specifying device got errors
+		# overwriting file got errors
+
+		$ fswebcam img_webCam.jpg
+		$ sudo chmod 777 img_webCam.jpg			# so you can overwrite?
+		$ sudo fswebcam -r 1280x720 img_webCam.jpg
+
+	# DISPLAY
+
+		if remoting , fbi needs output directed to 2nd screen
+		https://www.youtube.com/watch?v=Ug1uE9hEO80
+
+		$ sudo fbi -T 2 -a img_webCam.jpg	# -T terminal
+
+	# UTIL
+
+		$ sudo chmod 777 /dev/video0
+		$ v4l2-ctl --list-formats-ext
+		
+]
+
+webcam video [
+
+	# MS IE does NOT stream... use chrome , firefox , safari
+	# rPi camera will NOT work with Motion
+
+	http://www.instructables.com/id/How-to-Make-Raspberry-Pi-Webcam-Server-and-Stream-/
+
+	$ lsusb								# should show camera
+
+	$ sudo nano /etc/motion/motion.conf
+
+		daemon					ON
+		framerate				between 1000 to 1500
+		Stream_port				8081
+		Stream_quality			100
+		Stream_localhost		OFF
+		webcontrol_localhost	OFF
+		quality					100
+		width					640
+		height					480
+		post_capture			5
+
+	$ sudo nano /etc/default/motion
+
+		start_motion_daemon	// yes
+
+	$ sudo service motion start
+	$ sudo service motion restart
+
+	IPv4 Address Is: 69.14.189.72
+]
+
+extra [
+
+	sudo apt-get install feh
+
+	sudo apt-get install --no-install-recommends xserver-xorg
+	sudo apt-get install raspberrypi-ui-mods
+	sudo apt-get install lightdm
+	sudo apt update
+	sudo apt upgrade
+	sudo reboot
+
+	sudo systemctl start lightdm
+
+	$ sudo apt-get install vlc
+]
+

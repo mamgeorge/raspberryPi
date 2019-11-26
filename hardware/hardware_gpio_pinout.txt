@@ -1,0 +1,131 @@
+hardware_gpio_pinout.txt
+
+	MAT
+	raspberryPI 2 Model B
+	controller L293D or SN754410 pinout
+	controller L298N pinout
+	sensehat
+
+	see: "http://pinout.xyz"
+
+MAT [
+
+					40 o* 39 L293D blk grnd
+	M1+ wht L293D	38 ** 37 L293D blu M2+
+	M1- grn L293D	36 ** 35 L293D yel M2-
+			grnd	34 oo 33
+					32 oo 31
+			grnd	30 oo 29
+					28 oo 27
+					26 oo 25 grnd
+					24 oo 23
+		RGB LED red	22 *o 21
+	RGB LED whtgrnd	20 *o 19
+		RGB LED grn	18 *o 17 (3.3V)
+		RGB LED blu	16 *o 15
+		gripA grnd	14 *o 13
+		gripA yel	12 *o 11
+					10 oo 09 grnd
+					08 o* 07 gripB yel 
+		gripB grnd	06 *o 05
+		gripA/B(5V)	04 *o 03
+		L293D (5V)	02 *o 01 (3.3V)
+]
+
+raspberryPI 2 Model B [
+
+	40 pin ( aka J8 ) pinout board
+	26 pin is P1 pinout
+
+				pw:+3v3	01	02	pw:+5V
+	I2C_SDA1	GPIO02	03	04	pw:+5V
+	I2C_SCL1	GPIO03	05	06	ground
+		GCLK0	GPIO04	07	08	GPIO14	UART_TXD0
+				ground	09	10	GPIO15	UART_RXD0
+		GEN0	GPIO17	11	12	GPIO18	GEN1 , PWM0
+		GEN2	GPIO27	13	14	ground
+		GEN3	GPIO22	15	16	GPIO23	GEN4
+				pw:+3v3	17	18	GPIO24	GEN5
+	SPI_MOSI	GPIO10	19	20	ground	-
+	SPI_MISO	GPIO09	21	22	GPIO25	GEN6
+	SPI_SCLK	GPIO11	23	24	GPIO08	SPI_CE0_N
+				ground	25	26	GPIO07	SPI_CE1_N
+	---------------------------------------------
+	I2C_IDSD	EEPROM	27	28	EEPROM	I2C_IDSC
+		GCLK1	GPIO05	29	30	ground
+		GCLK2	GPIO06	31	32	GPIO12 , PWM0
+		PWM1	GPIO13	33	34	ground
+	SPI_MISO	GPIO19	35	36	GPIO16
+				GPIO26	37	38	GPIO20	SPI_MOSI
+				ground	39	40	GPIO21	SPI_SCLK
+]
+
+controller L293D or SN754410 pinout [
+
+	( L293D supplies 0.6A , SN754410 is newer , supplies 1A )
+
+	facing top near camera ( J8-GPIO )
+
+			[_]|blk
+			wht|blu
+			grn|ylw
+
+	facing top ( notched out "u" )
+
+				+────__────+
+	[ p02 ]	5v+	| 01	16 | 5v+	( wired to #1 ; logic )
+	[ p26 ]	P0	| 02	15 | P2		[ p20 ] wht|blu
+	[ M1+ ]	M1+	| 03	14 | M2+	[ M2+ ]
+	[ p39 ]	gnd	| 04	13 | gnd	( ground )
+			gnd	| 05	12 | gnd	[ wired to bt- ]
+	[ M1- ]	M1-	| 06	11 | M2-	[ M2- ]
+	[ p19 ]	P1	| 07	10 | P3		[ p16 ] grn|ylw
+	[ bt+ ]	12v+| 08	09 | 5v+
+				+──────────+
+
+	ground wired to #4, #13, #5, #12
+	ground wired to bt- & pin 39
+]
+
+controller L298N pinout [
+
+	01 DC stepper motor A+
+	02 DC stepper motor A-
+	03 12V jumper ( enables power to 5V regulator ; remove if V > 12V )
+	04 supply voltage ( max 35V DC ; use jumper if > 12V )
+	05 GND
+	06 5V output ( use if 12V jumper in place , ideal for powering SOC or SBC )
+	07 DC motor A jumper for stepper motor ; use PWM output for speed control
+	08 IN1
+	09 IN2
+	10 IN3
+	11 IN4
+	12 DC motor B jumper for stepper motor ; use PWM output for speed control
+	13 DC stepper motor B+
+	14 DC stepper motor B-
+]
+
+sensehat [
+
+					X	01	02	X
+					X	03	04	X
+					X	05	06	X
+		GCLK0	GPIO04	07	08	X
+					X	09	10	GPIO15	UART_RXD0
+		GEN0	GPIO17	11	12	GPIO18	GEN1 , PWM0
+		GEN2	GPIO27	13	14	ground
+		GEN3	GPIO22	15	16	X
+					X	17	18	X
+					X	19	20	X
+					X	21	22	X
+					X	23	24	X
+					X	25	26	GPIO07	SPI_CE1_N
+	---------------------------------------------
+					X	27	28	X
+		GCLK1	GPIO05	29	30	X
+		GCLK2	GPIO06	31	32	GPIO12 , PWM0
+		PWM1	GPIO13	33	34	X
+	SPI_MISO	GPIO19	35	36	GPIO16
+				GPIO26	37	38	GPIO20	SPI_MOSI
+					X	39	40	GPIO21	SPI_SCLK
+]

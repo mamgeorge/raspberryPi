@@ -1,0 +1,17 @@
+C:\Users\mamge\OneDrive\Documents
+\5Personal\Technology\2_BEN\BEN.txt
+
+stage 2 ) building AI ( BEN )
+
+	build a modular basic comprehension and interaction device
+	this stage may require geany , drJava , or eclipse tools
+	BEN: person/character/being/individual/unit
+		| AI / image/emulation/mirror/model/facsimile/likeness/form
+		| nlp ( 3 classes )/communication/voice/language/expression/TTS
+
+[ _ ] 1 ) build rudimentary identity
+[ _ ] 2 ) parse sentances , define words , categorize info
+[ _ ] 3 ) weight implications
+[ _ ] 4 ) parse response
+
+	https://opensource.com/business/15/7/five-open-source-nlp-tools

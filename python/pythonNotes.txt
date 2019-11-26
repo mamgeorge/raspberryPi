@@ -1,0 +1,111 @@
+\\5Personal\Technology\raspberryPi\python\pythonNotes.txt
+
+	stdin
+	curses
+	graphics
+	node
+
+stdin [
+
+	import sys , json
+
+	arrayLines = null
+	def reader( ):
+
+		# our input only has one line , parse JSON data from that
+		arrayLines = sys.stdin.readlines( )
+		arrayLines = json.loads( arrayLines[ 0 ] )
+
+	txtLine = 'testing'
+	print( txtLine )
+	sys.stdout.flush( )
+]
+
+curses [
+
+	curses alows monitor terminal printing
+	curses alows keyboard interrupts
+
+	http://terpconnect.umd.edu/~nsw/enpm808c/scancode.htm
+	https://docs.python.org/3/howto/curses.html
+	https://docs.python.org/3/library/curses.html#module-curses
+
+	## FOR CRASHES , CLEAR WITH: $ reset , or use curses.wrapper( )
+
+	import curses
+
+	## beg
+	stdscr = curses.initscr( )
+	curses.noecho( )
+	curses.cbreak( )
+	stdscr.keypad( True ) ## stdscr.keypad( 1 )
+
+	## loop
+	while True:
+		akey = stdscr.getch( )
+		if akey == ord( 'p' ): PrintDocument( )
+		if akey == ord( 'q' ): break # Exit the while loop
+		if akey == curses.KEY_LEFT	: px = px - 1
+		if akey == curses.KEY_RIGHT	: px = px + 1
+		if akey == curses.KEY_UP	: py = py + 1
+		if akey == curses.KEY_DOWN	: py = py - 1
+		if akey == curses.KEY_HOME	: x = y = 0
+
+	## mid
+	curses.nocbreak( )
+	stdscr.keypad( False ) ## stdscr.keypad( 0 )
+	curses.echo( )
+	curses.endwin( )
+	
+	## end ]
+
+graphics [
+
+	pygame
+
+		// can display in CLI but not thru putty ; requires XShell?
+		http://programarcadegames.com/index.php?chapter=introduction_to_graphics
+
+	turtle
+
+		// can display in CLI but not thru putty ; requires XShell?
+		https://docs.python.org/2/library/turtle.html
+]
+
+node [
+
+	python ( run python in node )
+
+		https://ianhinsdale.com/post/communicating-between-nodejs-and-python/
+
+		python-shell: npm install python-shell
+
+		python socket: https://stackoverflow.com/questions/43302190/how-to-run-a-python-script-from-node-js
+
+	exec uses buffer ( limited to 200kb )
+
+	node spawn
+
+		// spawn uses streams
+
+		var spawn = require( "child_process" ).spawn ;
+		var process = spawn( 'python' , [ "path/to/script.py" , arg1 , ... ] ) ; // import sys in python script
+		//
+		arrayData = [ 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 ] ,
+		txtLines = '' ;
+		//
+		process.stdout.on( 'data' , function( chunk ) { txtLines += chunk.toString( 'utf8' ) ; } ) ;
+		process.stdout.on( 'end' , function( )
+		{
+			console.log( 'results: ' , txtLines ) ;
+		 } ) ;
+
+		process.stdin.write( JSON.stringify( arrayData ) ) ;
+		process.stdin.end( ) ;
+
+		NOTE: chunk.toString( 'utf8' ) may fail because of UTF8 multibyte characters
+			in that case try:
+			var StringDecoder = require( 'string_decoder' ).StringDecoder ;
+			... var decoder = new StringDecoder( 'utf8' ) ;
+			... var textChunk = decoder.write( chunk ) ;
+]

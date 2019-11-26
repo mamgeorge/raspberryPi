@@ -1,0 +1,266 @@
+\\5Personal\Technology\raspberryPi\MAT.txt
+
+parts [
+
+	TOTAL: 44 + 53 + 46 + 64 = 207$
+
+	basic/modular: 9+7+13+15 = 44$
+
+		09$ RaspberryPi ZeroW 1.1 header female
+		07$ Motor Driver Controller L293D IC
+		13$ MicroSDHC 32GB Class 10
+		15$ 4.8 oz , Battery TPLink PowerBank TL-PB05200
+	
+	aquisition: 25+15+7+6 = 53$
+
+		25$ Camera Module RaspberryPi V2.1
+		15$ 8.0 oz , Speaker USB Wireless GearHead Model BT3500SLV
+		07$ High Power LED Chip 1W Cool White Light 10000K-15000K Cold Bulbs
+		06$ Red Dot Diode Laser 5V 650nm 5mW 6mm
+		
+	articulated: 10+10+13+13 = 46$
+
+		10$ 1.63 oz , Actobotics Horizontal Gripper Kit A
+		10$ 1.31 oz , Actobotics Horizontal Gripper Kit B
+		13$ 0.32 oz , Servo Motor HiTec HS-311 , 0.8 x 1.4 x 1.6 in
+		13$ 0.32 oz , Servo Motor HiTec HS-311 , 0.8 x 1.4 x 1.6 in
+
+	transport: 16+13+35 = 64$
+
+		16$ 9.6 oz , Tracked Vehicle Chassis ( Tamiya axels, wheels, tractor, plate ) , Tamiya PN: 70108 / 4 x 7 x 10 inches 
+		13$ 4.0 oz , Double Gearbox & Tamiya F130 Motors , Tamiya PN: 70168 / 1.3 x 4.2 x 6 in
+		35$ 8.0 oz , Battery TPLink PowerBank TL-PB10400
+]
+
+code [
+
+	python [
+
+		mat/robot.py
+		mat/motor_motions.py
+		mat/iface_actions.py
+		mat/speech.py
+
+		gpio/pi_lamps.py ( pi_lamps.py )
+		hats/pi_camera.py
+		servos/servo_both.py
+
+		/home/pi/servers/node/expressoMAT.js
+	]
+	
+	CLI [
+
+		$ node /home/pi/servers/node/expressoMAT.js	
+		$ sudo shutdown -h now
+		
+		// camera
+		$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10	
+		$ feh -g 600x400 -d img.jpg
+
+		// voice
+		$ sudo bluetoothctl
+		$ connect 12:12:28:6C:78:8C
+		$ espeak "Hello. My name is Matt!" -ven-us+m3 -p50 -k5 -s180 -a50 --stdout | aplay -f cd -D bluealsa
+		$ aplay -D bluealsa Music/ping.wav
+
+		// grippers
+		$ python python/servos/servo_both.py
+
+		//lights
+		$ python python/gpio/pi_lamps.py	
+	]	
+]
+
+phase 1 programmable transport ( BET ) [
+
+	$ node /home/pi/servers/node/expressoMAT.js
+
+	[ * ] RPi0WF SBC / ji1qi4
+			+ screwed onto a paint stick
+			+ hotglued onto a Powerbank
+
+	[ * ] TPLink PowerBank TL-PB05200 battery
+			( 05200 mAh , 5V ~ 2.5A , 1.0 x 0.8 x 3.6 in)
+			+ Adaptor USB A male to  USB micro B male
+
+	[ * ] TPLink PowerBank TL-PB10400 battery
+			( 10400 mAh , 5V ~ 3.0A , 3.5 x 1.7 x 1.7 in )
+			+ Adaptor USB A male to TTL Serial Cable
+			or 4 AA battery holder & 4 AA batteries
+
+	[ * ] F130 Tamaiya & Dbl Gearbox
+			Chassis assembly ( axels, wheels, tractor, plate )
+
+	[ * ] L293D IC motor driver controller [
+
+			see also: DRV8833
+
+			facing top near camera ( J8-GPIO )
+
+						[_]|blk
+						wht|blu
+						grn|ylw
+
+			facing top ( notched out "u" )
+
+					+────__────+
+		[ p02 ]	5v+	| 01	16 | 5v+	( wired to #1 ; logic )
+		[ p26 ]	P0	| 02	15 | P2		[ p20 ] wht|blu
+		[ M1+ ]	M1+	| 03	14 | M2+	[ M2+ ]
+		[ p39 ]	gnd	| 04	13 | gnd	( ground )
+				gnd	| 05	12 | gnd	[ wired to bt- ]
+		[ M1- ]	M1-	| 06	11 | M2-	[ M2- ]
+		[ p19 ]	P1	| 07	10 | P3		[ p16 ] grn|ylw
+		[ bt+ ]	12v+| 08	09 | 5v+
+					+──────────+
+
+				ground wired to #4, #13, #5, #12
+				ground wired to bt- & pin 39
+		]
+
+	[ * ] Python GPIO runs BET ( Battery Electric Transport )
+
+		$ node /home/pi/servers/node/expressoMAT.js ( calls "robot.py" )
+		"/home/pi/python/mat/robot.py"
+			import motor_motions
+			import iface_actions
+				import sys
+				sys.path.insert( 0 , '/home/pi/python/hats/' )
+				import pi_traffic
+]
+
+phase 2 remoting & components ( MAT ) [
+
+	[ * ] Node on Express server sends MAT Control html
+	[ * ] Node server accessible thru smartPhone
+	[ * ] Python program uses sys to read html form data
+	[ * ] Python "robot" tested with BET Transport 2017/07/08 , 2019/01/01
+	[ * ] install and test camera [
+
+		https://picamera.readthedocs.io/en/release-1.13/quickstart.html
+
+		// basics
+		shell: C:\servers\Xming\Xming.exe :0 -clipboard -multiwindow
+		$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10
+		$ feh -g 600x400 -d img.jpg
+
+		// python based
+		$ python -c "import picamera"
+	]
+	[ * ] install and test voice [
+
+		used USB AudioCard; but was too quiet
+		used BlueTooth; had different experience with devicess
+
+		// install & reboot
+		$ sudo apt-get install alsa-tools alsa-utils alsa-libs
+		$ sudo apt-get install espeak python-espeak
+		$ sudo modprobe snd_bcm2835
+		$ sudo apt-get install bluetooth bluez blueman
+
+		// configure & reboot
+		$ sudo raspi-config > Advanced Options > Audio > Headphone	// required for AudioCard
+		$ sudo nano /etc/asound.conf			// set card for AudioCard if used?
+		$ sudo nano /usr/share/alsa/alsa.conf	// set card for AudioCard if used?
+		$ sudo alsamixer						// use this to set speaker values
+		$ sudo nano /boot/config.txt			// configure cards?
+		$ sudo nano ~/.asoundrc					// configure bluetooth
+		$ sudo nano /etc/rc.local				// configure bluetooth; did not always work
+
+		// test with AudioCard
+		$ speaker-test -t wav -c2 -D plughw:1 , 0
+		$ espeak "Greetings!"
+		$ espeak -ven+m3 -k5 -s150 -a50 "Greetings!"
+		$ espeak -f xxxx.txt
+		$ date 'date: %Y/%m/%d , time: %I:%M:%S%p' | espeak -m -ven+f5
+		$ aplay Music/test.wav
+
+		// test with bluetooth
+		$ sudo bluetoothctl	// power on, agent on, scan on, pair xxxx, connect xxxx, exit
+		$ espeak -f Music/genesis.txt -ven-us+m5 -p50 -k5 -s180 -a10 --stdout | aplay -f cd -D bluealsa
+		$ espeak "Hello. My name is Matt!" --stdout | aplay -f cd -D bluealsa
+		$ espeak "Hello. My name is Matt!" -ven-us+m3 -p50 -k5 -s180 -a20 --stdout | aplay -f cd -D bluealsa
+		$ aplay -D bluealsa Music/ping.wav
+		os.system( "espeak 'Hello {}' --stdout | aplay -f cd -D bluealsa".format( insertVal ) )
+	]
+	[ * ] install and test grippers [
+
+		$ python python/servos/servo_once.py
+		$ python python/servos/servo_both.py
+	]
+	[ * ] install and test lights , plates [
+
+		note: this phase included reducing the breadboard to a breakout.
+			however, original breakout failed because it uses resistor on the pins
+			used plain tiny breadboard
+			
+		[ * ] python python/gpio/pi_traffic.py ( tested only )
+		[ * ] python python/gpio/pi_lamps.py
+	]
+]
+
+phase 3 network & motion ( MOAB ) [
+
+	[ _ ] headlamps [
+	
+		High Power LED Chip 1W Cool White Light 10000K-15000K Cold Bulbs 
+			Hontiey PN: 43222-6136
+			Product parameters : 
+			High Power LED Chip 100W Cool White 
+			Color Temperature: 10000K-15000K 
+			Voltage: 3.2-3.4 Volts 
+			Current: 350mA 
+			Luminous Flux 100-110 LM 
+			Material: Two Gold Wires + Copper Brackets 
+			worklife: > 50000 hours if < 60 Degree Celsius
+			requires heatsinks or Thermal Silica 
+			
+			https://raspberrypi.stackexchange.com/questions/51615/raspberry-pi-power-limitations
+			https://www.dummies.com/computers/raspberry-pi/powering-from-the-raspberry-pi/
+			https://www.electronicshub.org/control-a-relay-using-raspberry-pi/
+			RPi max of 16mA per pin ; total current from all pins not exceeding 51mA.
+			if you power the Pi with a 2A supply, you could take about 1.2A from the 5V lines. 
+			
+		V=IR
+
+			3.3v pwr ( max 16mA in RPi GPIO pin )
+			These leds take about 20mA current; regular leds take about 4mA
+			
+			3.3v pwr - 2.0v led = 1.3v res
+				
+				R = V/I
+
+				R = 1.3v of res / 0.020mA = 065 ohms for 10mm led
+				R = 3.0v of res / 0.020mA = 150 ohms for 10mm led
+				R = 1.3v of res / 0.004mA = 325 ohms for rglr led
+				R = 3.0v of res / 0.004mA = 750 ohms for rglr led
+
+			3.3v pwr - 3.3v led = 0.0v res
+
+				R = 0.0v of res / 1.000mA = 000 ohms for rglr led
+	]			
+	[ _ ] voice activation [ ]
+	[ _ ] realtime images [ ]
+	[ _ ] realtime video [ ]
+	[ _ ] send text to speech [ ]
+	[ _ ] motion detection [
+		
+		[ _ ] install and test linux "motion"
+		[ _ ] integrate "robot" with "motion"
+		[ _ ] update html to serve images	
+	]
+	[ _ ] goto locations [ ]
+]
+
+phase 4 articulation & sensing ( A1T1 ) [
+
+	[ _ ] articulation ( 3 to 5 axis )?
+	[ _ ] Pibrella attachment?
+	[ _ ] sensing / SenseHat attachment?
+]
+
+phase 5 voice activation and AI ( BEN ) [
+
+	[ _ ] VAC voice activation
+	[ _ ] AI ( BEN )
+]

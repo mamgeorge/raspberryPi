@@ -1,0 +1,54 @@
+\\5Personal\Technology\raspberryPi\api_gpio.txt
+
+	notes
+	setup
+	i/o
+	PWM
+
+notes [
+
+	GPIO pins use 3.3 V rail and cannot exceed 16 mA of current
+	https://sourceforge.net/p/raspberry-gpio-python/wiki/Home/
+	http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+	https://thepihut.com/blogs/raspberry-pi-tutorials/27968772-turning-on-an-led-with-your-raspberry-pis-gpio-pins
+]
+
+setup [
+
+	import RPi.GPIO as GPIO
+	GPIO.setmode( GPIO.BOARD )
+	GPIO.setmode( GPIO.BCM )
+	mode = GPIO.getmode( )
+	GPIO.setwarnings( False )
+
+	func = GPIO.gpio_function( pin ) # GPIO.IN , GPIO.OUT , GPIO.SPI , GPIO.I2C , GPIO.HARD_PWM , GPIO.SERIAL , GPIO.UNKNOWN
+	GPIO.cleanup( )
+	GPIO.RPI_INFO
+	GPIO.RPI_INFO[ 'P1_REVISION' ]
+	GPIO.VERSION
+]
+
+i/o [
+
+	GPIO.setup( pin , GPIO.IN )
+	GPIO.setup( pin , GPIO.IN , pull_up_down=GPIO.PUD_DOWN )
+	GPIO.setup( pin , GPIO.IN , pull_up_down=GPIO.PUD_UP )
+	GPIO.setup( pin , GPIO.OUT , initial=GPIO.HIGH )
+	GPIO.setup( listPins , GPIO.OUT )
+
+	GPIO.input( pin )
+
+	GPIO.output( pin , state )
+	GPIO.output( pin1 , GPIO.input( pin2 ) )
+	GPIO.output( pin1 , not GPIO.input( pin2 ) )
+	GPIO.output( listPins , ( GPIO.HIGH , GPIO.LOW ) )	# sets first HIGH and second LOW
+]
+
+PWM ( Pulse Wave Modulation ) [
+
+	pwmInst = GPIO.PWM( pin , frequency )
+	pwmInst.start( dutyCycle )				# 0.0 <= dutyCycle <= 100.0
+	pwmInst.ChangeFrequency( frequency )	# frequency in Hz
+	pwmInst.ChangeDutyCycle( dutyCycle ) 	# 0.0 <= dutyCycle <= 100.0
+	pwmInst.stop( )
+]

@@ -1,0 +1,126 @@
+\\4Work\toolCode\raspberryPi\projects_current.txt
+
+	TTS ( Text To Speech ) engines
+	STT ( Speech-To-Text ) engines
+	STT PocketSphinx
+	STT PiAUISuite
+	ERRORS
+
+TTS ( Text To Speech ) engines [
+
+	local: eSpeak Festival Flite
+	server: SVOXPicoTTS GoogleTTS IvonaTTS MaryTTS MacOSXTTS
+	http://elinux.org/RPi_Text_to_Speech_(Speech_Synthesis)
+
+	eSpeak
+
+		http://espeak.sourceforge.net/commands.html
+		sudo apt-get install espeak
+		sudo apt-get install espeak python-espeak
+
+		espeak "Hello World!"
+		python:
+			from espeak import espeak
+			espeak.synth( "Hello World!" )
+
+		espeak -f anyFile.txt
+
+	festival
+
+		https://learn.adafruit.com/speech-synthesis-on-the-raspberry-pi/programs
+		sudo apt-get install festival
+		echo "Hello World!" | festival --tts
+		hostname -I | festival --tts
+
+	flite
+
+		sudo apt-get install flite
+		flite -t "Hello World!"
+		flite -voice awb -t "Hello World!"
+		flite -lv							( lists voices )
+]
+
+STT ( Speech To Text ) engines [
+
+	Pocketsphinx GoogleSTT ATT_STT Wit.ai Julius PiAUISuite Jaspar
+
+	http://raspberrypi.stackexchange.com/questions/10384/speech-processing-on-the-raspberry-pi
+
+	PocketSphinx	https://wolfpaulus.com/embedded/raspberrypi2-sr/
+	Jaspar			-
+	GoogleSTT		https://oscarliang.com/raspberry-pi-voice-recognition-works-like-siri/
+	GoogleSTT		http://www.daveconroy.com/turn-raspberry-pi-translator-speech-recognition-playback-60-languages/
+	Watson			https://developer.ibm.com/recipes/tutorials/pi-the-personal-assistant-raspberry-pi-ibm-watson/
+	PiAUISuite		https://diyhacking.com/best-voice-recognition-software-for-raspberry-pi/
+]
+
+STT PocketSphinx [
+
+	https://wolfpaulus.com/embedded/raspberrypi2-sr/
+
+	$ wget http://sourceforge.net/projects/cmusphinx/files/sphinxbase/0.8/sphinxbase-0.8.tar.gz
+	$ wget http://sourceforge.net/projects/cmusphinx/files/pocketsphinx/0.8/pocketsphinx-0.8.tar.gz
+	$ tar -zxvf pocketsphinx-0.8.tar.gz; rm -rf pocketsphinx-0.8.tar.gz
+	$ tar -zxvf sphinxbase-0.8.tar.gz; rm -rf sphinxbase-0.8.tar.gz
+	$ sudo apt-get install bison libasound2-dev
+
+	cd into the Sphinxbase directory
+		$ ./configure --enable-fixed
+		$ sudo make
+		$ sudo make install
+	cd into the Pocketsphinx directory
+		$ ./configure
+		$ sudo make
+		$ sudo make install
+		$ src/programs/pocketsphinx_continuous -samprate 48000
+
+	ERROR
+		/usr/bin/ld: cannot open output file
+			/home/pi/pocketsphinx-0.8/src/programs/.libs/13327-lt-pocketsphinx_continuous:
+			Permission denied
+			collect2: error: ld returned 1 exit status
+]
+
+STT PiAUISuite [
+
+	https://diyhacking.com/best-voice-recognition-software-for-raspberry-pi/
+	http://www.techradar.com/how-to/how-to-control-the-raspberry-pi-with-your-voice
+	VRS: Raspberry Pi Voice Control / Steven Hickson
+
+	Step 1: Checking your microphone
+
+		must use webcam ; assumes speaker is plugged in and works
+
+		$ lsusb							( confirms webcam attached )
+		$ alsamixer						( set volume )
+			use up/down arrows set volume to high
+			use F6 to select device
+			use F5 to go bck to volume
+		$ arecord -l						( shows webcam listing )
+		$ arecord -D plughw:1,0 test.wav	( create test sound )
+		$ aplay test.wav					( play test sound )
+
+	Step 2: Installing the VRS ( voice recognition software )
+
+		$ wget --no-check-certificate "http://goo.gl/KrwrBa" -O PiAUISuite.tar.gz
+		$ tar -xvzf PiAUISuite.tar.gz
+		$ cd PiAUISuite/Install/
+		$ sudo ./InstallAUISuite.sh
+		$ sudo apt-get install libboost-regex1.49.0
+
+		( must answer questions )
+
+	Step 3: Using the voice control software
+
+		( reference: cd PiAUISuite/VoiceCommand )
+		$ sudo chmod a+rwx .commands.conf
+
+		$ voicecommand -e	( config )
+		$ voicecommand -c	( run )
+]
+
+ERRORS [
+
+	ERROR
+		https://www.raspberrypi.org/forums/viewtopic.php?t=75896&p=544906
+]		

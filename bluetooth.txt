@@ -1,0 +1,186 @@
+\\5Personal\Technology\raspberryPi\bluetooth.txt
+
+notes [
+
+	rPi wiki shows "sudo nano /boot/cmdline.txt" dwc_otg.speed=1 to slow USB speed
+
+	setting sudo raspi-config > Advanced > Audio > analog
+		and then plugin in to auxilary mode of speakerGH allows simple sound
+
+	assumptions [ espeak
+
+		$ sudo nano ~/.asoundrc
+
+		// espeak is on
+
+			$ sudo apt-get install espeak -y
+			$ sudo apt-get install espeak python-espeak -y
+
+		$ sudo apt-get install -y vlc
+		$ sudo apt-get install alsa-tools alsa-utils alsa-libs
+		$ sudo apt-get install bluetooth bluez blueman
+		$ sudo nano ~/.asoundrc				# see config
+
+	]
+
+	InSiq [
+
+		does have a mic, if looking at button, on the right
+		charge with 5v/300mAh; LED is red if charging, turns off when done
+
+		turn on by pressing main button for 3 sec
+		LED flashes blue when pairing is ready
+		connect device to INSIQBS1, once connected, LED stays blue
+			if connected to a phone:
+			pressing button once answers calls
+			pressing button twice takes pictures:
+			(iOs > Setting > Camera > VolumeKey > Settings)
+		while music is played, main button can be pressed to increase volume
+		turn of by pressing main button for 4 sec
+	]
+]
+
+RPi0 [
+
+	https://robotzero.one/pi-zero-w-bluetooth-voice/
+	http://denvycom.com/blog/playing-audio-over-bluetooth-on-rasbperry-pi-command-line/
+
+	$ sudo apt-get install bluetooth bluez blueman	// reboot ; Stretch has bluealsa
+
+	// [NEW] Controller B8:27:EB:D4:F0:6E raspberrypi [default]
+	// [CHG] Device 12:12:28:6C:78:8C Name: GH_BT3500
+	// [CHG] Device 18:45:C9:1D:0B:ED ProHT 88133
+
+	$ sudo bluetoothctl
+		[bluetooth]# power on
+		[bluetooth]# agent on
+		[bluetooth]# scan on
+
+		[bluetooth]# pair 18:45:C9:1D:0B:ED		// Pairing successful
+		[bluetooth]# pair 68:F7:FA:DF:79:FB		// Pairing successful INSIQBS1
+		[bluetooth]# connect 18:45:C9:1D:0B:ED	// Connection successful
+		[bluetooth]# connect 12:12:28:6C:78:8C	// Connection successful
+		[bluetooth]# exit
+
+	$ aplay -D bluealsa Music/ping.wav
+	$ espeak -f Music/genesis.txt -ven-us+m5 -p50 -k5 -s180 -a10 --stdout | aplay -f cd -D bluealsa
+
+	$ espeak "Hello. My name is Matt!" -a10 --stdout | aplay -f cd -D bluealsa
+	$ espeak "Hello. My name is Matt!" -ven-us+m3 -p50 -k5 -s180 -a20 --stdout | aplay -f cd -D bluealsa
+]
+
+config [
+
+	$ sudo nano ~/.asoundrc
+
+		defaults.bluealsa.interface "hci0"
+		defaults.bluealsa.device "18:45:C9:1D:0B:ED"
+		defaults.bluealsa.profile "a2dp"
+		defaults.bluealsa.delay 10000
+
+	$ sudo nano /etc/rc.local
+
+		jack_control start
+		## echo -e 'connect GH_BT3500 \n quit' | sudo bluetoothctl // 12:12:28:6C:78:8C
+		echo -e 'connect 18:45:C9:1D:0B:ED \n quit' | sudo bluetoothctl 18:45:C9:1D:0B:ED // ProHT 88133
+
+		aplay -D bluealsa Music/ping.wav
+]
+
+testing [
+
+	$ sudo bluetoothctl
+	[bluetooth]# power on
+	[bluetooth]# agent on
+	[bluetooth]# scan on
+	[bluetooth]# scan on // after connecting GH_BT3500
+
+		[CHG] Controller B8:27:EB:D4:F0:6E Discovering: yes
+		[NEW] Device B8:78:2E:2E:FA:2D B8-78-2E-2E-FA-2D
+		[NEW] Device 12:12:28:6C:78:8C 12-12-28-6C-78-8C
+		[CHG] Device 12:12:28:6C:78:8C Name: GH_BT3500
+		[CHG] Device 12:12:28:6C:78:8C Alias: GH_BT3500
+
+	[bluetooth]# scan on // after connecting ProHT_88133
+
+		Discovery started
+		[CHG] Controller B8:27:EB:D4:F0:6E Discovering: yes
+		[NEW] Device 18:B4:30:E5:E7:44 N0EME
+		[NEW] Device B8:78:2E:2E:FA:2D B8-78-2E-2E-FA-2D
+		[NEW] Device F1:8D:8E:55:D2:70 F1-8D-8E-55-D2-70
+		[NEW] Device 57:83:82:97:CE:31 57-83-82-97-CE-31
+
+	[bluetooth]# info 18:45:C9:1D:0B:ED
+			Device 18:45:C9:1D:0B:ED
+			Name: ProHT 88133
+			Alias: ProHT 88133
+			Class: 0x240404
+			Icon: audio-card
+			Paired: yes
+			Trusted: no
+			Blocked: no
+			Connected: no
+			LegacyPairing: no
+			UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
+			UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
+			UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
+
+	[bluetooth]# pair 18:45:C9:1D:0B:ED		// Pairing successful
+	[bluetooth]# connect 12:12:28:6C:78:8C	// GH_BT3500 Connection successful
+	[bluetooth]# connect 18:45:C9:1D:0B:ED	// ProHT_88133 Connection successful
+
+	[bluetooth]# trust 18:45:C9:1D:0B:ED
+	[bluetooth]# info 18:45:C9:1D:0B:ED
+	[bluetooth]# paired-devices
+	[bluetooth]# disconnect 18:45:C9:1D:0B:ED
+
+	[bluetooth]# exit
+
+	$ sudo hcitool lescan				// shows callsign of active BLE ( low energy ) devices in range
+	$ sudo hcitool scan					// shows BD address of the pairable devices in range
+	$ sudo hciconfig					// shows the BD address of the Pi
+
+	$ sudo lsusb						// shows usb assignments
+
+	$ aplay -D bluealsa:HCI=hci0,DEV=18:45:C9:1D:0B:ED,PROFILE=a2dp Music/ping.wav
+	$ arecord -D bluealsa:HCI=hci0,DEV=18:45:C9:1D:0B:ED,PROFILE=sco Music/test.wav
+
+	$ espeak "Greetings" -ven-us+m3 -p50 -k5 -s180 -a50 --stdout | aplay -f cd -D bluealsa
+
+	$ date 'date: %Y/%m/%d <break strength = "strong" /> time: %I:%M:%S%p' | espeak -m -ven-us+m3 -p50 -k5 -s180 -a50 --stdout | aplay -f cd -D bluealsa
+
+	//
+	os.system("espeak 'Hello {}' --stdout | aplay -f cd -D bluealsa".format( insertVal ) )
+]
+
+ERRORS [
+
+	ERROR [ No default controller available
+
+		pi@raspberrypi:~ $ echo -e 'connect 18:45:C9:1D:0B:ED \n quit' | bluetoothctl 18:45:C9:1D:0B:ED
+		[bluetooth]# connect 18:45:C9:1D:0B:ED \n quit
+		No default controller available
+		[bluetooth]#
+		(bluetoothctl:2058): GLib-CRITICAL **: Source ID 13 was not found when attempting to remove it
+
+		echo -e 'connect 18:45:C9:1D:0B:ED \n quit' | sudo bluetoothctl 18:45:C9:1D:0B:ED
+		echo -e 'connect 18:45:C9:1D:0B:ED \n quit' | sudo bluetoothctl // ProHT_88133
+		echo -e 'power on \n connect 18:45:C9:1D:0B:ED \n quit' | sudo bluetoothctl
+
+		RESOLUTION: none so far
+			devices may need started prior to running scripts
+			device ProHT_88133 does not have a name when connecting
+			device ProHT_88133 does not start automatically?
+	]
+
+	ERROR [ Unable to install hw params
+
+		$ espeak "Greetings" -ven-us+m3 -p40 -s120 --stdout | aplay -D bluealsa
+		aplay: set_params:1363: Unable to install hw params:
+
+		RESOLUTION:
+		$ espeak "Greetings" -ven-us+m3 -p40 -s120 --stdout | aplay -f cd -D bluealsa
+	]
+
+]
+----

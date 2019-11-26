@@ -1,0 +1,85 @@
+\\5Personal\Technology\raspberryPi\network_nodejs.txt
+
+	for RPi_server see: "C:\Martin\4Work\toolCode\raspberryPi\network_nodejs.txt"
+	for PC_install see: "C:\Program Files\nodejs"
+	for PC_folder see : "C:\servers\nodejs\njs_hello.js"
+
+quick [
+
+	https://www.instructables.com/id/Install-Nodejs-and-Npm-on-Raspberry-Pi/
+	$ uname -m
+	$ wget https://nodejs.org/dist/v8.9.0/node-v8.9.0-linux-armv6l.tar.gz
+	$ mv node-v8.9.0-linux-armv6l.tar.gz nodejs.gz
+	$ tar -xzf nodejs.gz
+	$ cd nodejs/
+	$ sudo cp -R * /usr/local/
+	$ node -v
+	$ npm -v
+]
+
+highlevel [
+
+	node is the server software
+	npm is the node package manager to add features
+	nvm is the node version manager to update node
+
+	for arm6 architecture ( RPi0 )
+
+		wget https://nodejs.org/dist/v6.2.1/node-v6.2.1-linux-armv6l.tar.gz
+		tar -xzf node-v6.2.1-linux-armv6l.tar.gz
+		node-v6.2.1-linux-armv6l/bin/node -v
+		cd node-v6.2.1-linux-armv6l/
+		sudo cp -R * /usr/local/
+
+		export PATH=$PATH:/home/pi/servers/nodejs/bin/
+
+	for NVM installs
+
+		curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+		command -v nvm		# prints NVM if NVM is installed
+		nvm install node	# updates
+]
+
+node [
+
+	node -v		# shows version
+
+		LTS v7.3.0 includes npm 3.10.10
+		LTS or Long Term Support Version
+
+	hostname - I
+
+		169.254.0.0 , 192.168.0.xx:8888/
+
+		http://169.254.0.0:8888/
+
+		Wireless LAN adapter Wi-Fi:
+		Connection-specific DNS Suffix . :
+		Link-local IPv6 Address: fe80::19c5:66b2:6bee:7e69%7
+		IPv4 Address:			192.168.0.xx
+		Subnet Mask:			255.255.255.0
+		Default Gateway:		192.168.0.1
+
+		you can always use: ifconfig
+]
+
+express [
+
+	static
+
+		http://expressjs.com/en/starter/hello-world.html
+		npm install express --save
+		npm install express-session
+		npm init , install express
+
+		http://ericsowell.com/blog/2014/6/17/enough-node-for-building-a-simple-website
+		create an express server that can send static files
+
+	invoke
+
+		https://github.com/extrabacon/python-shell
+		install python-express
+
+		http://stackoverflow.com/questions/20972788/how-to-invoke-external-scripts-programs-from-node-js
+]
+----

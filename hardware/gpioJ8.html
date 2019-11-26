@@ -1,0 +1,51 @@
+<html><head><title>GPIO</title>
+<script></script>
+<style>
+body {}
+h3 { display: inline; }
+table { background: #f0fff0; } 
+td { padding-left: 4px; padding-right: 4px; }
+.red { background: #ddaaaa; }
+.org { background: #eeccaa; }
+.ylw { background: #ddddaa; }
+.grn { background: #aaddaa; }
+.blu { background: #aaaadd; }
+.prp { background: #ddaadd; }
+.gra { background: #aaaaaa; }
+</style>
+</head>
+
+<body><center><h3>Raspberry PI 2 Model B</h3>
+<br /> 26 pin is P1 pinout
+<br /> 40 pin ( aka J8 ) pinout board
+<br /> reverse sort
+<br />
+<table border = "1" cellspacing = "0" />
+
+<!-- 22 --><tr><th class = "bsc" >ALTERNATE	</th><th class = "bsc" >BCM		</th><th class = "bsc" >BRD						 </th><!----><th class = "bsc" >BRD						 	 </th><th class = "bsc" >BCM		</th><th class = "bsc" >ALTERNATE	</th></tr> 
+<!-- 21 --><tr><td class = "bsc" >SPI_SCLK		</td><td class = "prp" >GPIO 21</td><td class = "prp" >40<input type = "radio" /></td><!----><td class = "gra" ><input type = "radio" />39</td><td class = "gra" >ground		</td><td class = "bsc" >			</td></tr> 
+<!-- 20 --><tr><td class = "bsc" >SPI_MOSI		</td><td class = "prp" >GPIO 20</td><td class = "prp" >38<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />37</td><td class = "grn" >GPIO 26	</td><td class = "bsc" >			</td></tr> 
+<!-- 19 --><tr><td class = "bsc" >				</td><td class = "prp" >GPIO 16</td><td class = "prp" >36<input type = "radio" /></td><!----><td class = "prp" ><input type = "radio" />35</td><td class = "prp" >GPIO 19	</td><td class = "bsc" >SPI_MISO	</td></tr> 
+<!-- 18 --><tr><td class = "bsc" >				</td><td class = "gra" >ground	</td><td class = "gra" >34<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />33</td><td class = "grn" >GPIO 13	</td><td class = "bsc" >PWM1		</td></tr> 
+<!-- 17 --><tr><td class = "bsc" >PWM0			</td><td class = "grn" >GPIO 12</td><td class = "grn" >32<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />31</td><td class = "grn" >GPIO 06	</td><td class = "bsc" >GCLK2		</td></tr> 
+<!-- 16 --><tr><td class = "bsc" >				</td><td class = "gra" >ground	</td><td class = "gra" >30<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />29</td><td class = "grn" >GPIO 05	</td><td class = "bsc" >GCLK1		</td></tr> 
+<!-- 15 --><tr><td class = "bsc" >I2C_IDSC		</td><td class = "ylw" >EEPROM	</td><td class = "ylw" >28<input type = "radio" /></td><!----><td class = "ylw" ><input type = "radio" />27</td><td class = "ylw" >EEPROM		</td><td class = "bsc" >I2C_IDSD	</td></tr> 
+<!-- 14 --><tr><td class = "bsc"colspan = "6"></td></tr>                                                                                                                          
+<!-- 13 --><tr><td class = "bsc" >SPI_CE1_N	</td><td class = "prp" >GPIO 07</td><td class = "prp" >26<input type = "radio" /></td><!----><td class = "gra" ><input type = "radio" />25</td><td class = "gra" >ground		</td><td class = "bsc" >			</td></tr> 
+<!-- 12 --><tr><td class = "bsc" >SPI_CE0_N	</td><td class = "prp" >GPIO 08</td><td class = "prp" >24<input type = "radio" /></td><!----><td class = "prp" ><input type = "radio" />23</td><td class = "prp" >GPIO 11	</td><td class = "bsc" >SPI_SCLK	</td></tr> 
+<!-- 11 --><tr><td class = "bsc" >GEN6			</td><td class = "grn" >GPIO 25</td><td class = "grn" >22<input type = "radio" /></td><!----><td class = "prp" ><input type = "radio" />21</td><td class = "prp" >GPIO 09	</td><td class = "bsc" >SPI_MISO	</td></tr> 
+<!-- 10 --><tr><td class = "bsc" >				</td><td class = "gra" >ground	</td><td class = "gra" >20<input type = "radio" /></td><!----><td class = "prp" ><input type = "radio" />19</td><td class = "prp" >GPIO 10	</td><td class = "bsc" >SPI_MOSI	</td></tr> 
+<!-- 09 --><tr><td class = "bsc" >GEN5			</td><td class = "grn" >GPIO 24</td><td class = "grn" >18<input type = "radio" /></td><!----><td class = "red" ><input type = "radio" />17</td><td class = "red" >pw: +3v3	</td><td class = "bsc" >			</td></tr> 
+<!-- 08 --><tr><td class = "bsc" >GEN4			</td><td class = "grn" >GPIO 23</td><td class = "grn" >16<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />15</td><td class = "grn" >GPIO 22	</td><td class = "bsc" >GEN3		</td></tr> 
+<!-- 07 --><tr><td class = "bsc" >				</td><td class = "gra" >ground	</td><td class = "gra" >14<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />13</td><td class = "grn" >GPIO 27	</td><td class = "bsc" >GEN2		</td></tr> 
+<!-- 06 --><tr><td class = "bsc" >GEN1, PWM0	</td><td class = "grn" >GPIO 18</td><td class = "grn" >12<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />11</td><td class = "grn" >GPIO 17	</td><td class = "bsc" >GEN0		</td></tr> 
+<!-- 05 --><tr><td class = "bsc" >UART_RXD0	</td><td class = "org" >GPIO 15</td><td class = "org" >10<input type = "radio" /></td><!----><td class = "gra" ><input type = "radio" />09</td><td class = "gra" >ground		</td><td class = "bsc" >			</td></tr> 
+<!-- 04 --><tr><td class = "bsc" >UART_TXD0	</td><td class = "org" >GPIO 14</td><td class = "org" >08<input type = "radio" /></td><!----><td class = "grn" ><input type = "radio" />07</td><td class = "grn" >GPIO 04	</td><td class = "bsc" >GCLK0		</td></tr> 
+<!-- 03 --><tr><td class = "bsc" >				</td><td class = "gra" >ground	</td><td class = "gra" >06<input type = "radio" /></td><!----><td class = "blu" ><input type = "radio" />05</td><td class = "blu" >GPIO 03	</td><td class = "bsc" >I2C_SCL1	</td></tr> 
+<!-- 02 --><tr><td class = "bsc" >				</td><td class = "red" >pw: +5V</td><td class = "red" >04<input type = "radio" /></td><!----><td class = "blu" ><input type = "radio" />03</td><td class = "blu" >GPIO 02	</td><td class = "bsc" >I2C_SDA1	</td></tr> 
+<!-- 01 --><tr><td class = "bsc" >				</td><td class = "red" >pw: +5V</td><td class = "red" >02<input type = "radio" /></td><!----><td class = "red" ><input type = "radio" />01</td><td class = "red" >pw: +3v3	</td><td class = "bsc" >			</td></tr>
+
+</table>
+
+</center>
+</body></html>
