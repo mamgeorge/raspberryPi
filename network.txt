@@ -1,6 +1,6 @@
 C:\Martin\4Work\toolCode\raspberryPi\network.txt
 
-general
+general [
 
 	host computer
 
@@ -26,22 +26,22 @@ general
 
 	NOTE: many ways to remotely connect to a pi
 
-		1 ) "putty" allows a command shell connection
+		1 "putty" allows a command shell connection
 			pros: the lowest overhead
 			cons: only command shell possible , but no CLI
 
-		2 ) "X11" allows a graphical screen
+		2 "X11" allows a graphical screen
 			uses command shell client AND graphical x11 server ( like putty AND Xming )
 			pros: graphics can be optional
 			cons: requires two programs
 
-		3 ) "vnc" is Virtual Network Computing
+		3 "vnc" is Virtual Network Computing
 			pros: the simplest overall access , allows
 			cons: a little more setup on pi side ; may also not allow some CLI image handling
 
 			"x11vnc" appears to be a variation of this
 
-		4 ) "ethernet"
+		4 "ethernet"
 			pros: fastest most secure connection
 			cons: requires a cable , command shell client , x11 server
 
@@ -50,8 +50,9 @@ general
 		SOLUTION: using a dongle ( which inceased distance ) seemed to help a lot
 			note that issues can arise based on the wifi dongle used ;
 			TP-Link failed but CanaKit worked
+]
 
-internet
+internet [
 
 	note: reformatting the NOOBs program for RPiB+ produced an image that did not have the default gateway.
 		http://www.doofusdan.com/2013/02/getting-raspberry-pi-dhcp-working-with.html
@@ -61,6 +62,7 @@ internet
 
 	adding network connection CLI
 
+		https://raspberrypihq.com/how-to-connect-your-raspberry-pi-to-wifia
 		http://www.algissalys.com/how-to/how-to-raspberry-pi-multiple-wifi-setup-through-the-command-line
 		https://www.thepolyglotdeveloper.com/2016/08/connect-multiple-wireless-networks-raspberry-pi/
 
@@ -75,15 +77,64 @@ internet
 			auto wlan0
 			allow-hotplug wlan0
 			iface wlan0 inet dhcp
-				wpa-ssid "ssid"		#mamgeorge
-				wpa-psk "password"
-				wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
+			# wpa-ssid "ssid"		#mamgeorge
+			# wpa-psk "password"
+			wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+			auto wlan1
+			allow-hotplug wlan1
+			iface wlan1 inet dhcp
+			wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
 
 			NOTES
 				* updating interfaces requires quotes "" which requires an US keyboard.
 					The image was set in GB , so raspi-config was needed to change localization.
 					Several menus were passed to get to it.
 				* wpa_supplicant.conf also has key_mgmt=WPA-PSK
+
+		$ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+
+			ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+			update_config=1
+
+			# Example Open
+			network = {
+				ssid = "any_SSID"
+				scan_ssid=1
+				key_mgmt = NONE
+			}
+
+			# Example WEP
+			network={
+				ssid="any_SSID"
+				scan_ssid=1
+				key_mgmt=NONE
+				wep_key0="any_WEPKEY"
+			}
+
+			# Example WPA
+			network={
+				ssid="any_SSID"
+				scan_ssid=1
+				key_mgmt=WPA-PSK
+				psk="any_WPAKEY"
+			}
+
+			# Example WPA2
+			network={
+				ssid="any_SSID"
+				scan_ssid=1
+				proto=RSN
+				key_mgmt=WPA-PSK
+				psk="any_RSN_KEY"
+			}
+
+			ssid		name of wireless network (shows up when you search for wifi)
+			key_mgmt	type either open, wep, wpa, wpa2
+			wep_key0	if network is wep encrypted, insert password (now outdated)
+			psk			if network is wpa/wpa2 encrypted, enter wifi password here
+			proto=RSN	this line will be added to wpa2 encrypted networks
+			scan_ssid	"1" lets wifi adapter look for networks automatically & connect
 
 		$ hostname -I				# gets IP address // 169.254.79.11 192.168.0.22
 		$ sudo ifconfig				# gets IP address
@@ -93,8 +144,9 @@ internet
 		$ sudo ifup wlan0			# starts network
 
 	note: node processes may not terminate when shut down from IDE remote process
+]
 
-network_SSH
+network_SSH [
 
 	"putty" allows a command shell connection assuming
 		"wpa_supplicant.conf" has key_mgmt=WPA-PSK
@@ -109,8 +161,9 @@ network_SSH
 			SHIFT-INSERT for paste
 			CTRL-INSERT for copy
 		Putty may take seconds for lots of text to transfer over
+]
 
-network_VNC
+network_VNC [
 
 	vnc: Virtual Network Computing
 
@@ -119,7 +172,7 @@ network_VNC
 
 	setup Raspberry Pi
 
-		1 ) setup
+		1 setup
 
 			$ sudo ifconfig				# OR hostname -I to get: 192.168.0.xx
 
@@ -129,11 +182,11 @@ network_VNC
 				> Interfacing Options > SSH		# NEEDED FOR PUTTY, ETC
 				> Interfacing Options > VNC
 
-		2 ) install
+		2 install
 
 			$ sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer
 
-		3 ) run
+		3 run
 
 			$ vncserver ( using raspberryPi )
 
@@ -141,7 +194,7 @@ network_VNC
 			$ sudo nano .bashrc
 				vncserver # add to end of file
 
-		4 ) enable cutPaste ( when using XServer )
+		4 enable cutPaste ( when using XServer )
 
 			# note: may not be needed ; see Putty > Change Settings > Window > Selection
 
@@ -151,12 +204,12 @@ network_VNC
 
 	setup PC
 
-		1 ) install Viewer
+		1 install Viewer
 
 			* TightVNC ( 2.8.5 )
 			* VNC Viewer ( 6.1.0 )
 
-		3 ) run Viewer
+		2 run Viewer
 
 			TightVNC , add ip address: 192.168.0.xx:1
 
@@ -189,15 +242,16 @@ network_VNC
 				SOLUTION:
 					use: tightvncserver?
 					connecion breaks if wifi dongle is switched out
+]
 
-network_X11
+network_X11 [
 
 	https://eltechs.com/3-ways-to-run-a-remote-desktop-on-raspberry-pi/
 	using ssh + X11 forwarding for Remote Desktop on Raspberry Pi
 
-	1 ) Install Xming X Server for Window
-	2 ) Run Xming Server
-	3 ) Run Putty , enter your RPi IP address ,
+	1 Install Xming X Server for Window
+	2 Run Xming Server
+	3 Run Putty , enter your RPi IP address ,
 		then in the options menu at the left select X11 and
 		check the box labelled "Enable X11 forwarding"
 
@@ -208,8 +262,9 @@ network_X11
 			sudo apt-get -y install xrdp
 
 		XDMCP is a remote desktop protocol.
+]
 
-network_X11VNC
+network_X11VNC [
 
 	http://www.karlrunge.com/x11vnc/
 	https://www.raspberrypi.org/forums/viewtopic.php?p=108862#p108862
@@ -234,8 +289,9 @@ network_X11VNC
 			StartupNotify=false
 			Terminal=false
 			Hidden=false
+]
 
-file transfer
+file transfer [
 
 	in RPi , using "hostname -I" reads: 192.168.0.xx
 	in Win10 , using "ipconfig" reads: IPv4: 192.168.0.xx
@@ -248,9 +304,10 @@ file transfer
 
 	downloaded bitVise SSH Client
 
-		do not now why , do not know what it does : )
+		do not now why , do not know what it does
+]
 
-toolbar
+toolbar [
 
 	toolbar helps because of limited screen real estate
 
@@ -270,8 +327,9 @@ toolbar
 
 	/usr/share/raspi-ui-overrides/applications/usr/sbin/wpa_gui
 	/usr/share/raspi-ui-overrides/applications/obconf %f
+]
 
-ethernet
+ethernet [
 
 	setup Raspberry Pi
 
@@ -296,25 +354,27 @@ ethernet
 
 	setup PC
 
-		1 ) using ethernet CAT5e cable
-		2 ) run XMing
-		3 ) run Putty ( Connection > SSH > X11 > Enable X11 forwarding )
+		1 using ethernet CAT5e cable
+		2 run XMing
+		3 run Putty ( Connection > SSH > X11 > Enable X11 forwarding )
 
 			read RPi IP address using "hostname -I"
 			in RPi , using "hostname -I" reads: 192.168.0.xx
 			in Win10 , using "ipconfig" reads: IPv4: 192.168.0.xx
 
-		4 ) login: 22/7 , password:	rubusIdaeus
+		4 login: 22/7 , password:	rubusIdaeus
 
 		for GUI:
 
-		a ) sudo cp .Xauthority ~root/
+			a sudo cp .Xauthority ~root/
 
-			see: "C:\Martin\4Work\toolCode\raspberryPi\software.txt:bash"
+				see: "C:\Martin\4Work\toolCode\raspberryPi\software.txt:bash"
 
-		b ) lxsession
+			b lxsession
 
 		for RPI0
 
 			http://raspi.tv/2015/ethernet-on-pi-zero-how-to-put-an-ethernet-port-on-your-pi
 			ENC28J60
+]
+----

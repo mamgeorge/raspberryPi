@@ -12,7 +12,7 @@ common [
 
 		encase pi 192.168.1.xx pi , ji1qi4 / shu4mei2
 		robots pi 192.168.1.xx pi , ji1qi4 / shu4mei2
-		maleIO pi 192.168.1.22 pi , raspberry
+		maleIO pi 192.168.1.22 pi , shu4mei2
 
 	clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
 		note: insert must be on numpad
@@ -30,7 +30,7 @@ general [
 
 	$ sudo raspi-config						//
 	$ sudo apt-get install rpi-update		// firmware update rm
-	$ sudo rpi-update						// firmware update
+	$ sudo rpi-update						// firmware update (NOT REQUIRED)
 	$ sudo apt-get update -y				// 1 super user do advanced packaging tool update
 	$ sudo apt-get upgrade -y				// 2 super user do advanced packaging tool upgrade
 
@@ -299,9 +299,6 @@ network [
 	$ netstat -lnutp					// see your network bindings
 
 	$ ping -q -t 5 -w1 -c1 8.8.8.8 t	// shows internet connection
-
-	$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash		// installing nvm
-	$ nvm install node					// updating to latest node version
 ]
 
 system [
@@ -379,124 +376,6 @@ end scripts [
 		echo "Computer deactivated. Goodbye."
 		espeak "Computer deactivated. Goodbye."
 ]
-]
-
-install ( SDcard NOOBs configure extras ) [
-
-	https://www.raspberrypi.org/documentation/installation/installing-images/
-
-	SD card
-
-		RPis ONLY reads FAT16 or FAT32 filesystems
-		RPi can NOT boot from an exFAT filesystem
-		RPis GPU bootloader is NOT updateable
-		32GB can NOT be used unless formatted as FAT32
-		SD card > 32GB is an SDXC card ; must be formatted as FAT32 filesystem
-
-SDcard prepare
-
-	download & install SD Formatter
-
-		download & install SD Associations Formatting Tool ( sdcard.org )
-		"C:\Program Files ( x86 )\SDA\SD Formatter\SDFormatter.exe"
-
-		( another "flasher" is Win32 DiskImager )
-
-	format SD card
-
-		set "FORMAT SIZE ADJUSTMENT" option to "ON" in the "Options" menu
-		this ensures the entire SD card volume is formatted
-
-download & extract OS: using NOOBs ( New Out Of the Box software )
-
-	download NOOBs software ; extract
-
-		https://www.raspberrypi.org/downloads/noobs/
-
-		NOOBS installs Raspbian
-
-		Noobs: version: 2.4.0 , release date: 2017-04-10 , see: VMM install of Debian Jessie
-		Noobs: version: 3.0.0 , release date: 2018-11-16 , see: VMM install of Debian
-
-	copy files ( not folder ) onto SD card
-
-	load SD card onto RPi , and run
-
-configure
-
-	if NOOBS is the setup, then a keyboard and monitor is needed
-
-	if GUI is installed, update network icon in GUI
-
-		RC toolbar > Panel Settings > Panel Preferences > WiFi Networks ( dhcpcdui )
-		enter key
-
-	bootup in CLI mode
-
-		$ sudo raspi-config					// select CLI bootup mode
-
-			NOTE: Updating interfaces requires quotes "" which requires an US keyboard.
-			The image was set in GB , so raspi-config was needed to change localization.
-			Several menus were passed to get to it.
-
-	configure remote ( Raspberry Pi setup )
-
-		see: "network.txt":internet		for network connection
-		see: "network.txt":network_SSH	for remote shell access
-
-extras
-
-	[ _ ] add node
-
-		https://oshlab.com/install-latest-node-js-raspberry-pi-3/
-
-		$ sudo apt-get remove nodered -y
-		$ sudo apt-get remove nodejs nodejs-legacy -y
-		$ sudo apt-get remove npm -y
-
-		// for pi
-		$ sudo curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-			// installing nvm
-
-		reload terminal!
-
-		$ nvm install node					// updating to latest node version
-
-	[ _ ] add TTS software
-
-		see "sound.txt":network_VNC
-
-	[ _ ] GUI on top of Raspbian Lite
-
-		$ sudo apt-get install mc		// midnight commander
-
-		https://www.raspberrypi.org/forums/viewtopic.php?f=66&t=133691
-		$ sudo apt-get dist-upgrade	// one way?
-
-		1 Display Server > Xorg Display Server
-
-		2 Desktop Environment >
-			PIXEL	Pi Improved Xwindows Environment Lightweight
-			LXDE	Lightweight X11 Desktop Environment
-			XFCE	XFCE Desktop Environment
-			MATE	MATE Desktop Environment
-
-		3 Window Manager >
-			PIXEL/LXDE	Openbox Window Manager
-			XFCE		XFWM Window Manager
-			MATE		Marco Window Manager
-
-		4 Login Manager > LightDM Login Manager
-
-	[ _ ] see CookBook 2.12 for printer access
-	
-	[ _ ] Github
-	
-		c:> cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
-		
-			fatal: This operation must be run in a work tree
-			git init
-		
 ]
 
 python ( idle nodejs ) [
@@ -616,5 +495,135 @@ ERRORS [
 
 				hdmi_drive=2 // might be useful to get audio to work
 ]
+]
+
+install ( SDcard NOOBs configure extras ) [
+
+	SDcard prepare [
+
+		SD card
+
+			https://www.raspberrypi.org/documentation/installation/installing-images/
+
+			RPis ONLY reads FAT16 or FAT32 filesystems
+			RPi can NOT boot from an exFAT filesystem
+			RPis GPU bootloader is NOT updateable
+			32GB can NOT be used unless formatted as FAT32
+			SD card > 32GB is an SDXC card ; must be formatted as FAT32 filesystem
+
+		download & install SD Formatter
+
+			download & install SD Associations Formatting Tool ( sdcard.org )
+			"C:\Program Files ( x86 )\SDA\SD Formatter\SDFormatter.exe"
+
+			( another "flasher" is Win32 DiskImager )
+
+		format SD card
+
+			set "FORMAT SIZE ADJUSTMENT" option to "ON" in the "Options" menu
+			this ensures the entire SD card volume is formatted
+	]
+
+	download OS [
+
+		extract OS using NOOBs ( New Out Of the Box software )
+
+		download NOOBs software ; extract
+
+			https://www.raspberrypi.org/downloads/noobs/
+
+			NOOBS installs Raspbian
+
+			Noobs: version: 2.4.0 , release date: 2017-04-10 , see: VMM install of Debian Jessie
+			Noobs: version: 3.0.0 , release date: 2018-11-16 , see: VMM install of Debian
+
+		copy files ( not folder ) onto SD card
+
+		load SD card onto RPi , and run
+	]
+
+	configure [
+
+		if "NOOBS" is the setup, THEN A KEYBOARD AND MONITOR IS NEEDED
+
+			in this case, NOOBS handles the wifi setup thru the external monitor
+
+		if GUI is installed, update network icon in GUI
+
+			RC toolbar > Panel Settings > Panel Preferences > WiFi Networks ( dhcpcdui )
+			enter key
+
+		bootup in CLI mode
+
+			$ sudo raspi-config			// select CLI bootup mode
+
+				NOTE: Updating interfaces requires quotes "" which requires an US keyboard.
+				The image was set in GB , so raspi-config was needed to change localization.
+				Several menus were passed to get to it.
+
+			$ sudo apt-get update -y	// super user do advanced packaging tool update
+			$ sudo apt-get upgrade -y	// super user do advanced packaging tool upgrade
+			$ sudo reboot
+
+		configure remote ( Raspberry Pi setup )
+
+			see: "network.txt":internet		for network connection
+			see: "network.txt":network_SSH	for remote shell access
+	]
+
+	extras [
+
+		[ _ ] add node & express
+
+			// node v10.15.2 , npm v5.8.0
+
+			$ npm install npm@latest -g
+
+			or
+
+			$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+			$ command -v nvm		# prints NVM if NVM is installed
+			reload terminal!
+			$ nvm install node	// updating to latest node version
+
+			// express@4.17.1
+
+			$ cd myapp
+			$ npm init
+			$ npm install express --save
+
+		[ _ ] add TTS software, etc.
+
+			$ sudo apt-get install espeak python-espeak
+
+			$ npm install colors		// for programming
+
+			$ sudo apt-get install mc	// midnight commander
+
+				1 Display Server > Xorg Display Server
+
+				2 Desktop Environment >
+					PIXEL	Pi Improved Xwindows Environment Lightweight
+					LXDE	Lightweight X11 Desktop Environment
+					XFCE	XFCE Desktop Environment
+					MATE	MATE Desktop Environment
+
+				3 Window Manager >
+					PIXEL/LXDE	Openbox Window Manager
+					XFCE		XFWM Window Manager
+					MATE		Marco Window Manager
+
+				4 Login Manager > LightDM Login Manager
+		]
+
+		[ _ ] see CookBook 2.12 for printer access
+
+		[ _ ] Github
+
+			c:> cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
+
+				fatal: This operation must be run in a work tree
+				git init
+	]
 ]
 ----

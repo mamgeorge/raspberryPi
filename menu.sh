@@ -44,6 +44,7 @@ voice( ) {
 
 light_ONE( ) {
 
+	echo -e "${BMAG}5) light_ONE 5a) light_RGB 5b) light_MNY${NCLR}"
 	echo -e "Expects LEDs on BLK on BCM 21 (pin 40)"
 	echo -e "${BRED}RED long anode on 3V pwr (pin 1)${NCLR}"
 	python python/gpio/gpio_ledOne.py
@@ -51,6 +52,7 @@ light_ONE( ) {
 
 light_RGB( ) {
 
+	echo -e "${BMAG}5) light_ONE 5a) light_RGB 5b) light_MNY${NCLR}"
 	echo -e "${BRED}R${BGRN}G${BBLU}B${NCLR} LED 10mm facing east"
 	echo -e "[ ${BBLU}20 - ${BGRN}16 - ${BWHT}34 - ${BRED}32 ${NCLR}]"
 	python python/gpio/pi_lamps.py
@@ -58,6 +60,7 @@ light_RGB( ) {
 
 light_MNY( ) {
 
+	echo -e "${BMAG}5) light_ONE 5a) light_RGB 5b) light_MNY${NCLR}"
 	echo -e "${BMAG}PiTraffic if pin 01 is North: ${NCLR}"
 	echo -e "[ ${BWHT}09 - ${BGRN}17 - ${BRED}27 - ${BBLU}22 ${NCLR}] # facing west"
 	echo -e "[ ${BWHT}39 - ${BGRN}26 - ${BRED}19 - ${BBLU}13 ${NCLR}] # facing east"

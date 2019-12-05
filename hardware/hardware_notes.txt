@@ -144,7 +144,25 @@ monitors [
 
 	[ * ] screen Case	/ $20 , Pimoroni Raspberry Pi 7 inch Touchscreen Display Case
 
-	[ * ] screen 3.5	/ $45 , PiTFT+480x320 3.5 inch TFT Plus Resistive Touchscreen (AdaFruit Id: 2441)
+	[ * ] screen 3.5	/ $45 , PiTFT+480x320 3.5 inch TFT Plus Resistive Touchscreen [
+
+		(AdaFruit Id: 2441)
+
+		https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi/downloads
+		https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi/easy-install-2
+
+			$ cd ~
+			$ wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh
+			$ chmod +x adafruit-pitft.sh
+			$ sudo ./adafruit-pitft.sh
+
+			choose #4 (3.5 inch TFT)
+			choose #3 (270 deg rotate)
+			Would you like the console to appear on the PiTFT display?
+			YES:	PiTFT as Text Console
+			NO:		PiTFT as HDMI Mirror
+			NO:		PiTFT as Raw Framebuffer Device
+	]
 
 	[ _ ] screen 3.5	/ $33 , PiTFT+480x320 3.5 inch TFT Plus Resistive Touchscreen
 

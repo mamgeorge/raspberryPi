@@ -45,12 +45,13 @@ summary [
 	$ aplay -D bluealsa Music/ping.wav			// play test wav, if bluetooth installed
 
 	$ arecord -l								// shows webcam list
-	$ arecord -d 3 -D plughw:1,0 Music/test.wav	// create test sound
-	$ aplay -D bluealsa Music/test.wav			// play test sound
+	$ arecord -d 3 -D plughw:1,0 Music/test.wav	// create test sound for 3 seconds
+	$ aplay -D bluealsa Music/test.wav			// play test sound with Device bluealsa
 
 	$ espeak -f Music/genesis.txt				// test file
 	$ espeak "Greetings!"						// YES!
 	$ espeak -ven+m5 -k5 -s150 "Greetings!"		// -ven: voice english , m5: male 5, k5: pitch 5, -s150: speed 150wpm
+	$ espeak -ven+m5 -k5 -s150 -f rom_12.txt -w q.wav	// writes file to wave
 ]
 
 hardware [
@@ -112,7 +113,9 @@ hardware [
 
 		https://learn.adafruit.com/usb-audio-cards-with-a-raspberry-pi/instructions
 
-		check /dev/sound ; if you many files there, youre using ALSA , if you have /dev/dsp0 , you have OSS
+		check /dev/sound ;
+			if you many files there, youre using ALSA ,
+			if you have /dev/dsp0 , you have OSS
 
 		$ dmesg | grep Headphone	// means you have a CM-headphone chipset with a C-Media USB Headphone Set Driver
 		$ dmesg | grep cm109		// means you have a CM109 chipset , with a CM109 Phone Interface Driver
@@ -167,16 +170,22 @@ config [
 		#dtparam=audio=on 		// worked on RPi0 when off ; blocks snd_bcm2835
 
 	$ sudo nano /etc/asound.conf
-		defaults.ctl.card 1
-		defaults.pcm.card 1
-		defaults.timer.card 1
-		pcm.!default { type hw card 1 }
-		ctl.!default { type hw card 1 }
+
+		// using "0" because of: $ cat /proc/asound/cards ; ? cat /proc/asound/modules
+
+		defaults.ctl.card 0
+		defaults.pcm.card 0
+		defaults.timer.card 0
+		pcm.!default { type hw card 0 }
+		ctl.!default { type hw card 0 }
 
 	$ sudo nano /usr/share/alsa/alsa.conf		// lengthy config
+
+		...
 		defaults.ctl.card 1
 		defaults.pcm.card 1
 		defaults.pcm.device 0
+		...
 
 	$ sudo alsamixer							// use this to set speaker values
 
@@ -251,9 +260,16 @@ tts [
 		$ sudo apt-get install espeak python-espeak
 		$ espeak --voices
 
-		$ espeak "Greetings!"
+		$ espeak "Greetings"
+		$ espeak "Greetings" -stdout | aplay -f cd -D bluealsa
+		$ espeak "Greetings" -ven-us+m3 -p50 -k5 -s180 -a50 --stdout | aplay -f cd -D bluealsa
 		$ espeak -ven+m3 -k5 -s150 -a50 "Greetings!"
-		$ espeak -f xxxx.txt
+		$ espeak "Hello. My name is Matt!"
+		$ espeak "Hello. My name is Matt!" -stdout | aplay -f cd -D bluealsa
+		$ espeak "Hello. My name is Matt!" -a10 --stdout | aplay -f cd -D bluealsa
+		$ espeak "Hello. My name is Matt!" -ven-us+m3 -p50 -k5 -s180 -a20 --stdout | aplay -f cd -D bluealsa
+		$ espeak -f rom_12.txt
+		$ espeak -f rom_12.txt -ven-us+m5 -p50 -k5 -s180 -a10 --stdout | aplay -f cd -D bluealsa
 		$ espeak -m -vzh 'ni3 hao3. <break strength = "strong" /> wo3 shi4 qiao2 ma3 ding1!'
 
 		$ date '+year %Y month %m date %d <break strength = "strong" /> time %I:%M:%S%p' | espeak -m -ven+f5
@@ -264,7 +280,9 @@ tts [
 			#! /usr/bin/env python
 			from subprocess import call
 			call( [ ‘espeak "Pi initialized. Greetings!"’ ] , shell=True )
-	]
+	
+		os.system( "espeak 'Hello {}' --stdout | aplay -f cd -D bluealsa".format( insertVal ) ) 	// python
+]
 
 	tts flite [
 
@@ -378,19 +396,44 @@ ERRORS [
 		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.center_lfe
 		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.side
 		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
-		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.hdmi
-		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
 		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.modem
 		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
-		ALSA lib pcm.c:2495:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.phoneline
+
+		ALSA lib pcm.c:2565:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround21
+		ALSA lib pcm.c:2565:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround40
+		ALSA lib pcm.c:2565:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround41
+		ALSA lib pcm.c:2565:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround50
+		ALSA lib pcm.c:2565:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround51
+		ALSA lib pcm.c:2565:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.surround71
+		ALSA lib pcm.c:2565:(snd_pcm_open_noupdate) Unknown PCM cards.pcm.iec958
 
 		RESOLUTION ?
+
 			see changes above for "/etc/asound.conf" & "/usr/share/alsa/alsa.conf"
 
-			## supress error message
-			cards.pcm.front 1
+			unknown PCM cards are removed by commenting out relevant lines
 
+				or, changing
+
+					pcm.front cards.pcm.front
+					pcm.front cards.pcm.default
+
+				or , suppress error message
+
+					cards.pcm.front 1
+
+				or , comment out
 	]
+
+	ERROR Expression 'alsa_snd_pcm_hw_params_set_period_size_near( pcm, hwParams, &alsaPeriodFrames, &dir )' failed in 'src/hostapi/alsa/pa_linux_alsa.c', line:
+
+		Expression 'alsa_snd_pcm_hw_params_set_period_size_near \
+			( pcm, hwParams, &alsaPeriodFrames, &dir )'
+			failed in 'src/hostapi/alsa/pa_linux_alsa.c',
+
+		RESOLUTION
+
+			set PA_ALSA_PLUGHW=1	// did not work
 
 	ERROR
 		jack server is not running or cannot be started

@@ -4,19 +4,6 @@
 	for PC_install see: "C:\Program Files\nodejs"
 	for PC_folder see : "C:\servers\nodejs\njs_hello.js"
 
-quick [
-
-	https://www.instructables.com/id/Install-Nodejs-and-Npm-on-Raspberry-Pi/
-	$ uname -m
-	$ wget https://nodejs.org/dist/v8.9.0/node-v8.9.0-linux-armv6l.tar.gz
-	$ mv node-v8.9.0-linux-armv6l.tar.gz nodejs.gz
-	$ tar -xzf nodejs.gz
-	$ cd nodejs/
-	$ sudo cp -R * /usr/local/
-	$ node -v
-	$ npm -v
-]
-
 highlevel [
 
 	node is the server software
@@ -32,12 +19,6 @@ highlevel [
 		sudo cp -R * /usr/local/
 
 		export PATH=$PATH:/home/pi/servers/nodejs/bin/
-
-	for NVM installs
-
-		curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
-		command -v nvm		# prints NVM if NVM is installed
-		nvm install node	# updates
 ]
 
 node [
@@ -46,6 +27,26 @@ node [
 
 		LTS v7.3.0 includes npm 3.10.10
 		LTS or Long Term Support Version
+
+		$ npm install npm@latest -g
+
+	install
+
+		https://www.instructables.com/id/Install-Nodejs-and-Npm-on-Raspberry-Pi/
+		$ uname -m
+		$ wget https://nodejs.org/dist/v8.9.0/node-v8.9.0-linux-armv6l.tar.gz
+		$ mv node-v8.9.0-linux-armv6l.tar.gz nodejs.gz
+		$ tar -xzf nodejs.gz
+		$ cd nodejs/
+		$ sudo cp -R * /usr/local/
+		$ node -v
+		$ npm -v
+
+	install thru NVM
+
+		$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+		$ command -v nvm		// prints NVM if NVM is installed
+		$ nvm install node		// updates
 
 	hostname - I
 
@@ -65,15 +66,18 @@ node [
 
 express [
 
-	static
+	install
 
-		http://expressjs.com/en/starter/hello-world.html
-		npm install express --save
-		npm install express-session
-		npm init , install express
+		// create an express server that can send static files
 
-		http://ericsowell.com/blog/2014/6/17/enough-node-for-building-a-simple-website
-		create an express server that can send static files
+			https://expressjs.com/en/starter/installing.html
+			http://expressjs.com/en/starter/hello-world.html
+			http://ericsowell.com/blog/2014/6/17/enough-node-for-building-a-simple-website
+
+		$ cd myapp
+		$ npm init
+		$ npm install express --save
+		$ npm install express-session
 
 	invoke
 
