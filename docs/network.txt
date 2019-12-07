@@ -21,7 +21,7 @@ general [
 		Authentication:	WPA2-PSK
 		Encryption:		CCMP
 		SSID:			mamgeorge
-		BSSID:			6c:b0:ce:43:20:4b
+		BSSID:			xx:xx:xx:xx:xx:xx
 		IP Address:		192.168.0.xx
 
 	NOTE: many ways to remotely connect to a pi
@@ -158,7 +158,7 @@ network_SSH [
 		"wpa_supplicant.conf" has key_mgmt=WPA-PSK
 		"interfaces" has wpa-ssid "ssid" , wpa-psk "password"
 		GUI: HostName = "raspberrypi" , Port 22
-		shell: login: "pi" password: "raspberry"
+		shell: login: "pi" password: "xxxxxx"
 
 	sudosudo raspi-config allows change to some of these defaults
 
@@ -368,7 +368,7 @@ ethernet [
 			in RPi , using "hostname -I" reads: 192.168.0.xx
 			in Win10 , using "ipconfig" reads: IPv4: 192.168.0.xx
 
-		4 login: 22/7 , password:	rubusIdaeus
+		4 login: 22/7 , password:	xxxxxxx
 
 		for GUI:
 

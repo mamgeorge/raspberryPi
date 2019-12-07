@@ -10,8 +10,8 @@ common [
 
 	http://192.168.1.1 , admin , q-1-Z-TP
 
-		sensehat		pi 192.168.1.xx pi , ji1qi4 / shu4mei2
-		RPI0_WH robot	pi 192.168.1.xx pi , ji1qi4 / shu4mei2
+		sensehat		pi 192.168.1.xx pi , j1_q4 / s4_m2
+		RPI0_WH robot	pi 192.168.1.xx pi , j1_q4 / s4_m2
 		RPI0_WH	male	pi 192.168.1.22 pi , s4_m2
 
 	clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
@@ -34,13 +34,13 @@ general [
 	$ sudo apt-get update -y				// 1 super user do advanced packaging tool update
 	$ sudo apt-get upgrade -y				// 2 super user do advanced packaging tool upgrade
 
-	$ cat /proc/device-tree/model && echo	// Raspberry Pi 2 Model B Rev 1.1 ; MN: qiao1003ZHITP
+	$ cat /proc/device-tree/model && echo	// Raspberry Pi 2 Model B Rev 1.1 ; MN: q_1_Z_TP
 	$ cat /etc/os-release					// PRETTY_NAME="Raspbian GNU/Linux 8 (jessie)"
 	$ cat /sys/class/net/wlan0/address		// MAC address
 	$ uname -a								// Linux raspberrypi 4.14.90-v7+ #1183 SMP Fri Dec 21 14:03:50 GMT 2018 armv7l GNU/Linux
 	$ hostname -I							// 192.168.0.13
 	$ sudo ifconfig							// gets network info & IP address
-	$ iwgetid								// wlan0 ESSID:"GeorgeHousehold"
+	$ iwgetid								// wlan0 ESSID:"xxxx"
 	$ df -h									// /dev/root 14G ...
 	$ free -m								// Mem: 732 ...
 
@@ -290,7 +290,7 @@ network [
 
 	$ ls /sys/class/net/				// show active interface
 
-	$ sudo iwgetid						// shows all available connections , eth0 , lo , wlan0 // wlan0 ESSID:"GeorgeHousehold"
+	$ sudo iwgetid						// shows all available connections , eth0 , lo , wlan0 // wlan0 ESSID:"xxxxxx"
 	$ sudo iwlist wlan0 scan			// shows all available WiFi networks
 	$ sudo ifconfig						// gets network info & IP address
 	$ sudo ifconfig wlan0				// gets network info
