@@ -1,11 +1,4 @@
-\\5Personal\Technology\raspberryPi\camera.txt
-
-	init
-	camera pix
-	camera video
-	webcam pix
-	webcam video 
-	extra
+\\5Personal\Technology\raspberryPi\docs\camera.txt
 
 init [
 
@@ -22,8 +15,8 @@ init [
 camera pix [
 
 	for Camera Module V2.1 / 8 Megapixel 1080p / RPI-CAM-V2 / Sony IMX219 8-megapixel sensor
-	for RPI0 Cam Cable 6.0 x 5/8 to 7/16 inch , 15 pin to 22 pin 
-	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1	
+	for RPI0 Cam Cable 6.0 x 5/8 to 7/16 inch , 15 pin to 22 pin
+	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
 
 	# RECORD
 
@@ -35,7 +28,7 @@ camera pix [
 
 		// https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
 		$ raspistill -vf -o img.jpg	-w 640 -h 480 -v	# using width & height , -v verbose , -vf verticleFlip
-		$ raspistill -t 100 -vf -o img.jpg	-md 6		# -t time 100 ms , -md6 mode 6: 640x480	
+		$ raspistill -t 100 -vf -o img.jpg	-md 6		# -t time 100 ms , -md6 mode 6: 640x480
 		$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10	# -q quality from 0 to 100
 		$ raspistill -ex night -vf						# -ex exposure mode?
 
@@ -56,12 +49,12 @@ camera pix [
 				RESOLUTION:
 				only remote shell for commands , monitor MUST remain attached to rPi
 
-		$ feh -g 600x400 -d img.jpg			# -g geometrySize , -d drawFilename 
+		$ feh -g 600x400 -d img.jpg			# -g geometrySize , -d drawFilename
 ]
 
 camera video [
 
-	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1	
+	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
 
 	# RECORD
 
@@ -71,7 +64,7 @@ camera video [
 			$ raspivid -vf -t 0 -w 640 -h 480 -o - | 192.168.1.12:0
 			$ raspivid -vf -t 0 -w 640 -h 480 -o - &
 
-		$ raspivid -t 5000 -vf -o cam.h264 
+		$ raspivid -t 5000 -vf -o cam.h264
 
 	# DISPLAY
 
@@ -101,7 +94,7 @@ webcam pix [
 
 		$ sudo chmod 777 /dev/video0
 		$ v4l2-ctl --list-formats-ext
-		
+
 ]
 
 webcam video [
@@ -151,4 +144,4 @@ extra [
 
 	$ sudo apt-get install vlc
 ]
-
+----

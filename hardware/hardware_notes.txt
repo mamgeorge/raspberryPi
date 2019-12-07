@@ -179,27 +179,33 @@ raspberryPi ( with version info ) [
 	[ _ ] RaspberryPi A+	BCM2835	700 MHz 1 -core ARM1176JZF-S	256MB RAM	1 USB	40 GPIO	microSDHC	-
 	[ _ ] RaspberryPi B+	BCM2835	700 MHz 1 -core ARM1176JZF-S	512MB RAM	4 USB	40 GPIO	microSDHC	Ethernet
 	[ _ ] RaspberryPi B		BCM2835	700 MHz 1 -core ARM1176JZF-S	512MB RAM	2 USB	26 GPIO	SDHC		-
-	[ * ] RaspberryPi B+2	BCM2836	900 MHz 4 -core ARM Cortex-A7	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet
+	[ * ] RaspberryPi B+2	BCM2836	900 MHz 4 -core ARM Cortex-A7	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
+		
+		encased for sensehat
+	]
+	[ * ] RaspberryPi 0		BCM2835	1.0 GHz 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [
+	
+		RPI0 for robot
+	]
+	[ * ] RaspberryPi 0WH	BCM2835	1.0 GHz 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [
 
-	[ * ] RaspberryPi 0		BCM2835	1.0 GHz 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	-
-	[ * ] RaspberryPi 0W	BCM2835	1.0 GHz 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [
+		RPI0_WH	male	, pi 192.168.1.22 pi , s4_m2	b8:27:eb:fc:a5:72 
 
-			WH: Wifi & Header
+		WH: Wifi & Header
+		802.11 b/g/n wireless LAN
+		Bluetooth 4.1
+		Bluetooth Low Energy (BLE)
+		Like the Pi Zero, it also has:
 
-			802.11 b/g/n wireless LAN
-			Bluetooth 4.1
-			Bluetooth Low Energy (BLE)
-			Like the Pi Zero, it also has:
-
-			1GHz, single-core CPU
-			512MB RAM
-			Mini HDMI and USB On-The-Go ports
-			Micro USB power
-			HAT-compatible 40-pin header
-			Composite video and reset headers
-			CSI camera connector
-		]
-	[ _ ] RaspberryPi 3		BCM2837	900 MHz 4 - core ARM Cortex-A53	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet
+		1GHz, single-core CPU
+		512MB RAM
+		Mini HDMI and USB On-The-Go ports
+		Micro USB power
+		HAT-compatible 40-pin header
+		Composite video and reset headers
+		CSI camera connector
+	]
+	[ _ ] RaspberryPi 3		BCM2837	900 MHz 4 - core ARM Cortex-A53	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
 
 		GPU:	Broadcom VideoCore IV @ 250 MHz , OpenGL ES 2.0 ( 24 GFLOPS ) , MPEG-2 and VC-1 , 1080p30 H.264/MPEG-4 AVC high-profile decoder and encoder
 		power:	5 V via MicroUSB drawing 800 mA ( 4.0 W )
@@ -212,7 +218,8 @@ raspberryPi ( with version info ) [
 		200-pin LPDDR2 SO-DIMM:
 		low-power double data rate synchronous
 		DRAM small outline dual in-line memory module
-
+	]
+	
 	http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
 
 		$ cat /proc/cpuinfo

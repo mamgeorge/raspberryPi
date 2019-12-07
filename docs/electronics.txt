@@ -1,4 +1,6 @@
-https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart\\5Personal\Technology\raspberryPi\electronics.txt
+\\5Personal\Technology\raspberryPi\docs\electronics.txt
+
+	https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart\\5Personal\Technology\raspberryPi\electronics.txt
 
 terminology [
 

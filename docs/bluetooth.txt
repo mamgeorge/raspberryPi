@@ -1,4 +1,4 @@
-\\5Personal\Technology\raspberryPi\bluetooth.txt
+\\5Personal\Technology\raspberryPi\docs\bluetooth.txt
 
 basics [
 

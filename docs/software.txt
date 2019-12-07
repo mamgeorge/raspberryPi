@@ -1,4 +1,4 @@
-\\5Personal\Technology\raspberryPi\software.txt
+\\5Personal\Technology\raspberryPi\docs\software.txt
 
 highLevel ( common general project other ) [
 
@@ -10,9 +10,9 @@ common [
 
 	http://192.168.1.1 , admin , q-1-Z-TP
 
-		encase pi 192.168.1.xx pi , ji1qi4 / shu4mei2
-		robots pi 192.168.1.xx pi , ji1qi4 / shu4mei2
-		maleIO pi 192.168.1.22 pi , shu4mei2
+		sensehat		pi 192.168.1.xx pi , ji1qi4 / shu4mei2
+		RPI0_WH robot	pi 192.168.1.xx pi , ji1qi4 / shu4mei2
+		RPI0_WH	male	pi 192.168.1.22 pi , s4_m2
 
 	clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
 		note: insert must be on numpad
@@ -36,6 +36,7 @@ general [
 
 	$ cat /proc/device-tree/model && echo	// Raspberry Pi 2 Model B Rev 1.1 ; MN: qiao1003ZHITP
 	$ cat /etc/os-release					// PRETTY_NAME="Raspbian GNU/Linux 8 (jessie)"
+	$ cat /sys/class/net/wlan0/address		// MAC address
 	$ uname -a								// Linux raspberrypi 4.14.90-v7+ #1183 SMP Fri Dec 21 14:03:50 GMT 2018 armv7l GNU/Linux
 	$ hostname -I							// 192.168.0.13
 	$ sudo ifconfig							// gets network info & IP address
@@ -264,6 +265,8 @@ configs [
 
 	// syntax highlight coloring for files
 
+		https://unix.stackexchange.com/questions/148/colorizing-your-terminal-and-shell-environment
+
 		$ sudo nano /usr/share/nano/js.nanorc				// syntax highlighting for nano js
 		$ sudo nano /usr/share/nano/python.nanorc			// syntax highlighting for nano python
 
@@ -284,9 +287,13 @@ configs [
 network [
 
 	$ hostname -I						// gets IP address: 169.254.79.11 , 192.168.0.22
+
+	$ ls /sys/class/net/				// show active interface
+
 	$ sudo iwgetid						// shows all available connections , eth0 , lo , wlan0 // wlan0 ESSID:"GeorgeHousehold"
 	$ sudo iwlist wlan0 scan			// shows all available WiFi networks
 	$ sudo ifconfig						// gets network info & IP address
+	$ sudo ifconfig wlan0				// gets network info
 	$ sudo ifup wlan0					// starts network
 	$ sudo ifdown wlan0					// shuts down network
 
@@ -398,7 +405,11 @@ idle python [
 
 nodejs python [
 
-	1 using a child process
+	1 color for terminal
+
+		pip install colorama
+
+	2 using a child process
 
 		http://stackoverflow.com/questions/23450534/how-to-call-python-function-from-nodejs
 		http://www.sohamkamani.com/blog/2015/08/21/python-nodejs-comm/
@@ -408,7 +419,7 @@ nodejs python [
 		var result = execSync( pathFile ) ;
 		console.log( result.toString( 'utf8' ) ) ;
 
-	2 setup required for windows
+	3 setup required for windows
 
 		https://github.com/nodejs/node-gyp
 
@@ -425,16 +436,16 @@ nodejs python [
 		node-gyp configure
 		node-gyp build
 
-	3 npm install python-shell
+	4 npm install python-shell
 
 		https://github.com/extrabacon/python-shell
 		var PythonShell = require( 'python-shell' ) ;
-		PythonShell.run( 'my_script.py' , options , function ( err , results ) { ... }
+		PythonShell.run( 'my_script.py' , options , function ( err , results ) { ... });
 		// you can send a message to python shell using pyshell.send( 'hello' ) ;
 
 		ERROR: configuration
 
-	4 npm install node-python
+	5 npm install node-python
 
 		ERROR: configuration
 ]
@@ -494,7 +505,6 @@ ERRORS [
 				config_hdmi_boost=4
 
 				hdmi_drive=2 // might be useful to get audio to work
-]
 ]
 
 install ( SDcard NOOBs configure extras ) [
@@ -577,14 +587,15 @@ install ( SDcard NOOBs configure extras ) [
 
 			// node v10.15.2 , npm v5.8.0
 
-			$ npm install npm@latest -g
+				$ sudo npm install npm@latest -g
 
-			or
+					or
 
-			$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
-			$ command -v nvm		# prints NVM if NVM is installed
-			reload terminal!
-			$ nvm install node	// updating to latest node version
+				$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+				$ command -v nvm	// prints NVM if NVM is installed
+
+				reload terminal!
+				$ nvm install node	// updating to latest node version
 
 			// express@4.17.1
 
@@ -596,9 +607,9 @@ install ( SDcard NOOBs configure extras ) [
 
 			$ sudo apt-get install espeak python-espeak
 
-			$ npm install colors		// for programming
+			$ npm install colors		// colors@1.4.0
 
-			$ sudo apt-get install mc	// midnight commander
+			? sudo apt-get install mc	// midnight commander
 
 				1 Display Server > Xorg Display Server
 
@@ -614,7 +625,6 @@ install ( SDcard NOOBs configure extras ) [
 					MATE		Marco Window Manager
 
 				4 Login Manager > LightDM Login Manager
-		]
 
 		[ _ ] see CookBook 2.12 for printer access
 

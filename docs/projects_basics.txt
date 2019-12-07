@@ -1,4 +1,4 @@
-\\5Personal\Technology\raspberryPi\projects_basics.txt
+\\5Personal\Technology\raspberryPi\docs\projects_basics.txt
 
 	see: "\\5Personal\Technology\raspberryPi\projects_dev.txt"
 	see: "\\5Personal\Technology\raspberryPi\software.txt"

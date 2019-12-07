@@ -1,4 +1,4 @@
-C:\Martin\4Work\toolCode\raspberryPi\network.txt
+C:\Martin\4Work\toolCode\raspberryPi\docs\network.txt
 
 general [
 
@@ -16,7 +16,7 @@ general [
 		getting network assignments from TPLink
 			use http://192.168.1.1	admin to get rPi: 192.168.1.22
 
-	hostname -I	OR ifconfig ( gets IP address )
+	$ hostname -I	OR ifconfig ( gets IP address )
 
 		Authentication:	WPA2-PSK
 		Encryption:		CCMP
@@ -129,12 +129,18 @@ internet [
 				psk="any_RSN_KEY"
 			}
 
+		terms
+		
 			ssid		name of wireless network (shows up when you search for wifi)
 			key_mgmt	type either open, wep, wpa, wpa2
 			wep_key0	if network is wep encrypted, insert password (now outdated)
 			psk			if network is wpa/wpa2 encrypted, enter wifi password here
 			proto=RSN	this line will be added to wpa2 encrypted networks
 			scan_ssid	"1" lets wifi adapter look for networks automatically & connect
+			
+			eth0		first Ethernet interface; usually a NIC connected to the network by a category 5 cable
+			wlan0		first wireless network interface
+			lo			loopback interface; special interface system uses to communicate with itself
 
 		$ hostname -I				# gets IP address // 169.254.79.11 192.168.0.22
 		$ sudo ifconfig				# gets IP address

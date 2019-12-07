@@ -78,13 +78,22 @@ I/O ( I/O: inputs , screens , camera , speakers ) [
 
 	[ * ] keyboard		/ 29$ / Logitech Wireless Combo MK270 Keyboard & Mouse / with dongle / 2015/07/29
 	[ * ] keyboard		/ 30$ / Logitech Wireless Touch Keyboard K400 Plus with Built-In Touchpad / with dongle / 2016/06/08
+	[ * ] keyboard		/ 33$ / JellyComb Foldable Bluetooth Keyboard [
+
+		JellyComb PN: B003
+		You can connect the keyboard with your device via Bluetooth or USB cable
+		When you remove the usb cable, the keyboard will automatically switch to bluetooth mode
+		Bluetooth 3.0 technology
+		size: 11.89 x 3.82 x 0.31 inch , folded: 5.98 x 3.82 x 0.71
+
+	]
 	[ * ] mouse			/ 20$ / Logitech Wireless Mouse M187 / with dongle / 2017/04/06
 
 	[ * ] screen LCD	/ 128$ / LCD Monitor Black / 24-inch wide / AOC E2425SWD / 2015/08/05 / order: 106-3033016-9172202 / ( 1920x1080 Optimum Resolution , 20M:1 DCR , DVI-D and VGA connectivity )
 	[ * ] screen TFT	/ 70$ / Pi Foundation PiTFT - 7 inch Touchscreen 800x480 pixels & DSI cable
 	[ * ] screen Case	/ 20$ / Pimoroni Raspberry Pi 7 inch Touchscreen Display Case
 	[ * ] screen 3.5	/ 45$ / PiTFT+480x320 3.5 inch TFT Plus Resistive Touchscreen [
-		
+
 		AdaFruit Product Id: 2441 , enabled for RPi0
 		uses SPI pins (SCK, MOSI, MISO, CE0, CE1) & #25 , #24
 		Your Order Number: 2191014-2525529066
@@ -107,7 +116,7 @@ I/O ( I/O: inputs , screens , camera , speakers ) [
 	[ * ] speakerHT		/ 07$ / USB Wireless Speaker / Inland Bluetooth Speaker PN: 88133 / black with hex pattern / ProHT 88133 , password 0000 / 3W 4 ohms 40mm , 5V 500 ma / 33 ft , signal to noise 84db , distortion < 116
 	[ * ] speakerGH		/ 15$ / USB Wireless Speaker / GearHead Model BT3500SLV PN: GH_BT3500 (bluetooth) / silver cylinder , 8 oz , 2.5 dia x 3 in
 	[ * ] speakerINSIQ	/ 15$ / USB Wireless Speaker / Insiq PN: 4326595940 / black cylinder , 2.4 oz , 1.2 inch dia x 1 inch / SKU: QO-3GJM-7ZVN [
-							
+
 							Insiq Mini Bluetooth Wireless Speaker: Owners Manual
 							volume of over >90DB , bluetooth version 4.1 , range of 30+ feet
 							code: INSIQBS1
@@ -136,8 +145,8 @@ components ( wifi , circuitry , HATs+ ) [
 	circuitry
 
 	[ * ] relay			/ 01$ / SRD relay / 10A 250-125 VAC , 10A 30-28 VDC / Songle PN: SRD 5VDC SL C
-	[ * ] resistor		/ 06$ / [ 025 ] resistors 230 ohms @ 5% , 1/4 W ; EProjects 25EP514220K 
-	[ * ] resistor		/ 07$ / [ 100 ] resistors 10k ohms @ 5% , 1/4 W ; EProjects 100EP51410K0 
+	[ * ] resistor		/ 06$ / [ 025 ] resistors 230 ohms @ 5% , 1/4 W ; EProjects 25EP514220K
+	[ * ] resistor		/ 07$ / [ 100 ] resistors 10k ohms @ 5% , 1/4 W ; EProjects 100EP51410K0
 	[ * ] resistor		/ 05$ / 10 pcs LDR ( light dependent resistor ) 5-10K Ohm , aka Photoresistor , Optoresistor / uxcell a15071300ux0102 , GL5516
 	[ * ] capacitor		/ 04$ / 50 pcs Ceramic Disc Capacitors , 100000pF = 100nF , 50V Low Voltage DIP / uxcell
 	[ * ] sensor		/ 06$ / HC-SR501 Body Sensor Module Infrared PIR Motion Detector / PIR: passive infrared sensor
@@ -148,11 +157,11 @@ components ( wifi , circuitry , HATs+ ) [
 	[ * ] lasers		/ 06$ / 10 pcs 5V 650nm 5mW 6mm Red Dot Diode Laser / HiLetgo , ASIN: B071FT9HSV
 
 	[ * ] I2c OLED 		/ 09$ / I2c SSD1306 OLED LCD Module / 128X64 , 0.96 inch , Blue Yellow , by: Diymall / Driver IC: SSD1306, VCC: 3.3-5V
-	[ * ] I2c Compass	/ 08$ / I2c HMC5883L Triple Axis Compass Magnetometer Sensor 
-	[ * ] I2c Pressure	/ 06$ / I2c BMP180 Barometric Pressure, Temperature, Altitude Sensor / JBtek RP0088 / not HG, but Pascals ( hectopascals or mbars Conversion: mbars x 0.02953 = inches of mercury ) / compare with BME280 
+	[ * ] I2c Compass	/ 08$ / I2c HMC5883L Triple Axis Compass Magnetometer Sensor
+	[ * ] I2c Pressure	/ 06$ / I2c BMP180 Barometric Pressure, Temperature, Altitude Sensor / JBtek RP0088 / not HG, but Pascals ( hectopascals or mbars Conversion: mbars x 0.02953 = inches of mercury ) / compare with BME280
 	[ 5 ] I2c Distance	/ 10$ / I2c HCSR04 Distance Sensor Ultrasonic Module / 2 Mounting Bracket / range: 0.75 to 16ft / 1.3 x 0.4 x 0.1 inch / Module working principle: Pull the Trig pin to high level for more than 10us impulse, the module start ranging. The module automatically sends eight 40KHz square wave to detect whether a signal is returned. Finished ranging, If you find an object in front, Echo pin will be high level, and based on the different distance, it will take the different duration of high level. So we can calculated the distance easily.The distance = ((Duration of high level)*(Sonic :340m/s))/2
-	
-	[ * ] I2c ports		/ 05$ / I2C MCP23017 port expander / by: MicroChip	/ 16 Bit 
+
+	[ * ] I2c ports		/ 05$ / I2C MCP23017 port expander / by: MicroChip	/ 16 Bit
 	[ * ] I2c DAC		/ 05$ / I2C MCP4725 DAC ( DigitalAnalog converter ) / by: HiLetgo	/ 1-Channel 12 Bit Development Board Breakout Board , Internal EEPROM Store Settings, 2.7V to 5.5V supply , addresses 0x62, 0x63
 	[ * ] SPI DAC		/ 04$ / SPI MCP3008 DAC ( DigitalAnalog converter ) / by: MicroChip	/ 8-Channel 10-Bit ADC With SPI Interface / ADC: Analog to Digital Converter
 
@@ -206,7 +215,7 @@ basics ( breadboard , wires , adapters , cable , solder ) [
 	[ * ] breadboard	/ $10 / GPIO J8 40-pin pinout board & cable
 	[ * ] breadboard	/ $10 / breadboard 14x60
 	[ * ] breadboard	/ $05 / breadboard 14x30 / J*30 breadboard
-	[ 6 ] breadboard	/ $09 / breadboard 10x17 /  170 Tie Points / by: Chanzon , PN: SYB-170 
+	[ 6 ] breadboard	/ $09 / breadboard 10x17 /  170 Tie Points / by: Chanzon , PN: SYB-170
 	[ * ] breakouts		/ $19 / RasPiO Pro breakout
 	[ _ ] breakouts		/ $13 / Pimoroni Explorer pHAT for RPi0 / AdaFruit 3018
 	[ _ ] breakouts		/ $23 / Pimoroni Explorer HAT Pro / AdaFruit 2427

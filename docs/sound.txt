@@ -1,4 +1,4 @@
-\\5Personal\Technology\raspberryPi\sound.txt
+\\5Personal\Technology\raspberryPi\docs\sound.txt
 
 summary [
 

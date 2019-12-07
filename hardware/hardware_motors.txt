@@ -243,13 +243,52 @@ articulation [
 	[ 1 ] ( 10$ ) Gripper / Actobotics Horizontal Standard Gripper Kit A / #637094 / uses HiTec HS-300 Servo Standard
 	[ 1 ] ( 10$ ) Gripper / Actobotics Vertical Standard Gripper Kit B / #637096 / uses HiTec HS-300 Servo Standard
 	[ _ ] ( 15$ ) Gripper / Actobotics Parallel Gripper Kit A / #637092 / uses HiTec servo with a 24T or 25T spline
-	[ 2 ] ( 13$ ) Servo / HiTec HS-311 Servo , Standard Universal / #31311S / https://www.servocity.com/hs-311-servo
+
+	[ 2 ] ( 13$ ) Servo / HiTec HS-311 Servo , Standard Universal / #31311S [
+
+		https://www.servocity.com/hs-311-servo
+		#####################################
+		## Model: HiTec HS-311 Standard Servo
+		#####################################
+		## Voltage Range		4.8V - 6.0V
+		## NoLoad Speed @4.8V	0.19sec/60 Deg
+		## Stall Torque @4.8V	42 oz/in ( 3.0 kg/cm )
+		## Product Weight		1.52oz ( 43g )
+		## PWM Signal MaxRange	575-2460 ms
+		## Max Travel			202.5 Deg
+		## 000 Deg: 0.5 ms , DC: 0.5/20 = 02.5%
+		## Neutral: 1.5 ms , DC: 1.5/20 = 07.5%
+		## 180 Deg: 2.5 ms , DC: 2.5/20 = 12.5%
+		#####################################
+	]
 	[ _ ] ( 11$ ) Servo / HiTec HS-55 Servo , Standard / #31055S
 	[ _ ] ( 18$ ) Servo / HiTec HS-5055MG Servo , Digital Metal Geared / #35055S
-
-
 	[ 2 ] ( 07$ ) Gripper / Actobotics SubMicro Gripper Kit / #637104 /
-	[ 2 ] ( 13$ ) Servo / Hitec 31055S HS-55 Sub Micro Servo Universal Economy
-	[ _ ] ( 15$ ) Servo / Hitec 31081S HS-81 Sub Micro Servo  ?
+	[ 2 ] ( 13$ ) Servo / Hitec 31055S HS-55 Sub Micro Servo Universal Economy [
+
+		https://www.servocity.com/hitec-hs-55-servo
+
+		Voltage Range	4.8V - 6.0V
+		No-Load Speed (4.8V)	0.18 sec/60°
+		Stall Torque (4.8V)	16.66 oz-in. (1.2kg.cm)
+		Product Weight	0.28oz (8g)
+		Max PWM Signal Range (Standard)	615-2390μsec
+		Max Travel (out of box)	203°
+		Pulse Amplitude	3-5V
+		Wire Gauge	28AWG
+	]
+	[ 1 ] ( 15$ ) Servo / Hitec 31081S HS-81 Sub Micro Servo  [
+
+		https://www.servocity.com/hs-81
+
+		Voltage Range	4.8V - 6.0V
+		No-Load Speed (4.8V)	0.11sec/60°
+		Stall Torque (4.8V)	36.10 oz/in. (2.6kg.cm)
+		Product Weight	0.58oz (16.6g)
+		Max PWM Signal Range (Standard)	640-2250μsec
+		Max Travel (out of box)	165°
+		Pulse Amplitude	3-5V
+		Wire Gauge	28AWG
+	]
 ]
 ----

@@ -1,4 +1,4 @@
-\\5Personal\Technology\raspberryPi\network_nodejs.txt
+\\5Personal\Technology\raspberryPi\docs\network_nodejs.txt
 
 	for RPi_server see: "C:\Martin\4Work\toolCode\raspberryPi\network_nodejs.txt"
 	for PC_install see: "C:\Program Files\nodejs"
