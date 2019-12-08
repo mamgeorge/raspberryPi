@@ -4,7 +4,7 @@ highLevel ( common general project other ) [
 
 common [
 
-	c:> C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
+	c:> cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
 
 	https://www.osboxes.org/raspbian/#raspbian-2019-04-vmware
 		vmware_Raspbian_20190411_32bit.7z

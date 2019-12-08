@@ -1,4 +1,4 @@
-## python\servo\servo_once.py
+## python\servo\servo_one.py
 #####################################
 ## Model: HiTec HS-311 Standard Servo
 ## Model: HiTec HS-55 Sub Micro Servo

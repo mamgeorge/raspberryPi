@@ -112,18 +112,18 @@ servos( )	{ ## 6
 	echo -e "\t${BYEL}YLW${NCLR} pin_37: BCM26"
 	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_02: 5V+"
-	python python/servos/servo_once.py
+	python python/servos/servo_one.py
 }
 stepper( )	{ ## 7
 
-	echo -e "${BMAG}Expects Steppers: [# 11,13,15,19]${NCLR}\n"
+	echo -e "${BMAG}Expects Stepper: [# 11,13,15,19]${NCLR}\n"
 	echo -e "\t${BBLU}BLU${NCLR} pin_11: BCM_17"
 	echo -e "\t${BMAG}PUR${NCLR} pin_13: BCM_27"
 	echo -e "\t${BYEL}YEL${NCLR} pin_15: BCM_22"
 	echo -e "\t${BORA}ORA${NCLR} pin_19: BCM_10"
 	echo -e "\t${BCKW}BLK${NCLR} pin_06: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_04: 5V+"
-	python python/servos/stepper_any.py
+	python python/servos/stepper_one.py
 }
 robot( )	{ ## 8
 
