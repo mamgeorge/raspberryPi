@@ -4,6 +4,8 @@ highLevel ( common general project other ) [
 
 common [
 
+	c:> 
+
 	https://www.osboxes.org/raspbian/#raspbian-2019-04-vmware
 		vmware_Raspbian_20190411_32bit.7z
 		C:\Program Files\Microsoft VS Code\resources
@@ -608,6 +610,8 @@ install ( SDcard NOOBs configure extras ) [
 			$ sudo apt-get install espeak python-espeak
 
 			$ npm install colors		// colors@1.4.0
+
+			$ npm install feh			// colors@1.4.0
 
 			? sudo apt-get install mc	// midnight commander
 

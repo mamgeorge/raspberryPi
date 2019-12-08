@@ -18,40 +18,71 @@ camera pix [
 	for RPI0 Cam Cable 6.0 x 5/8 to 7/16 inch , 15 pin to 22 pin
 	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
 
-	# RECORD
+	recording [
 
 		# assumes camera , not webcam
 		# the ribbon contact for zero faces down , for camera faces up
 		# must use direct HDMI video connection to rPi for fbi
 
-		$ raspistill -vf -o img.jpg						# -vf verticleFlip , -o output ( otherwise not saved )
-
 		// https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
-		$ raspistill -vf -o img.jpg	-w 640 -h 480 -v	# using width & height , -v verbose , -vf verticleFlip
-		$ raspistill -t 100 -vf -o img.jpg	-md 6		# -t time 100 ms , -md6 mode 6: 640x480
-		$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10	# -q quality from 0 to 100
-		$ raspistill -ex night -vf						# -ex exposure mode?
 
-	# DISPLAY
+		$ raspistill -vf -o anyPic.jpg
+		$ raspistill -vf -o anyPic.jpg	-w 640 -h 480 -v
+		$ raspistill -t 100 -vf -o anyPic.jpg -md 6
+		$ raspistill -t 100 -vf -o anyPic.jpg -md 6 -q 10
+		$ raspistill -ex night -vf
 
-		$ fbi img.jpg						# CLI requires direct HDMI video connection
+			-h 480	height
+			-md 6	mode 6: 640x480
+			-o		output ( otherwise not saved )
+			-q 10	quality from 0 to 100
+			-t 100	time 100 ms
+			-v		verbose
+			-vf		verticleFlip
+			-w 640	width
+	]
 
-			to use remote capability , rPi must STILL be attached to monitor
-			use remoting so USB ports & target screen are freed up
-			feh works but fbi and pqiv do not
+	displaying [
 
-		$ sudo fbi -T 2 -a img.jpg			# -a autoZoom out , -T terminal
+		// CLI requires direct HDMI video connection
 
-			ERROR during remote:
-				https://raspberrypi.stackexchange.com/questions/8922/how-do-i-display-images-without-starting-x11
-				ioctl VT_GETSTATE: Inappropriate ioctl for device ( not a linux console? )
+			$ sudo apt-get install caca-utils -y
 
-				RESOLUTION:
-				only remote shell for commands , monitor MUST remain attached to rPi
+			$ cacaview anyPic.jpg
+			$ cacaview Pictures/python.png
 
-		$ feh -g 600x400 -d img.jpg			# -g geometrySize , -d drawFilename
+		// fbi needs HDMI video connection, but seems to run without X11
+
+			$ sudo apt-get -y install fbi
+			$ fbi anyPic.jpg
+			$ fbi Pictures/python.png
+
+				to use remote capability , rPi must STILL be attached to monitor
+				use remoting so USB ports & target screen are freed up
+				feh works but fbi and pqiv do not
+
+			$ sudo fbi -T 2 -a anyPic.jpg
+
+				-a autoZoom out
+				-T terminal
+
+				ERROR during remote:
+					https://raspberrypi.stackexchange.com/questions/8922/how-do-i-display-images-without-starting-x11
+					ioctl VT_GETSTATE: Inappropriate ioctl for device ( not a linux console? )
+
+					RESOLUTION:
+					only remote shell for commands , monitor MUST remain attached to rPi
+
+		// feh is an X11 image viewer
+
+			$ sudo apt-get install feh -y
+			$ feh -g 600x400 -d anyPic.jpg
+			$ feh Pictures/python.png
+
+				-g geometrySize
+				-d drawFilename
+	]
 ]
-
 camera video [
 
 	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1

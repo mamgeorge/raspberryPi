@@ -32,7 +32,6 @@ sequenceHalf = [
 
 revolution = 512 # 512 cycles for one revolution
 timerDelay = 0.001 # outside for loop so pins are set and motor has a chance to repond
-timerDelay = 0.01
 
 for pin in controlPins:
 	GPIO.setup( pin , GPIO.OUT )
