@@ -3,15 +3,15 @@
 basics [
 
 	terminology: bluetooth profiles (services)
-	
+
 		A2DP	Advanced Audio Distribution Profile
 		GAP		Generic Access Profile
-		GATT	Generic Attribute Profile 
-		HFP		Hands-Free Profile; relies on SCO 
-		HSP		Headset Profile; relies on SCO 
+		GATT	Generic Attribute Profile
+		HFP		Hands-Free Profile; relies on SCO
+		HSP		Headset Profile; relies on SCO
 
 	terminology: bluetooth protocols
-				
+
 		ACL		Asynchronous Connection-Less; Controller stack
 		HCI		Host Controller Interface; Controller stack
 		LMP		Link Management Protocol; Controller stack
@@ -148,11 +148,7 @@ device MACs [
 			UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
 			Modalias: usb:v04E8p7021d011B
 	]
-	18:F6:43:C7:A8:8B	MEG IPhone
-	B4:4B:D2:17:FB:89	MLG IPhone
-	D0:57:7B:9A:E2:FA	HP360 MLG
-	D4:6E:0E:43:B6:98	Router (Router)
-	9C:AE:D3:CE:11:E6	Printer , Model: WF-4720 Series, Name: EPSONCE11E6 , IP: 192.168.1.18
+	20:20:00:19:60:18	Bluetooth 3.0 Keyboard (using dongle)
 
 	MACs unknown [
 		0C:02:D8:47:30:BF	(unknown)
