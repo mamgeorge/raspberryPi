@@ -1,18 +1,18 @@
-## /home/pi/python/gpio/pi_lamps.py
+# /home/pi/python/leds/led_rgb_more.py
 
-## python python/gpio/pi_lamps.py
-## Common Cathode RGB LEDs are R, (-), G, B 
-## Common Anode.. RGB LEDs are R, (+), G, B 
-## RGB LED diffused , 10mm dia , 4 Pin 
-## red: 700 mcd	, grn: 2100 mcd	 , blu: 900 mcd ( milliCandela typical brightness ) 
-## red: 623 nm	, grn: 523 nm	 , blu: 467 nm ( wavelength ) 
-## red: 1.8-2.2V, grn: 3.0-3.4V	 , blu: 3.0-3.4V ( @ 20mA current ) 
-## 50 degree viewing angle
+# python python/gpio/pi_lamps.py
+# Common Cathode RGB LEDs are R, (-), G, B 
+# Common Anode.. RGB LEDs are R, (+), G, B 
+# RGB LED diffused , 10mm dia , 4 Pin 
+# red: 700 mcd	, grn: 2100 mcd	 , blu: 900 mcd ( milliCandela typical brightness ) 
+# red: 623 nm	, grn: 523 nm	 , blu: 467 nm ( wavelength ) 
+# red: 1.8-2.2V, grn: 3.0-3.4V	 , blu: 3.0-3.4V ( @ 20mA current ) 
+# 50 degree viewing angle
 
 import RPi.GPIO as GPIO
 import time
 
-## init
+#### init
 GPIO.setmode( GPIO.BCM ) # BOARD
 GPIO.setwarnings( False )
 pinRed = 12 # pin 32 | pinRed = 25 # pin 22

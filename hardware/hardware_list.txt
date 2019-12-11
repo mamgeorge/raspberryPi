@@ -130,9 +130,9 @@ I/O ( I/O: inputs , screens , camera , speakers ) [
 	[ _ ] microamp		/ 08$ / Plugable USB Audio Adapter / with 3.5mm Speaker Headphone Microphone Jacks , Black Aluminum , C-Media HS 100B Chip / Plugable
 ]
 
-components ( wifi , circuitry , HATs+ ) [
+components ( wifi , circuitry , comm , HATs+ ) [
 
-	wifi
+	wifi [
 
 	[ * ] usbhub		/ 08$ / GE 4-Port USB Hub / H097958 USB 1.1 Portable Hub / 12 Mbps / LED , Built-in Cable
 	[ * ] wifi			/ 10$ / TP-Link TL-WN725N / 150 Mbps / 64/128 WEP , WPA/WPA2 , WPA-PSK/WPA2-PSK
@@ -141,8 +141,9 @@ components ( wifi , circuitry , HATs+ ) [
 	[ * ] bluetooth		/ 12$ / bluetooth 4.0 USB / IOGEAR - GBU521 / 2.4GHz ISM Band / max transfer 3Mbps
 	[ * ] bluetooth		/ 12$ / bluetooth 4.0 USB / CSR 4.0 / 2.4GHz ISM Band / SSP ( Secure Simple Pairing ) / RtTech
 	[ * ] adaptor		/ 16$ / LAN Network Adaptor / USB 3.1 type C male to RJ45 female 8P/8C Gigabit Ethernet / CableMatters model: 201013
+	]
 
-	circuitry
+	circuitry [
 
 	[ * ] relay			/ 01$ / SRD relay / 10A 250-125 VAC , 10A 30-28 VDC / Songle PN: SRD 5VDC SL C
 	[ * ] resistor		/ 06$ / [ 025 ] resistors 230 ohms @ 5% , 1/4 W ; EProjects 25EP514220K
@@ -155,15 +156,127 @@ components ( wifi , circuitry , HATs+ ) [
 	[ * ] leds			/ 09$ / 10 pcs 10mm RGB LED Multicolor 4pin Common Cathode/Anode ( Diffused/Clear ) / Chanzon , Gikfun
 	[ * ] leds			/ 07$ / 10 pcs High Power LED Chip 1W Cool White Light 10000K-15000K Cold Bulbs / Hontiey PN: 43222-6136
 	[ * ] lasers		/ 06$ / 10 pcs 5V 650nm 5mW 6mm Red Dot Diode Laser / HiLetgo , ASIN: B071FT9HSV
+	]
 
-	[ * ] I2c OLED 		/ 09$ / I2c SSD1306 OLED LCD Module / 128X64 , 0.96 inch , Blue Yellow , by: Diymall / Driver IC: SSD1306, VCC: 3.3-5V
-	[ * ] I2c Compass	/ 08$ / I2c HMC5883L Triple Axis Compass Magnetometer Sensor
-	[ * ] I2c Pressure	/ 06$ / I2c BMP180 Barometric Pressure, Temperature, Altitude Sensor / JBtek RP0088 / not HG, but Pascals ( hectopascals or mbars Conversion: mbars x 0.02953 = inches of mercury ) / compare with BME280
-	[ 5 ] I2c Distance	/ 10$ / I2c HCSR04 Distance Sensor Ultrasonic Module / 2 Mounting Bracket / range: 0.75 to 16ft / 1.3 x 0.4 x 0.1 inch / Module working principle: Pull the Trig pin to high level for more than 10us impulse, the module start ranging. The module automatically sends eight 40KHz square wave to detect whether a signal is returned. Finished ranging, If you find an object in front, Echo pin will be high level, and based on the different distance, it will take the different duration of high level. So we can calculated the distance easily.The distance = ((Duration of high level)*(Sonic :340m/s))/2
+	comm
 
-	[ * ] I2c ports		/ 05$ / I2C MCP23017 port expander / by: MicroChip	/ 16 Bit
-	[ * ] I2c DAC		/ 05$ / I2C MCP4725 DAC ( DigitalAnalog converter ) / by: HiLetgo	/ 1-Channel 12 Bit Development Board Breakout Board , Internal EEPROM Store Settings, 2.7V to 5.5V supply , addresses 0x62, 0x63
-	[ * ] SPI DAC		/ 04$ / SPI MCP3008 DAC ( DigitalAnalog converter ) / by: MicroChip	/ 8-Channel 10-Bit ADC With SPI Interface / ADC: Analog to Digital Converter
+	summary [
+
+		https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
+
+		cpp [
+
+			$ gpio -v			// see if you have it; 2019/12/10: gpio version: 2.50
+			$ gpio readall		// confirm access
+			$ sudo apt-get install wiringpi
+
+			// \home\pi\lang\sample.cpp
+			$ g++ -o sample lang/sample.cpp
+			$ ./sample
+		]
+
+		I2C [
+
+			$ ls /dev/*i2c*					/* i2c-tools v4.1-1 */
+
+				/dev/i2c-1
+
+			$ sudo apt-get install -y i2c-tools
+
+			$ i2cdetect -y 1
+		]
+
+		SPI [
+
+			$ ls /dev/*spi* 				/**/
+
+				for some reason the SPI files were gone:
+				https://www.raspberrypi-spy.co.uk/2014/08/enabling-the-spi-interface-on-the-raspberry-pi/
+
+			$ lsmod | grep spi			// confirmed: spi_bcm2835
+			$ sudo apt-get install -y python-dev python3-dev
+
+				in my case revealed:
+				python-dev is already the newest version (2.7.16-1).
+				python3-dev is already the newest version (3.7.3-1).
+
+			$ sudo apt-get install -y python-spidev python3-spidev
+
+				in my case revealed:
+				python-spidev is already the newest version (20170223~145721-2).
+				python3-spidev is already the newest version (20170223~145721-2).
+
+				so i did NOT make the install
+		]
+
+		components [
+
+			SSD1306 OLED
+			HCSR04 distance
+			HMC5883L compass
+			BMP180 pressure
+			MCP4725 DAC
+			MCP23017 expander
+
+			MCP3008 DAC (SPI)
+		]
+	]
+	[ * ] I2c OLED 		/ 09$ / I2c SSD1306 OLED LCD Module / by: Diymall [
+
+		Blue Yellow screen, pixels: 128X64 /
+		size: 0.96 inch,  Driver IC: SSD1306, VCC: 3.3-5V /
+
+		blue postage stamp with 4 pins /
+		pins: SDA SCL GND VCC
+	]
+	[ 5 ] I2c Distance	/ 10$ / I2c HCSR04 Distance Sensor Ultrasonic Module / by: xxxx [
+
+		2 Mounting Bracket / range: 0.75 to 16ft / 1.3 x 0.4 x 0.1 inch /
+			Module working principle: Pull Trig pin to high level for more than 10ms impulse /
+			module ready to begin range check (ranging) /
+			module automatically sends eight 40KHz square wave to detect signal /
+			after ranging AND object is in front, echo pin will be high level /
+			a different distance will yield a different duration of high level /
+			calculation for distance = [ ( duration of high level ) * ( sonic :340m/s ) ] / 2
+
+		blue rectangle with two large cylinders & 4 pins /
+		pins: GND ECHO TRIG VCC
+	]
+	[ * ] I2c Compass	/ 08$ / I2c HMC5883L Triple Axis Compass Magnetometer Sensor / by: xxxx [
+
+		blue rectangle with 5 pins (AdaFruit has 6)
+		pins: VCC GND SCL SDA DRDY
+	]
+	[ * ] I2c Pressure	/ 06$ / I2c BMP180 Barometric Pressure, Temperature, Altitude Sensor / by: JBtek [
+
+		JBtek RP0088 / not HG, but Pascals /
+		( hectopascals or mbars Conversion: mbars x 0.02953 = inches of mercury ) /
+		compare with BME280
+
+		blue tiny square with 4 pins /
+		pins: VIN GND SCL SDA
+	]
+	[ * ] I2c DAC		/ 05$ / I2C MCP4725 DAC ( DigitalAnalog converter ) / by: HiLetgo [
+
+		1-Channel 12 Bit Development Board Breakout Board , Internal EEPROM Store Settings /
+		2.7V to 5.5V supply , addresses 0x62, 0x63
+
+		red small square with 6 pin /
+		pins: OUT GND SCL SDA VCC GND
+	]
+	[ * ] I2c ports		/ 05$ / I2C MCP23017 port expander / by: MicroChip [
+
+		16 Bit
+
+		black long IC chip with 28 pins /
+	]
+
+	[ * ] SPI DAC		/ 04$ / SPI MCP3008 DAC ( DigitalAnalog converter ) / by: MicroChip [
+
+		8-Channel 10-Bit ADC With SPI Interface / ADC: Analog to Digital Converter
+
+		black long IC chip with 16 pins /
+	]
 
 	HATs+
 

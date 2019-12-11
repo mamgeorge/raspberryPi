@@ -14,7 +14,7 @@ common [
 
 		sensehat		pi 192.168.1.xx pi , j1_q4 / s4_m2
 		RPI0_WH robot	pi 192.168.1.xx pi , j1_q4 / s4_m2
-		RPI0_WH	male	pi 192.168.1.22 pi , s4_m2
+		RPI0_WH	male	pi 192.168.1.22 pi , s4_m2 / B8:27:EB:D4:F0:6E
 
 	clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
 		note: insert must be on numpad
@@ -605,15 +605,21 @@ install ( SDcard NOOBs configure extras ) [
 			$ npm init
 			$ npm install express --save
 
+			// others
+
+			$ npm install colors	// colors@1.4.0
+
 		[ _ ] add TTS software, etc.
 
 			$ sudo apt-get install espeak python-espeak
 
-			$ npm install colors		// colors@1.4.0
+			$ sudo apt-get install fbi -y 			// fbi version 2.09
+			$ sudo apt-get install feh -y			// feh version 3.1.3
+			$ sudo apt-get install caca-utils -y	// cacaview q0.99.beta19
 
-			$ npm install feh			// colors@1.4.0
+			$ sudo apt-get install sqlite3			// sqlite3 3.27.2-3
 
-			? sudo apt-get install mc	// midnight commander
+			? sudo apt-get install mc				// midnight commander
 
 				1 Display Server > Xorg Display Server
 

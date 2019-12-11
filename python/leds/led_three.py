@@ -1,6 +1,10 @@
-# /home/pi/python/gpio_ledMulti.py
+# /home/pi/python/leds/led_three.py
 
 # http://www.instructables.com/id/Using-a-RPi-to-Control-an-RGB-LED/
+# https://thepihut.com/blogs/raspberry-pi-tutorials/27968772-turning-on-an-led-with-your-raspberry-pis-gpio-pins
+# RPi ( 60mA )
+# 330ohm resistor ( Orange, Orange, Brown, Gold )
+# LED ( longer leg is anode )
 
 import RPi.GPIO as GPIO
 import time

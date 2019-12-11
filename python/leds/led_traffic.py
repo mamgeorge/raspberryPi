@@ -1,4 +1,4 @@
-# /home/pi/python/gpio/pi_traffic.py
+# /home/pi/python/leds/led_traffic.py
 
 import RPi.GPIO as GPIO
 import time
@@ -17,6 +17,7 @@ piTraffic = [ rval , yval , gval ]
 
 base = 1 # seconds
 
+#### init
 GPIO.setmode( GPIO.BCM )
 GPIO.setwarnings( False )
 for pin in piTraffic:
@@ -42,7 +43,7 @@ def showLights( ):
 	for pin in piTraffic:
 		GPIO.output( pin , False) ; time.sleep( base )
 
-# main
+#### main
 print( "lights" )
 
 clear( )
