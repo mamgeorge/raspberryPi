@@ -164,17 +164,6 @@ components ( wifi , circuitry , comm , HATs+ ) [
 
 		https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
 
-		cpp [
-
-			$ gpio -v			// see if you have it; 2019/12/10: gpio version: 2.50
-			$ gpio readall		// confirm access
-			$ sudo apt-get install wiringpi
-
-			// \home\pi\lang\sample.cpp
-			$ g++ -o sample lang/sample.cpp
-			$ ./sample
-		]
-
 		I2C [
 
 			$ ls /dev/*i2c*					/* i2c-tools v4.1-1 */

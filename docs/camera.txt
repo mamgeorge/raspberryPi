@@ -44,13 +44,6 @@ camera pix [
 
 	displaying [
 
-		// CLI requires direct HDMI video connection
-
-			$ sudo apt-get install caca-utils -y
-
-			$ cacaview anyPic.jpg
-			$ cacaview Pictures/python.png
-
 		// fbi needs HDMI video connection, but seems to run without X11
 
 			$ sudo apt-get -y install fbi
@@ -73,16 +66,25 @@ camera pix [
 					RESOLUTION:
 					only remote shell for commands , monitor MUST remain attached to rPi
 
+		// cacaview needs X11 image viewer
+
+			$ sudo apt-get install caca-utils -y
+
+			$ cacaview anyPic.jpg
+			$ cacaview Pictures/python.png
+
 		// feh is an X11 image viewer
 
 			$ sudo apt-get install feh -y
-			$ feh -g 600x400 -d anyPic.jpg
+			$ feh -g 600x400 --scale-down -d anyPic.jpg
 			$ feh Pictures/python.png
 
 				-g geometrySize
 				-d drawFilename
+				--scale-down
 	]
 ]
+
 camera video [
 
 	shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
@@ -162,16 +164,31 @@ webcam video [
 
 extra [
 
-	sudo apt-get install feh
+	raspberry pi camera connector broken: molex 54548-2271
+	
+	Here it is: https://www.raspberrypi.org/forums/viewtopic.php?f=44&t=151834
+		And here's the part information, not sure who sells it though:
+		Item, Quantity, Reference, Part, Manufacturer, Manuf. Part No, Description,
+		15, 4, J9 J10 J11 J12, 54548-2271, Molex, 54548-2271, 0.5MM FFC 22W RA BC
+		You're looking for a 1mm pitch, 15 pin FFC or Flexible Printed Circuit (FPC) connector.
+		
+		GeorgeHousehold
+		https://www.mouser.com/api-orderhistory/
+		API Key: 36e04eef-02f2-49dc-89a1-fd734a65a14c
 
-	sudo apt-get install --no-install-recommends xserver-xorg
-	sudo apt-get install raspberrypi-ui-mods
-	sudo apt-get install lightdm
-	sudo apt update
-	sudo apt upgrade
-	sudo reboot
+	// summary
+	$ sudo apt-get install fbi -y 
+	$ sudo apt-get install caca-utils -y
+	$ sudo apt-get install feh
 
-	sudo systemctl start lightdm
+	$ sudo apt-get install --no-install-recommends xserver-xorg
+	$ sudo apt-get install raspberrypi-ui-mods
+	$ sudo apt-get install lightdm
+	$ sudo apt update
+	$ sudo apt upgrade
+	$ sudo reboot
+
+	$ sudo systemctl start lightdm
 
 	$ sudo apt-get install vlc
 ]

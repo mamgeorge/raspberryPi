@@ -70,8 +70,12 @@ light3( )	{ ## 2c
 camera( )	{ ## 3
 
 	echo Expects Camera to be connected
-	raspistill -t 100 -vf -o anyPic.jpg -md 6 -q 10
-	feh -g 600x400 -d anyPic.jpg
+	#raspistill -t 100 -vf -o anyPic.jpg -md 6 -q 10
+	echo "Expects X11 server to be running"
+	echo "Showing ASCII view (but may take a minute)"
+	cacaview anyPic.jpg
+	read -p "Press [Enter] to see full image"
+	feh -g 600x400 --scale-down -d anyPic.jpg
 }
 
 speaker( )	{ ## 4, 4a , 4b, 4c, 4d

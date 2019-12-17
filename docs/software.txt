@@ -5,6 +5,10 @@ highLevel ( common general project other ) [
 common [
 
 	c:> cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
+		git branch
+		git add .
+		git commit -m "xxxx"
+		git push
 
 	https://www.osboxes.org/raspbian/#raspbian-2019-04-vmware
 		vmware_Raspbian_20190411_32bit.7z
@@ -15,6 +19,41 @@ common [
 		sensehat		pi 192.168.1.xx pi , j1_q4 / s4_m2
 		RPI0_WH robot	pi 192.168.1.xx pi , j1_q4 / s4_m2
 		RPI0_WH	male	pi 192.168.1.22 pi , s4_m2 / B8:27:EB:D4:F0:6E
+
+		connecting RPI0 with USB [
+
+			G:> config.txt
+
+				dtoverlay=dwc2
+
+			G:> cmdline.txt
+
+				modules-load=dwc2,g_ether	// after rootwait
+
+			G:> ssh pi@raspberrypi.local
+
+				appears to work if using USB C adaptor on connected network
+
+				ERROR: this did not work on the regular USB port (used for mouse) without network
+
+					somes guides say to set key first:
+					G:> ssh-keygen -R raspberrypi.local
+
+					RESOLUTION:
+
+					somes guides say to add "Bonjour"
+						Bonjour networking protocol sends and receives network packets on UDP port 5353
+						https://support.apple.com/kb/DL999?locale=en_US
+						no help
+
+					somes guides say to add "RNDIS Ethernet gadget"
+						RNDIS (Remote Network Driver Interface Specification) is a Microsoft proprietary protocol
+						https://www.raspberrypi.org/forums/viewtopic.php?t=245184
+						https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
+							assumed device shows up in com port
+
+					"RNDIS Ethernet gadget" is NOT added in Windows 10!
+		]
 
 	clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
 		note: insert must be on numpad
@@ -215,7 +254,7 @@ GUIs [
 
 ]
 
-bash 2 ( ANSI configs network system Xming ) [
+bash 2 ( ANSI configs network system Xming cpp ) [
 
 ANSI [
 
@@ -255,15 +294,18 @@ configs [
 	$ setterm -blank 1									// set terminal to blank ; you can even "force" it to close now
 	$ dmesg | less										// show startup log
 	$ dmesg | grep anytext								// show startup log parts
+	$ tabs -4											// set tab width to 4
 
-	$tabs -4											// set tab width to 4
-		setup in
-		$ sudo nano ~/.bashrc
-		$ sudo nano /etc/nanorc
-			set tabsize 4
+	$ sudo nano ~/.bashrc
 
-			## JavaScript
-			include "/usr/share/nano/js.nanorc"
+		tabs -4											// set tab width to 4
+
+	$ sudo nano /etc/nanorc
+
+		set tabsize 4
+
+		## JavaScript
+		include "/usr/share/nano/js.nanorc"
 
 	// syntax highlight coloring for files
 
@@ -335,6 +377,35 @@ Xming [
 
 			// REFERENCE ONLY
 			C:\servers\Xming\Xming.exe :1 -query 192.168.1.22 -screen 0 800x600+100+100@1
+]
+
+cpp [
+
+	$ gpio -v			// see if you have it; 2019/12/10: gpio version: 2.50
+	$ gpio readall		// confirm access
+
+		$ sudo apt-get install wiringpi	// in some cases?
+		$ sudo apt-get purge wiringpi
+		$ hash -r
+
+		$ cd
+		$ git clone git://git.drogon.net/wiringPi
+		$ git clone git://github.com/WiringPi/WiringPi
+		$ cd WiringPi
+		$ ./build
+
+	gcc sees *. c files as a c program
+	g++ sees *. c files as a c ++ program
+	diff defaults is which libraries link automatically
+
+		// https://cs.fit.edu/~mmahoney/cse1502/tutorial/
+		// https://www.programiz.com/cpp-programming/examples
+		// \home\pi\lang\sample.cpp
+
+		$ g++ -o lang/sample lang/sample.cpp
+		$ ./lang/sample
+
+	"L" means an array of wide characters (wchar_t)	, "A" = 41 , L"A" = 00 41
 ]
 ]
 
