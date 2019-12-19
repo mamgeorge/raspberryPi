@@ -11,7 +11,7 @@ import time
 #### init
 GPIO.setmode( GPIO.BCM )
 GPIO.setwarnings( False )
-pin10mm = 21 #21=40 , #4=7; put longer anode on pwr
+pin10mm = 21 #pin_40 = BCM_21 longer anode
 
 sleepLen = .02
 frequency = 500
@@ -21,8 +21,8 @@ dtyCycleRng = 50
 def blink( pin ):
 
 	GPIO.setup( pin , GPIO.OUT )
-	#GPIO.output( pin , GPIO.HIGH )
-	GPIO.output( pin , GPIO.LOW )
+	#GPIO.output( pin , GPIO.LOW ) # if reversing pins
+	GPIO.output( pin , GPIO.HIGH )
 	time.sleep( 1 )
 	print( "BLINK: " + str( GPIO.HIGH ) + " / " + str( GPIO.LOW ) )
 
@@ -44,7 +44,7 @@ def glows( pin ):
 
 #### exec
 blink( pin10mm )
-#glows( pin10mm )
+glows( pin10mm )
 
 #### fini
 GPIO.cleanup( )

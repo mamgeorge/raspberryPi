@@ -175,7 +175,7 @@ system [
 	$ sudo apt-get clean				// super user do apt clean up leftover packages
 	$ sudo apt-get update				// super user do advanced packaging tool update
 	$ sudo apt-get upgrade				// super user do advanced packaging tool upgrade
-	$ sudo raspi-config					// mainly for enabling SSH if CAT5 cable is used
+	$ sudo raspi-config					// mainly for enabling SSH if CAT5 cable is used, etc.
 	$ sudo rpi-update					// firmware update , can use UPDATE_SELF=0 to defer current program
 	$ sudo apt-get install rpi-update	// firmware update
 	$ sudo apt-get autoremove			// clean stuff
@@ -185,7 +185,7 @@ system [
 	$ sudo cat /proc/version			// Linux version 4.14.90-v7+ (dom@dom-XPS-13-9370) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1183 SMP Fri Dec 21 14:03:50 GMT 2018
 	$ sudo cat /proc/cpuinfo			// model name : ARMv7 Processor rev 5 (v7l)
 	$ sudo cat /proc/meminfo			// MemTotal: 750512 kB
-	$ sudo cat /proc/partitions			// major minor  #blocks  name
+	$ sudo cat /proc/partitions			// major minor #blocks name
 	$ sudo cat /etc/os-release			// PRETTY_NAME="Raspbian GNU/Linux 8 (jessie)"
 
 	$ uname -a							// get kernel ver , all:	Linux raspberrypi 4.14.90-v7+ #1183 SMP Fri Dec 21 14:03:50 GMT 2018 armv7l GNU/Linux
@@ -254,7 +254,7 @@ GUIs [
 
 ]
 
-bash 2 ( ANSI configs network system Xming cpp ) [
+bash 2 ( ANSI configs network system Xming cpp comm ) [
 
 ANSI [
 
@@ -372,7 +372,7 @@ Xming [
 		$ feh -g 600x400 -d img.jpg
 
 		shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
-			( or  )
+			( or )
 			C:\servers\Xming\Xming.exe :0 -clipboard -multiwindow
 
 			// REFERENCE ONLY
@@ -406,6 +406,63 @@ cpp [
 		$ ./lang/sample
 
 	"L" means an array of wide characters (wchar_t)	, "A" = 41 , L"A" = 00 41
+]
+
+comm [
+
+	https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
+	https://www.instructables.com/id/Raspberry-Pi-I2C-Python/
+
+	I2C [
+
+		I2C is a communication bus by Philips for chips to communicate with each other on a PCB.
+
+		// seems to be required in older configurations
+
+			$ sudo raspi-config			// assumes enabled I2C & SPI under "raspi-config":
+
+			$ sudo nano /etc/modprobe.d/raspi-blacklist.conf
+
+				blacklist spi-bcm2708	// comment out if needed?
+				blacklist i2c-bcm2708	// comment out if needed?
+
+			$ sudo nano /etc/modules
+
+				// already had i2c-dev in my case
+
+		testing
+
+			$ ls /dev/*i2c*						*// returns: "/dev/i2c-1"
+
+			$ sudo apt-get install -y i2c-tools	// note i2c-tools: v4.1-1
+
+			$ i2cdetect -y 0					// Error: Could not open file `/dev/i2c-0' or `/dev/i2c/0': No such file or directory
+
+			$ i2cdetect -y 1					// shows available i2c devices
+	]
+
+	SPI [
+
+		$ ls /dev/*spi* 				/**/
+
+			for some reason the SPI files were gone:
+			https://www.raspberrypi-spy.co.uk/2014/08/enabling-the-spi-interface-on-the-raspberry-pi/
+
+		$ lsmod | grep spi			// confirmed: spi_bcm2835
+		$ sudo apt-get install -y python-dev python3-dev
+
+			in my case revealed:
+			python-dev is already the newest version (2.7.16-1).
+			python3-dev is already the newest version (3.7.3-1).
+
+		$ sudo apt-get install -y python-spidev python3-spidev
+
+			in my case revealed:
+			python-spidev is already the newest version (20170223~145721-2).
+			python3-spidev is already the newest version (20170223~145721-2).
+
+			so i did NOT make the install
+	]
 ]
 ]
 

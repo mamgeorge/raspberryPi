@@ -124,7 +124,7 @@ I/O ( I/O: inputs , screens , camera , speakers ) [
 	[ * ] headset		/ 10$ / microphone headset audio / Microsoft LifeChat LX-1000
 	[ * ] headset		/ 30$ / microphone headset USB / Logitech ClearChat H390
 	[ * ] microphone	/ 05$ / microphone analog / -
-	[ * ] microphone	/ 05$ / USB mini microphone / model: MI-305 ( supposed to be Kinobo "Makio" ASIN: B00IR8R7WQ ) / frequency: 100-16 khz , sensitivity: -67 dBV/pBar,  -47 dBV/Pascal +/- 4dB
+	[ * ] microphone	/ 05$ / USB mini microphone / model: MI-305 ( supposed to be Kinobo "Makio" ASIN: B00IR8R7WQ ) / frequency: 100-16 khz , sensitivity: -67 dBV/pBar, -47 dBV/Pascal +/- 4dB
 	[ * ] microamp		/ 08$ / USB Virtual Sound Adapter 7.1 Channel / Microphone In and 3.5mm Speaker Out / Digital Class-B Power Amplifier
 	[ _ ] microamp		/ 13$ / Stereo Audio Amplifier 3.7W class D , MAX98306 / adafruit ID: 987
 	[ _ ] microamp		/ 08$ / Plugable USB Audio Adapter / with 3.5mm Speaker Headphone Microphone Jacks , Black Aluminum , C-Media HS 100B Chip / Plugable
@@ -150,75 +150,13 @@ components ( wifi , circuitry , comm , HATs+ ) [
 	[ * ] resistor		/ 07$ / [ 100 ] resistors 10k ohms @ 5% , 1/4 W ; EProjects 100EP51410K0
 	[ * ] resistor		/ 05$ / 10 pcs LDR ( light dependent resistor ) 5-10K Ohm , aka Photoresistor , Optoresistor / uxcell a15071300ux0102 , GL5516
 	[ * ] capacitor		/ 04$ / 50 pcs Ceramic Disc Capacitors , 100000pF = 100nF , 50V Low Voltage DIP / uxcell
-	[ * ] sensor		/ 06$ / HC-SR501 Body Sensor Module Infrared PIR Motion Detector / PIR: passive infrared sensor
-	[ * ] sensor		/ 02$ / TMP-36 analogue temperature sensor / PN: TMP36GZ #1602 379440
 	[ * ] leds			/ xx$ / LEDs & 1 RGB LED
 	[ * ] leds			/ 09$ / 10 pcs 10mm RGB LED Multicolor 4pin Common Cathode/Anode ( Diffused/Clear ) / Chanzon , Gikfun
 	[ * ] leds			/ 07$ / 10 pcs High Power LED Chip 1W Cool White Light 10000K-15000K Cold Bulbs / Hontiey PN: 43222-6136
 	[ * ] lasers		/ 06$ / 10 pcs 5V 650nm 5mW 6mm Red Dot Diode Laser / HiLetgo , ASIN: B071FT9HSV
-	]
-
-	comm
-
-	summary [
-
-		https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
-
-		I2C [
-
-			$ ls /dev/*i2c*					/* i2c-tools v4.1-1 */
-
-				/dev/i2c-1
-
-			$ sudo apt-get install -y i2c-tools
-
-			$ i2cdetect -y 1
-		]
-
-		SPI [
-
-			$ ls /dev/*spi* 				/**/
-
-				for some reason the SPI files were gone:
-				https://www.raspberrypi-spy.co.uk/2014/08/enabling-the-spi-interface-on-the-raspberry-pi/
-
-			$ lsmod | grep spi			// confirmed: spi_bcm2835
-			$ sudo apt-get install -y python-dev python3-dev
-
-				in my case revealed:
-				python-dev is already the newest version (2.7.16-1).
-				python3-dev is already the newest version (3.7.3-1).
-
-			$ sudo apt-get install -y python-spidev python3-spidev
-
-				in my case revealed:
-				python-spidev is already the newest version (20170223~145721-2).
-				python3-spidev is already the newest version (20170223~145721-2).
-
-				so i did NOT make the install
-		]
-
-		components [
-
-			SSD1306 OLED
-			HCSR04 distance
-			HMC5883L compass
-			BMP180 pressure
-			MCP4725 DAC
-			MCP23017 expander
-
-			MCP3008 DAC (SPI)
-		]
-	]
-	[ * ] I2c OLED 		/ 09$ / I2c SSD1306 OLED LCD Module / by: Diymall [
-
-		Blue Yellow screen, pixels: 128X64 /
-		size: 0.96 inch,  Driver IC: SSD1306, VCC: 3.3-5V /
-
-		blue postage stamp with 4 pins /
-		pins: SDA SCL GND VCC
-	]
-	[ 5 ] I2c Distance	/ 10$ / I2c HCSR04 Distance Sensor Ultrasonic Module / by: xxxx [
+	[ * ] sensor		/ 06$ / HC-SR501 Body Sensor Module Infrared PIR Motion Detector / PIR: passive infrared sensor
+	[ * ] sensor		/ 02$ / TMP-36 analogue temperature sensor / PN: TMP36GZ #1602 379440
+	[ 5 ] sensor		/ 10$ / HCSR04 Distance Sensor Ultrasonic Module / by: Elegoo [
 
 		2 Mounting Bracket / range: 0.75 to 16ft / 1.3 x 0.4 x 0.1 inch /
 			Module working principle: Pull Trig pin to high level for more than 10ms impulse /
@@ -230,6 +168,25 @@ components ( wifi , circuitry , comm , HATs+ ) [
 
 		blue rectangle with two large cylinders & 4 pins /
 		pins: GND ECHO TRIG VCC
+
+			GND		pin_02
+			ECHO	pin_38 , BCM_20 orange
+			TRIG	pin_40 , BCM_21 blue
+			VCC		pin_06
+
+			https://tutorials-raspberrypi.com/raspberry-pi-ultrasonic-sensor-hc-sr04/
+	]
+	]
+
+	comm
+
+	[ * ] I2c OLED 		/ 09$ / I2c SSD1306 OLED LCD Module / by: Diymall [
+
+		Blue Yellow screen, pixels: 128X64 /
+		size: 0.96 inch, Driver IC: SSD1306, VCC: 3.3-5V /
+
+		blue postage stamp with 4 pins /
+		pins: SDA SCL GND VCC
 	]
 	[ * ] I2c Compass	/ 08$ / I2c HMC5883L Triple Axis Compass Magnetometer Sensor / by: xxxx [
 
@@ -259,7 +216,6 @@ components ( wifi , circuitry , comm , HATs+ ) [
 
 		black long IC chip with 28 pins /
 	]
-
 	[ * ] SPI DAC		/ 04$ / SPI MCP3008 DAC ( DigitalAnalog converter ) / by: MicroChip [
 
 		8-Channel 10-Bit ADC With SPI Interface / ADC: Analog to Digital Converter
@@ -317,7 +273,7 @@ basics ( breadboard , wires , adapters , cable , solder ) [
 	[ * ] breadboard	/ $10 / GPIO J8 40-pin pinout board & cable
 	[ * ] breadboard	/ $10 / breadboard 14x60
 	[ * ] breadboard	/ $05 / breadboard 14x30 / J*30 breadboard
-	[ 6 ] breadboard	/ $09 / breadboard 10x17 /  170 Tie Points / by: Chanzon , PN: SYB-170
+	[ 6 ] breadboard	/ $09 / breadboard 10x17 / 170 Tie Points / by: Chanzon , PN: SYB-170
 	[ * ] breakouts		/ $19 / RasPiO Pro breakout
 	[ _ ] breakouts		/ $13 / Pimoroni Explorer pHAT for RPi0 / AdaFruit 3018
 	[ _ ] breakouts		/ $23 / Pimoroni Explorer HAT Pro / AdaFruit 2427

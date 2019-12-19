@@ -2,6 +2,7 @@
 # \home\pi\menu.sh
 # http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 # https://misc.flogisoft.com/bash/tip_colors_and_formatting
+# https://rosettacode.org/wiki/Terminal_control/Coloured_text
 # https://theasciicode.com.ar/
 
 initVars() {
@@ -22,8 +23,9 @@ initVars() {
 	NCLR="\033[0m"
 	
 	BCKR="\u001b[41;1m"
-	BCKG="\u001b[42;1m"
+	BCKO="\u001b[43;1;202m"
 	BCKY="\u001b[43;1m"
+	BCKG="\u001b[42;1m"
 	BCKB="\u001b[44;1m"
 	BCKM="\u001b[45;1m"
 	BCKC="\u001b[46;1m"
@@ -45,8 +47,8 @@ nodejs( )	{ ## 1
 lights( )	{ ## 2 , 2a , 2b , 2c
 
 	echo -e "${BMAG}2a) light1 LED${NCLR}"
-	echo -e "\t${BCKW}BLK${NCLR} pin_40: BCM_21 short cathode"
-	echo -e "\t${BCKR}RED${NCLR} pin_01: 3V PWR long anode"
+	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground short cathode"
+	echo -e "\t${BCKR}RED${NCLR} pin_40: BCM_21 long anode"
 
 	echo -e "\n${BMAG}2b) light2 RGB${NCLR}"
 	echo -e "\t${BRED}R${BGRN}G${BBLU}B${NCLR} LED 10mm facing east"
@@ -67,15 +69,32 @@ light2( )	{ ## 2b
 light3( )	{ ## 2c
 	python python/leds/led_traffic.py
 }
-camera( )	{ ## 3
 
-	echo Expects Camera to be connected
+pictures( )	{ ## 3, 3a , 3b, 3c, 3d
+
+	echo -e "${BMAG}Camera & Images: May need HDMI or x11 server${NCLR}\n"
+	echo -e "\t${BCYN}3a) Expects Camera to be connected${NCLR}"
+	echo -e "\t${BCYN}3b) Showing ASCII view (but may take a minute)${NCLR}"
+	echo -e "\t${BCYN}3c) FEH expects X11 server to be running${NCLR}"
+	echo -e "\t${BCYN}3d) FBI expects X11 server to be running${NCLR}"
+}
+camera( )	{ ## 3a
+
+	echo -e "${BMAG}Taking Picture!${NCLR}"
 	#raspistill -t 100 -vf -o anyPic.jpg -md 6 -q 10
-	echo "Expects X11 server to be running"
-	echo "Showing ASCII view (but may take a minute)"
+	echo -e "${BMAG}Done!${NCLR}"
+}
+images1( )	{ ## 3b
+
 	cacaview anyPic.jpg
-	read -p "Press [Enter] to see full image"
+}
+images2( )	{ ## 3c
+
 	feh -g 600x400 --scale-down -d anyPic.jpg
+}
+images3( )	{ ## 3d
+
+	fbi anyPic.jpg
 }
 
 speaker( )	{ ## 4, 4a , 4b, 4c, 4d
@@ -127,27 +146,35 @@ stepper( )	{ ## 5b
 	python python/servos/stepper_one.py
 }
 
-comms( )	{ ## 6 
+gpios( )	{ ## 6 
 
+	echo -e "${BMAG}gpio sensors${NCLR}"
+	echo -e ""
+	echo -e "\t6a ${BBLU}HCSR04	distance: ${NCLR}"
+	echo -e "\t\t${BCKR}VCC${NCLR} @ 5V"
+	echo -e "\t\t${BCKW}GND${NCLR} @ GND"
+	echo -e "\t\t${BCKO}pin_38${NCLR}: BCM_20 orange"
+	echo -e "\t\t${BCKB}pin_40${NCLR}: BCM_21 blue"
+	
+	echo -e ""
 	echo -e "${BMAG}6i) i2c_sample${NCLR}"
 	echo -e ""
-	echo -e "\t6a ${BBLU}SSD1306	OLED		${NCLR}"
-	echo -e "\t6b ${BCKB}HCSR04	distance	${NCLR}"
+	echo -e "\t6b ${BBLU}SSD1306	OLED		${NCLR}"
 	echo -e "\t6c ${BBLU}HMC5883L	compass		${NCLR}"
 	echo -e "\t6d ${BBLU}BMP180	pressure	${NCLR}"
 	echo -e "\t6e ${BRED}MCP4725	DAC			${NCLR}"
 	echo -e "\t6f ${BWHT}MCP23017	expander	${NCLR}"
-	echo -e "\t────────────────────"
+	echo -e ""
 	echo -e "${BMAG}6s) spi_sample${NCLR}"
 	echo -e ""
 	echo -e "\t6m ${BWHT}MCP3008	DAC	${NCLR}"
 
 }
+gpio_dst( )	{ ## 6a
+	python python/comm/gpio_distance.py
+}
 comm_i2c( )	{ ## 6i
 	python python/comm/i2c_sample.py
-}
-comm_dist( )	{ ## 6b
-	python python/comm/i2c_distance.py
 }
 comm_spi( )	{ ## 6s
 	python python/comm/spi_sample.py
@@ -223,14 +250,14 @@ do
 
 	echo -e "${ENDS}\n${BGRN}Greetings. ${DATES} \n ${NCLR}"
 
-	## echo -e "0 EXIT | 1 node | 2 lights | 3 camera | 4 speaker | 5 motors | 6 i2cs | 7 spis | 8 robot | 9 pins | r REBOOT"
+	## echo -e "0 EXIT | 1 node | 2 lights | 3 camera | 4 speaker | 5 motors | 6 comm | 7 xxxx | 8 robot | 9 pins | r REBOOT"
 	echo -e "0 EXIT		exits menu"
 	echo -e "1 node		http://192.168.1.22:3000"
 	echo -e "2 lights	shows LED, ${BRED}R${BGRN}G${BBLU}B${NCLR}, Traffic"
 	echo -e "3 camera	takes a picture & displays it"
 	echo -e "4 speaker	loads GH_BT3500 INSIQBS1 ProHT_88133"
 	echo -e "5 motors	runs servos or stepper"
-	echo -e "6 comm		runs i2c or spi based programs"
+	echo -e "6 gpio		runs gpio, i2c, or spi based programs"
 	echo -e "─────────────────────────────────────────"
 	echo -e "8 robot		runs robot node interface"
 	echo -e "9 pins		shows diagram of J8 pinout board"
@@ -244,11 +271,11 @@ do
 		## if [[ ( $option == "1" ) ]]; then nodejs; fi
 		0) exits 	;;
 		1) nodejs	;;
-		2) lights	;; 2a) light1 ;; 2b) light2 ;; 2c) light3 ;;
-		3) camera	;;
-		4) speaker	;; 4a) blue1  ;; 4b) blue2  ;; 4c) blue3 ;; 4d) voice ;;
+		2) lights	;; 2a) light1 ;; 2b) light2  ;; 2c) light3 ;;
+		3) pictures	;; 3a) camera ;; 3b) images1 ;; 3c) images2 ;; 3d) images3 ;;
+		4) speaker	;; 4a) blue1  ;; 4b) blue2   ;; 4c) blue3 ;; 4d) voice ;;
 		5) motors	;; 5a) servos ;; 5b) stepper ;;
-		6) comms	;; 6i) comm_i2c ;; 6b) comm_dist ;; 6s) comm_spi ;;
+		6) gpios	;; 6a) gpio_dst ;; 6i) comm_i2c ;; 6s) comm_spi ;;
 		7) ;;
 		8) robot	;;
 		9) pins		;;
