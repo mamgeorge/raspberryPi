@@ -180,27 +180,83 @@ components ( wifi , circuitry , comm , HATs+ ) [
 
 	comm
 
-	[ * ] I2c OLED 		/ 09$ / I2c SSD1306 OLED LCD Module / by: Diymall [
-
-		Blue Yellow screen, pixels: 128X64 /
-		size: 0.96 inch, Driver IC: SSD1306, VCC: 3.3-5V /
-
-		blue postage stamp with 4 pins /
-		pins: SDA SCL GND VCC
-	]
-	[ * ] I2c Compass	/ 08$ / I2c HMC5883L Triple Axis Compass Magnetometer Sensor / by: xxxx [
-
-		blue rectangle with 5 pins (AdaFruit has 6)
-		pins: VCC GND SCL SDA DRDY
-	]
 	[ * ] I2c Pressure	/ 06$ / I2c BMP180 Barometric Pressure, Temperature, Altitude Sensor / by: JBtek [
 
 		JBtek RP0088 / not HG, but Pascals /
 		( hectopascals or mbars Conversion: mbars x 0.02953 = inches of mercury ) /
 		compare with BME280
 
-		blue tiny square with 4 pins /
-		pins: VIN GND SCL SDA
+			blue tiny square with 4 pins /
+			pins: VCC GND SCL SDA
+
+			ORA	VCC	pin_01 : 3V3
+			WHT	GND	pin_06 : GND
+			MAG	SDA	pin_03 : BCM_02
+			YEL	SCL	pin_05 : BCM_03
+
+			BME vs BMP [
+
+				BMP280 and BME280 measure temperature in centigrade and pressure in Pa
+				BME280 can measure humidity , BMP280 can not
+				BME280 can also measure relative humidity in %.
+				BME280 has a wider measurement range: -40 to 85ºC
+				BME280 can use either I2C or SPI communication protocol
+
+				BMP180 can only use I2C communication
+				BMP180 just measures from 0 to 65ºC
+
+				6 widely used temp sensors: DHT11, DHT22, LM35, DS18B20, BME280, BMP180
+				https://randomnerdtutorials.com/dht11-vs-dht22-vs-lm35-vs-ds18b20-vs-bme280-vs-bmp180/
+			]
+
+		BMP180
+
+			2015 https://thepihut.com/blogs/raspberry-pi-tutorials/18025084-sensors-pressure-temperature-and-altitude-with-the-bmp180
+			2019 https://tutorials-raspberrypi.com/raspberry-pi-and-i2c-air-pressure-sensor-bmp180/
+
+			$ git clone https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code
+			$ cd Adafruit-Raspberry-Pi-Python-Code/
+			- or -
+			$ git clone https://github.com/adafruit/Adafruit_Python_BMP.git
+			$ cd ~/Adafruit_Python_BMP
+
+			$ <python2> sudo python setup.py install
+			$ <python3> sudo python3 setup.py install
+
+		ERROR [ i2c config not showing
+
+			no device detected
+
+			RESOLUTION
+
+				soldering looks good , but possible:
+					cold joints (from improrper soldering , requiring redo
+					damaged circuit from too much heat
+		]
+	]
+
+		ERROR [ code not available
+
+			Adafruit expanded their library, ruining the original codebase
+
+			RESOLUTION:
+		]
+	]
+	[ * ] I2c Compass	/ 08$ / I2c HMC5883L Triple Axis Compass Magnetometer Sensor / by: xxxx [
+
+		blue rectangle with 5 pins (AdaFruit has 6)
+
+		https://www.sparkfun.com/tutorials/301
+		https://www.instructables.com/id/Interfacing-Digital-Compass-HMC5883L-with-Raspberr/
+
+			HMC5883L replaced with LSM303DLHC; latter includes accelerometer
+
+			pins: VCC GND SCL SDA DRDY
+
+			ORA	VCC	pin_01 : 3V3
+			WHT	GND	pin_06 : GND
+			MAG	SDA	pin_03 : BCM_02
+			YEL	SCL	pin_05 : BCM_03
 	]
 	[ * ] I2c DAC		/ 05$ / I2C MCP4725 DAC ( DigitalAnalog converter ) / by: HiLetgo [
 
@@ -209,6 +265,14 @@ components ( wifi , circuitry , comm , HATs+ ) [
 
 		red small square with 6 pin /
 		pins: OUT GND SCL SDA VCC GND
+	]
+	[ * ] I2c OLED 		/ 09$ / I2c SSD1306 OLED LCD Module / by: Diymall [
+
+		Blue Yellow screen, pixels: 128X64 /
+		size: 0.96 inch, Driver IC: SSD1306, VCC: 3.3-5V /
+
+		blue postage stamp with 4 pins /
+		pins: SDA SCL GND VCC
 	]
 	[ * ] I2c ports		/ 05$ / I2C MCP23017 port expander / by: MicroChip [
 

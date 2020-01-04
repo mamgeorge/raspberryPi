@@ -21,7 +21,7 @@ initVars() {
 	BWHT="\033[37;1m"
 	BGRA="\u001b[37m"
 	NCLR="\033[0m"
-	
+
 	BCKR="\u001b[41;1m"
 	BCKO="\u001b[43;1;202m"
 	BCKY="\u001b[43;1m"
@@ -30,7 +30,7 @@ initVars() {
 	BCKM="\u001b[45;1m"
 	BCKC="\u001b[46;1m"
 	BCKW="\u001b[47;1m\u001b[30m"
-	
+
 	BOLD="\u001b[1m"
 	UNDR="\u001b[4m"
 	REVR="\u001b[7m"
@@ -38,11 +38,18 @@ initVars() {
 }
 ##################
 
-nodejs( )	{ ## 1
+nodejs( )	{ ## 1 , 1a , 1b
 
-	echo Expects Node to be installed
+	echo -e "${BMAG}Expects Node to be installed ${NCLR}" 
 	node -v
+	echo -e "\t${BCYN}1a) run Node MAT Service ${NCLR}"
+	echo -e "\t${BCYN}1b) run Node GPIO: ${BCKW}BLK${NCLR} pin_39 | ${BCKR}RED${NCLR} pin_40 ${NCLR}"
+}
+nodeMAT( )	{ ## 1a
 	node nodejs/samples/expressoMAT.js
+}
+nodeGPIO( )	{ ## 1b
+	node nodejs/samples/node_rpio.js
 }
 lights( )	{ ## 2 , 2a , 2b , 2c
 
@@ -146,38 +153,55 @@ stepper( )	{ ## 5b
 	python python/servos/stepper_one.py
 }
 
-gpios( )	{ ## 6 
+gpios( )	{ ## 6
 
 	echo -e "${BMAG}gpio sensors${NCLR}"
 	echo -e ""
-	echo -e "\t6a ${BBLU}HCSR04	distance: ${NCLR}"
-	echo -e "\t\t${BCKR}VCC${NCLR} @ 5V"
-	echo -e "\t\t${BCKW}GND${NCLR} @ GND"
-	echo -e "\t\t${BCKO}pin_38${NCLR}: BCM_20 orange"
-	echo -e "\t\t${BCKB}pin_40${NCLR}: BCM_21 blue"
-	
+	echo -e "\t6a ${BBLU}HCSR04	distance: [${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKO}p38${NCLR}:B20 ${BCKB}p40${NCLR}:B21 ${BBLU}]${NCLR}"
 	echo -e ""
 	echo -e "${BMAG}6i) i2c_sample${NCLR}"
 	echo -e ""
-	echo -e "\t6b ${BBLU}SSD1306	OLED		${NCLR}"
-	echo -e "\t6c ${BBLU}HMC5883L	compass		${NCLR}"
-	echo -e "\t6d ${BBLU}BMP180	pressure	${NCLR}"
-	echo -e "\t6e ${BRED}MCP4725	DAC			${NCLR}"
-	echo -e "\t6f ${BWHT}MCP23017	expander	${NCLR}"
+	echo -e "\t6b ${BBLU}BMP180	pressure	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t6c ${BBLU}HMC5883L	compass		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t6d ${BRED}MCP4725	DAC			${BBLU}[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t6e ${BBLU}SSD1306	OLED		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t6f ${BWHT}MCP23017	expander	[]${NCLR}"
 	echo -e ""
 	echo -e "${BMAG}6s) spi_sample${NCLR}"
 	echo -e ""
 	echo -e "\t6m ${BWHT}MCP3008	DAC	${NCLR}"
+}
+gpio_HCSR04( )	{ ## 6a
+	python python/comm/gpio_HCSR04.py
+}
+i2c_sample( )	{ ## 6i
 
-}
-gpio_dst( )	{ ## 6a
-	python python/comm/gpio_distance.py
-}
-comm_i2c( )	{ ## 6i
+	ls /dev/i2c* /dev/spi*
+	i2cdetect -y 1
 	python python/comm/i2c_sample.py
 }
-comm_spi( )	{ ## 6s
+i2c_BMP180( )	{ ## 6b
+	python python/comm/i2c_BMP180.py
+}
+i2c_HMC5883L( )	{ ## 6c
+	python python/comm/i2c_HMC5883L.py
+}
+i2c_MCP4725( )	{ ## 6d
+	python python/comm/i2c_MCP4725.py
+}
+i2c_SSD1306( )	{ ## 6e
+	python python/comm/i2c_SSD1306.py
+}
+i2c_MCP23017( )	{ ## 6f
+	python python/comm/i2c_MCP23017.py
+}
+spi_sample( )	{ ## 6s
+
+	ls /dev/i2c* /dev/spi*
 	python python/comm/spi_sample.py
+}
+spi_MCP3008( )	{ ## 6m
+	python python/comm/spi_MCP3008.py
 }
 
 robot( )	{ ## 8
@@ -189,7 +213,7 @@ robot( )	{ ## 8
 	echo -e "\t${BBLU}BLU${NCLR} pin_38: BCM_20 m2RGT+"
 	echo -e "${BGRN}		   ┌─────────┐		 ┌────────┐${NCLR}"
 	echo -e "${BGRN}	┌──────┘${BBLU} 8 forw ${BGRN} └──────┐${BGRN}│ + fast │${NCLR}"
-	echo -e "${BGRN}	│${BBLU}4 left│${BRED} 5 stop ${BBLU} │6 rght${BGRN}│├────────┤${NCLR}"	
+	echo -e "${BGRN}	│${BBLU}4 left│${BRED} 5 stop ${BBLU} │6 rght${BGRN}│├────────┤${NCLR}"
 	echo -e "${BGRN}	└──────┐${BBLU} 2 back ${BGRN} ┌──────┘${BGRN}│ - slow │${NCLR}"
 	echo -e "${BGRN}		   └─────────┘		 ${BGRN}└────────┘${NCLR}"
 	echo -e "${BGRN}	┌───────────────────────┐${NCLR}"
@@ -243,7 +267,7 @@ shutdown( )	{ ## x
 }
 
 ##################
-initVars 
+initVars
 
 while [ "$option" != "0" ]
 do
@@ -270,12 +294,21 @@ do
 
 		## if [[ ( $option == "1" ) ]]; then nodejs; fi
 		0) exits 	;;
-		1) nodejs	;;
+		1) nodejs	;; 1a) nodeMAT ;; 1b) nodeGPIO ;;
 		2) lights	;; 2a) light1 ;; 2b) light2  ;; 2c) light3 ;;
 		3) pictures	;; 3a) camera ;; 3b) images1 ;; 3c) images2 ;; 3d) images3 ;;
 		4) speaker	;; 4a) blue1  ;; 4b) blue2   ;; 4c) blue3 ;; 4d) voice ;;
 		5) motors	;; 5a) servos ;; 5b) stepper ;;
-		6) gpios	;; 6a) gpio_dst ;; 6i) comm_i2c ;; 6s) comm_spi ;;
+		6) gpios	;;
+			6a) gpio_HCSR04 ;;
+			6i) i2c_sample ;;
+				6b) i2c_BMP180 ;;
+				6c) i2c_HMC5883L ;;
+				6d) i2c_MCP4725 ;;
+				6e) i2c_SSD1306 ;;
+				6f) i2c_MCP23017 ;;
+				6m) spi_MCP3008 ;;
+			6s) spi_sample ;;
 		7) ;;
 		8) robot	;;
 		9) pins		;;

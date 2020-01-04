@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# \\python\comm\gpio_distance.py
+# \\python\comm\gpio_HCSR04.py
 # HCSR04 distance
 
 import RPi.GPIO as GPIO

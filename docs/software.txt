@@ -69,7 +69,7 @@ general [
 	$ sudo shutdown -h now					// shutdown
 	$ sudo reboot							// reboot
 
-	$ sudo raspi-config						//
+	$ sudo raspi-config						// basic config
 	$ sudo apt-get install rpi-update		// firmware update rm
 	$ sudo rpi-update						// firmware update (NOT REQUIRED)
 	$ sudo apt-get update -y				// 1 super user do advanced packaging tool update
@@ -413,6 +413,39 @@ comm [
 	https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
 	https://www.instructables.com/id/Raspberry-Pi-I2C-Python/
 
+	python [ AdafruitLegacy, CircuitPython
+
+		# What happened to all the Raspberry Pi Python code!?
+
+		example code to talk to sensors like the BMP085, TCS34725, character LCD plates moved
+			all old Python code moved to GitHub repositories
+			https://pypi.python.org/pypi
+			they can be installed with `pip` (not example code)
+			All Python libraries now support Python 3.x and many Linux/Single Board Computers
+			See old RPi code @ https://github.com/adafruit/Adafruit-Raspberry-Pi-Python-Code/tree/legacy
+			It is a snapshot of old code before refactor as unit libraries and NOT maintained!
+
+		CircuitPython has support for almost 200 different drivers
+			This library has been deprecated in favor of our python3 Blinka library
+			see: https://github.com/adafruit/Adafruit_Blinka
+			see: https://circuitpython.org/blinka
+			see: https://circuitpython.readthedocs.io/projects/bundle/en/latest/drivers.html
+			see: https://learn.adafruit.com/circuitpython-on-raspberrypi-linux/installing-circuitpython-on-raspberry-pi
+
+			$ sudo pip3 install adafruit-circuitpython-mcp4725
+			$ sudo pip3 install adafruit-circuitpython-busdevice
+			$ sudo pip3 install --upgrade setuptools
+			$ sudo apt-get install python3-pip
+			Enabling Second SPI add "boot/config.txt" dtoverlay=spi1-3cs
+			$ sudo pip3 install adafruit-blinka
+			$ sudo pip3 install adafruit-circuitpython-ssd1306
+
+		For FT232H support for Mac/Win/Linux:
+			see: https://learn.adafruit.com/circuitpython-on-any-computer-with-ft232h
+			FT232H uses FTDI (Future Technology Devices International)
+			TTL serial (Transistor Transistor Logic)
+	]
+
 	I2C [
 
 		I2C is a communication bus by Philips for chips to communicate with each other on a PCB.
@@ -439,6 +472,10 @@ comm [
 			$ i2cdetect -y 0					// Error: Could not open file `/dev/i2c-0' or `/dev/i2c/0': No such file or directory
 
 			$ i2cdetect -y 1					// shows available i2c devices
+
+		SMBus (System Management Bus) is a subset from the I2C protocol
+
+			http://wiki.erazor-zone.de/wiki:linux:python:smbus:doc
 	]
 
 	SPI [
