@@ -1,0 +1,408 @@
+\\5Personal\Technology\raspberryPi\hardware\hardware_motors.txt
+
+	note: this document is for transport & articulation hardware only; see "electronics" for principles
+
+chassis [ parts: Chassis Gearbox Motor Plate Transport
+
+	[ * ] (16$) Chassis / Tracked Vehicle Chassis / Tamiya PN: 70108-1500 [
+
+		aka motorized tread transport
+		gearbox assembly: ratios normal: 203.7:1, hiSpeed 58.2:1 /
+		gearbox parts: 8 pinion gear, 42t12t gear x 2, 38t crown gear, 42t12t gear /
+		switch assembly, batteryMount assembly, tread assembly
+
+		Tamiya PN: 70100 track and wheel set
+		Tamiya PN: 70098 universal plate set
+		Tamiya PN: 70097 twin-motor gearbox
+		Tamiya PN: 980112M Mabuchi FA-130 Motor
+	]
+
+	[ * ] (13$) Gearbox / Double Gearbox 4-Speed Left/Right Independent / Tamiya PN: 70168 [
+		2 x type 130 motors / left and right 3mm hex output shafts /
+		4 oz, 1.3 x 4.2 x 6 inches / Clear = Tamiya PN: 69912
+		gearbox assembly ratios:
+
+			70168		torque	rotation
+			ratio		gf*cm	rpm
+			-------		----	----
+			012.7:1		0094	1039
+			038.2:1		0278	0345
+			114.7:1		0809	0115
+			344.2:1		2276	0038
+
+		gearboxes
+
+			Tamiya 70168 double gearbox, gray
+			Tamiya 69912 double gearbox, clear
+			Tamiya 89918 double gearbox, clear
+			Tamiya 70097 double gearbox, thinner & longer
+	]
+
+	[ * ] (02$) Motor (see motors, analog) / Tamiya PN: 980112M Mabuchi FA-130 Motor
+
+	[ * ] (09$) Universal Plate / 60mm x 160mm / Tamiya PN: 70098 360
+
+	[ _ ] (21$) motorized tread transport / aka Mini RobotShop Rover Chassis Kit / PN: RB-Rbo-155 [
+		by: RobotShop
+	]
+]
+
+motors [ analog stepper servo
+
+	analog [ description, items (Tamiya 980112M)
+
+		description
+
+			can be controlled thru PWM
+
+			ACIM (AC Induction Motors) (vs synchronous?)
+			PMAC (Permanent Magnet AC), also PMDC
+			PMSM (Permanent Magnet Synchronous Motor) (brushless)
+			BLDC (Brushless DC Motors)
+
+		[ _ ] (02$) analog brushed DC motor [
+
+			https://www.pololu.com/product/77
+			Tamiya 980112M Mabuchi FA-130 Motor, PN#: FA-130RA-18100, Pololu PN#: 77
+				Operating voltage: 1.5 - 3.0 V
+				3 V No-load speed: 12.3 kRPM
+				3 V Stall current: 2.10 A
+				3 V Stall torque: 36 g-cm
+
+			Brushed DC Motor: 130-Size, 6V, 11.5 kRPM, 800 mA Stall, Pololu PN#: 1117
+				replaces discontinued Solarbotics RM3, Pololu PN#: 604 (see AdaFruit: PN#: 711)
+		]
+	]
+
+	stepper	[ description, vendors, types, items (Elegoo 28BYJ48)
+
+		description	[
+
+			good: cheaper, high holding torque, lower acceleration
+
+			bad: no reserve power, skipped steps, more noise
+		]
+
+		vendors [
+
+			Mouser, Pololu
+
+			https://www.pololu.com/category/22/motors-and-gearboxes
+			https://www.pololu.com/category/87/stepper-motors
+			https://www.mouser.com/Electromechanical/Motors-Drives/_/N-u86z
+		]
+
+		types [ rotor sizes gearing shaft example
+
+			https://learn.adafruit.com/all-about-stepper-motors/types-of-steppers
+
+			rotor
+
+				PM Permanent Magnet, Active rotor
+				VR Variable Reluctance, Reactive rotor
+				HB Hybrid Synchronous, Combination of PM and VR
+
+			sizes
+
+				https://www.applied-motion.com/news/2015/10/what-do-nema-sizes-mean
+				sizes NEMA 8, 11, 14, 17, 23, 24, 34, 42 Frames ...
+
+			gearing
+
+				example: 32:1 gear-train
+
+			shaft style
+
+				Round, "D" Shaft, Geared shaft, Lead-Screw
+
+			example: Stepper Motor 28BYJ-48 [
+
+				http://www.autom.cn/FAQ_view_34.html
+				28BYJ-48-A
+				Frame Number			28: outer diameter in mm
+
+				Motor Category			BY = PM (Permanent Magnet) Stepper Motor; HB = Hybrid
+				Motor Configuration		J = built in reducer, Z = linear motion, HJ = external reducer
+				steps per revolution	48; range from 4 to 400: 24, 48, 300
+				Derivative Code			A, B, C...
+
+				operating voltage		5V-12V DC
+				Phase Number Wiring		2 phase bipole, 4 phase unipolar ...
+				Pole Pairs				5, 6, 8, 12 ...
+			]
+		]
+
+		[ _ ] (03$) stepper motor (e.g. 28BYJ-48) [
+
+			5V DC 4-Phase 5-Wire
+
+			unipolar
+			geared down reduction	1/16
+			holding torque @ 12VDC	250 gram-force*cm / 25 N*mm / 3.5 oz-force*in
+			weight					37 g
+			size					28mm dia x 20mm tall w/o shaft
+			shaft				 	5mm dia x 9mm lng flattened
+			cable					23 cm long
+		]
+
+		[ 5 ] (14$) stepper Unipolar Motor 28BYJ-48 5V + ULN2003 Driver Board [ Elegoo
+
+			vendor: Elegoo
+
+			Specification:
+			* A, B, C, D four-phase LED indicates the status of the stepper motor work
+			* Stepper motor with a standard interface, when used directly pluggable.
+			* 5 line 4 phase can be used for ordinary ULN2003 chip driver, connect to the 2 phase, support the development board, with convenient use, direct docking.
+
+			* Rated Voltage				DC5V 4-phase
+			* Insulation Resistance		>10MΩ (500V)
+			* Dielectric Strength		600V AC / 1mA / 1s
+			* Step angle				5.625 x 1/64
+			* DC Resistance				200Ω±7% (25C)
+			* Reduction ratio			1/64
+			* Insulation Grade			A
+			* No-load Pull in Frequency	>600Hz
+			* No-load Pull out Freq.	>1000Hz
+			* Pull in Torque			>34.3mN.m(120Hz)
+			* Detent Torque				>34.3mN.m
+			* Temperature Rise			< 40K(120Hz)
+		]
+
+		[ x ] (20$) stepper Bipolar Motor [ Pololu PN: SY20STH30-0604A #1204
+
+			Stepper Motor: Bipolar, 200 Steps/Rev, 20×30mm, 3.9V, 0.6 A/Phase
+			NEMA 8
+			Pololu item #: 1204
+			Pololu PN: SY20STH30-0604A
+		]
+
+		[ x ] (25$) stepper Motor, Crouzet PN: 82910029
+	]
+
+	servo [ description, vendors, types, items (Hitec 31055S), programming
+
+		description [
+
+			good: high speed, high torque, high efficiency, quiet
+
+			bad: but expensive, more complex
+		]
+
+		vendors [
+
+			ServoCity, Hitech, Futaba, Savox, goBILDA, TowerPro, TianKongRC, Parallax
+
+				https://www.servocity.com/servos/				(has list)
+				https://www.pololu.com/category/23/rc-servos
+				https://www.mouser.com/Electromechanical/Motors-Drives/_/N-u86z
+
+				https://www.watelectrical.com/servo-motor-types-and-working-principle/
+
+			Hitech > South Korea > manufactures transmitters, recievers, servos, electronics
+		]
+
+		types [
+
+			AC & DC
+			RC Radio Controlled
+			Analog Feedback Servos
+
+			Positional Rotation Servo
+			Continuous Rotation Servo
+			Linear Servo
+
+			https://www.servocity.com/hitec-servo-chart
+
+			Hitec Types:
+			* nano, subMicro, micro, mini
+			* standard
+			* large, largeHV, specialty
+
+			HSR-1425CR	Analog	Continuous Rotation	039 4.8V Torque (oz-in), 44 RPM
+			HSR-2645CR	Analog	Continuous Rotation	111 4.8V Torque (oz-in), 46 RPM
+			Hitec 31055S HS-55
+		]
+
+		[ 2 ] (13$) Hitec HS-55 SubMicro, Economy / 203 deg  [ PN: 31055S
+
+			https://www.servocity.com/hitec-hs-55-servo
+
+			Voltage Range	4.8V - 6.0V
+			No-Load Speed (4.8V)	0.18 sec/60°
+			Stall Torque (4.8V)	16.66 oz-in. (1.2kg.cm)
+			Product Weight	0.28oz (8g)
+			Max PWM Signal Range (Standard)	615-2390μsec
+			MaxTravel (out of box)	203°
+			Pulse Amplitude	3-5V
+			Wire Gauge	28AWG
+		]
+
+		[ _ ] (21$) HiTec HS-5055MG SubMicro, Digital Metal Geared / 126 deg [ PN: 35055S ]
+
+		[ 1 ] (15$) Hitec HS-81 Micro, Clockwise / 165 deg [ PN: 31081S
+
+			https://www.servocity.com/hs-81
+
+			Voltage Range	4.8V - 6.0V
+			No-Load Speed (4.8V)	0.11sec/60°
+			Stall Torque (4.8V)	36.10 oz/in. (2.6kg.cm)
+			Product Weight	0.58oz (16.6g)
+			Max PWM Signal Range (Standard)	640-2250μsec
+			MaxTravel (out of box)	165°
+			Pulse Amplitude	3-5V
+			Wire Gauge	28AWG
+		]
+
+		[ 2 ] (12$) HiTec HS-311 Standard, Universal / 210 deg [ PN: 31311S
+
+			https://www.servocity.com/hs-311-servo
+			#####################################
+			## Model: HiTec HS-311 Standard Servo
+			#####################################
+			## Voltage Range		4.8V - 6.0V
+			## NoLoad Speed @4.8V	0.19sec/60 Deg
+			## Stall Torque @4.8V	42 oz/in (3.0 kg/cm)
+			## Product Weight		1.52oz (43g)
+			## PWM Signal MaxRange	575-2460 ms
+			## MaxTravel			202.5 Deg
+			## 000 Deg: 0.5 ms, DC: 0.5/20 = 02.5%
+			## Neutral: 1.5 ms, DC: 1.5/20 = 07.5%
+			## 180 Deg: 2.5 ms, DC: 2.5/20 = 12.5%
+			#####################################
+		]
+
+		[ _ ] (10$) HiTec HS-318 Standard, Stock / 210 deg [ PN: 31318 ]
+
+		[ _ ] (20$) Hitec HSR-1425CR Standard, Continuous / 360 deg [ PN: 31425CR ]
+
+		[ _ ] (4@15$) TowerPro MG90S Servo / 12 x 23 x 33 mm, 180 deg, Stall Torque: 2kg/cm
+
+		[ _ ] (4@19$) TianKongRC MG995 Servo / 20 x 38 x 40 mm, 180 deg, Stall Torque: 12kg/cm / B07NQJ1VZ2
+
+		[ _ ] (4@19$) TianKongRC MG996R Servo / 19 x 40 x 43 mm, 180 deg, Stall Torque: 12kg/cm
+
+		programming [
+
+			pulse lengths actually drive the action
+				generally only turn in a limited angle range
+
+			## duty_cycle: 50; 1/50 = .02 = 20 ms
+			srvFREQ = 50	# Hz (50 pulses a sec)
+			dc_min = 2.5	# 000 close	0.5 ms / 20 ms * 100 = 2.5%
+			dc_ntr = 7.5	# nuetral	1.5 ms / 20 ms * 100 = 7.5%
+			dc_max = 12.5	# 180 open	2.5 ms / 20 ms * 100 = 12.5%
+
+			GPIO.setmode(GPIO.BCM) # GPIO.setmode(GPIO.BOARD)
+			GPIO.setwarnings(False) # RuntimeWarning: This channel is already in use, continuing anyway. Use GPIO.setwarnings(False) to disable warnings.
+
+			GPIO.setup(pinCTRL, GPIO.OUT)
+			pwmCTRL = GPIO.PWM(pinCTRL, srvFREQ)
+			print("runs once")
+
+			pwmCTRL.start(dc_ntr) # neutral
+			try:
+
+				while True:
+					pwmCTRL.ChangeDutyCycle(dc_ntr)	# neutral
+					time.sleep(sleepLen)
+
+					pwmCTRL.ChangeDutyCycle(dc_max)	# 180 open
+					time.sleep(sleepLen)
+
+					pwmCTRL.ChangeDutyCycle(dc_min)	# 000 close
+					time.sleep(sleepLen)
+
+			except KeyboardInterrupt:
+				pwmCTRL.stop()
+				GPIO.cleanup()
+		]
+	]
+]
+
+controllers [ analog stepper servo microcontroller
+
+	// controller (hardware) vs driver (software)
+
+	analog driver [ pibrella, L293D
+
+		[ _ ] (15$) pibrella; peripheral connectors with ULN2003A controller / PiMoroni
+
+		[ * ] (07$) HBridge L293D analog Motor Drive Shield / SainSmart
+	]
+
+	stepper driver [  ULN2003 DRV8825 A4988 TB6560 / L298N Atmega2560 / MCP23017 TB6612
+
+		[ 5 ] (08$) ULN2003 Driver Board, 1 channel
+
+		[ x ] (11$) DRV8825 Driver Board, 1 channel / Pololu
+
+		[ x ] (09$) A4988 Driver Board, 1 channel / Pololu
+
+		[ x ] (xx$) TB6560 Driver Board / Toshiba
+
+		---------------------------------------
+
+		[ * ] (07$) HBridge L298N Stepper Motor Driver / Qunqi
+
+		[ x ] (17$) Atmega2560-16au / 14 channels
+
+		---- i2c -------------------------------
+
+		[ * ] (05$) MCP23017 / Adafruit ProductID: 732
+			upto 16 i2c io port expander, upto 8 MCP23017 on each I2C bus
+
+		[ _ ] (23$) TB6612 MOSFET i2c drivers HAT, DC / Adafruit ProductID: 2348
+			upto 2 stepper motors
+	]
+
+	servo driver [ PivotPi XC4005XL PCA9685
+
+		[ _ ] (20$) PivotPi i2c Servo Controller / upto 8 servos / Dexter
+
+		[ _ ] (xx$) XC4005XL i2c FPGA / "hardware implementation of pwm"
+
+			uses Xilinx XC4005XL FPGA with circuitry for 8051 microcontroller
+			FPGA: Field Programmable Gate Array
+
+		[ 2 ] (10$) PCA9685 16 Channel 12-Bit PWM Servo Motor Driver [
+
+			PCA9685 16-way (channel) steering gear control
+			12-Bit PWM Servo Motor Driver
+			DC5-10V power supply
+			PWM outputs have 220 ohm resistor
+			Communication Interface: i2c
+			Manf: HiLetgo, PN: 3-01-1070-2pcs, 2 pieces / Adafruit PN: 815 (1 @ 15$)
+			ASIN: B07BRS249H
+
+			https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
+			https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
+		]
+	]
+
+	microcontroller	[ ESP32S
+
+		[ x ] (11$) ESP32S WiFi Microcontroller [
+
+			https://www.electrondust.com/2018/11/11/esp-32-micro-robot-arm/
+				uses A4988 stepper driver with converted bipolar 28BYJ48
+
+			Espressif Systems ESP32-WROOM32 Microcontroller (M103QH3200PH3Q0)
+			WiFi Modules (802.11)
+			Bluetooth Dual Cores
+			Manf: ESP32-DevKitM-1
+			Manf: HiLetGo
+		]
+	]
+]
+
+grippers [ Actobotics
+
+	[ 1 ] (10$) Gripper / Actobotics Horizontal Standard Gripper Kit A / #637094 / uses HiTec HS-300 Servo Standard
+
+	[ 1 ] (10$) Gripper / Actobotics Vertical Standard Gripper Kit B / #637096 / uses HiTec HS-300 Servo Standard
+
+	[ _ ] (15$) Gripper / Actobotics Parallel Gripper Kit A / #637092 / uses HiTec servo with a 24T or 25T spline
+
+	[ 2 ] (07$) Gripper / Actobotics SubMicro Gripper Kit / #637104 /
+]
+----

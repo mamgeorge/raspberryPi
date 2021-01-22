@@ -1,0 +1,33 @@
+## all *js files  ( e.g. Firefox user.js, prefs.js )
+## New updated taken from http://wiki.linuxhelp.net/index.php/Nano_Syntax_Highlighting
+syntax "JavaScript" "\.(js)$"
+
+## Default
+color white "^.+$"
+
+## Decimal, cotal and hexadecimal numbers
+## Floating point number with at least one digit before decimal point
+color brightmagenta "\<[-+]?([1-9][0-9]*|0[0-7]*|0x[0-9a-fA-F]+)([uU][lL]?|[lL][uU]?)?\>"
+color brightmagenta "\<[-+]?([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([EePp][+-]?[0-9]+)?[fFlL]?"
+color brightmagenta "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
+
+## Keywords
+color brightblue "\<(break|case|catch|continue|default|delete|do|else|finally)\>"
+color brightblue "\<(for|function|if|in|instanceof|new|null|return|switch)\>"
+color brightblue "\<(switch|this|throw|try|typeof|undefined|var|void|while|with)\>"
+
+## Type specifiers
+color blue "\<(Array|Boolean|Date|Enumerator|Error|Function|Math)\>"
+color blue "\<(Number|Object|RegExp|String)\>"
+color blue "\<(true|false)\>"
+
+## String
+color brightcyan "L?\"(\\"|[^"])*\""
+color brightcyan "L?'(\'|[^'])*'"
+
+## Escapes
+color brightyellow "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
+
+## Comments
+color brightgreen start="/\*" end="\*/"
+color brightgreen "//.*$"

@@ -1,164 +1,345 @@
 \\5Personal\Technology\raspberryPi\docs\software.txt
 
-highLevel ( common general project other ) [
+common (project github wifi SSH commmands programs) [
 
-common [
+	terms [
 
-	c:> cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
+		28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
+		ADC		Analog 2 Digital Converter
+		ASIC	Application Specific Integrated Circuit - customized IC
+		BCM		Broadcom
+		BJT		Bipolar Junction Transistor
+		CSI		Camera Serial Interface
+		DCE		Data Circuit-Terminating Equipment (ex. modem)
+		DIMM	Dual In Line Memory Module
+		DIP		Dual Inline Package
+		DSI		Display Serial Interface
+		DTE		Data Terminal Equipment (ex. terminal)
+		FET		Field Effect Transistor
+		FPC		Flexible Printed Circuit
+		FPGA	Field Programmable Gate Array
+		FTDI	Future Technology Devices International
+		GPIO	General Purpose Input/Output
+		HDMI	High Definition Multimedia Interface
+		HB		motor Hybrid Synchronous, Combination of PM and VR
+		I2C		Inter Integrated Circuit
+		IC		Integrated Circuit
+		J8		40 pin pinout board
+		LASER	Light Amplification Stimulated Emission Radiation
+		LCD		Liquid Crystal Display
+		LED		Light Emitting Diode
+		LPDDR	Low Power Double Data Rate synchronous
+		MIPI	Mobile Industry Processor Interface
+		MOSFET	Metal Oxide Semiconductor FET
+		NEMA	National Electrical Manufacturers Association
+		OLED	Organic Light Emitting Diode
+		P1		26 pin pinout board
+		PCB		Printed Circuit Board
+		PDIP	Plastic Dip Package
+		PM		motor Permanent Magnet, Active rotor
+		POE		Power over Ethernet
+		RGB		Red Green Blue
+		RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
+		RPI0WHf	0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
+		SIP		Single Inline Package
+		SODIMM	Small Outline DIMM
+		SOIC	Small Outline Integrated Circuit
+		SOC		System on Chip
+		SOP		Small Outline Package
+		SPI 	Serial Peripheral Interface
+		TSSOP	Thin Shrink Small Outline Package
+		UART	Universal Asynchronous Receive/Transmit
+		VR		motor Variable Reluctance, Reactive rotor
+	]
+
+	commmands [ general
+
+		https://www.circuitbasics.com/useful-raspberry-pi-commands/
+		cut&paste [
+
+			clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
+			note: insert must be on numpad
+		]
+
+		to add remote shell access , see: "network.txt": network_SSH
+
+		$ sudo shutdown -h now					// shutdown
+		$ sudo reboot							// reboot
+
+		$ sudo raspi-config						// basic config
+		$ sudo apt-get update -y				// 1st super user do advanced packaging tool update
+		$ sudo apt-get upgrade -y				// 2nd super user do advanced packaging tool upgrade
+		$ sudo apt-get autoremove -y			// cleanup
+
+		$ cat /proc/device-tree/model && echo	// Raspberry Pi 2 Model B Rev 1.1 ; MN: q_1_Z_TP
+		$ cat /etc/os-release					// PRETTY_NAME="Raspbian GNU/Linux 10 (buster)"
+		$ cat /sys/class/net/wlan0/address		// MAC address
+		$ uname -a								// Linux raspberrypi 4.14.90-v7+ #1183 SMP Fri Dec 21 14:03:50 GMT 2018 armv7l GNU/Linux
+		$ hostname -I							// 192.168.1.13
+		$ sudo ifconfig							// gets network info & IP address
+		$ iwgetid								// wlan0 ESSID:"xxxx"
+		$ df -h									// /dev/root 14G ...
+		$ free -m								// Mem: 732 ...
+
+		$ sudo nano /etc/network/interfaces		// update password , etc
+		$ raspi-gpio get						// pins list
+		$ gpio readall							// printout gpio cool; from wiringpi
+		$ pinout								// printout gpio cooler
+	]
+
+	connecting wifi thru ips [
+
+		http://192.168.1.1 , admin , q-1-Z-TP
+
+			RPI0			 pi, s4_m2 | ip 192.168.1.xx |?B8:27:EB:D4:F0:6E?
+			RPI0_WH robot	 pi, s4_m2 | ip 192.168.1.21 | B8:27:EB:2B:0F:91
+			RPI0_WH	male	 pi, s4_m2 | ip 192.168.1.22 | B8:27:EB:fc:a5:72
+			RPI2 sensehat	 pi, s4_m2 | ip 192.168.1.19 | 00:0F:60:05:51:1D, 169.254.62.195
+			RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.20 | DC:A6:32:DB:19:F9
+
+		c:>	arp -a -v							// ARP: Address Resolution Protocol, -a shows arp entries , -v verbose
+
+		$ cat /sys/class/net/wlan0/address		// MAC address
+	]
+
+	connecting SSH thru USB [
+
+		connecting raspberryPi with SSH thru USB:
+
+			https://desertbot.io/blog/headless-pi-zero-ssh-access-over-usb-windows
+
+		1 save a file named only "ssh" with one space in the RPi root drive:
+
+			"G:>ssh"
+
+		2 save "G:>config.txt" with the following appended:
+
+			dtoverlay=dwc2
+
+		3 save "G:>cmdline.txt" with the following inserted after rootwait and one space:
+
+			modules-load=dwc2,g_ether
+
+		4 plug in pi at usb (using USB C adaptor)
+
+			// appears to work if using USB C adaptor on connected network: s4_m2 shu4mei2
+
+		5 shell into RPi: "ssh pi@raspberrypi.local" [
+
+			C:> ssh pi@raspberrypi.local
+
+			ERROR: this did NOT work on USB port without network [
+
+				somes guides say to set key first:
+					C:> ssh-keygen -R raspberrypi.local
+					FAIL
+
+				RESOLUTION:
+
+				somes guides say to add "Bonjour"
+					Bonjour networking protocol sends and receives network packets on UDP port 5353
+					https://support.apple.com/kb/DL999?locale=en_US
+					no help
+					FAIL
+
+				somes guides say to add "RNDIS Ethernet gadget"
+					RNDIS (Remote Network Driver Interface Specification) is a Microsoft proprietary protocol
+					https://www.raspberrypi.org/forums/viewtopic.php?t=245184
+					https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
+						assumed device shows up in com port
+					"RNDIS Ethernet gadget" is NOT added in Windows 10!
+					FAIL
+			]
+
+			FAIL: NO RNDIS
+		]
+
+		6 installing RNDIS for Windows 10 [
+
+			RNDIS is an Ethernet via USB driver
+				which enables virtual Ethernet connection link between the Pi and your Laptop
+
+				downloaded: "http://web1.moddevices.com/shared/mod-duo-rndis.zip"
+					into: "C:\Users\mamge\Downloads\RNDIS_W10_cat"
+
+				Open Device Manager and you can see the Pi is detected as USB Serial Device at COM port under the
+					Ports(COM & LPT). Right click on it and select “Update Driver Software”.
+
+					https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
+
+				FAIL: NO COM PORT
+
+			show hidden
+
+				System > DeviceManager > View > "Show hidden devices"
+
+				System > DeviceManager > <computer> NetworkAdapters > "USB Ethernet/RNDIS Gadget"
+
+					weird because "it was not there earlier" , it was "greyed" out
+
+					General
+						Device type:		Network adapters
+						Manufacturer:		Acer Incorporated
+						Location:			Port_#0003.Hub_#0001
+
+					Driver
+						Driver Provider:	Acer Incorporated
+						Driver Date:		1/13/2010
+						Driver Version:		1.0.0.0
+						Driver Signer:		Microsoft Windows Hardware Compatibility Publisher
+
+						Driver Details
+							Driver Files:	"C:\Windows\System32\drivers\usb8023.sys"
+							Provider:			Microsoft Corporation
+							File version:		10.0.18362.1 (WinBuild. 160101.0600)
+							Copyright:			@Microsoft Corporation
+							Digital Signer:		Microsoft Windows
+
+					Details
+						Property
+							Device description
+							Value			USB Ethernet/RNDIS Gadget
+
+					Events
+						Device USB\VID_0525&PID_A4A2\5&8b74c98&0&3 requires further installation.
+		]
+	]
+
+	projects [
+
+		https://en.wikipedia.org/wiki/Comparison_of_EDA_software
+
+			https://www.element14.com/community/groups/development-tools/blog/2016/09/03/best-free-online-circuit-simulator
+
+			https://www.circuitlab.com
+
+			http://fritzing.org/
+
+		// menu
+			$ ./menu.sh
+
+		// MAT (on RPI0wf , 22)
+
+			see: "MAT.txt"
+			$ node /home/pi/servers/node/expressoMAT.js
+
+			// controlling camera
+			see: "camera.txt"
+			shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
+			- or -
+			shell: C:\servers\Xming\Xming.exe :0 -clipboard -multiwindow
+			$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10
+			$ feh -g 600x400 -d img.jpg
+
+			// controlling gripper (on RPI0wf , 22)
+
+				// red to p2, blk to grnd (p6), ylw to p7
+
+				$ sudo nano python/servos/servo_acts.py
+
+				$ python python/servos/servo_keys.py	// based on keyboard
+				$ python python/servos/servo_loop.py	// continuous
+				$ python python/servos/servo_once.py
+
+		// for network thru CLI
+			see: "network.txt":internet
+
+		// for USB sound , use "USB Virtual Sound Adapter" , speaker , alsamixer , espeak "HI!"
+			see: "sound.txt":RPI_setup
+
+		// for monitor thru GPIO
+
+			see: "hardware\hardware_notes.txt":monitor
+			see: "hardware\hardware_list.txt":components:comm
+
+			// showcase sensehat (on RPI2B , 13)
+			$ python python/sensehat/sens_samples.py
+	]
+
+	project_arm [
+
+		9 motors?
+			stepper + stepper + servo
+			stepper + stepper + servo
+			waist + head + pan
+
+		general [
+
+			https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/
+			https://www.best-microcontroller-projects.com/i2c-tutorial.html
+			https://learn.sparkfun.com/tutorials/i2c/all
+			https://www.robot-electronics.co.uk/i2c-tutorial
+			https://www.bluedot.space/tutorials/how-many-devices-can-you-connect-on-i2c-bus/
+
+			driving Stepper_Servo
+			https://www.raspberrypi.org/forums/viewtopic.php?t=147594
+
+			howMany
+			https://www.raspberrypi.org/forums/viewtopic.php?t=117605
+
+			offload
+			https://www.element14.com/community/community/raspberry-pi/raspberrypi_projects/blog/2017/07/04/offload-raspberry-pi-tasks-with-the-i2c-bus-turning-stepper-motors
+		]
+
+		i2c_stepper: with Polulu A4988 stepper driver
+
+			https://forum.arduino.cc/index.php?topic=277692.0
+
+		i2c_servo: with Adafruit PCA9685 servo driver
+
+			https://learn.adafruit.com/16-channel-pwm-servo-driver
+
+		$ ls /dev/*i2c*			/*/// returns /dev/i2c-1
+	]
+
+	updating github [
+
+		c:>
+		cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
+		CD C:\workspace\vscode\nodeSamples
+
 		git branch
 		git add .
 		git commit -m "xxxx"
 		git push
+	]
 
-	https://www.osboxes.org/raspbian/#raspbian-2019-04-vmware
-		vmware_Raspbian_20190411_32bit.7z
-		C:\Program Files\Microsoft VS Code\resources
+	programs [
 
-	http://192.168.1.1 , admin , q-1-Z-TP
+		Rasbpian (Unix > Linux > Debian 7 Wheezy > Raspbian)
 
-		sensehat		pi 192.168.1.xx pi , j1_q4 / s4_m2
-		RPI0_WH robot	pi 192.168.1.xx pi , j1_q4 / s4_m2
-		RPI0_WH	male	pi 192.168.1.22 pi , s4_m2 / B8:27:EB:D4:F0:6E
+		bash 4.3.30(1) // was originally bash 2.2.37(1)
 
-		connecting RPI0 with USB [
+			berries at top of login indicate the number of CPU cores in the processor
 
-			G:> config.txt
+		Python 3.2.3 (default Python 2.7.3)
 
-				dtoverlay=dwc2
+			$ sudo idle			// for Python2 IDE ; useful for pibrella
+			$ sudo idle3		// for Python3 IDE
+			$ sudo python -i	// for interactive
 
-			G:> cmdline.txt
+				$ print("sys.version: " + sys.version)
 
-				modules-load=dwc2,g_ether	// after rootwait
+		gcc 4.9.2-10 // was 4.6.3
 
-			G:> ssh pi@raspberrypi.local
+			$ sudo gcc --version
 
-				appears to work if using USB C adaptor on connected network
 
-				ERROR: this did not work on the regular USB port (used for mouse) without network
+		PIXEL (Pi Improved X-Window Environment Lightweight)
 
-					somes guides say to set key first:
-					G:> ssh-keygen -R raspberrypi.local
+			main desktop environment
 
-					RESOLUTION:
+			was LXDE = Lightweight X11 Desktop Environment
 
-					somes guides say to add "Bonjour"
-						Bonjour networking protocol sends and receives network packets on UDP port 5353
-						https://support.apple.com/kb/DL999?locale=en_US
-						no help
+		vmware images
 
-					somes guides say to add "RNDIS Ethernet gadget"
-						RNDIS (Remote Network Driver Interface Specification) is a Microsoft proprietary protocol
-						https://www.raspberrypi.org/forums/viewtopic.php?t=245184
-						https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
-							assumed device shows up in com port
-
-					"RNDIS Ethernet gadget" is NOT added in Windows 10!
-		]
-
-	clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
-		note: insert must be on numpad
-
-	// ARP ( Address Resolution Protocol ) shows host IP addresses from physical MAC or Ethernet
-		c:>	arp -a -v		// -a shows arp entries , -v verbose
+			https://www.osboxes.org/raspbian/#raspbian-2019-04-vmware
+			vmware_Raspbian_20190411_32bit.7z
+			C:\Program Files\Microsoft VS Code\resources
+	]
 ]
 
-general [
-
-	to add remote shell access , see: "network.txt":network_SSH
-
-	$ sudo shutdown -h now					// shutdown
-	$ sudo reboot							// reboot
-
-	$ sudo raspi-config						// basic config
-	$ sudo apt-get install rpi-update		// firmware update rm
-	$ sudo rpi-update						// firmware update (NOT REQUIRED)
-	$ sudo apt-get update -y				// 1 super user do advanced packaging tool update
-	$ sudo apt-get upgrade -y				// 2 super user do advanced packaging tool upgrade
-
-	$ cat /proc/device-tree/model && echo	// Raspberry Pi 2 Model B Rev 1.1 ; MN: q_1_Z_TP
-	$ cat /etc/os-release					// PRETTY_NAME="Raspbian GNU/Linux 8 (jessie)"
-	$ cat /sys/class/net/wlan0/address		// MAC address
-	$ uname -a								// Linux raspberrypi 4.14.90-v7+ #1183 SMP Fri Dec 21 14:03:50 GMT 2018 armv7l GNU/Linux
-	$ hostname -I							// 192.168.0.13
-	$ sudo ifconfig							// gets network info & IP address
-	$ iwgetid								// wlan0 ESSID:"xxxx"
-	$ df -h									// /dev/root 14G ...
-	$ free -m								// Mem: 732 ...
-
-	$ sudo nano /etc/network/interfaces		// update password , etc
-]
-
-project [
-
-	// menu
-		$ 1
-		./menu.sh
-
-	// showcase sensehat ( on RPI2B , 13 )
-		$ python python/sensehat/sens_samples.py
-
-	// MAT ( on RPI0wf , 22 )
-
-		see: "MAT.txt"
-		$ node /home/pi/servers/node/expressoMAT.js
-
-		// controlling camera
-		see: "camera.txt"
-		shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
-		- or -
-		shell: C:\servers\Xming\Xming.exe :0 -clipboard -multiwindow
-		$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10
-		$ feh -g 600x400 -d img.jpg
-
-		// controlling gripper ( on RPI0wf , 22 )
-
-			// red to p2, blk to grnd (p6), ylw to p7
-
-			$ sudo nano python/servos/servo_acts.py
-
-			$ python python/servos/servo_keys.py	// based on keyboard
-			$ python python/servos/servo_loop.py	// continuous
-			$ python python/servos/servo_once.py
-
-	// for network thru CLI
-		see: "network.txt":internet
-
-	// for USB sound , use "USB Virtual Sound Adapter" , speaker , alsamixer , espeak "HI!"
-		see: "sound.txt":RPI_setup
-
-	// for monitor thru GPIO
-		see: "hardware\hardware_notes.txt":monitor
-]
-
-other [
-
-	Rasbpian ( Unix > Linux > Debian 7 Wheezy > Raspbian )
-
-	bash 4.3.30( 1 ) // was originally bash 2.2.37( 1 )
-
-		berries at top of login indicate the number of CPU cores in the processor
-
-	PIXEL ( Pi Improved X-Window Environment Lightweight )
-
-		main desktop environment
-
-		was LXDE = Lightweight X11 Desktop Environment
-
-	Python 3.2.3 ( default Python 2.7.3 )
-
-		$ sudo idle			// for Python2 IDE ; useful for pibrella
-		$ sudo idle3		// for Python3 IDE
-		$ sudo python -i	// for interactive
-
-			$ print( "sys.version: " + sys.version )
-
-	gcc 4.9.2-10 // was 4.6.3
-
-		$ sudo gcc --version
-]
-]
-
-bash 1 ( system executables navigation GUIs ) [
+bash 1 (system executables navigation GUIs) [
 
 	https://www.raspberrypi.org/documentation/linux/usage/commands.md
 	https://lsingelectronics.org/articles/raspberry-PI/ten-things-raspberry-PI/
@@ -168,29 +349,30 @@ bash 1 ( system executables navigation GUIs ) [
 
 system [
 
-	$ sudo shutdown -h now				// shutdown ( halt )
+	$ sudo shutdown -h now				// shutdown (halt)
 	$ sudo shutdown -r now				// reboot
 	$ sudo reboot						// reboot
 
 	$ sudo apt-get clean				// super user do apt clean up leftover packages
-	$ sudo apt-get update				// super user do advanced packaging tool update
-	$ sudo apt-get upgrade				// super user do advanced packaging tool upgrade
+	$ sudo apt-get update -y			// super user do advanced packaging tool update
+	$ sudo apt-get upgrade -y			// super user do advanced packaging tool upgrade
+	$ sudo apt-get autoremove -y		// clean stuff
 	$ sudo raspi-config					// mainly for enabling SSH if CAT5 cable is used, etc.
 	$ sudo rpi-update					// firmware update , can use UPDATE_SELF=0 to defer current program
 	$ sudo apt-get install rpi-update	// firmware update
-	$ sudo apt-get autoremove			// clean stuff
-	$ sudo apt-get -purge remove XXXXXX	// remove stuff
+	$ sudo apt-get -purge remove XXXX	// remove stuff
+	$ sudo dpkg -l | grep -i xxx		// determine id package is installed
 
 	$ sudo cat /proc/device-tree/model && echo	// get model: Raspberry Pi 2 Model B Rev 1.1
 	$ sudo cat /proc/version			// Linux version 4.14.90-v7+ (dom@dom-XPS-13-9370) (gcc version 4.9.3 (crosstool-NG crosstool-ng-1.22.0-88-g8460611)) #1183 SMP Fri Dec 21 14:03:50 GMT 2018
 	$ sudo cat /proc/cpuinfo			// model name : ARMv7 Processor rev 5 (v7l)
 	$ sudo cat /proc/meminfo			// MemTotal: 750512 kB
 	$ sudo cat /proc/partitions			// major minor #blocks name
-	$ sudo cat /etc/os-release			// PRETTY_NAME="Raspbian GNU/Linux 8 (jessie)"
+	$ sudo cat /etc/os-release			// PRETTY_NAME="Raspbian GNU/Linux 10 (buster)"
 
 	$ uname -a							// get kernel ver , all:	Linux raspberrypi 4.14.90-v7+ #1183 SMP Fri Dec 21 14:03:50 GMT 2018 armv7l GNU/Linux
 	$ uname -mrs						// get kernel version:		Linux 4.4.11-v7+ arm71 , Linux 4.14.49-v7+ armv7l
-	$ bash -version						// bourne again shell:		GNU bash , version 4.3.30 ( 1 )
+	$ bash -version						// bourne again shell:		GNU bash , version 4.3.30 (1)
 	$ df -h								// shows mem disk file:		/dev/root 14G ...
 	$ free -m							// shows mem ram:			Mem: 732 ...
 	$ watch -n 60 uptime				// shows how much battery is being used?
@@ -213,12 +395,12 @@ navigation [
 
 	$ pwd								// prints working sirectory: /home/pi/
 	$ ls -plaXR							// add / to dirs , long format , sort eXt , recursively
-	$ ls -1 | wc -l						// counts ( notice "L" , not '1' )
+	$ ls -1 | wc -l						// counts (notice "L" , not '1')
 	$ cd Desktop						// change directory: if already in /home/pi/
 	$ cd python							// change directory: if already in /home/pi/
 	$ mv xxxx.ttt yyyy.ttt				// rename
 	$ cp xxxx.ttt yyyy.ttt				// copy
-	$ rm xxxx.ttt						// remove file
+	$ rm xxxx.ttt						// remove/delete file
 	$ rm -r xxxx.ttt					// remove recursively: BE CAREFUL!
 	$ sudo rm -f /var/lib/motion/0*.xxx	// BE CAREFUL! removes file irregardless of permissions
 	$ mkdir anyFolder					// make directory anyFolder
@@ -239,10 +421,10 @@ navigation [
 	$ find . -type f -name "anyFile.txt" -exec rm -f { } \ ;	// find a single file called tecmint.txt and remove it
 	$ find /home -user anyUser -iname "*.txt"					// find all files that belongs to group Developer under /home directory
 
-	$ cat filename						// concantenates file ; to output
+	$ filename							// concantenates file ; to output
 	$ cat filename | less				// stops or pauses scroll , allows pageup pagedown
 
-	$ tar -dvf anyZippedDir.tgz			// zips
+	$ tar -xvf anyZippedDir.tgz			// zips | c: creates, x: extracts, v: progress, f: filename, t: view
 ]
 
 GUIs [
@@ -252,9 +434,30 @@ GUIs [
 	$ lxsession							// if CAT5 network
 ]
 
+xtra [
+
+	$ espeak "Hello, World!"
+	$ flite -t "Hello, World!"
+	$ echo "Hello, World!" | festival --tts
+	$ ./speech.sh "Hello, World!"
+
+	$ sed -n '5,10p;10q' robots.txt | espeak
+	$ sed -n '5,10p;10q' robots.txt | flite
+	$ sed -n '5,10p;10q' robots.txt | festival --tts
+
+	$ for value in {1..10}
+		do
+		echo $value
+		done
+
+	$ echo $((1 + $RANDOM % 10))
+
+	https://dev.to/0xbf/run-multiple-commands-in-one-line-with-and-linux-tips-5hgm
+	$ for value in {1..10}; do echo $((5 + $RANDOM % 26)); done
+]
 ]
 
-bash 2 ( ANSI configs network system Xming cpp comm ) [
+bash 2 (ANSI configs network usb Xming cpp comm) [
 
 ANSI [
 
@@ -276,13 +479,20 @@ ANSI [
 	echo -e "I ${ RED }LOVE${ NCL } MEG\n"
 ]
 
-configs [
+configs [ basic nano encoding system
+
+basic [
 
 	$ sudo su											// set user to sudo
 	$ sudo dpkg-reconfigure console-setup				// change terminal font "GUI"
 	$ sudo nano /etc/default/console-setup				// change terminal font "CLI"
-		change FONTFACE = "Terminus" , FONTSIZE = "16x32"
-		sudo /etc/init.d/console-setup restart
+		change FONTFACE = "Terminus" ,
+		FONTSIZE = "16x32"
+		#FONTSIZE = "12x24"
+
+		$ sudo /etc/init.d/console-setup restart
+
+		$ fc-list // shows fonts
 
 	$ sudo nano /boot/config.txt						// manually edit default Raspberry Pi config
 	$ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf	// shows network config
@@ -295,40 +505,69 @@ configs [
 	$ dmesg | less										// show startup log
 	$ dmesg | grep anytext								// show startup log parts
 	$ tabs -4											// set tab width to 4
+]
+
+nano [
 
 	$ sudo nano ~/.bashrc
 
 		tabs -4											// set tab width to 4
 
-	$ sudo nano /etc/nanorc
+	$ sudo nano /etc/nanorc								// config file that requires the nanorc
 
 		set tabsize 4
 
 		## JavaScript
-		include "/usr/share/nano/js.nanorc"
+		include "/usr/share/nano/js.nanorc" or			// apparently nanorc.nanorc must be first
+		include /usr/share/nano/*						/* does not seem to work */
 
-	// syntax highlight coloring for files
+		notes
+			saving these files on Notepad may require globally removing "\n"
+			there is a bug in nano < 2.7.4-1; nano: /etc/nanorc is ignored, if ~/.nanorc exists
+
+	$ ls /usr/share/nano/
+
+		// syntax highlight coloring for files
 
 		https://unix.stackexchange.com/questions/148/colorizing-your-terminal-and-shell-environment
+		https://wolfgang-ziegler.com/blog/enable-javascript-syntax-highlighting-in-the-nano-text-editor
 
-		$ sudo nano /usr/share/nano/js.nanorc				// syntax highlighting for nano js
+		$ sudo nano /usr/share/nano/javascript.nanorc		// syntax highlighting for nano js
 		$ sudo nano /usr/share/nano/python.nanorc			// syntax highlighting for nano python
 
-		https://wolfgang-ziegler.com/blog/enable-javascript-syntax-highlighting-in-the-nano-text-editor
 		see: "\\5Personal\Technology\raspberryPi\html.nanorc"
 
-	// encoding
+		ERROR [
 
-		http://python.org/dev/peps/pep-0263/
+			Failed to start dhcpd on all interfaces.
+			See 'systemctl status dhcpd.service' for details.
+		]
+]
 
-		editor
-		# encoding: utf-8
+encoding [
 
-		binary
-		# -*- coding: utf-8 -*-
+	http://python.org/dev/peps/pep-0263/
+
+	editor
+	# encoding: utf-8
+
+	binary
+	# -*- coding: utf-8 -*-
+]
+
+system [
+
+	$ sudo killall applicationName.bin	// force quit (kill) an application type
+	$ sudo kill -9 XXXXX				// XXXXX is the PID for the process you want to kill. Can be found using the ‘top’ command
+]
 ]
 
 network [
+
+	// if you can not connect to the network at all, set ssid & psk in:
+	// $ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+	// then, ifconfig;
+	see: "\\5Personal\Technology\raspberryPi\docs\network.txt"
 
 	$ hostname -I						// gets IP address: 169.254.79.11 , 192.168.0.22
 
@@ -338,24 +577,116 @@ network [
 	$ sudo iwlist wlan0 scan			// shows all available WiFi networks
 	$ sudo ifconfig						// gets network info & IP address
 	$ sudo ifconfig wlan0				// gets network info
-	$ sudo ifup wlan0					// starts network
-	$ sudo ifdown wlan0					// shuts down network
-
-	$ lsusb								// show usb
-	$ lsb_release -a					// shows standard linux base , but requires: $ sudo apt-get install lsb_release
-	$ sftp								// use WinSCP , see: "\\toolCode\raspberryPi\network.txt":ethernet connection
-
-	$ sudo iptables --list				// will list firewall rules on Pi for Raspbian
-	$ netstat -a						// look for the listening ports
-	$ netstat -lnutp					// see your network bindings
+	$ sudo service --status-all		// list all running services
 
 	$ ping -q -t 5 -w1 -c1 8.8.8.8 t	// shows internet connection
 ]
 
-system [
+usb [
 
-	$ sudo killall applicationName.bin	// force quit ( kill ) an application type
-	$ sudo kill -9 XXXXX				// XXXXX is the PID for the process you want to kill. Can be found using the ‘top’ command
+	$ lsusb	[					// show usb
+
+		pi@raspberrypi:~ $ lsusb
+		Bus 001 Device 005: ID 148f:5370 Ralink Technology, Corp. RT5370 Wireless Adapter
+		Bus 001 Device 004: ID 046d:c52b Logitech, Inc. Unifying Receiver
+		Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+		Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+		Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+	]
+
+	$ lsb_release -a [			// shows standard linux base
+
+		No LSB modules are available.
+		Distributor ID: Raspbian
+		Description:    Raspbian GNU/Linux 10 (buster)
+		Release:        10
+		Codename:       buster
+	]
+
+	$ dmesg | grep -i wlan [	// prints the message buffer of the kernel
+
+		// shows kernel messages related to wifi access; also shows router address
+
+		[    5.905601] usb 1-1.5: Product: 802.11 n WLAN
+		[   15.962660] wlan0: authenticate with 10:0c:6b:1f:4e:24
+		[   15.988587] wlan0: send auth to 10:0c:6b:1f:4e:24 (try 1/3)
+		[   15.998025] wlan0: authenticated
+		[   16.001116] wlan0: associate with 10:0c:6b:1f:4e:24 (try 1/3)
+		[   16.044632] wlan0: RX AssocResp from 10:0c:6b:1f:4e:24 (capab=0x411 status=0 aid=2)
+		[   16.051680] wlan0: associated
+		[   16.224279] IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
+		[   16.230253] wlan0: Limiting TX power to 30 (30 - 0) dBm as advertised by 10:0c:6b:1f:4e:24
+	]
+
+	$ usb-devices [				// shows usb-devices
+
+		...
+
+		T:  Bus=01 Lev=02 Prnt=02 Port=02 Cnt=02 Dev#=  4 Spd=12  MxCh= 0
+		D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=32 #Cfgs=  1
+		P:  Vendor=046d ProdID=c52b Rev=24.01
+		S:  Manufacturer=Logitech
+		S:  Product=USB Receiver
+		C:  #Ifs= 3 Cfg#= 1 Atr=a0 MxPwr=98mA
+		I:  If#=0x0 Alt= 0 #EPs= 1 Cls=03(HID  ) Sub=01 Prot=01 Driver=usbhid
+		I:  If#=0x1 Alt= 0 #EPs= 1 Cls=03(HID  ) Sub=01 Prot=02 Driver=usbhid
+		I:  If#=0x2 Alt= 0 #EPs= 1 Cls=03(HID  ) Sub=00 Prot=00 Driver=usbhid
+
+		T:  Bus=01 Lev=02 Prnt=02 Port=04 Cnt=03 Dev#=  5 Spd=480 MxCh= 0
+		D:  Ver= 2.00 Cls=00(>ifc ) Sub=00 Prot=00 MxPS=64 #Cfgs=  1
+		P:  Vendor=148f ProdID=5370 Rev=01.01
+		S:  Manufacturer=Ralink
+		S:  Product=802.11 n WLAN
+		S:  SerialNumber=1.0
+		C:  #Ifs= 1 Cfg#= 1 Atr=80 MxPwr=450mA
+		I:  If#=0x0 Alt= 0 #EPs= 7 Cls=ff(vend.) Sub=ff Prot=ff Driver=rt2800usb
+	]
+
+	$ lsblk [					// disk partitions?
+
+		NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+		mmcblk0     179:0    0 29.8G  0 disk
+		+-mmcblk0p1 179:1    0  256M  0 part /boot
+		+-mmcblk0p2 179:2    0 29.6G  0 part /
+	]
+
+	$ sudo blkid [				// disk partitions?
+
+		/dev/mmcblk0p1: LABEL_FATBOOT="boot" LABEL="boot" UUID="4467-8C16" TYPE="vfat" PARTUUID="057e1fee-01"
+		/dev/mmcblk0p2: LABEL="rootfs" UUID="66f68227-b1ae-4493-9ef5-e593576a6e81" TYPE="ext4" PARTUUID="057e1fee-02"
+		/dev/mmcblk0: PTUUID="057e1fee" PTTYPE="dos"
+	]
+
+	$ sudo fdisk -l [			// RAM allocations?
+
+		Disk /dev/ram0: 4 MiB, 4194304 bytes, 8192 sectors
+		Units: sectors of 1 * 512 = 512 bytes
+		Sector size (logical/physical): 512 bytes / 4096 bytes
+		I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+		Disk /dev/ram1: 4 MiB, 4194304 bytes, 8192 sectors
+		Units: sectors of 1 * 512 = 512 bytes
+		Sector size (logical/physical): 512 bytes / 4096 bytes
+		I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+		...
+
+		Disk /dev/ram15: 4 MiB, 4194304 bytes, 8192 sectors
+		Units: sectors of 1 * 512 = 512 bytes
+		Sector size (logical/physical): 512 bytes / 4096 bytes
+		I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+
+		Disk /dev/mmcblk0: 29.8 GiB, 32010928128 bytes, 62521344 sectors
+		Units: sectors of 1 * 512 = 512 bytes
+		Sector size (logical/physical): 512 bytes / 512 bytes
+		I/O size (minimum/optimal): 512 bytes / 512 bytes
+		Disklabel type: dos
+		Disk identifier: 0x057e1fee
+
+		Device         Boot  Start      End  Sectors  Size Id Type
+		/dev/mmcblk0p1        8192   532479   524288  256M  c W95 FAT32 (LBA)
+		/dev/mmcblk0p2      532480 62521343 61988864 29.6G 83 Linux
+	]
 ]
 
 Xming [
@@ -365,14 +696,12 @@ Xming [
 
 	// https://feh.finalrewind.org
 
-		$ sudo apt-get install feh
-		$ sudo apt-get install fbi
 		$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10
 
 		$ feh -g 600x400 -d img.jpg
 
 		shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
-			( or )
+			(or)
 			C:\servers\Xming\Xming.exe :0 -clipboard -multiwindow
 
 			// REFERENCE ONLY
@@ -503,7 +832,7 @@ comm [
 ]
 ]
 
-startup ( beg end ) [
+startup (beg end) [
 
 beg scripts [
 
@@ -520,8 +849,8 @@ beg scripts [
 
 		alias lsx='ls -lSX --color=auto'	// redefine listing with colors
 		lsx
-		vncserver
-		export PATH=$PATH:/home/pi/servers/nodejs:/home/pi/servers/nodejs/bin
+		#vncserver
+		#export PATH=$PATH:/home/pi/servers/nodejs:/home/pi/servers/nodejs/bin
 		tabs -4
 
 		espeak "Greetings. Computer initialized."
@@ -552,17 +881,17 @@ end scripts [
 ]
 ]
 
-python ( idle nodejs ) [
+python (idle nodejs) [
 
 idle python [
 
-		Python 3.2.3 ( default Python 2.7.3 )
+		Python 3.2.3 (default Python 2.7.3)
 			pibrella requires python 2 to run the files
 
 		sudo idle			// for Python2 IDE ; useful for pibrella
 		sudo idle3			// for Python3 IDE
 		sudo python -i		// for interactive
-		print( "sys.version: " + sys.version )
+		print("sys.version: " + sys.version)
 
 		// see: /home/pi/python/piezo.py
 		// see: /home/pi/python/led_vary.py
@@ -582,9 +911,9 @@ nodejs python [
 		http://www.sohamkamani.com/blog/2015/08/21/python-nodejs-comm/
 		http://lukeramsey.io/child
 
-		var execSync = require( 'child_process' ).execSync ;
-		var result = execSync( pathFile ) ;
-		console.log( result.toString( 'utf8' ) ) ;
+		var execSync = require('child_process').execSync ;
+		var result = execSync(pathFile) ;
+		console.log(result.toString('utf8')) ;
 
 	3 setup required for windows
 
@@ -592,7 +921,7 @@ nodejs python [
 
 		npm install -g node-gyp
 		npm install --global --production windows-build-tools
-			( as admin ; this installs python 2.7 )
+			(as admin ; this installs python 2.7)
 
 		node-gyp --python "C:\Users\mamge\.windows-build-tools\python27\python.exe"
 		npm config set python "C:\Users\mamge\.windows-build-tools\python27\python.exe"
@@ -606,9 +935,9 @@ nodejs python [
 	4 npm install python-shell
 
 		https://github.com/extrabacon/python-shell
-		var PythonShell = require( 'python-shell' ) ;
-		PythonShell.run( 'my_script.py' , options , function ( err , results ) { ... });
-		// you can send a message to python shell using pyshell.send( 'hello' ) ;
+		var PythonShell = require('python-shell') ;
+		PythonShell.run('my_script.py' , options , function (err , results) { ... });
+		// you can send a message to python shell using pyshell.send('hello') ;
 
 		ERROR: configuration
 
@@ -618,7 +947,7 @@ nodejs python [
 ]
 ]
 
-ERRORS [
+ERRORS [ updating booting
 
 	ERROR: trouble updating/upgrading
 
@@ -626,7 +955,7 @@ ERRORS [
 		tried lots of configuration checks.
 		appears to be WiFi dongle not working ; replacing it enabled update
 
-	ERROR: rPi0 not booting
+	ERROR: rPi0 not booting [
 
 		[ * ] HW: replaced cables with adaptors
 		[ * ] HW: replaced rPi0 with rPi0W
@@ -640,7 +969,7 @@ ERRORS [
 		[ * ] SD: reformat 32 GB cards Samsung , SDFormatter , reloaded NOOBS 2.3
 		[ * ] SD: reformat 32 GB cards Samsung , SDFormatter , reloaded NOOBS 2.4
 		[ * ] SD: reformat 32 GB cards Samsung , Windows10 , reloaded NOOBS 2.4
-		[ * ] SD: altered NOOBs "recovery.cmdline" ( was "cmdline.txt" ) to include HDMI lines
+		[ * ] SD: altered NOOBs "recovery.cmdline" (was "cmdline.txt") to include HDMI lines
 		[ * ] SD: install etcher > download image > transfer to SDCard
 
 		[ * ] $ sudo nano /boot/config.txt
@@ -672,11 +1001,12 @@ ERRORS [
 				config_hdmi_boost=4
 
 				hdmi_drive=2 // might be useful to get audio to work
+	]
 ]
 
-install ( SDcard NOOBs configure extras ) [
+install (SDcard NOOBs configure extras) [
 
-	SDcard prepare [
+	SDcard prepare [ card download format SSH
 
 		SD card
 
@@ -690,20 +1020,23 @@ install ( SDcard NOOBs configure extras ) [
 
 		download & install SD Formatter
 
-			download & install SD Associations Formatting Tool ( sdcard.org )
-			"C:\Program Files ( x86 )\SDA\SD Formatter\SDFormatter.exe"
+			download & install SD Associations Formatting Tool (sdcard.org)
+			"C:\Program Files (x86)\SDA\SD Formatter\SDFormatter.exe"
 
-			( another "flasher" is Win32 DiskImager )
+			(another "flasher" is Win32 DiskImager)
 
 		format SD card
 
 			set "FORMAT SIZE ADJUSTMENT" option to "ON" in the "Options" menu
 			this ensures the entire SD card volume is formatted
+
+		SSH is disabled by default in the newer Raspbian images.
+			Create a blank text file called "ssh" on the root of the SD card using your laptop.
 	]
 
-	download OS [
+	download OS [ extract download copy load
 
-		extract OS using NOOBs ( New Out Of the Box software )
+		extract OS using NOOBs (New Out Of the Box software)
 
 		download NOOBs software ; extract
 
@@ -711,15 +1044,12 @@ install ( SDcard NOOBs configure extras ) [
 
 			NOOBS installs Raspbian
 
-			Noobs: version: 2.4.0 , release date: 2017-04-10 , see: VMM install of Debian Jessie
-			Noobs: version: 3.0.0 , release date: 2018-11-16 , see: VMM install of Debian
-
-		copy files ( not folder ) onto SD card
+		copy files (not folder) onto SD card
 
 		load SD card onto RPi , and run
 	]
 
-	configure [
+	configure [ bootup remote
 
 		if "NOOBS" is the setup, THEN A KEYBOARD AND MONITOR IS NEEDED
 
@@ -727,7 +1057,7 @@ install ( SDcard NOOBs configure extras ) [
 
 		if GUI is installed, update network icon in GUI
 
-			RC toolbar > Panel Settings > Panel Preferences > WiFi Networks ( dhcpcdui )
+			RC toolbar > Panel Settings > Panel Preferences > WiFi Networks (dhcpcdui)
 			enter key
 
 		bootup in CLI mode
@@ -742,49 +1072,129 @@ install ( SDcard NOOBs configure extras ) [
 			$ sudo apt-get upgrade -y	// super user do advanced packaging tool upgrade
 			$ sudo reboot
 
-		configure remote ( Raspberry Pi setup )
+		configure remote (Raspberry Pi setup)
 
 			see: "network.txt":internet		for network connection
 			see: "network.txt":network_SSH	for remote shell access
 	]
 
-	extras [
+	extras [ speakers images sqlite3 git node gpio other
 
-		[ _ ] add node & express
+		$ sudo dpkg -l | grep -i  xxx	// dpkg -l | grep -i "ii  sql"
 
-			// node v10.15.2 , npm v5.8.0
+		speakers	[ complicated		// espeak v1.48.04+dfsg-7+deb10u1
 
-				$ sudo npm install npm@latest -g
+			see: "\\5Personal\Technology\raspberryPi\docs\bluetooth.txt"
+			see: "\\5Personal\Technology\raspberryPi\docs\sound.txt"
 
-					or
+			$ sudo bluetoothctl	// init: uses 12:12:28:6C:78:8C, GH_BT3500
 
-				$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
-				$ command -v nvm	// prints NVM if NVM is installed
+				[bluetooth]# pair 12:12:28:6C:78:8C
+				[bluetooth]# trust 12:12:28:6C:78:8C
+				[bluetooth]# connect 12:12:28:6C:78:8C
+				[bluetooth]# info 12:12:28:6C:78:8C
 
-				reload terminal!
-				$ nvm install node	// updating to latest node version
+			$ sudo apt-get install espeak python-espeak -y
+			$ echo -e 'connect 12:12:28:6C:78:8C \n quit' | sudo bluetoothctl // GH_BT3500
+			$ espeak "Hi There"
 
-			// express@4.17.1
+			$ aplay mamgeorge/sound/ping.wav
+		]
+
+		images		[ feh fbi cacaview; requires XMing
+
+			$ sudo apt-get install feh -y			// feh v3.1.3-1
+
+				FEH: Image viewer
+				https://man.finalrewind.org/1/feh/
+
+				$ feh -g 600x400 -d image.jpg // g: geometrySize, d: drawFilename
+
+			$ sudo apt-get install fbi -y 			// fbi v2.10-3
+
+				FBI: FrameBuffer Image viewer
+				https://www.raspberrypi-spy.co.uk/2017/02/how-to-display-images-on-raspbian-command-line-with-fbi/
+
+				$ sudo fbi -T 2 -a image.jpg
+
+			$ sudo apt-get install caca-utils -y	// cacaview v0.99.beta19-2.1
+
+				should read any images
+				https://www.carta.tech/man-pages/man1/cacaview.1.html
+
+				$ cacaview image.jpg
+
+				ERROR [ PuTTY X11 proxy: unable to connect
+
+					PuTTY X11 proxy: unable to connect to forwarded X server: Network error: Connection refused
+
+					// $ pip install img2txt -y
+
+						// img2txt requires py3to2
+						// py3to2 requires Python-2.6.1
+
+					RESOLUTION: need to run XMing
+				]
+		]
+
+		$ sudo apt-get install sqlite3 [ // sqlite3 v3.27.2
+
+			https://randomnerdtutorials.com/sqlite-database-on-a-raspberry-pi/
+		]
+
+		git			[ // git v2.20.1
+
+			c:> cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
+
+				fatal: This operation must be run in a work tree
+				git init
+		]
+
+		node		[ // node v15.5.1, npm v6.14.10
+
+			// default was node v10.21.0, npm v5.8.0
+
+				ERROR: npm WARN npm npm does not support Node.js v10.21.0
+
+				$ curl -sL https://deb.nodesource.com/setup_15.x | sudo -E bash -
+				$ sudo apt-get install -y nodejs
+
+				or
+					$ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.1/install.sh | bash
+					$ command -v nvm	// prints NVM if NVM is installed
+
+					reload terminal!
+					$ nvm install node	// updating to latest node version
+
+			// starts package json for project
 
 			$ cd myapp
 			$ npm init
-			$ npm install express --save
 
 			// others
 
-			$ npm install colors	// colors@1.4.0
+			$ npm install express --save	// express@4.17.1
+			$ npm install log4js			// log4js@6.3.0
+			$ npm install colors			// colors@1.4.0
+			$ npm install rpi-gpio			// rpi-gpio@2.1.7
 
-		[ _ ] add TTS software, etc.
+			$ npm list --depth=0			// lists versions
+		]
 
-			$ sudo apt-get install espeak python-espeak
+		gpio		[ // gpio v2.50
 
-			$ sudo apt-get install fbi -y 			// fbi version 2.09
-			$ sudo apt-get install feh -y			// feh version 3.1.3
-			$ sudo apt-get install caca-utils -y	// cacaview q0.99.beta19
+			ERROR: Oops - unable to determine board type... model: 17
 
-			$ sudo apt-get install sqlite3			// sqlite3 3.27.2-3
+				cd /tmp
+				wget https://project-downloads.drogon.net/wiringpi-latest.deb
+				sudo dpkg -i wiringpi-latest.deb
+		]
 
-			? sudo apt-get install mc				// midnight commander
+		other		[ printer mc
+
+			see CookBook 2.12 for printer access [ ]
+
+			? sudo apt-get install mc [ // midnight commander
 
 				1 Display Server > Xorg Display Server
 
@@ -800,15 +1210,8 @@ install ( SDcard NOOBs configure extras ) [
 					MATE		Marco Window Manager
 
 				4 Login Manager > LightDM Login Manager
-
-		[ _ ] see CookBook 2.12 for printer access
-
-		[ _ ] Github
-
-			c:> cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
-
-				fatal: This operation must be run in a work tree
-				git init
+			]
+		]
 	]
 ]
 ----

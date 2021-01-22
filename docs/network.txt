@@ -1,28 +1,6 @@
-C:\Martin\4Work\toolCode\raspberryPi\docs\network.txt
+\\5Personal\Technology\raspberryPi\docs\network.txt
 
 general [
-
-	host computer
-
-		> ipconfig -all
-			shows DHCP is on , and IP is 192.168.0.xx
-
-			mayles: 192.168.0.15 , ARRIS_SES_26465 , 5kdm20r5pimt3lw3
-				UBEE: 192.168.0.1
-
-		Control Panel > Network and Sharing Center > Change Adapter Settings > dblClick adaptor > Details >
-				> shows SSID mamgeorge
-
-		getting network assignments from TPLink
-			use http://192.168.1.1	admin to get rPi: 192.168.1.22
-
-	$ hostname -I	OR ifconfig ( gets IP address )
-
-		Authentication:	WPA2-PSK
-		Encryption:		CCMP
-		SSID:			mamgeorge
-		BSSID:			xx:xx:xx:xx:xx:xx
-		IP Address:		192.168.0.xx
 
 	NOTE: many ways to remotely connect to a pi
 
@@ -52,104 +30,260 @@ general [
 			TP-Link failed but CanaKit worked
 ]
 
-internet [
+internet [ wifi
 
-	note: reformatting the NOOBs program for RPiB+ produced an image that did not have the default gateway.
-		http://www.doofusdan.com/2013/02/getting-raspberry-pi-dhcp-working-with.html
+	terms [
 
-		$ route -n								( shows default gateway if it exists )
-		$ sudo route add default 192.168.1.1	( temp solution )
+		ssid		Service Set Identifier name of wireless network (shows up when you search for wifi)
+		key_mgmt	type either open, wep, wpa, wpa2
+		wep_key0	if network is wep encrypted, insert password (now outdated)
+		psk			if network is wpa/wpa2 encrypted, enter wifi password here
+		proto=RSN	this line will be added to wpa2 encrypted networks
+		scan_ssid	"1" lets wifi adapter look for networks automatically & connect
 
-	adding network connection CLI
+		eth0		first Ethernet interface; usually a NIC connected to the network by a category 5 cable
+		wlan0		first wireless network interface
+		lo			loopback interface; special interface system uses to communicate with itself
 
-		https://raspberrypihq.com/how-to-connect-your-raspberry-pi-to-wifia
-		http://www.algissalys.com/how-to/how-to-raspberry-pi-multiple-wifi-setup-through-the-command-line
-		https://www.thepolyglotdeveloper.com/2016/08/connect-multiple-wireless-networks-raspberry-pi/
+		WEP			Wired Equivalent Privacy
+		WPA2		Wi-Fi Protected Access 2
+		PSK			Pre Shared Key
+		dhcpcd		DHCP client daemon
+		DHCP		Dynamic Host Configuration Protocol
+	]
 
-		$ sudo nano /etc/network/interfaces
+	adding [
 
-			auto lo
-			iface lo inet loopback
+		SSH is disabled by default in the newer Raspbian images.
+			Create a blank text file called "ssh" on the root of the SD card using your laptop.
+			Then boot the Pi from it. That will enable SSH.
 
-			auto eth0
-			iface eth0 inet dhcp
+			https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
 
-			auto wlan0
-			allow-hotplug wlan0
-			iface wlan0 inet dhcp
-			# wpa-ssid "ssid"		#mamgeorge
-			# wpa-psk "password"
-			wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
+		$ sudo nano /etc/network/interfaces [ NOTE: unused in "" release!!!
 
-			auto wlan1
-			allow-hotplug wlan1
-			iface wlan1 inet dhcp
-			wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
+			source-directory /etc/network/interfaces.d
 
-			NOTES
+			/* old method
+
+				auto lo
+				iface lo inet loopback
+
+				auto eth0
+				iface eth0 inet dhcp
+
+				auto wlan0
+				allow-hotplug wlan0
+				iface wlan0 inet dhcp
+					wpa-ssid "ssid"
+					wpa-psk "password"
+				wpa_conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+				iface default inet dhcp
+
+				notes
+
 				* updating interfaces requires quotes "" which requires an US keyboard.
 					The image was set in GB , so raspi-config was needed to change localization.
 					Several menus were passed to get to it.
 				* wpa_supplicant.conf also has key_mgmt=WPA-PSK
+			*/
+		]
 
-		$ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+		$ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf [
 
 			ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 			update_config=1
+			country=US
 
-			# Example Open
-			network = {
-				ssid = "any_SSID"
-				scan_ssid=1
-				key_mgmt = NONE
-			}
-
-			# Example WEP
 			network={
 				ssid="any_SSID"
-				scan_ssid=1
-				key_mgmt=NONE
-				wep_key0="any_WEPKEY"
-			}
-
-			# Example WPA
-			network={
-				ssid="any_SSID"
-				scan_ssid=1
-				key_mgmt=WPA-PSK
 				psk="any_WPAKEY"
 			}
 
-			# Example WPA2
-			network={
-				ssid="any_SSID"
-				scan_ssid=1
-				proto=RSN
-				key_mgmt=WPA-PSK
-				psk="any_RSN_KEY"
-			}
+			/* older method; make sure to add "country=US" above
 
-		terms
-		
-			ssid		name of wireless network (shows up when you search for wifi)
-			key_mgmt	type either open, wep, wpa, wpa2
-			wep_key0	if network is wep encrypted, insert password (now outdated)
-			psk			if network is wpa/wpa2 encrypted, enter wifi password here
-			proto=RSN	this line will be added to wpa2 encrypted networks
-			scan_ssid	"1" lets wifi adapter look for networks automatically & connect
-			
-			eth0		first Ethernet interface; usually a NIC connected to the network by a category 5 cable
-			wlan0		first wireless network interface
-			lo			loopback interface; special interface system uses to communicate with itself
+				# Example Open
+				network = {
+					ssid = "any_SSID"
+					scan_ssid=1
+					key_mgmt = NONE
+				}
 
-		$ hostname -I				# gets IP address // 169.254.79.11 192.168.0.22
-		$ sudo ifconfig				# gets IP address
-		$ sudo iwlist wlan0 scan	# shows networks
+				# Example WEP
+				network={
+					ssid="any_SSID"
+					scan_ssid=1
+					key_mgmt=NONE
+					wep_key0="any_WEPKEY"
+				}
 
-		$ sudo ifdown wlan0			# shuts down network
-		$ sudo ifup wlan0			# starts network
+				# Example WPA
+				network={
+					ssid="any_SSID"
+					scan_ssid=1
+					key_mgmt=WPA-PSK
+					psk="any_WPAKEY"
+				}
 
-	note: node processes may not terminate when shut down from IDE remote process
+				# Example WPA2
+				network={
+					ssid="any_SSID"
+					scan_ssid=1
+					proto=RSN
+					key_mgmt=WPA-PSK
+					psk="any_RSN_KEY"
+				}
+			*/
+		]
+	]
+
+	commands [
+
+		c:\> arp -a -v								// -a shows arp entries , -v verbose
+
+		$ ls /etc/network/interfaces.d				// dir; probably blank
+		$ ls /sys/class/net/						// show active interface: eth0 lo wlan0
+		$ cat /sys/class/net/wlan0/address			// MAC address
+		$ sudo nano /etc/dhcpcd.conf				// for statics
+		$ sudo nano /etc/network/interfaces			// auto wlan0
+		$ sudo nano /etc/wpa_supplicant/wpa_supplicant.conf	// network = { ssid = "any_SSID" psk="any_RSN_KEY" }
+
+		$ sudo iwlist wlan0 scan					// shows all available WiFi networks
+		$ sudo iwlist wlan0 scan | grep "ESSID"		// shows all available WiFi networks
+		$ sudo iwlist wlan0 scan | egrep "Cell|ESSID|Frequency|Quality"	// nice summary
+		$ sudo iwlist wlan0 scan | egrep -i SSID\|Address\|Channel\|Quality\|Auth
+		$ sudo iwlist wlan0 channel					// shows all channels & frequencies
+		$ sudo iwgetid								// shows all available connections , eth0 , lo , wlan0 // wlan0 ESSID:"xxxxxx"
+		$ sudo iw dev								// connection details for a current device?
+		$ sudo iw dev wlan0 scan freq 2462			// connection details for a frequency
+
+		$ sudo ifconfig								// gets network info & IP address
+		$ sudo ifconfig -a							// gets all network info, same as above
+		$ sudo ifconfig wlan0						// gets network info
+		$ sudo route -n								// shows default gateway if it exists
+		$ sudo ip route								// metric 303
+		$ sudo iptables --list						// lists firewall rules on Pi: Chain INPUT/FORWARD/ACCEPT (policy ACCEPT)
+		$ cat /etc/resolv.conf						// nameserver 192.168.1.1
+		$ netstat -a								// look for the listening ports
+		$ netstat -lnutp							// see your network bindings
+
+		$ sftp										// use WinSCP , see: "\\toolCode\raspberryPi\network.txt":ethernet connection
+		$ ping -q -t 5 -w1 -c1 8.8.8.8 t			// shows internet connection
+		$ ping -c3 8.8.8.8							// connect: Network is unreachable or Destination Host Unreachable
+		$ ping -c3 $(ip route | awk '/default/ {print $3}')
+		$ ping -c3 google.com						// Temporary failure in name resolution
+		$ sudo systemctl status dhcpcd				// connected to Access Point `NETGEAR13'
+		$ sudo systemctl status dhcpcd.service		// same as above
+
+		//changes
+		$ wpa_passphrase any_SSID					// generates encrypted PSK
+		$ wpa_passphrase "testing" >> /etc/wpa_supplicant/wpa_supplicant.conf
+		$ sudo route add default gw 192.168.1.1		// SIOCADDRT: Network is unreachable
+
+		$ wpa_cli -i wlan0 reconfigure				// Failed to connect to non-global ctrl_ifname: wlan0 error: No such file or directory
+		$ wpa_cli -i wlan0 reconfigure || ( systemctl restart dhcpcd; wpa_cli -i wlan0 reconfigure; )
+		$ dhclient -v								// cycles dhcp
+
+		$ sudo service --status-all				// list all running services
+		$ sudo ifdown wlan0							// OBSOLETE? network shutdown
+		$ sudo ifup wlan0							// OBSOLETE? network startup; ifup: unknown interface wlan0
+		$ sudo ifdown wlan0 && sudo ifup wlan0		// OBSOLETE? shutsdown and restarts
+		$ sudo ip link set wlan0 down				// network shutdown
+		$ sudo ip link set wlan0 up					// network startup
+
+		[FAILED] Failed to start dhcpcd on all services
+		$ sudo systemctl start dhcpcd				// 169.254.123.176
+		$ sudo systemctl restart dhcpcd				// 169.254.123.176
+		$ sudo systemctl enable dhcpcd.service
+		$ sudo systemctl daemon-reload
+		$ sudo systemctl restart dhcpcd				// 169.254.123.176
+
+		$ /etc/init.d/networking restart			// restarts startup
+	]
+
+	responses [ wlan iwlist scan
+	
+		ipconfig (on Windows) [
+
+			Wireless LAN adapter Wi-Fi:
+
+			   Connection-specific DNS Suffix  . :
+			   Link-local IPv6 Address . . . . . : fe80::c1b6:7322:ba4a:c1ab%22
+			   IPv4 Address. . . . . . . . . . . : 192.168.1.9
+			   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+			   Default Gateway . . . . . . . . . : 192.168.1.1
+		]
+
+		$ dmesg | grep -i wlan [	// prints the message buffer of the kernel
+
+			// shows kernel messages related to wifi access; also shows router address
+
+			[    5.905601] usb 1-1.5: Product: 802.11 n WLAN
+			[   15.962660] wlan0: authenticate with 10:0c:6b:1f:4e:24
+			[   15.988587] wlan0: send auth to 10:0c:6b:1f:4e:24 (try 1/3)
+			[   15.998025] wlan0: authenticated
+			[   16.001116] wlan0: associate with 10:0c:6b:1f:4e:24 (try 1/3)
+			[   16.044632] wlan0: RX AssocResp from 10:0c:6b:1f:4e:24 (capab=0x411 status=0 aid=2)
+			[   16.051680] wlan0: associated
+			[   16.224279] IPv6: ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
+			[   16.230253] wlan0: Limiting TX power to 30 (30 - 0) dBm as advertised by 10:0c:6b:1f:4e:24
+		]
+
+		$ sudo iwlist wlan0 scan | egrep "Cell|ESSID|Signal|Rates|Frequency" [
+
+			Cell 03 - Address: 10:0C:6B:1F:4E:24
+				Frequency:2.462 GHz (Channel 11)
+				Quality=70/70  Signal level=-31 dBm
+				ESSID:"NETGEAR13"
+				Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s
+				Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 48 Mb/s
+		]
+
+		$ sudo iwlist wlan0 scan [
+
+			Cell 03 - Address: 10:0C:6B:1F:4E:24
+				Channel:11
+				Frequency:2.462 GHz (Channel 11)
+				Quality=70/70  Signal level=-31 dBm
+				Encryption key:on
+				ESSID:"NETGEAR13"
+				Bit Rates:1 Mb/s; 2 Mb/s; 5.5 Mb/s; 11 Mb/s; 18 Mb/s; 24 Mb/s; 36 Mb/s; 54 Mb/s
+				Bit Rates:6 Mb/s; 9 Mb/s; 12 Mb/s; 48 Mb/s
+				Mode:Master
+				Extra:tsf=000004272c3f3380
+				Extra: Last beacon: 70ms ago
+				IE: Unknown: 00094E4554474541523133
+				IE: Unknown: 010882848B962430486C
+				IE: Unknown: 03010B
+				IE: Unknown: 0706555320010B1E
+				IE: Unknown: 200100
+				IE: Unknown: 23021A00
+				IE: Unknown: 2A0104
+				IE: Unknown: 32040C121860
+				IE: IEEE 802.11i/WPA2 Version 1
+					Group Cipher : CCMP
+					Pairwise Ciphers (1) : CCMP
+					Authentication Suites (1) : PSK
+				IE: Unknown: 0B0507004F0000
+				IE: Unknown: 2D1AEF1917FFFF000000000000000000000000000000000000000000
+				IE: Unknown: 3D160B081500000000000000000000000000000000000000
+				IE: Unknown: 4A0E14000A002C01C800140005001900
+				IE: Unknown: 7F0A05000800000000400040
+				IE: Unknown: FF1C230D0008120010022002C00D418308000C00FAFFFAFF391CC7711C07
+				IE: Unknown: FF072404000028FCFF
+				IE: Unknown: FF0E260400A40820A408404308603208
+				IE: Unknown: DD7D0050F204104A00011010440001021057000101103B00010310470010C95B3453C798BBCBE81FD1456754B2861021000842726F6164636F6D1023000552415832301024000631323334353610420004313233341054000800060050F2040001101100055241583230100800022008103C0001031049000600372A000120
+				IE: Unknown: DD1E00904C0418BF0CB179890FFAFF0000FAFF0000C005000B000000C3020038
+				IE: Unknown: DD090010180207001C0000
+				IE: Unknown: DD180050F2020101840003A4000027A4000042435E0062322F00
+		]
+
+		CanaKit Wireless_Adapter: 150 Mbps 802.11n/g/b Mini USB 2.0
+			Ralink 5370 Chipset
+
+		TP-Link TL-WN725N: 150 Mbps / 64/128 WEP, WPA/WPA2, WPA-PSK/WPA2-PSK
+	]
 ]
 
 network_SSH [

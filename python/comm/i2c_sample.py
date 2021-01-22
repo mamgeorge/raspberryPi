@@ -10,7 +10,6 @@ import sys
 import smbus
 
 DEVICE_BUS = 1
-DEVICE_ADDR = 0x0D
 
 def showI2C( ):
 

@@ -1,0 +1,280 @@
+\\5Personal\Technology\raspberryPi\hardware\hardware_detailed.txt
+
+	this is for detailed explanations behind parts
+
+kits [
+
+	[ * ] kit		/ $xx / CanaKit Pi 2 Ultimate Starter Kit 2015/06/20
+	[ * ] book		/ $40 / 9781449365226 / Raspberry Pi Cookbook / Simon Monk, 414 pp, OReilly, 2014
+	[ * ] container	/ $25 / 12 pcs Flip Top, Clear (7.9 x 6.5 x 4.5 inches) / Sterilite 18038612
+	[ _ ] kit		/ $95 / SKU: TS0248			/ SunFounder Smart Video Car Kit for Raspberry Pi with Android App
+	[ _ ] kit		/ $96 / SKU: RPi2SensorV2	/ SunFounder 37 Modules Sensor Kit V2.0 for Raspberry Pi
+	[ _ ] kit		/ $76 / SKU: PiPlus			/ SunFounder PiPlus Electronics Building Block Sensor STEM Starter Kit
+	[ _ ] kit		/ $73 / SKU: CZ0024			/ SunFounder RFID Learning Kit V2.0 for Arduino
+
+		RaspberryPi 0 | https://www.raspberrypi.org/blog/gpio-zero-a-friendly-python-api-for-physical-computing/
+
+		[ _ ] pinboard	/ $01 / ID: 2822 / GPIO 2x20 Male Header - Break-away 0.1 inch Dual
+		[ _ ] protector	/ $05 / ID: 2883 / Adafruit Pi Protector for Raspberry Pi Model Zero
+		[ _ ] wifi		/ $12 / ID: 0814 / Miniature WiFi (802.11b/g/n) Module: For Raspberry Pi and more
+		[ _ ] usbhub	/ $22 / ID: 0961 / USB 2.0 Powered Hub - 7 Ports with 5V 2A Power Supply
+
+	camera specs: http://elinux.org/Rpi_Camera_Module#Technical_Parameters_.28v.1_board.29
+]
+
+connectors, electronic [
+
+	[ _ ] 4P4C or RJ9		(4 position 4 contact or registered jack) handset connectors
+	[ _ ] Molex connectors	(common PC DC power; can be clamped down)
+	[ _ ] JST connectors	(Japan Solderless Terminal)
+	[ _ ] Tamiya connectors	(common on RC vehicles)
+]
+
+sdCards [
+
+	https://reprage.com/post/what-are-the-best-sd-cards-to-use-in-a-raspberry-pi
+
+		NOOBS minimum recommended card size is 8 GB SDHC
+		recommended class 6 (should attain 6 MB/s)
+		use "$ sudo halt" to shutdown
+		issues can result from overclocking
+		issues can result from insufficient power supply voltage
+
+		should have wear leveling
+
+	MicroSD HC
+		xxxx Micro SDSC 02 GB (Secure Digital Standard Capacity)
+		2006 Micro SDHC 32 GB (High-Capacity) storage & support for FAT32 files
+		2009 Micro SDXC 02 TB (eXtended-Capacity)storage & support for exFAT files
+
+	Bus Interface
+
+		v1.01	12.5 MB/s		(default)
+		v2.00	25.0 MB/s		(high speed)
+
+		UHS: Ultra High Speed
+		v3.01	12.5 MB/s		(UHS I) SDR12
+		v3.01	25.0 MB/s		(UHS I) SDR25
+		v3.01	50.0 MB/s		(UHS I) SDR50
+		v3.01	104. MB/s		(UHS I) SDR104
+
+		v4.00	156-312 MB/s	(UHS II)	FD156-HD312, FD: FullDuplex, HD: HalfDuplex
+		v6.00	312-624 MB/s	(UHS III)	FD312-FD624, FD: FullDuplex
+
+	Speed Classes
+
+		Speed	UHS	Video
+
+		C2		-	-
+		C4		-	-
+		C6		-	V6
+		C10		U1	V10
+		-		U3	V30
+		-		-	V60
+		-		-	V90
+]
+
+power [
+
+	requirements
+
+		1200mA	2 port	5V x 1.2A
+		2500mA	4 port	5V x 2.5A (w/o powered hub)
+		050mA	GPIO pins
+		100mA	keyboards
+		250mA	HDMI port
+		250mA	camera
+
+		watch -n 60 uptime
+		256 MB Model A can get 16 hours from 6 AA batteries
+
+	portable smartphone battery
+
+		$$	mAh		weight	dimensions		ASIN		description
+		--	---		--		----------		----		-----------
+	*	15	05200	4.80 oz	1.0 x 2.1 x 3.6	B014ULADTM	TPLink PowerBank / TL-PB5200
+		22	10400	8.50 oz	1.7 x 1.7 x 3.6	B014ULADTM	TPLink PowerBank / TL-PB10400
+		66	26800	12.6 oz	0.9 x 2.3 x 6.5	B01JIWQPMW	Anker PowerCore / AK-A1277011
+		136	50000	2.8 lb	1.3 x 5.3 x 8.3	B00YP823NA	MAXOAK Laptop Power Bank / K2-50000mAh / 185Wh
+
+	other
+
+		[ _ ] DIY power supply; UBEC aka "Universal Battery Eliminator Circuit"
+
+			plain switch mode voltage regulator
+			input of 5.5V-20V up to 3A
+
+			5$ HOBBYMATE 3A SwitchMode UBEC 5V-6V-3A Output / 42mm x 24mm x 11mm / 10g / 3A-UBEC /
+			9$ HOBBYWING 3A SwitchMode UBEC 5V-6V-3A Output / 43mm x 17mm x 7mm / 0.4 oz
+
+		[ _ ] battery box suitable for six or more AA batteries
+
+			13$ 6 AA Size Cell Battery Holder Box; 9V Case With Snap Connector Wire Lead / 58mm x 48mm x 28mm / B01D1IURU0
+]
+
+monitors [
+
+	[ * ] screen TFT	/ $70, PiTFT 800x480, 7.0 inch TouchScreen with DSI [
+
+		screen TFT / $70, Pi Foundation PiTFT - 7 inch Touchscreen 800x480 pixels & DSI cable
+
+			NOTE: RPI0 DOES NOT HAVE THE DSI CONNECTION AND WILL NOT WORK!
+			DSI (Display Serial Interface) 15 pin ribbon cable (included)
+			Raspberry Pi Display version 1.1
+
+		install
+
+			https://www.element14.com/community/docs/DOC-78156/l/raspberry-pi-7-touchscreen-display
+
+			The Broadcom BCM2835 IC has a MIPI (Mobile Industry Processor Interface).
+				The MIPI feeds graphics data directly to a display panel through a connector.
+				The connector is an S2 (Serial 2) DSI (Display Serial Interface) connector.
+				Contrast this with the S5 (Serial 5) CSI (Camera Serial Interface) connector.
+				Both have 15 pins.
+
+			1 ribbon cable attaches from Monitor "RPI DISPLAY" socket to RPi "DISPLAY" socket.
+				The RPi "DISPLAY" socket may be unlabeled, or labeled as "C1" or "S2"
+			2 uses RPi pin #2 (5V)
+			3 uses RPi pin #6 (ground)
+
+		$ sudo nano /boot/config.txt
+			display_rotate = 2
+			gpu_mem = 448
+	]
+
+	[ * ] screen Case	/ $20, Pimoroni Raspberry Pi 7 inch Touchscreen Display Case
+
+	[ * ] screen 3.5	/ $45, PiTFT+480x320 3.5 inch TFT Plus Resistive Touchscreen [
+
+		(AdaFruit Id: 2441)
+
+		https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi/downloads
+		https://learn.adafruit.com/adafruit-pitft-3-dot-5-touch-screen-for-raspberry-pi/easy-install-2
+
+			$ cd ~
+			$ wget https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/adafruit-pitft.sh
+			$ chmod +x adafruit-pitft.sh
+			$ sudo ./adafruit-pitft.sh
+
+			choose #4 (3.5 inch TFT)
+			choose #3 (270 deg rotate)
+			Would you like the console to appear on the PiTFT display?
+			YES:	PiTFT as Text Console
+			NO:		PiTFT as HDMI Mirror
+			NO:		PiTFT as Raw Framebuffer Device
+	]
+
+	[ _ ] screen 3.5	/ $33, PiTFT+480x320 3.5 inch TFT Plus Resistive Touchscreen
+
+	[ _ ] screen 2.2	/ $25, PiTFT 320x240 2.2 inch TFT HAT Mini Kit - No Touch, fits in case, needs soldered
+
+	[ _ ] screen 2.8	/ $35, PiTFT 320x240 2.8 inch TFT Plus Resistive Touchscreen, not in case but compact
+]
+
+RPi [ RaspberryPi with version info
+
+	[ _ ] model SOC			CPU								LPDDR2SDRAM	port	pins	card		conn
+	-----+----------------+-----------------------------+----------+-------+------+----------+-----
+	[ _ ] RPi1 A	BCM2835	700 MHZ 1 -core ARM1176JZF-S	256MB RAM	1 USB	26 GPIO	SDHC		-
+	[ _ ] RPi1 A+	BCM2835	700 MHZ 1 -core ARM1176JZF-S	256MB RAM	1 USB	40 GPIO	microSDHC	-
+	[ _ ] RPi1 B+	BCM2835	700 MHZ 1 -core ARM1176JZF-S	512MB RAM	4 USB	40 GPIO	microSDHC	Ethernet
+	[ _ ] RPi1 B	BCM2835	700 MHZ 1 -core ARM1176JZF-S	512MB RAM	2 USB	26 GPIO	SDHC		-
+
+	[ * ] RPi2 B+2	BCM2836	900 MHZ 4 -core ARM Cortex-A7	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
+
+		encased for sensehat
+	]
+	[ * ] RPi0 		BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [
+
+		(40PIN GPIO female header pushed in)
+	]
+	[ * ] RPi0 WHf	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [
+
+		RPI0_WH	female (for robot)
+
+		WH: Wifi & Header (40PIN pre-soldered GPIO female headers)
+	]
+	[ * ] RPi0 WHm	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [
+
+		RPI0_WH	male
+
+		WH: Wifi & Header (40PIN pre-soldered GPIO male headers)
+		802.11 b/g/n wireless LAN
+		Bluetooth 4.1
+		Bluetooth Low Energy (BLE)
+		Like the Pi Zero, it also has:
+
+		1GHz, single-core CPU
+		512MB RAM
+		Mini HDMI and USB On-The-Go ports
+		Micro USB power
+		HAT-compatible 40-pin header
+		Composite video and reset headers
+		CSI camera connector
+	]
+	[ _ ] RPi3 B 3	BCM2837	900 MHZ 4 -core ARM Cortex-A53	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
+
+		GPU:	Broadcom VideoCore IV @ 250 MHZ, OpenGL ES 2.0 (24 GFLOPS), MPEG-2 and VC-1, 1080p30 H.264/MPEG-4 AVC high-profile decoder and encoder
+		power:	5 V via MicroUSB drawing 800 mA (4.0 W)
+		RPiB2+:	size: 86 mm x 57 mm x 19 mm (3.4 in x 2.2 in x 0.8 in), weight: 45 g (1.60 oz)
+		RPi0:	size: 65 mm x 30 mm x 05 mm (2.7 in x 1.2 in x 0.2 in), weight: 09 g (0.32 oz); drawing 160 mA (0.8 W)
+
+		https://www.raspberrypi.org/documentation/usage/gpio/
+
+		note:
+		200-pin LPDDR2 SO-DIMM:
+	]
+	[ * ] RPi4 B 4	BCM2711 1.5 GHZ 4 -core ARMv7 rev 3		8.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
+
+		BCM2711 CPU; 64 bit Quad Core ARMv7 Processor rev 3 (v71)
+
+			8.0GB RAM
+			micro SD memory Card Slot (32GB)
+			40 pin GPIO
+			WiFi 2.4/5GHZ
+			BlueTooth 5.0
+
+		connectors
+
+			power	USB type C 5V 3A power supply
+			Ether	port Gigabit Ethernet
+			USB		2x port USB 3.0
+			USB		2x port USB 2.0
+			audio	2x port 3.5mm Audio Jack 4 pole Stereo Audio
+			video	2x port micro HDMI for 4k 60p displays
+			display	two lane MIPI DSI connector
+			camera	two lane MIPI CSI connector
+			PoE HAT Header
+	]
+
+	general [ Hardware Revision Code
+
+		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+
+		$ cat /proc/cpuinfo
+
+		Model & PCB Rev.		RAM		Hardware Revision Code
+		----------------		---		----------------------
+		Compute Module			512MB	0011
+		Compute Module			512MB	0014 (Embest, China)
+		RPi1 - 1 Model A		256MB	0007, 0008, 0009
+		RPi1 - 1 Model A+		256MB	0012
+		RPi1 - 1 Model A+		256MB	0015 (Embest, China)
+		RPi1 - 1 Model A+		512MB	0015 (Embest, China)
+		RPi1 - 1 Model B Rev 1	256MB	0002 (0003 for ECN0001)
+		RPi1 - 1 Model B Rev 2	256MB	0004, 0005, 0006
+		RPi1 - 1 Model B Rev 2	512MB	000d, 000e, 000f
+		RPi1 - 1 Model B+		512MB	0010, 0013, 900032
+		RPi2 - 2 Model B v1.1	1GB		a01041 (Sony, UK)
+		RPi2 - 2 Model B v1.1	1GB		a21041 (Embest, China)
+		RPi2 - 2 Model B v1.2	1GB		a22042
+		RPi3 - 3 Model B		1GB		a02082 (Sony, UK)
+		RPi3 - 3 Model B		1GB		a22082 (Embest, China)
+		RPi4 - 4 Model B v1.4	8GB		d03114
+
+		RPi0 - Zero W			512MB	0x9000C1
+		RPi0 - Zero v1.2		512MB	900092
+		RPi0 - Zero v1.3		512MB	900093
+	]
+]
+----

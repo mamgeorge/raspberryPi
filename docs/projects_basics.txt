@@ -1,23 +1,38 @@
 \\5Personal\Technology\raspberryPi\docs\projects_basics.txt
 
-	see: "\\5Personal\Technology\raspberryPi\projects_dev.txt"
 	see: "\\5Personal\Technology\raspberryPi\software.txt"
-	see: "\\4Work\current.txt" USB
 
 	initial bash python node motion [ speak camera sensor interface / VAC actuator transport / nlp ]
 
-xtra [
-
-	I2C: https://www.instructables.com/id/Raspberry-Pi-I2C-Python/
-]
-	
 [ x ] robotics [
 
-		RaspberryPi ZeroW SOC / TPLink PowerBank 5 Ah battery pack
-			Python ( Putty SSH shell vs RPi IDLE IDE )
-			NodeJS Server / HTML & CSS webPage
-		L293D Controller DriveShield
-		Tamiya Double Motorized Gearbox
+	Modular SOC
+
+		* TPLink PowerBank 05200 Ah battery pack
+		* RPi0WF 1.1 BCM2835
+		* Python (bash, putty, IDE)
+		* NodeJS (HTML, CSS, javaScript)
+
+		* Camera Module V2.1
+		* USB Wireless Speaker Insiq PN: 4326595940
+		? USB WebCam Nexigo PN: N60
+		? USB microphone mini PN: MI-305
+
+	articulation
+
+		PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+
+		(4) Stepper Motor / 28BYJ-48 5V
+		(4) Driver ULN2003 Driver Board
+		(2) Servo Motor / Hitec 31055S HS-55 Sub Micro Servo Universal Economy
+		(2) Gripper / Actobotics SubMicro Gripper Kit / #637104
+
+	transport
+
+		* TPLink PowerBank 10400 Ah battery pack
+		* Tamiya Double Motorized Gearbox PN: 70168
+		* Tamiya Chassis / Tracked Vehicle Chassis PN: 70108-1500
+		* L293D Controller DriveShield
 ]
 
 [ * ] hardware ( GPIO sound camera ) [
@@ -27,9 +42,10 @@ xtra [
 	[ * ] Sensehat		python python/sens_samples.py
 	[ * ] Pibrella		python pibrella_samples.py
 
-	[ x ] sound record		( webcam logitech c170 mic : using arecord/omxplayer )
-	[ * ] camera video		( using picam with raspivid , omxplayer )
-	[ * ] camera picture	( using picam with raspistill , fbi )
+	[ * ] sound record		( webcam logitech c170 mic : using arecord/omxplayer )
+	[ * ] webcam record		( webcam nexigo N60 mic : using motion )
+	[ * ] camera video		( using picam with raspivid, omxplayer )
+	[ * ] camera picture	( using picam with raspistill, fbi )
 	[ * ] camera picture	( webcam logitech c170 : using fswebcam )
 	[ * ] QEMU emulation	https://www.pcsteps.com/1199-raspberry-pi-emulation-for-windows-qemu/
 ]
@@ -38,14 +54,14 @@ xtra [
 
 	( see: "network_nodejs.txt" )
 
-	[ * ] language ( thru node ) python , java
+	[ * ] language ( thru node ) python, java
 	[ * ] database ( thru node ) SQLite
-	[ * ] server nodejs ( basics , files , static )
+	[ * ] server nodejs ( basics, files, static )
 	[ * ] server nodejs invoke interactive
 	[ * ] language & HATs
 ]
 
-[ * ] networks ( printer , internet , ethernet , VNC ) [
+[ * ] networks ( printer, internet, ethernet, VNC ) [
 
 	[ * ] printer
 		CookBook 2.12
@@ -59,9 +75,9 @@ xtra [
 	[ * ] network_x11
 	[ * ] network_SSH
 		"putty" shell: login: "pi" password: "xxxxxx"
-		use http://192.168.1.1 , admin to get rPi: 192.168.1.22
+		use http://192.168.1.1, admin to get rPi: 192.168.1.22
 
-	[ * ] ethernet connects , remoting ( see: "network.txt" )
+	[ * ] ethernet connects, remoting ( see: "network.txt" )
 		note: sudo cp .Xauthority ~root/	# sudo lxterminal leafpad pcmanfm
 
 	[ * ] internet ( see: "network.txt" )
@@ -96,8 +112,8 @@ xtra [
 
 	see: "C:\Martin\4Work\toolCode\raspberryPi\software.txt"
 	[ * ] bash
-	[ * ] python , IDLE
-	[ * ] browser , ideWeasel
+	[ * ] python, IDLE
+	[ * ] browser, ideWeasel
 	[ * ] sonicPi
 ]
 ----

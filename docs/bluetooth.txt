@@ -1,156 +1,79 @@
 \\5Personal\Technology\raspberryPi\docs\bluetooth.txt
 
-basics [
+----------------
 
-	terminology: bluetooth profiles (services)
+B8:27:EB:D4:F0:6E	rpi0_wh		(default controller)
 
-		A2DP	Advanced Audio Distribution Profile
-		GAP		Generic Access Profile
-		GATT	Generic Attribute Profile
-		HFP		Hands-Free Profile; relies on SCO
-		HSP		Headset Profile; relies on SCO
+12:12:28:6C:78:8C	GH_BT3500	(silver speaker) [
 
-	terminology: bluetooth protocols
-
-		ACL		Asynchronous Connection-Less; Controller stack
-		HCI		Host Controller Interface; Controller stack
-		LMP		Link Management Protocol; Controller stack
-		L2CAP	Logical Link Control and Adaptation Protocol; Host Stack
-		SCO		Synchronous Connection Oriented; Controller stack, voice data link
-		OBEX	OBject EXchange ( aka IrOBEX ); Host Stack
-
-	terminology: general
-
-		BD		Bluetooth Device
-		BLE		Bluetooth Low Energy
-		HCI		Host Controller Interface
-		ISM		Industrial, Scientific, Medical
-		MAC		Media Access Control address ; "xx:xx:xx:xx:xx:xx" for address of remote bluetooth device
-		PAN		Personal Area Networks
-		RSSI	Received Signal Strength Indication [
-					higher RSSI value is stronger
-					number closer to zero is a better signal
-					-50 is a pretty good signal
-					-75 - is fairly reasonable
-					-100 is no signal at all
-		]
-		SIG		Bluetooth Special Interest Group , manages Bluetooth
-
-	With Raspbian Stretch, PulseAudio is not installed by default, they are now using Bluez-alsa.
-
-	rPi wiki shows "sudo nano /boot/cmdline.txt" dwc_otg.speed=1 to slow USB speed
-
-	setting sudo raspi-config > Advanced > Audio > analog
-		and then plugin in to auxilary mode of speakerGH allows simple sound
+	Device 12:12:28:6C:78:8C (public)
+		Name: GH_BT3500
+		Alias: GH_BT3500
+		Class: 0x00240404
+		Icon: audio-card
+		Paired: yes
+		Trusted: yes
+		Blocked: no
+		Connected: yes
+		LegacyPairing: no
+		UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
+		UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
+		UUID: Advanced Audio Distribu.. (0000110d-0000-1000-8000-00805f9b34fb)
+		UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
 ]
 
-RPi0 [
+18:45:C9:1D:0B:ED	ProHT 88133	(black speaker) [
 
-	assumptions
-
-		// initally upgraded, then attached devices in GUI
-
-			2017/03 "SOLVED RPI Zero W and Bluetooth audio" [
-
-				https://www.raspberrypi.org/forums/viewtopic.php?t=177615
-
-				use desktop,
-				r-click on bluetooth icon, choose scan for bluetooth devices
-				r-click on volume and connect
-			]
-
-			2016/04 "Pi3 bluetooth audio stutters with Wifi enabled #1402" [
-
-				https://github.com/raspberrypi/linux/issues/1402
-				https://www.sigmdel.ca/michel/ha/rpi/bluetooth_02_en.html
-
-				seems to suggest using wifi or bluetooth dongle instead
-			]
-
-			2018/02 "How To Connect Bluetooth Headset Or Speaker To Raspberry Pi 3" [
-
-				http://youness.net/raspberry-pi/how-to-connect-bluetooth-headset-or-speaker-to-raspberry-pi-3
-			]
-
-		// installed "espeak"
-
-			$ sudo apt-get install espeak python-espeak -y
-			$ sudo apt-get install -y vlc
-
-		// confirmed attachment in "bluetoothctl"; see: "BT connections" below
-
-			MUST be
-				connected using "sudo bluetoothctl" AFTER EACH REBOOT if in CLI
-					ex: [bluetooth]# connect 68:F7:FA:DF:79:FB
-				reset "sudo alsamixer"
-
-		// updated config file; see: "config files" below
-
-			$ sudo nano ~/.asoundrc
+	[bluetooth]# info 18:45:C9:1D:0B:ED
+	Device 18:45:C9:1D:0B:ED
+		Name: ProHT 88133
+		Alias: ProHT 88133
+		Class: 0x240404
+		Icon: audio-card
+		Paired: yes
+		Trusted: no
+		Blocked: no
+		Connected: no
+		LegacyPairing: no
+		UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
+		UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
+		UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
 ]
 
-device MACs [
+68:F7:FA:DF:79:FB	INSIQBS1	(tiny speaker) [
 
-	B8:27:EB:D4:F0:6E	rpi0_wh		( default controller )
-	12:12:28:6C:78:8C	GH_BT3500	( silver speaker ) [
-		Device 12:12:28:6C:78:8C (public)
-			Name: GH_BT3500
-			Alias: GH_BT3500
-			Class: 0x00240404
-			Icon: audio-card
-			Paired: yes
-			Trusted: yes
-			Blocked: no
-			Connected: yes
-			LegacyPairing: no
-			UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
-			UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
-			UUID: Advanced Audio Distribu.. (0000110d-0000-1000-8000-00805f9b34fb)
-			UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
-	]
-	18:45:C9:1D:0B:ED	ProHT 88133	( black speaker ) [
+	[bluetooth]# info 68:F7:FA:DF:79:FB
+	Device 68:F7:FA:DF:79:FB (public)
+		Name: INSIQBS1
+		Alias: INSIQBS1
+		Class: 0x00302540
+		Icon: input-keyboard
+		Paired: yes
+		Trusted: yes
+		Blocked: no
+		Connected: yes
+		LegacyPairing: no
+		UUID: Serial Port               (00001101-0000-1000-8000-00805f9b34fb)
+		UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
+		UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
+		UUID: Advanced Audio Distribu.. (0000110d-0000-1000-8000-00805f9b34fb)
+		UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
+		UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
+		UUID: Human Interface Device... (00001124-0000-1000-8000-00805f9b34fb)
+		UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
+		Modalias: usb:v04E8p7021d011B
+]
 
-		[bluetooth]# info 18:45:C9:1D:0B:ED
-		Device 18:45:C9:1D:0B:ED
-			Name: ProHT 88133
-			Alias: ProHT 88133
-			Class: 0x240404
-			Icon: audio-card
-			Paired: yes
-			Trusted: no
-			Blocked: no
-			Connected: no
-			LegacyPairing: no
-			UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
-			UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
-			UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
-	]
-	68:F7:FA:DF:79:FB	INSIQBS1	( tiny speaker ) [
+20:20:00:19:60:18	Bluetooth 3.0 Keyboard (using dongle)
 
-		[bluetooth]# info 68:F7:FA:DF:79:FB
-		Device 68:F7:FA:DF:79:FB (public)
-			Name: INSIQBS1
-			Alias: INSIQBS1
-			Class: 0x00302540
-			Icon: input-keyboard
-			Paired: yes
-			Trusted: yes
-			Blocked: no
-			Connected: yes
-			LegacyPairing: no
-			UUID: Serial Port               (00001101-0000-1000-8000-00805f9b34fb)
-			UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
-			UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
-			UUID: Advanced Audio Distribu.. (0000110d-0000-1000-8000-00805f9b34fb)
-			UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
-			UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
-			UUID: Human Interface Device... (00001124-0000-1000-8000-00805f9b34fb)
-			UUID: PnP Information           (00001200-0000-1000-8000-00805f9b34fb)
-			Modalias: usb:v04E8p7021d011B
-	]
-	20:20:00:19:60:18	Bluetooth 3.0 Keyboard (using dongle)
+DC:A6:32:DB:19:F8	epi4 ether
+
+----------------
+
+devices [ unknown InSiq
 
 	MACs unknown [
+
 		0C:02:D8:47:30:BF	(unknown)
 		27:4E:81:46:B4:3E	(unknown)
 		28:D4:21:65:C4:E8	(unknown)
@@ -179,7 +102,85 @@ device MACs [
 	]
 ]
 
-config files [
+terminology [ profiles protocols
+
+	A2DP	BT profiles: Advanced Audio Distribution Profile
+	GAP		BT profiles: Generic Access Profile
+	GATT	BT profiles: Generic Attribute Profile
+	HFP		BT profiles: Hands-Free Profile; relies on SCO
+	HSP		BT profiles: Headset Profile; relies on SCO
+
+	ACL		BT protocols: Asynchronous Connection-Less; Controller stack
+	HCI		BT protocols: Host Controller Interface; Controller stack
+	LMP		BT protocols: Link Management Protocol; Controller stack
+	L2CAP	BT protocols: Logical Link Control and Adaptation Protocol; Host Stack
+	SCO		BT protocols: Synchronous Connection Oriented; Controller stack, voice data link
+	OBEX	BT protocols: OBject EXchange (aka IrOBEX); Host Stack
+
+	BD		Bluetooth Device
+	BLE		Bluetooth Low Energy
+	HCI		Host Controller Interface
+	ISM		Industrial, Scientific, Medical
+	MAC		Media Access Control address; "xx:xx:xx:xx:xx:xx" for address of remote bluetooth device
+	PAN		Personal Area Networks
+	RSSI	Received Signal Strength Indication [
+
+		higher RSSI value is stronger
+		number closer to zero is a better signal
+		-50 is a pretty good signal
+		-75 - is fairly reasonable
+		-100 is no signal at all
+	]
+	SIG		Bluetooth Special Interest Group, manages Bluetooth
+
+	With Raspbian Stretch, PulseAudio is not installed by default, they are now using Bluez-alsa.
+
+	rPi wiki shows "sudo nano /boot/cmdline.txt" dwc_otg.speed=1 to slow USB speed
+
+	setting sudo raspi-config > Advanced > Audio > analog ; then plugin in to auxilary mode of speakerGH, allows simple sound
+]
+
+bluetoothctl [ agent scan connect trust pair info exit
+
+	https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers/
+
+	$ sudo bluetoothctl
+
+	[bluetooth]# power on
+	[bluetooth]# agent on
+	[bluetooth]# pairable on
+	[bluetooth]# scan on
+	[bluetooth]# devices
+
+		Discovery started
+		[CHG] Controller xx:xx:xx:xx:xx:xx Discovering: yes
+		[CHG] Device xx:xx:xx:xx:xx:xx RSSI: -69
+
+	[bluetooth]# connect 12:12:28:6C:78:8C
+	[bluetooth]# pair 12:12:28:6C:78:8C			// GH_BT3500
+	[bluetooth]# trust 12:12:28:6C:78:8C
+	[bluetooth]# info 12:12:28:6C:78:8C
+	[bluetooth]# disconnect 12:12:28:6C:78:8C
+	[bluetooth]# paired-devices
+
+	[bluetooth]# exit
+
+	ERROR [ paired but not connected
+	
+		RESOLUTION: run 
+		
+			pulseaudio -k		// kill an already running PulseAudio daemon of the calling user 
+			pulseaudio --start 
+	]
+
+	$ sudo apt-get install espeak python-espeak
+	$ echo -e 'connect 12:12:28:6C:78:8C \n quit' | sudo bluetoothctl
+	$ espeak "Hi There"
+]
+
+config files [ asoundrc rc alsa
+
+	2018/02/08	https://youness.net/raspberry-pi/how-to-connect-bluetooth-headset-or-speaker-to-raspberry-pi-3
 
 	$ sudo nano ~/.asoundrc
 
@@ -201,64 +202,12 @@ config files [
 		may need some updates
 ]
 
-BT connections [
-
-	info from bluetoothctl [
-
-	// RSSI ( Received Signal Strength Indication )
-
-		[bluetooth]# scan on
-
-			[CHG] Device xx:xx:xx:xx:xx:xx RSSI: -69
-
-	// ManufacturerData Key: Hex Class values can identify company:
-
-		[bluetooth]# info <MAC_ADDRESS>
-
-			Device xx:xx:xx:xx:xx:xx
-			ManufacturerData Key: 0x004c
-			dec: 76 / hex: 0x004C / company: Apple, Inc.
-
-		https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers/
-
-	// ManufacturerData Value:
-
-		[bluetooth]# info <MAC_ADDRESS>
-
-			Device xx:xx:xx:xx:xx:xx
-			ManufacturerData Value: 10 05 11 18 6e 65 cb
-	]
-
-	$ sudo bluetoothctl 	// connect to devices
-
-	[bluetooth]# power on
-	[bluetooth]# agent on
-	[bluetooth]# scan on
-
-	[bluetooth]# scan on // after connecting ProHT_88133
-
-		Discovery started
-		[CHG] Controller xx:xx:xx:xx:xx:xx Discovering: yes
-		[NEW] Device xx:xx:xx:xx:xx:xx ????
-
-	[bluetooth]# info xx:xx:xx:xx:xx:xx		// see above
-	[bluetooth]# pair xx:xx:xx:xx:xx:xx		// Pairing successful
-	[bluetooth]# connect xx:xx:xx:xx:xx:xx	// ProHT_88133 Connection successful
-
-	[bluetooth]# trust xx:xx:xx:xx:xx:xx
-	[bluetooth]# info xx:xx:xx:xx:xx:xx
-	[bluetooth]# paired-devices
-	[bluetooth]# disconnect xx:xx:xx:xx:xx:xx
-
-	[bluetooth]# exit
-]
-
-testing [
+testing [ hcitool hciconfig
 
 	$ sudo hcitool scan						// shows BD address of the pairable devices in range
-	$ sudo hcitool lescan					// shows callsign of active BLE ( low energy ) devices in range
+	$ sudo hcitool lescan					// shows callsign of active BLE (low energy) devices in range
 
-	$ sudo hciconfig						// list Bluetooth Adaptors ( show BD address of pi )
+	$ sudo hciconfig						// list Bluetooth Adaptors (show BD address of pi)
 	$ sudo hciconfig hci0 up				// bring up the interface
 	$ sudo hciconfig hci0 piscan			// make pi discoverable
 
@@ -266,42 +215,23 @@ testing [
 	$ sudo lsusb							// shows usb assignments
 	$ sudo iw wlan0 station dump			// list all connected devices on the interface wlan0
 	$ ip neigh show dev wlan0				// display the Mac addresses and associated IP addresses
-
-	// testing targets ( see: "sound.txt" )
-
-	$ aplay -l								// shows devices
-	$ aplay -D bluealsa Music/ping.wav
-	$ aplay -D bluealsa:HCI=hci0,DEV=xx:xx:xx:xx:xx:xx,PROFILE=a2dp Music/ping.wav
-
-	$ espeak "Greetings"
-	$ espeak "Greetings" -ven-us+m3 -p50 -k5 -s180 -a50 --stdout | aplay -f cd -D bluealsa
-	$ espeak "Hello. My name is Matt!"
-	$ espeak "Hello. My name is Matt!" -stdout | aplay -f cd -D bluealsa
-	$ espeak "Hello. My name is Matt!" -a10 --stdout | aplay -f cd -D bluealsa
-	$ espeak "Hello. My name is Matt!" -ven-us+m3 -p50 -k5 -s180 -a20 --stdout | aplay -f cd -D bluealsa
-	$ espeak -f rom_12.txt
-	$ espeak -f rom_12.txt -ven-us+m5 -p50 -k5 -s180 -a10 --stdout | aplay -f cd -D bluealsa
-
-	$ date 'date: %Y/%m/%d <break strength = "strong" /> time: %I:%M:%S%p' | espeak -m -ven-us+m3 -p50 -k5 -s180 -a50 --stdout | aplay -f cd -D bluealsa
-
-	os.system( "espeak 'Hello {}' --stdout | aplay -f cd -D bluealsa".format( insertVal ) ) 	// python
 ]
 
 ERRORS [
 
-	ERROR [
-		ALSA lib bluealsa-pcm.c:763:(_snd_pcm_bluealsa_open) Couldn't get BlueALSA PCM: PCM not found
+	ERROR [ raspberry pi 4 bluetooth speaker connected, trusted, paired but no sound
+	
+		raspberry pi 4 bluetooth speaker connected, trusted, paired but no sound
+	
+		RESOLUTION
+		
+			https://youness.net/raspberry-pi/how-to-connect-bluetooth-headset-or-speaker-to-raspberry-pi-3
+			sudo apt-get install pulseaudio pulseaudio-module-bluetooth
+			dpkg -l pulseaudio pulseaudio-module-bluetooth
+			or use: sudo dpkg -l | grep -i  xxxx
 
-		RESOLUTION:
-	]
-
-	ERROR [ Unable to install hw params
-
-		$ espeak "Greetings" -ven-us+m3 -p40 -s120 --stdout | aplay -D bluealsa
-		aplay: set_params:1363: Unable to install hw params:
-
-		RESOLUTION:
-		$ espeak "Greetings" -ven-us+m3 -p40 -s120 --stdout | aplay -f cd -D bluealsa
+			rebooted, set bluetoothctl to default-agent
+			note: was already paired
 	]
 ]
 ----

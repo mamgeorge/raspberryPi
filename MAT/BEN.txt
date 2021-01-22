@@ -1,5 +1,7 @@
 C:\Users\mamge\OneDrive\Documents
-\5Personal\Technology\2_BEN\BEN.txt
+\5Personal\Technology\raspberryPi\MAT\BEN.txt
+
+see: "\5Personal\AI\basics.txt"
 
 stage 2 ) building AI ( BEN )
 

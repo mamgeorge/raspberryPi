@@ -4,12 +4,45 @@ init [
 
 	$ sudo raspi-config > Interfacing Options > camera > enable > finish > yes ( reboot )
 
-	$ sudo apt-get install fbi			# camera program
-	$ sudo apt-get install feh			# camera program xming?
-	$ sudo apt-get install fswebcam		# webcam program
-	$ sudo apt-get install omxplayer	# video player
-	$ sudo apt-get install mplayer		# movie player
-	$ sudo apt-get install motion		# motion detector
+	$ sudo apt-get install feh -y [ // feh v3.1.3-1
+
+		FEH: Image viewer
+		https://man.finalrewind.org/1/feh/
+
+		$ feh -g 600x400 --scale-down -d mamgeorge/images/0_MEG.jpg // g: geometrySize, d: drawFilename
+	]
+
+	$ sudo apt-get install fbi -y [ // fbi v2.10-3
+
+		FBI: FrameBuffer Image viewer
+		https://www.raspberrypi-spy.co.uk/2017/02/how-to-display-images-on-raspbian-command-line-with-fbi/
+
+		$ sudo fbi -T 2 -a mamgeorge/images/0_MEG.jpg // a: autoZoom, T terminal
+	]
+
+	$ sudo apt-get install caca-utils -y [ // cacaview v0.99.beta19-2.1
+
+		should read any images
+		https://www.carta.tech/man-pages/man1/cacaview.1.html
+
+		ERROR [ PuTTY X11 proxy: unable to connect
+
+			PuTTY X11 proxy: unable to connect to forwarded X server: Network error: Connection refused
+
+			// $ pip install img2txt -y
+
+				// img2txt requires py3to2
+				// py3to2 requires Python-2.6.1
+
+			RESOLUTION: need to run XMing
+		]
+	]
+
+	$ sudo dpkg -l | grep -i  xxx		// dpkg -l | grep -i "ii  sql"
+	$ sudo apt install fswebcam	-y		// webcam program
+	$ sudo apt-get install omxplayer -y	// video player
+	$ sudo apt-get install mplayer -y	// movie player
+	$ sudo apt-get install motion -y	// motion detector
 ]
 
 camera pix [
@@ -44,24 +77,26 @@ camera pix [
 
 	displaying [
 
+		// feh is an X11 image viewer
+
+			$ sudo apt-get install feh -y
+
+			$ feh -g 600x400 --scale-down -d mamgeorge/images/0_MEG.jpg // g: geometrySize, d: drawFilename
+
 		// fbi needs HDMI video connection, but seems to run without X11
 
 			$ sudo apt-get -y install fbi
-			$ fbi anyPic.jpg
-			$ fbi Pictures/python.png
 
 				to use remote capability , rPi must STILL be attached to monitor
 				use remoting so USB ports & target screen are freed up
 				feh works but fbi and pqiv do not
 
-			$ sudo fbi -T 2 -a anyPic.jpg
-
-				-a autoZoom out
-				-T terminal
+			$ sudo fbi -T 2 -a mamgeorge/images/0_MEG.jpg // a: autoZoom, T terminal
 
 				ERROR during remote:
 					https://raspberrypi.stackexchange.com/questions/8922/how-do-i-display-images-without-starting-x11
-					ioctl VT_GETSTATE: Inappropriate ioctl for device ( not a linux console? )
+					using "Liberation Mono-16", pixelsize=16.67 file=/usr/share/fonts/truetype/liberation2/LiberationMono-Regular.ttf
+					ioctl VT_GETSTATE: Inappropriate ioctl for device (not a linux console?)
 
 					RESOLUTION:
 					only remote shell for commands , monitor MUST remain attached to rPi
@@ -70,18 +105,7 @@ camera pix [
 
 			$ sudo apt-get install caca-utils -y
 
-			$ cacaview anyPic.jpg
-			$ cacaview Pictures/python.png
-
-		// feh is an X11 image viewer
-
-			$ sudo apt-get install feh -y
-			$ feh -g 600x400 --scale-down -d anyPic.jpg
-			$ feh Pictures/python.png
-
-				-g geometrySize
-				-d drawFilename
-				--scale-down
+			$ cacaview mamgeorge/images/0_MEG.jpg
 	]
 ]
 
@@ -106,90 +130,95 @@ camera video [
 
 webcam pix [
 
-	# RECORD
+	https://www.raspberrypi.org/documentation/usage/webcams/
 
-		# usb hub may fail , may need a direct connection to USB
-		# specifying device got errors
-		# overwriting file got errors
+	$ sudo apt install fswebcam	-y		# webcam program
 
-		$ fswebcam img_webCam.jpg
-		$ sudo chmod 777 img_webCam.jpg			# so you can overwrite?
-		$ sudo fswebcam -r 1280x720 img_webCam.jpg
+		$ sudo usermod -a -G video <username> // if not using pi
+
+	$ fswebcam image.jpg
+	$ fswebcam -r 1280x720 image.jpg
+	$ fswebcam -r 1280x720 --no-banner image.jpg
 
 	# DISPLAY
 
 		if remoting , fbi needs output directed to 2nd screen
 		https://www.youtube.com/watch?v=Ug1uE9hEO80
 
-		$ sudo fbi -T 2 -a img_webCam.jpg	# -T terminal
+		$ cacaview image.jpg
+		$ feh -g 600x400 --scale-down -d image.jpg
 
 	# UTIL
 
 		$ sudo chmod 777 /dev/video0
 		$ v4l2-ctl --list-formats-ext
-
 ]
 
 webcam video [
 
-	# MS IE does NOT stream... use chrome , firefox , safari
-	# rPi camera will NOT work with Motion
+	// rPi camera will NOT work with Motion!?
+	// MS IE does NOT stream... use chrome , firefox , safari
 
 	http://www.instructables.com/id/How-to-Make-Raspberry-Pi-Webcam-Server-and-Stream-/
 
-	$ lsusb								# should show camera
+		$ sudo nano /etc/motion/motion.conf
 
-	$ sudo nano /etc/motion/motion.conf
+			daemon					ON			// was off
+			Stream_quality			50			// suggested 100
+			Stream_localhost		OFF			// was on
+			webcontrol_localhost	OFF			// was on
+			quality					75			// recommended 100
+			width					640			// was 320
+			height					480			// was 240
+			post_capture			0			// suggested 5
+		
+			// kept the same
+			framerate				2			// suggested 1000 to 1500
+			rotate					0
+			ffmpeg_video_codec		mkv
+			target_dir				/var/lib/motion
+			movie_filename			%v-%Y%m%d%H%M%S
+			Stream_port				8081
 
-		daemon					ON
-		framerate				between 1000 to 1500
-		Stream_port				8081
-		Stream_quality			100
-		Stream_localhost		OFF
-		webcontrol_localhost	OFF
-		quality					100
-		width					640
-		height					480
-		post_capture			5
+		$ sudo nano /etc/default/motion
 
-	$ sudo nano /etc/default/motion
+			start_motion_daemon	// yes
 
-		start_motion_daemon	// yes
+		$ sudo service motion restart
 
-	$ sudo service motion start
-	$ sudo service motion restart
+		IPv4 Address is: 192.168.1.xx:8081
 
-	IPv4 Address Is: 69.14.189.72
+	// shutdown
+
+		$ sudo nano /etc/default/motion
+
+			start_motion_daemon	// no
+
+		$ sudo service motion stop
+
+	// display
+
+		$ ls /var/lib/motion -plaX
+
+		$ sudo chmod 777 /var/lib/motion/*				/* allow changes */
+
+		$ sudo rm /var/lib/motion/03-20210118131431.mkv
+
+		$ mplayer /var/lib/motion/01-20210118190932.mkv
 ]
 
 extra [
 
 	raspberry pi camera connector broken: molex 54548-2271
-	
+
 	Here it is: https://www.raspberrypi.org/forums/viewtopic.php?f=44&t=151834
 		And here's the part information, not sure who sells it though:
 		Item, Quantity, Reference, Part, Manufacturer, Manuf. Part No, Description,
 		15, 4, J9 J10 J11 J12, 54548-2271, Molex, 54548-2271, 0.5MM FFC 22W RA BC
 		You're looking for a 1mm pitch, 15 pin FFC or Flexible Printed Circuit (FPC) connector.
-		
+
 		GeorgeHousehold
 		https://www.mouser.com/api-orderhistory/
 		API Key: 36e04eef-02f2-49dc-89a1-fd734a65a14c
-
-	// summary
-	$ sudo apt-get install fbi -y 
-	$ sudo apt-get install caca-utils -y
-	$ sudo apt-get install feh
-
-	$ sudo apt-get install --no-install-recommends xserver-xorg
-	$ sudo apt-get install raspberrypi-ui-mods
-	$ sudo apt-get install lightdm
-	$ sudo apt update
-	$ sudo apt upgrade
-	$ sudo reboot
-
-	$ sudo systemctl start lightdm
-
-	$ sudo apt-get install vlc
 ]
 ----
