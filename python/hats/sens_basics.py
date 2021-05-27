@@ -1,4 +1,4 @@
-# sens_basics.py
+()# sens_basics.py
 #
 # sudo apt-get install sense-hat
 # https://trinket.io/sense-hat

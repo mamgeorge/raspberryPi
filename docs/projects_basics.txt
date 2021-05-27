@@ -20,12 +20,23 @@
 
 	articulation
 
-		PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+		MG995/PCA9685
 
-		(4) Stepper Motor / 28BYJ-48 5V
-		(4) Driver ULN2003 Driver Board
-		(2) Servo Motor / Hitec 31055S HS-55 Sub Micro Servo Universal Economy
-		(2) Gripper / Actobotics SubMicro Gripper Kit / #637104
+			https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
+
+			(1) PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+			(4) Servo Motor / MG995, 20 x 38 x 40 mm, 180 deg, Stall Torque: 12kgcm, TianKongRC / B07NQJ1VZ2
+
+		28BYJ48/MCP23017
+
+			(1) port expander MCP23017 or microcontroller ESP32S
+			(4) Stepper Motor / 28BYJ48, Elegoo, 5V
+			(4) Driver ULN2003 Driver Board
+
+		gripper 
+		
+			(2) Servo Motor / Hitec 31055S HS-55 Sub Micro Servo Universal Economy
+			(2) Gripper / Actobotics SubMicro Gripper Kit / #637104
 
 	transport
 
