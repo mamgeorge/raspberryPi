@@ -6,6 +6,17 @@ see: [mamgeorge main altervista website](http://mamgeorge.altervista.org/)
 
 see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
 
+intent:
+
+	* control	: RPI_0w using NodeJs server to access GPIO Python code
+	* travel	: Tamiya Track, Double Gearbox, 2 F130 DC Motors, L293D
+	* movement	: 4 MG995 Servos, 2 subMicro Grippers, 2 HS55 Servos
+	* sensing	: RPI 2.1 Camera, GearHead BT3500SLV Speaker, Microphone, Light
+	* power		: Powered by rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
+	
+	Currently designed to act as programmable sentry.
+	Development below shows most recent first.
+
 ---
 ### robot 3
 
