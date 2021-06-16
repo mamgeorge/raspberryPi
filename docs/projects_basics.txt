@@ -19,14 +19,33 @@ CAD drawings [ components
 	robot_Assembly
 ]
 
-[ x ] robotics [
+robotics [
 
-	robot v3 / Intent is to include functional armature.
+	future possible
 
-	robot v2 / Includes RPI_0w, Track, L293D, Camera, Speaker, Microphone, Grippers, Light
-		Steppers were not a valid configuration due to the pin requirements for the RPI.
+		video feed
+		voice feed & exchange
+		preprogrammed locations
+		location awareness
 
-	robot v1 / Includes RPI_0w, Track using L293D Controllers 
+		voice activation?
+		basic AI commands text interface
+		basic AI definitions
+
+		laser pointer; movable
+		hiBrightness LED lighting
+		access sensors: heat, height, location, speed
+		stealth mode for night vision
+
+		larger size
+		preprogrammed tasks
+		learnable tasks
+
+	robot v3 / Replaced Steppers with Servos & PCA9865 for functional armature.
+
+	[ * ] robot v2 / Includes RPI_0w, Track, L293D, Camera, Speaker, Microphone, Grippers, Light
+
+	[ * ] robot v1 / Includes RPI_0w, Track using L293D Controllers
 
 	Modular SOC
 
@@ -55,8 +74,8 @@ CAD drawings [ components
 			(4) Stepper Motor / 28BYJ48, Elegoo, 5V
 			(4) Driver ULN2003 Driver Board
 
-		gripper 
-		
+		gripper
+
 			(2) Servo Motor / Hitec 31055S HS-55 Sub Micro Servo Universal Economy
 			(2) Gripper / Actobotics SubMicro Gripper Kit / #637104
 
