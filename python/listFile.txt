@@ -1,0 +1,4 @@
+Martin, Programmer, 1964/07/23, robotics
+Mary, Educator, 1964/04/13, genealogy
+Samuel, Councilman, 2002/10/03, writing
+Kenzie, Dog, 2013, sleeping

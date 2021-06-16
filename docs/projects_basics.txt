@@ -4,7 +4,29 @@
 
 	initial bash python node motion [ speak camera sensor interface / VAC actuator transport / nlp ]
 
+CAD drawings [ components
+
+	see: "C:\workspace\images\CAD"
+
+	servo_MG995.stl
+	servo_HS55.stl
+	gripper_micro.stl
+	flange_6mm_id.stl
+	flange_H25T.stl
+	tamiya_gearbox.stl
+
+	r3_Arm.stl
+	robot_Assembly
+]
+
 [ x ] robotics [
+
+	robot v3 / Intent is to include functional armature.
+
+	robot v2 / Includes RPI_0w, Track, L293D, Camera, Speaker, Microphone, Grippers, Light
+		Steppers were not a valid configuration due to the pin requirements for the RPI.
+
+	robot v1 / Includes RPI_0w, Track using L293D Controllers 
 
 	Modular SOC
 

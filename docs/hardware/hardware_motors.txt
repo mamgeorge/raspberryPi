@@ -1,4 +1,4 @@
-\\5Personal\Technology\raspberryPi\hardware\hardware_motors.txt
+\\5Personal\Technology\raspberryPi\docs\hardware\hardware_motors.txt
 
 	note: this document is for transport & articulation hardware only; see "electronics" for principles
 
@@ -6,7 +6,7 @@
 		what driver handles multiple stepper motor
 	google: handling multiple servo motors
 
-chassis [ parts: Chassis Gearbox Motor Plate Transport
+chassis [ parts: chassis, gearbox, motor, plate, transport
 
 	[ * ] (16$) Chassis / Tracked Vehicle Chassis / Tamiya PN: 70108-1500 [
 
@@ -78,46 +78,42 @@ motor analog [ description, items (Tamiya 980112M)
 
 motor stepper [ description, vendors, types, items (Elegoo 28BYJ48)
 
-	description	[
+	description	[ generally square, segmented magnets
 
-		good: cheaper, high holding torque, lower acceleration
+		https://learn.adafruit.com/all-about-stepper-motors
 
-		bad: no reserve power, skipped steps, more noise
+		good: cheaper, high holding torque
+		bad: lower acceleration, no reserve power, skipped steps, more noise
 	]
 
-	vendors [
+	vendors [ Mouser, Pololu ]
 
-		Mouser, Pololu
+	types [ sizes, gearing, shaft, rotor, example
 
-		https://www.pololu.com/category/22/motors-and-gearboxes
-		https://www.pololu.com/category/87/stepper-motors
-		https://www.mouser.com/Electromechanical/Motors-Drives/_/N-u86z
-	]
+		sizes: NEMA
 
-	types [ rotor sizes gearing shaft example
+			https://www.orientalmotor.com/stepper-motors/stepper-motor-frame-sizes.html
+			https://www.pololu.com/category/87/stepper-motors
+			NEMA 8, 11, 14, 17, 23, 24, 34, 42 Frames ...
 
-		https://learn.adafruit.com/all-about-stepper-motors/types-of-steppers
+		gearing
 
-		rotor
+			https://www.pololu.com/category/22/motors-and-gearboxes
+			example: 32:1 gear-train
+
+		shaft
+
+			Round, "D" Shaft, Geared shaft, Lead-Screw
+
+		rotor/motor
+
+			https://www.mouser.com/Electromechanical/Motors-Drives/_/N-u86z
 
 			PM Permanent Magnet, Active rotor
 			VR Variable Reluctance, Reactive rotor
 			HB Hybrid Synchronous, Combination of PM and VR
 
-		sizes
-
-			https://www.applied-motion.com/news/2015/10/what-do-nema-sizes-mean
-			sizes NEMA 8, 11, 14, 17, 23, 24, 34, 42 Frames ...
-
-		gearing
-
-			example: 32:1 gear-train
-
-		shaft style
-
-			Round, "D" Shaft, Geared shaft, Lead-Screw
-
-		example: Stepper Motor 28BYJ-48 [
+		example: Stepper Motor 28BYJ-48 [ https://cookierobotics.com/042/
 
 			http://www.autom.cn/FAQ_view_34.html
 			28BYJ-48-A
@@ -134,19 +130,6 @@ motor stepper [ description, vendors, types, items (Elegoo 28BYJ48)
 		]
 	]
 
-	[ _ ] (03$) stepper motor (e.g. 28BYJ-48) [
-
-		5V DC 4-Phase 5-Wire
-
-		unipolar
-		geared down reduction	1/16
-		holding torque @ 12VDC	250 gram-force*cm / 25 N*mm / 3.5 oz-force*in
-		weight					37 g
-		size					28mm dia x 20mm tall w/o shaft
-		shaft				 	5mm dia x 9mm lng flattened
-		cable					23 cm long
-	]
-
 	[ 5 ] (14$) stepper Unipolar Motor 28BYJ-48 5V + ULN2003 Driver Board [ Elegoo
 
 		vendor: Elegoo
@@ -156,17 +139,23 @@ motor stepper [ description, vendors, types, items (Elegoo 28BYJ48)
 		* Stepper motor with a standard interface, when used directly pluggable.
 		* 5 line 4 phase can be used for ordinary ULN2003 chip driver, connect to the 2 phase, support the development board, with convenient use, direct docking.
 
-		* Rated Voltage				DC5V 4-phase
+			weight:	37 g
+			size:	28mm dia x 20mm tall w/o shaft
+			shaft:	5mm dia x 9mm lng flattened (setscrew type)
+			cable:	23 cm long
+
+		* Rated Voltage				DC 5V 4-phase
 		* Insulation Resistance		>10MΩ (500V)
 		* Dielectric Strength		600V AC / 1mA / 1s
 		* Step angle				5.625 x 1/64
 		* DC Resistance				200Ω±7% (25C)
-		* Reduction ratio			1/64
+		* Reduction ratio			1/64 (other versions: gear down reduction	1/16)
 		* Insulation Grade			A
 		* No-load Pull in Frequency	>600Hz
 		* No-load Pull out Freq.	>1000Hz
 		* Pull in Torque			>34.3mN.m(120Hz)
 		* Detent Torque				>34.3mN.m
+		* holding torque			@ 12V DC, 250 gram-force*cm / 25 N*mm / 3.5 oz-force*in
 		* Temperature Rise			< 40K(120Hz)
 	]
 
@@ -183,51 +172,63 @@ motor stepper [ description, vendors, types, items (Elegoo 28BYJ48)
 
 motor servo [ description, vendors, types, items (Hitec 31055S), programming
 
-	description [
+	description [ generally rectangular, geared encoders
+
+		https://www.watelectrical.com/servo-motor-types-and-working-principle/
+		https://www.servocity.com/glossary/#servo-splines
 
 		good: high speed, high torque, high efficiency, quiet
-
-		bad: but expensive, more complex
+		bad: expensive, more complex
 	]
 
-	vendors [
+	vendors [ ServoCity, Hitech (SouthKorea), Futaba, Savox, goBILDA, TowerPro, TianKongRC, Parallax ]
 
-		ServoCity, Hitech, Futaba, Savox, goBILDA, TowerPro, TianKongRC, Parallax
+	types [ sizes, others, examples
 
-			https://www.servocity.com/servos/				(has list)
+		// rotor sizes gearing shaft example
+
+		sizes: mm
+
+			large, standard, mini, micro
+			generally by mm
+
+		others
+
+			gearing:
+				https://www.servocity.com/glossary/#servo-splines
+				https://www.servocity.com/32p-24-tooth-25t-3f-spline-servo-mount-gears/
+
+			properties: torque, speed, voltage, gearing, shaft
+
+			controller: AC & DC, RC Radio Controlled, Analog Feedback Servos
+
+			function: Positional Rotation Servo, Continuous Rotation Servo, Linear Servo, waterproof
+
+		examples
+
+			https://www.servocity.com/servos/
 			https://www.pololu.com/category/23/rc-servos
 			https://www.mouser.com/Electromechanical/Motors-Drives/_/N-u86z
 
-			https://www.watelectrical.com/servo-motor-types-and-working-principle/
+			Hitec Types:
+				* nano, subMicro, micro, mini
+				* standard
+				* large, largeHV, specialty
 
-		Hitech > South Korea > manufactures transmitters, recievers, servos, electronics
+				HSR-1425CR	Analog	Continuous Rotation	039 4.8V Torque (oz-in), 44 RPM
+				HSR-2645CR	Analog	Continuous Rotation	111 4.8V Torque (oz-in), 46 RPM
+				Hitec 31055S HS-55
+
+			https://servodatabase.com/servos/jr
+
+				JR Servos are supposedly better; much more expensive
 	]
 
-	types [
-
-		AC & DC
-		RC Radio Controlled
-		Analog Feedback Servos
-
-		Positional Rotation Servo
-		Continuous Rotation Servo
-		Linear Servo
-
-		https://www.servocity.com/hitec-servo-chart
-
-		Hitec Types:
-		* nano, subMicro, micro, mini
-		* standard
-		* large, largeHV, specialty
-
-		HSR-1425CR	Analog	Continuous Rotation	039 4.8V Torque (oz-in), 44 RPM
-		HSR-2645CR	Analog	Continuous Rotation	111 4.8V Torque (oz-in), 46 RPM
-		Hitec 31055S HS-55
-	]
-
-	[ 2 ] (13$) Hitec HS-55 SubMicro, Economy / 203 deg  [ PN: 31055S
+	[ 2 ] (13$) Hitec HS-55 SubMicro, Economy / 203 deg		[ PN: 31055S, shaft: 15 tooth spline, aka A15T
 
 		https://www.servocity.com/hitec-hs-55-servo
+
+		shaft: 15 tooth spline, aka A15T
 
 		Voltage Range	4.8V - 6.0V
 		No-Load Speed (4.8V)	0.18 sec/60°
@@ -239,25 +240,34 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 		Wire Gauge	28AWG
 	]
 
-	[ _ ] (21$) HiTec HS-5055MG SubMicro, Digital Metal Geared / 126 deg [ PN: 35055S ]
+	[ _ ] (21$) HiTec HS-5055MG SubMicro, 126 degrees		[ PN: 35055S, shaft: 15 tooth spline, aka A15T
 
-	[ 1 ] (15$) Hitec HS-81 Micro, Clockwise / 165 deg [ PN: 31081S
+		Digital Metal Geared
+		shaft: 15 tooth spline, aka A15T
+	]
+
+	[ 1 ] (15$) Hitec HS-81 Micro, Clockwise / 165 deg		[ PN: 31081S, shaft: C24T spline, aka C1
+
+		shaft: C24T spline, aka C1
 
 		https://www.servocity.com/hs-81
 
-		Voltage Range	4.8V - 6.0V
-		No-Load Speed (4.8V)	0.11sec/60°
-		Stall Torque (4.8V)	36.10 oz/in. (2.6kg.cm)
-		Product Weight	0.58oz (16.6g)
+		Voltage Range			4.8V - 6.0V
+		Pulse Amplitude			3-5V
+		No-Load Speed			(4.8V)	0.11sec/60°
+		Stall Torque			(4.8V)	36.10 oz/in. (2.6kg.cm)
 		Max PWM Signal Range (Standard)	640-2250μsec
 		MaxTravel (out of box)	165°
-		Pulse Amplitude	3-5V
-		Wire Gauge	28AWG
+		Wire Gauge				28AWG
+		Weight					0.58oz (16.6g)
 	]
 
-	[ 2 ] (12$) HiTec HS-311 Standard, Universal / 210 deg [ PN: 31311S
+	[ 2 ] (12$) HiTec HS-311 Standard, Universal / 210 deg	[ PN: 31311S, shaft: C24T spline, aka C1
+
+		shaft: C24T spline, aka C1
 
 		https://www.servocity.com/hs-311-servo
+
 		#####################################
 		## Model: HiTec HS-311 Standard Servo
 		#####################################
@@ -273,15 +283,64 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 		#####################################
 	]
 
-	[ _ ] (10$) HiTec HS-318 Standard, Stock / 210 deg [ PN: 31318 ]
+	[ _ ] (10$) HiTec HS-318 Standard, Stock / 210 deg		[ PN: 31318 , shaft: H25T spline, aka 3F
 
-	[ _ ] (20$) Hitec HSR-1425CR Standard, Continuous / 360 deg [ PN: 31425CR ]
+		shaft: H25T spline, aka 3F
+	]
 
-	[ _ ] (4@15$) TowerPro MG90S Servo / 12 x 23 x 33 mm, 180 deg, Stall Torque: 2kg/cm
+	[ _ ] (20$) Hitec HSR-1425CR Continuous / 360 deg		[ PN: 31425CR, shaft: C24T spline, aka C1 ]
 
-	[ 4 ] (4@19$) TianKongRC MG995 Servo / 20 x 38 x 40 mm, 180 deg, Stall Torque: 12kg/cm / B07NQJ1VZ2
+	[ _ ] (4@15$) TowerPro MG90S Servo / 180 deg			[ shaft: 21?? spline, aka ??
 
-	[ _ ] (4@19$) TianKongRC MG996R Servo / 19 x 40 x 43 mm, 180 deg, Stall Torque: 12kg/cm
+		Weight: 13.4g
+		Dimension: 22.8×12.2×28.5mm
+		Stall torque: 1.8kg/cm (4.8V); 2.2kg/cm (6.6V)
+		Operating speed: 0.10sec/60degree (4.8V); 0.08sec/60degree (6.0V)
+		Operating voltage: 4.8V
+		Temperature range: 0℃_ 55℃
+		Dead band width: 1us
+		Power Supply: Through External Adapter
+		servo wire length: 25 cm
+		Servo Plug: JR (Fits JR and Futaba)
+	]
+
+	[ 4 ] (4@19$) TianKongRC MG995 Servo / 180 deg			[ shaft: H25T spline, aka 3F, B07NQJ1VZ2
+
+		shaft: H25T spline, aka 3F
+		apparently based on TowerPro MG995
+		similar to HiTec 5945 MG?
+
+		Servo Weight:		55g
+		Item Dimension:		40.7*19.7*42.9mm(1.60*0.78*1.69inch)
+		Stall torque:		6V 12kg/cm, 7.2V 13kg/cm
+		Positioning speed:	at 4.8V without load 0.17s / 60 degrees; 6.0V without load 0.13s / 60 degrees
+		Operation Voltage:	3.0V - 7.2V
+		Dead Band Width:	4us
+
+		Gear Type:			All Metal Gears
+		Connector Wire:		11.81 inch (300mm),
+		Plug Specification:	JR FUTABA, Hitec,Sanwa, GWS are universal
+		signal wire/PWM--Yellow; positive Pole(+)--Red; negative Pole/GND(-)—Brown
+	]
+
+	[ _ ] (4@19$) TianKongRC MG996R Servo / 180 deg			[ shaft: H25T spline, aka 3F, B07MFK266B
+
+		upgraded MG995 servo shock-proofing, redesigned PCB, IC control system for accuracy
+
+		MG996R High Speed Torque Digital Servo with Metal Gearing
+
+		Operating Voltage:		4.8 to 7.2V
+		Operating Temp Range:	0? to 55?
+		Operating Speed:		60/0.17 degree/second (No Load @ 4.8V)
+		Operating Speed:		60/0.14 degree/second (No Load @ 6.0V)
+		Stall Torque:			9.4 kg/cm @ 4.8V
+		Stall Torque:			12 kg/cm @ 6V
+		Running Current:		500mA - 900mA @ 6V
+		Stall Current:			2.5A @ 6V
+		Gear Type:				All Metal Gears
+		wire length:			30cm Wire Assembled
+		Weight:			 		55g
+	]
 
 	programming [
 
@@ -333,33 +392,47 @@ controllers [ analog stepper servo microcontroller
 
 	stepper driver [  ULN2003 DRV8825 A4988 TB6560 / L298N Atmega2560 / MCP23017 TB6612
 
+		https://forum.arduino.cc/t/is-it-possible-to-use-i2c-to-control-multiple-a4988-stepper-driver-boards/505675
+			Stepper drivers almost invariably have a step+direction interface, not a bus interface.
+			This is because of the need for accurate timing of all the step pulses.
+			The latency of I2C would be too much.
+			Bear in mind many (microstepping) stepper drivers go upto 100,000 step pulses/second.
+
 		[ 5 ] (08$) ULN2003 Driver Board, 1 channel
 
-		[ x ] (11$) DRV8825 Driver Board, 1 channel / Pololu
+		[ _ ] (11$) DRV8825 Driver Board, 1 channel / Pololu
 
-		[ x ] (09$) A4988 Driver Board, 1 channel / Pololu
+		[ _ ] (09$) A4988 Driver Board, 1 channel / Pololu
 
-		[ x ] (xx$) TB6560 Driver Board / Toshiba
+		[ ? ] (xx$) TB6560 Driver Board, 4 channel / Toshiba
 
 		---------------------------------------
 
-		[ * ] (07$) HBridge L298N Stepper Motor Driver / Qunqi
+		[ * ] (07$) HBridge L298N Stepper Motor Driver / 2 channels / Qunqi
 
 		[ x ] (17$) Atmega2560-16au / 14 channels
 
 		---- i2c -------------------------------
 
+		[ _ ] (xx$) MotorHAT / uses TB6612 / 2 channels / Adafruit
+
+		[ _ ] (23$) TB6612 MOSFET i2c drivers HAT, DC / 2 channels / Adafruit ProductID: 2348
+
+		[ ? ] PCA9629 / 4 channels / NXP
+
+		[ _ ] Big EasyDriver Stepper Motor Driver / ? channels / uses Allegro A4988
+			https://www.raspberrypi.org/forums/viewtopic.php?t=43508
+
 		[ * ] (05$) MCP23017 / Adafruit ProductID: 732
 			upto 16 i2c io port expander, upto 8 MCP23017 on each I2C bus
 			https://www.raspberrypi.org/forums/viewtopic.php?t=22602
-				https://forums.adafruit.com/viewtopic.php?f=22&t=171384
+			https://forums.adafruit.com/viewtopic.php?f=22&t=171384
 
-		[ _ ] (23$) TB6612 MOSFET i2c drivers HAT, DC / Adafruit ProductID: 2348
-			upto 2 stepper motors
-			
-		Sparkfun Big EasyDriver Stepper Motor Driver Allegro A4988 
-		
-		TB6600 Stepper Motor Driver, 4A 9-42V, 28x72x95 or 1.1x2.8x3.7, CNC Controller / Usongshine 
+
+
+		DRV8847S ?
+
+		[ _ ] (xx$) TB6600 Stepper Motor Driver, 4A 9-42V, 28x72x95 or 1.1x2.8x3.7, CNC Controller / Usongshine
 	]
 
 	servo driver [ PivotPi XC4005XL PCA9685
@@ -373,6 +446,12 @@ controllers [ analog stepper servo microcontroller
 
 		[ 2 ] (10$) PCA9685 16 Channel 12-Bit PWM Servo Motor Driver [
 
+			PCA9685 aka PCA-9685
+
+				https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
+				https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
+				The 16-Channel 12-bit PWM/Servo Driver will drive up to 16 servos over I2C with only 2 pins. 
+
 			PCA9685 16-way (channel) steering gear control
 			12-Bit PWM Servo Motor Driver
 			DC5-10V power supply
@@ -380,9 +459,6 @@ controllers [ analog stepper servo microcontroller
 			Communication Interface: i2c
 			Manf: HiLetgo, PN: 3-01-1070-2pcs, 2 pieces / Adafruit PN: 815 (1 @ 15$)
 			ASIN: B07BRS249H
-
-			https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
-			https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
 		]
 	]
 
@@ -404,12 +480,12 @@ controllers [ analog stepper servo microcontroller
 
 grippers [ Actobotics
 
-	[ 1 ] (10$) Gripper / Actobotics Horizontal Standard Gripper Kit A / #637094 / uses HiTec HS-300 Servo Standard
+	[ 1 ] (10$) Gripper / Actobotics Horizontal Standard Gripper Kit A / #637094 / uses HiTec HS-300 servo Standard
 
-	[ 1 ] (10$) Gripper / Actobotics Vertical Standard Gripper Kit B / #637096 / uses HiTec HS-300 Servo Standard
+	[ 1 ] (10$) Gripper / Actobotics Vertical Standard Gripper Kit B / #637096 / uses HiTec HS-300 servo, with C24T or H25T spline
 
-	[ _ ] (15$) Gripper / Actobotics Parallel Gripper Kit A / #637092 / uses HiTec servo with a 24T or 25T spline
+	[ _ ] (15$) Gripper / Actobotics Parallel Gripper Kit A / #637092 / uses HiTec servo, with C24T or H25T spline
 
-	[ 2 ] (07$) Gripper / Actobotics SubMicro Gripper Kit / #637104 /
+	[ 2 ] (07$) Gripper / Actobotics SubMicro Gripper Kit / #637104 / uses HiTec HS-55 or HS-5055MG servo, with A15T spline
 ]
 ----
