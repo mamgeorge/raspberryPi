@@ -9,21 +9,25 @@ see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
 ---
 ### robot 3
 
-* Control is via SmartPhone thru NodeJs Server to activate Python GPIO code.
-* Intent is to include functional armature using I2C on PCA9865.
+* MG995 Servos are intended to control armature via I2C on PCA9865.
+* The PCA9865 will power all Servos from the TL-PB 10400.
 * SketchUp 3D servo & tractor components were publically accessible.
-* Only Flanges & Gripper required drawing. 
+* SketchUp 3D was used to create the Flanges & Grippers required.
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
-* Steppers are compact, but require too many GPIO leads for the RPI 40 pin J8 form factor.
+* Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
 * My research suggests RPI timing is not very reliable for many I2C protocol calls.
+* Both Actobotics "subMicro" Grippers were controlled by HiTec HS55 Servos.
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
 
 ---
 ### robot 2
 
-* Includes RPI_0w, Track, L293D, Camera, Speaker, Microphone, Grippers, Light<br />
-* Bluetooth Speaker used programmed phrases using ESpeak. 
+* Includes RPI_0w, Track, L293D, Grippers, Camera, Speaker, Microphone, Light<br />
+* The F130 DC motor power was changed to a TL-PB 10400 mAh Powerbank.
+* Both Actobotics type "A" Grippers were controlled by HiTec HS311 Servos.
+* The Camera is a RPi v2.1, the Speaker a GearHead BT3500SLV.
+* Bluetooth Speaker used programmed phrases using ESpeak.
 * Everything works, but no armature and limited Gripper functionality.
 <img src="images/robot_2.jpg" alt = "robot_2" width="600">
 
@@ -33,7 +37,10 @@ see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
 ---
 ### robot 1
 
+* Control is via SmartPhone thru NodeJs Server to activate Python GPIO code.
 * Includes RPI_0w, Tamiya Track Gearbox, & L293D Controller.
+* RPI_0w is powered by a TL-PB 5200 mAh Powerbank.
+* F130 DC motors are powered by 4 AA cells.
 <img src="images/robot_1.jpg" alt = "robot_1" width="600">
 
 * Pinout diagram of L293D Controller used for DC Motor PWM control.
