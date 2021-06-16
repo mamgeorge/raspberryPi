@@ -1,12 +1,14 @@
 # raspberryPi
 
-### robotics
+## robotics
 
 see: [mamgeorge main altervista website](http://mamgeorge.altervista.org/)
 
 see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
 
 ---
+### robot 3
+
 * Control is via SmartPhone thru NodeJs Server to activate Python GPIO code.
 * Intent is to include functional armature using I2C on PCA9865.
 * SketchUp 3D servo & tractor components were publically accessible.
@@ -18,6 +20,8 @@ see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
 
 ---
+### robot 2
+
 * Includes RPI_0w, Track, L293D, Camera, Speaker, Microphone, Grippers, Light<br />
 * Bluetooth Speaker used programmed phrases using ESpeak. 
 * Everything works, but no armature and limited Gripper functionality.
@@ -27,6 +31,8 @@ see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
 <img src="images/robot_2_CAD.png" alt = "robot_2_CAD" width="600">
 
 ---
+### robot 1
+
 * Includes RPI_0w, Tamiya Track Gearbox, & L293D Controller.
 <img src="images/robot_1.jpg" alt = "robot_1" width="600">
 
@@ -34,4 +40,6 @@ see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
 <img src="images/l293d.jpg" alt = "L293D_Controller" width="600">
 
 ---
+### xtra
+
 [markdown guide](https://www.markdownguide.org/basic-syntax/)
