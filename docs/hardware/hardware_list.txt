@@ -30,15 +30,73 @@ suppliers (raspberryPi, robotics, tooling) [
 		Vellman 		boxes
 ]
 
-strutural (structures, plastic, metal, connectors) [
+strutural (structures, plastic, flanges) [
 
-	structures: plate, beam, angle, axel, wheel, bushing
+	structures [ screwSet, Schylling, metal
 
-		$12 / 15.00 inch / Aluminum Channel / Actobotics PN: 585458 / (15 inch = 381 mm)
-		$10 / 15.50 inch / 7b Angle Girder, 31 Hole, Zinc / Meccano PN: 7b-ZN-N
-		$05 / 36.00 inch / Westcott Wood Yardstick /
+		// plate, beam, angle, axel
 
-	plastic
+		12$ / 15.00 inch / Aluminum Channel / Actobotics PN: 585458 / (15 inch = 381 mm)
+		10$ / 15.50 inch / 7b Angle Girder, 31 Hole, Zinc / Meccano PN: 7b-ZN-N
+		05$ / 36.00 inch / Westcott Wood Yardstick /
+
+		[ 1 ] (18$) M3 Phillips Machine Screw Set 304SS	[ PN: B07FCN64HV, 810 parts
+
+			M3 Phillips Pan Head Machine Screw Set
+			components: Screws, Bolts, Nuts, Lock, Flat Washers, Storage Box
+			sizes: M3 x 4/6/8/10/12/14/16/18/20 mm Screw
+			material: 304 SS (Stainless Steel)
+			MN: CRH18M3-137-US1, VIGRUE
+		]
+
+		[ * ] (27$) Schylling Steel Construction Kit	[ PN: B06X3ZMZWN, 300 parts
+
+			Schylling Steel Works Mechanical Multi-Model Construction Building Kit
+			includes: beams, plates, angles / nuts, bolts, washers, axels, gears
+			MN: STWMMS, 300 parts
+		]
+
+		[ * ] (25$) Schylling Steel EmpireState Kit		[ PN: B07NW8GNTC, 1000 parts
+
+			Schylling Steel Works Empire State Building Construction Set
+			includes: long beams
+			MN: STWESB, 1000 parts
+		]
+
+		[ * ] (19$) Schylling Steel 4 x 4 Vehicle Kit	[ PN: B01APYA20I, 350 parts
+
+			Schylling Steel Works 4 x 4 Vehicle
+			includes: wheels
+			MN: STW4, 350 parts
+		]
+
+		metal [ (durable, limited, expensive)
+
+			[ _ ] Square Perforated Galvanized Tube
+
+			Grainger, MMC (McMaster_Carr)
+				MSC, Fastenal, Wurth, Octopart, Arrow, DigiKey
+
+				[ ? ] (13$) MMC 1 inch aluminum square tubing with holes
+					Square	1 1/2 x 1 1/2 x 1/8 inch, Anodized Aluminum 8809T7, 2feet:
+					Bolt-Together Framing Component
+
+ 
+				[ 6$ ] GRAINGER APPROVED Grainger Choice Product
+					Square Tube, 6063AL, 7/8 In Inside Sq, 3 ft
+					Item # 6ALR7, Mfr. Model # 6ALR7, Catalog Page # 2183
+					cut with manual miter saw
+
+			Actobotics - ServoCity
+				[ ? ] (05$)	U-Channel (5 Hole, 4.50 inch) SKU: 585444 / Matl: Al, Wt: 1.86 oz (53g), Finish: Clear Anodized
+
+			MakeBlock
+
+			suppliers RobotShop, ServoCity
+		]
+	]
+
+	plastic [ CAD, standardized
 
 		CAD drawings shipped out for 3D printing
 
@@ -48,33 +106,61 @@ strutural (structures, plastic, metal, connectors) [
 			Tamiya Universal Plate
 			Lego Technic
 			Meccano
+	]
 
-	metal (durable, limited, expensive)
+	flanges [ gearing, flanges
 
-		Grainger, McMaster_Carr
-		MSC, Fastenal, Wurth, Octopart, Arrow, DigiKey
+		gearing
 
-			[ ? ] (13$) McMaster_Carr 1 inch aluminum square tubing with holes
-				Square	1 1/2 x 1 1/2 x 1/8 inch, Anodized Aluminum 8809T7, 2feet:
-				Bolt-Together Framing Component
+			see: "https://www.servocity.com/glossary/#servo-splines"
+			Mg995 uses H25T spline (aka 3F), 5.9mm dia
+			servoCity may call flanges "Servo Shaft Hub"
 
-		Actobotics - ServoCity
-			[ ? ] (05$)	U-Channel (5 Hole, 4.50 inch) SKU: 585444 / Matl: Al, Wt: 1.86 oz (53g), Finish: Clear Anodized
+			gage	#screw	mm		inch
+			12g		#2		2mm		5/64"
+			10g		#3		2.4mm	3/32"
+			8g		#4/5	3mm		1/8"
+			6g		#8		4mm		5/32"
+			4g		#11		5mm		3/16"
+			2g		#13		6mm		1/4"
+			1g		#16		7mm		9/32"
+			0g		#20		8mm		5/16"
 
-		MakeBlock
+		[ 5 ] (12$) Stepper Aluminum Flange / 5mm shaft	[ PN: B07PMMPSXW, seller: PATOPS
 
-		suppliers RobotShop, ServoCity
+			22mm base dia, 5mm inner dia, 10mm outer dia x 12mm ht total, 2mm base ht
+			4x hole dia: 2.85mm (#M3, or #4, 7/64 in), 14mm cross centers
+			4x #M3 mini hex wrench, 8 x #M3 set screw
+			high hardness coupling, silver
+		]
 
-	connectors, mechanical [
+		[ 4 ] (07$) Servo Aluminum Flange / 6mm shaft	[ PN: B08334N261, seller: Daier
+		
+			22mm base dia, 6mm inner dia, 10mm outer dia x 12mm ht total, 2mm base ht
+			4x hole dia: 2.85mm (#M3, or #4, 7/64 in), 16mm cross centers
+			4x #M3 mini hex wrench, 8 x #M3 set screw
+			45# steel (Aluminum, Alloy Steel, Copper)		
+		]
 
-		[ 2 ] (12$) Flange Coupling, 4 Pack / 5mm Flange Coupling Connector / seller: PATOPS, PN: AN1013 /
-			Shaft Axis Fittings for DIY RC Model Motors, High Hardness Coupling Connector-Silver /
-			4x M3 Mini Hex Wrench, 8 x M3 Fastening Screw /
-			Inner Dia: 5mm, Cylinder Outer Dia: 10mm, Cylinder Height: 10mm. Base Dia: 22mm, Base Height: 2mm /
-			4x hole Dia: 2.85mm (0.1122 in; #m3; #4 7/64 in)
+		[ 5 ] (08$) Servo Aluminum Flange / 25t gear	[ PN: B00NOGMK3M, seller: Mallofusa
 
-		[ * ] (27$) Schylling Steel Works Mechanical Multi-Model Construction Building Kit, PN: STWMMS, 96519P1 /
-			includes: beams, plates, angles / nuts, bolts, washers, axels, gears
+			20mm base dia, 5.5mm inner dia, 9mm outer dia x 4.5mm ht total?, 1mm base ht?
+			4x hole dia: 2.85mm (#M3, #4, 7/64 in)
+			suitable for Hitec, Parallax, Futaba, etc.
+			gear: H25T spline (aka 3F)
+			for Mg945 Mg995 Mg996
+			CNC Aluminum Alloy, silver
+		]
+
+		[ 5 ] (07$) Servo Aluminum Flange / 25t gear	[ PN: B08597JG9P, seller: ZYAMY
+
+			20mm base dia, 5.5mm inner dia, 9mm outer dia x 4.5mm ht total, 2mm base ht
+			4x hole dia: 2.85mm (#M3, #4, 7/64 in), 14mm cross centers
+			suitable for Hitec, Parallax, Futaba, etc. // BARELY!!!
+			gear: H25T spline (aka 3F)
+			for Mg945 Mg995 Mg996
+			Aluminum Alloy, silver
+		]
 	]
 ]
 
@@ -382,100 +468,142 @@ components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
 
 		see: "hardware_notes.txt"
 
-	[ * ] SenseHat		/ $40 / SenseHat	/ Raspberry Pi	/ 3.9 x 2.9 x 1.2 in / used in space
-	[ * ] piBrella		/ $20 / PiBrella	/ Pimoroni		/ 2.2 x 1.6 x 0.5 in / see: "C:\Martin\4Work\toolCode\raspberryPi\hardware_pibrella.txt"
-	[ * ] piTraffic (2)	/ $07 / PiTraffic	/ LowVoltageLabs/ 2.1 x 0.8 x 0.8 in / Red Yellow Green
+	[ * ] SenseHat		/ 40$ / SenseHat	/ Raspberry Pi	/ 3.9 x 2.9 x 1.2 in / used in space
+	[ * ] piBrella		/ 20$ / PiBrella	/ Pimoroni		/ 2.2 x 1.6 x 0.5 in / see: "C:\Martin\4Work\toolCode\raspberryPi\hardware_pibrella.txt"
+	[ * ] piTraffic (2)	/ 07$ / PiTraffic	/ LowVoltageLabs/ 2.1 x 0.8 x 0.8 in / Red Yellow Green
 ]
 
 capacity (power, memory, books) [
 
 	power supplies (all input: AC 100-240v 50hz-60hz, 200mA ~ 500Ma)
 
-	[ * ] power	rPi		/ $11 / DC 5.0V ~2.5A / USB MicroB	/ QOS			MN: xxxx
-	[ * ] power	rPi		/ $08 / DC 5.0V ~2.5A / USB MicroB	/ CanaKit		MN: DCAR-052A5
-	[ * ] power	rPi		/ $09 / DC 5.0V ~3.5A / USB C		/ CanaKit		MN: DCAR-RSP-3A5C
-	[ * ] power	rPi		/ $08 / DC 5.0V ~2.0A / USB MicroB	/ QVS			MN: ARUSB-2A
-	[ * ] power	USBHub	/ $XX / DC 5.0V ~2.5A / DC connect.	/ GE			MN: PSO526; DC Cylindrical connectors: https://en.wikipedia.org/wiki/Coaxial_power_connector
-	[ * ] power spkrHT	/ $xx / DC 5.0V ~0.7A / USB MicroB	/ ZTE			MN: STC-A22O501700M5-C
-	[ * ] power	Kindle	/ $xx / DC 5.0V ~0.8A / USB MicroB	/ Kyocera		MN: SCP-38ADT
-	[ * ] power	Drill	/ $xx / DC 5.0V ~0.6A / USB MicroB	/ BlackDecker	MN: SSA-5CVI-05
+	[ * ] power	rPi		/ 11$ / DC 5.0V ~2.5A / USB MicroB	/ QOS			MN: xxxx
+	[ * ] power	rPi		/ 08$ / DC 5.0V ~2.5A / USB MicroB	/ CanaKit		MN: DCAR-052A5
+	[ * ] power	rPi		/ 09$ / DC 5.0V ~3.5A / USB C		/ CanaKit		MN: DCAR-RSP-3A5C
+	[ * ] power	rPi		/ 08$ / DC 5.0V ~2.0A / USB MicroB	/ QVS			MN: ARUSB-2A
+	[ * ] power	USBHub	/ XX$ / DC 5.0V ~2.5A / DC connect.	/ GE			MN: PSO526; DC Cylindrical connectors: https://en.wikipedia.org/wiki/Coaxial_power_connector
+	[ * ] power spkrHT	/ xx$ / DC 5.0V ~0.7A / USB MicroB	/ ZTE			MN: STC-A22O501700M5-C
+	[ * ] power	Kindle	/ xx$ / DC 5.0V ~0.8A / USB MicroB	/ Kyocera		MN: SCP-38ADT
+	[ * ] power	Drill	/ xx$ / DC 5.0V ~0.6A / USB MicroB	/ BlackDecker	MN: SSA-5CVI-05
 
-	[ * ] battery		/ $35 / portable smartphone battery / 10400 mAh/ In&Out: 5V ~ 2.5A / TPLink PowerBank model: TL-PB10400/ 8.0 oz, 1.7 x 1.7 x 3.5 in / B00G0AMUE8
-	[ * ] battery		/ $15 / portable smartphone battery / 5200 mAh / In&Out: 5V ~ 2.5A / TPLink PowerBank model: TL-PB5200 / 4.8 oz, 1.0 x 2.1 x 3.6 in / B014ULADTM
-	[ * ] battery		/ $05 / portable smartphone battery / 2600 mAh / In&Out: 5V ~ 0.8A / TPLink PowerBank / 90g, 21 x 22 x 94 mm
-	[ * ] battery		/ $05 / portable smartphone battery / 2600 mAh / In&Out: 5V ~ 0.8A / TPLink PowerBank
-	[ _ ] switch		/ $36 / 5VDC switch for 120VAC / PowerSwitch Tail II
+	[ * ] battery		/ 35$ / portable smartphone battery / 10400 mAh/ In&Out: 5V ~ 2.5A / TPLink PowerBank model: TL-PB10400/ 8.0 oz, 1.7 x 1.7 x 3.5 in / B00G0AMUE8
+	[ * ] battery		/ 15$ / portable smartphone battery / 5200 mAh / In&Out: 5V ~ 2.5A / TPLink PowerBank model: TL-PB5200 / 4.8 oz, 1.0 x 2.1 x 3.6 in / B014ULADTM
+	[ * ] battery		/ 05$ / portable smartphone battery / 2600 mAh / In&Out: 5V ~ 0.8A / TPLink PowerBank / 90g, 21 x 22 x 94 mm
+	[ * ] battery		/ 05$ / portable smartphone battery / 2600 mAh / In&Out: 5V ~ 0.8A / TPLink PowerBank
+	[ _ ] switch		/ 36$ / 5VDC switch for 120VAC / PowerSwitch Tail II
 
 	memory
 
-	[ * ] mem RPi0w 1.1	/ $13 / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB32D
-	[ * ] mem RPi0w 1.1	/ $13 / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB32D
-	[ * ] mem RPi0v 1.3	/ $09 / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
-	[SAG] mem RPi2B+1.2	/ $10 / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
-	[ * ] mem RPi2B 1.1	/ $10 / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
-	[ * ] mem RPi4B		/ $xx / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I 
+	[ * ] mem RPi0w 1.1	/ 13$ / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB32D
+	[ * ] mem RPi0w 1.1	/ 13$ / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB32D
+	[ * ] mem RPi0v 1.3	/ 09$ / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
+	[SAG] mem RPi2B+1.2	/ 10$ / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
+	[ * ] mem RPi2B 1.1	/ 10$ / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
+	[ * ] mem RPi4B		/ xx$ / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I
 
 	book
 
-	[ * ] book			/ $20 / B01FV5OTRI / Raspberry Pi Cookbook	/ 2014 / Simon Monk		/ 414 pp, OReilly
-	[ _ ] book			/ $xx / B00DRC96TE / Raspberry Pi Projects	/ 2013 / Donald Norris	/ for the Evil Genius
-	[ _ ] book			/ $xx / B01H2KNGX8 / Exploring Raspberry Pi	/ 2016 / Derek Molloy	/Interfacing to the Real World with Embedded Linux
-	[ _ ] book			/ $xx / B01740K0F8 / Raspberry Pi Projects	/ 2015 / Mike Cook		/ For Dummies
+	[ * ] book			/ 20$ / B01FV5OTRI / Raspberry Pi Cookbook	/ 2014 / Simon Monk		/ 414 pp, OReilly
+	[ _ ] book			/ xx$ / B00DRC96TE / Raspberry Pi Projects	/ 2013 / Donald Norris	/ for the Evil Genius
+	[ _ ] book			/ xx$ / B01H2KNGX8 / Exploring Raspberry Pi	/ 2016 / Derek Molloy	/Interfacing to the Real World with Embedded Linux
+	[ _ ] book			/ xx$ / B01740K0F8 / Raspberry Pi Projects	/ 2015 / Mike Cook		/ For Dummies
 ]
 
 basics (breadboard, wires, adapters, cable, solder) [
 
-	[ * ] breadboard	/ $10 / GPIO J8 40-pin pinout board & cable
-	[ * ] breadboard	/ $10 / breadboard 14x60
-	[ * ] breadboard	/ $05 / breadboard 14x30 / J*30 breadboard
-	[ 6 ] breadboard	/ $09 / breadboard 10x17 / 170 Tie Points / by: Chanzon, PN: SYB-170
-	[ * ] breakouts		/ $19 / RasPiO Pro breakout
-	[ _ ] breakouts		/ $13 / Pimoroni Explorer pHAT for RPi0 / AdaFruit 3018
-	[ _ ] breakouts		/ $23 / Pimoroni Explorer HAT Pro / AdaFruit 2427
+	[ * ] breadboard	/ 10$ / GPIO J8 40-pin pinout board & cable
+	[ * ] breadboard	/ 10$ / breadboard 14x60
+	[ * ] breadboard	/ 05$ / breadboard 14x30 / J*30 breadboard
+	[ 6 ] breadboard	/ 09$ / breadboard 10x17 / 170 Tie Points / by: Chanzon, PN: SYB-170
+	[ * ] breakouts		/ 19$ / RasPiO Pro breakout
+	[ _ ] breakouts		/ 13$ / Pimoroni Explorer pHAT for RPi0 / AdaFruit 3018
+	[ _ ] breakouts		/ 23$ / Pimoroni Explorer HAT Pro / AdaFruit 2427
 
-	[ * ] header		/ $02 / ID: 2222 / GPIO 2x20 Female Header for Raspberry Pi A+/B+/Pi 2
-	[ * ] header		/ $02 / ID: 2823 / GPIO 2x20 Female Header RightAngle at 0.1 inch
-	[ * ] header		/ $11 / 10 pcs 2 x 40 Pin 2.54mm 2 Row Breakaway Male Pin Header / EK1531 / Gikfun
-	[ * ] header		/ $xx / Solderless Connectors (GPIO Hammer Headers) / RPi M/F Solderless Connectors + Jig / PID: 3413
-	[ * ] wires			/ $16 / 350 pcs pre formed jumper wire kit / Elenco / AWG: 22, dia: 0.644 mm, common for breadboards, turns: 15.5 cm, area: 0.326 mm², resistance: 52.96 Omega/km, max: 7 amps
+	[ * ] header		/ 02$ / ID: 2222 / GPIO 2x20 Female Header for Raspberry Pi A+/B+/Pi 2
+	[ * ] header		/ 02$ / ID: 2823 / GPIO 2x20 Female Header RightAngle at 0.1 inch
+	[ * ] header		/ 11$ / 10 pcs 2 x 40 Pin 2.54mm 2 Row Breakaway Male Pin Header / EK1531 / Gikfun
+	[ * ] header		/ xx$ / Solderless Connectors (GPIO Hammer Headers) / RPi M/F Solderless Connectors + Jig / PID: 3413
+	[ * ] wires			/ 16$ / 350 pcs pre formed jumper wire kit / Elenco / AWG: 22, dia: 0.644 mm, common for breadboards, turns: 15.5 cm, area: 0.326 mm², resistance: 52.96 Omega/km, max: 7 amps
 
-	[ * ] adapter		/ $06 / Generic 1 Pair Right Left Angle Micro USB Male 90 Degree USB Male to Micro Female Plug Adapters
-	[ * ] adapter		/ $06 / Micro-B USB male to USB A female OTG Host Adapter / SIIG CB-US0G11-S1
-	[ * ] adapter		/ $04 / Micro-B USB male to USB A female Adapter / SANOXY 325582 / B0027YYMU6
-	[ * ] adapter		/ $09 / USB-C male to USB 3.0 female Adapter / 2 items / AUKEY CB-A1-2 / B01AUKU1OO
+	[ * ] adapter		/ 06$ / Generic 1 Pair Right Left Angle Micro USB Male 90 Degree USB Male to Micro Female Plug Adapters
+	[ * ] adapter		/ 06$ / Micro-B USB male to USB A female OTG Host Adapter / SIIG CB-US0G11-S1
+	[ * ] adapter		/ 04$ / Micro-B USB male to USB A female Adapter / SANOXY 325582 / B0027YYMU6
+	[ * ] adapter		/ 09$ / USB-C male to USB 3.0 female Adapter / 2 items / AUKEY CB-A1-2 / B01AUKU1OO
 
-	[ * ] cable			/ $03 / ID: 1099 / USB OTG Host Cable - MicroB OTG male to A female (OTG = On the Go)
-	[ * ] cable			/ $07 / ID: 2029 / Assembled Pi Cobbler Plus - Breakout Cable for Pi B+/A+/Pi 2
-	[ * ] cable			/ $10 / ID: 0954 / USB to TTL Serial Cable - Debug / Console Cable for Raspberry Pi
-	[ * ] leads			/ $xx / leads (all male)
-	[ * ] heatSink		/ $xx / heatSink
+	[ * ] cable			/ 03$ / ID: 1099 / USB OTG Host Cable - MicroB OTG male to A female (OTG = On the Go)
+	[ * ] cable			/ 07$ / ID: 2029 / Assembled Pi Cobbler Plus - Breakout Cable for Pi B+/A+/Pi 2
+	[ * ] cable			/ 10$ / ID: 0954 / USB to TTL Serial Cable - Debug / Console Cable for Raspberry Pi
+	[ * ] leads			/ xx$ / leads (all male)
+	[ * ] heatSink		/ xx$ / heatSink
 
-	[ * ] solder kit	/ $20 / solder kit with adjustable heat / 50w, 370F-900F / Velleman PN#: VTSS5U
-	[ * ] solder sponge	/ $07 / solder tip cleaner (brass)
-	[ * ] solder		/ $04 / rosin core solder / Aven PN#: 17551
+	[ * ] solder kit	/ 20$ / solder kit with adjustable heat / 50w, 370F-900F / Velleman PN#: VTSS5U
+	[ * ] solder sponge	/ 07$ / solder tip cleaner (brass)
+	[ * ] solder		/ 04$ / rosin core solder / Aven PN#: 17551
 ]
 
-containers (container, fasteners) [
+containers (container, bumpers, nylon) [
 
-	[ * ] container		/ $02 / Removable Divider Box / 1.25 x 2.75 x 5.5 inches / Quantum Storage PN#: QB200
-	[ * ] container		/ $25 / Flip Top, Clear Box / 4.5 x 6.5 x 7.625 inches / Sterilite PN#: 1803 clear, 1803-8612
-	[ * ] container: 7	/ $04 / storage box, 7 compartment / 1.25 x 3.5 x 5.5 inch / Velleman PN#: OCBR9
+	[ * ] container		/ 25$ / storage box, flip top		/ 4.5 x 6.5 x 7.6 inches	[ PN: B005H3GAM2, 12 parts
 
-	[ * ] bumpers		/ $03 / 12 pcs 1/2 inch Round Clear Self Stick Bumpers / Soft Touch
-	[ * ] fasteners		/ $13 / 280 pcs M2.5 Female-Female Nylon Hex Spacers, Standoffs, Screws, Nuts (Black) / HVAZI
+		clear flip top box
+		12 parts
+		Sterilite PN#: 18038612
+	]
 
-	HVAZI 280 pieces M2.5 Female-Female Nylon Hex Spacer
-	Standoff Screws Nuts Assorted Kit (Black)
+	[ _ ] container		/ 11$ / storage box, movable slots	/ 0.9 x 2.4 x 4.7 inches	[ PN: B00SSLLZES, 4 parts
 
-	01 top Spacer M2.5 - 20 mm 10pcs
-	02 top Spacer M2.5 - 25 mm 10pcs
-	03 top Screws M2.5 x 06 mm 70pcs
-	04 top Screws M2.5 x 12 mm 70pcs
-	05 top NutHex M2.5 - 70 pcs
-	06 btm Spacer M2.5 - 18 mm 10pcs
-	07 btm Spacer M2.5 - 15 mm 10pcs
-	08 btm Spacer M2.5 - 12 mm 10pcs
-	09 btm Spacer M2.5 - 10 mm 10pcs
-	10 btm Spacer M2.5 - 08 mm 10pcs
+		clear plastic tray
+		adjustable dividers: 2x10 2x15 grids
+		dimensions 	4.72 x 2.36 x 0.9 inches
+		4 parts
+	]
+
+	[ * ] container		/ 11$ / storage box, movable slots	/ 0.9 x 2.7 x 5 inches 		[ PN: B07GJ3HKX5, 5 parts
+
+		rectangle plastic storage box
+		movable dividers, 10 grids
+		PandaHall
+		5 parts
+		10 Grids
+		0.8 x 2.6 x 5 inches
+	]
+
+	[ * ] container		/ 02$ / storage box, movable slots	/ 1.25 x 2.75 x 5.5 inches	[ "NA", see: Plano
+
+		Removable Divider Box
+		PN: Quantum QB200
+		dimension 1.25 x 2.75 x 5.5 inches
+	]
+
+	[ * ] container		/ NA$ / storage box, movable slots	/ 1.25 x 3.5 x 5.5 inches	[ "NA", see: Plano
+
+		Plastic Storage Box - 7 Compartments
+		PN: Velleman OCBR9, "Not Avaialble"
+		dimension: 1.25 x 3.5 x 5.5 inches
+	]
+
+	[ * ] bumpers		/ 03$ / 1/2 inch round clear self stick bumpers [ PN: B001WAK6DS, 12 parts
+
+		1/2 inch Round Clear Self Stick Bumpers
+		Waxman 4215395N
+	]
+
+	[ * ] nylon		/ 13$ / black nylon assorted screws kit [ PN: B01N3PX090, 280 parts
+
+		M2.5 Female-Female Black Nylon Hex Spacers, Standoffs, Screws, Nuts
+		manufacturer: HVAZI
+		parts: 280
+
+		01 top Spacer M2.5 - 20 mm 10pcs
+		02 top Spacer M2.5 - 25 mm 10pcs
+		03 top Screws M2.5 x 06 mm 70pcs
+		04 top Screws M2.5 x 12 mm 70pcs
+		05 top NutHex M2.5 - 70 pcs
+		06 btm Spacer M2.5 - 18 mm 10pcs
+		07 btm Spacer M2.5 - 15 mm 10pcs
+		08 btm Spacer M2.5 - 12 mm 10pcs
+		09 btm Spacer M2.5 - 10 mm 10pcs
+		10 btm Spacer M2.5 - 08 mm 10pcs
+	]
 ]
 ----
