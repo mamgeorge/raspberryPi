@@ -20,7 +20,7 @@ CAD drawings [ components
 	robot_Assembly
 ]
 
-robotics [ future, robot_v3, robot_v2, robot_v1  
+robotics [ future, robot_v3, robot_v2, robot_v1
 
 	future possible [ video, AI, sensors, function
 
@@ -43,7 +43,7 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 		access sensors: heat, height, location, speed
 		stealth mode for night vision
 
-		// function 
+		// function
 		larger size
 		preprogrammed tasks
 		learnable tasks
@@ -51,41 +51,55 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 
 	[ _ ] robot_v3 / replaced Steppers with Servos [
 
-		* control	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
-		* servos	(4) Servo Motor, PN: MG995
-		* speaker	USB Wireless Speaker Insiq PN: 4326595940 (upgrades BT3500SLV)
-		* servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
-		* grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
+		* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+		* servos:	(4) Servo Motor, PN: MG995
+		* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940 🟢 (upgrades BT3500SLV)
+		* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🟢 (upgrades HS300)
+		* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (upgrades "A" Grippers)
+
+		x steppers: (4) Stepper Motor 28BYJ48 🔴 (later removed)
+		x control: (4) ULN2003 Driver Board 🔴 (later removed)
+
+		The SketchUp 3D drawing required only new Flange & Gripper drawings.
+		All the other components were accessible online.
+
+		The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
+		Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.
 	]
 
 	[ * ] robot_v2 / added camera, grippers [
 
-		* camera	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
-		* speaker	GearHead Bluetooth Speaker, PN: BT3500SLV
-		* microphn	USB mini microphone, PN: MI-305
-		* battery	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
-		* light		10 mm color LED
-		* grippers	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
-		* servos	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
-		x steppers	(4) Stepper Motor 28BYJ48
-		x control	(4) ULN2003 Driver Board
+		* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
+		* speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
+		* microphone:	USB mini microphone, PN: MI-305
+		* light:	10 mm color LED
+		* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🟢 (upgrades 4 AA batteries)
+		* grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
+		* servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+
+		The Grippers and Speaker worked, but proved to be clunky.
+
+		The LibreCad 2D CAD representation with BOM.
 	]
 
 	[ * ] robot_v1 / travel control via SmartPhone [
 
-		* computer	RPi0WF 1.1 SOC with BCM2835 cpu
-		* control	L293D Controller DriveShield
-		* gearbox	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
-		* chassis	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
-		* battery	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
-		* batteries	(4) AA batteries in case (for motors)
+		* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
+		* control:	L293D Controller DriveShield
+		* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
+		* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
+		* battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
+		* battery:	(4) AA batteries in case (for motors)
+
+		Required using Python PWM coding for the L293D GPIOs thru NodeJS.
 
 		software
-		* os base	Raspbian, Bash, Putty, WinSCP, GitHub...
-		* control	Python & IDLE for DC motor PWM control
-		* server	NodeJS (JavaScript, HTML, CSS) for view
-		* drawing	LibreCad 2D CAD, Sketchup 3D
-		* pinout	L293D Controller pinout diagram
+		* os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
+		* control:	Python & IDLE for DC motor PWM control
+		* server:	NodeJS, Express (JavaScript, HTML, CSS) for view
+		* drawing:	LibreCad 2D CAD, Sketchup 3D
+		
+		L293D Controller pinout diagram.
 	]
 ]
 

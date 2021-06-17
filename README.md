@@ -13,18 +13,18 @@ intent:
 	* added		: 10 mm color LED
 	* power		: Powered by rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
-	Descriptions below show most recent developments first.
+	Descriptions show most recent developments first.
 
 ---
 ### robot 3 / replaced Steppers with Servos
 
-* control	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
-* servos	(4) Servo Motor, PN: MG995
-* speaker	USB Bluetooth Speaker Insiq PN: 4326595940 🟢 (upgrades BT3500SLV) 
-* servos	(2) Hitec subMicro Servo motor, PN: HS55 🟢 (upgrades HS300) 
-* grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (upgrades "A" Grippers) 
+* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+* servos:	(4) Servo Motor, PN: MG995
+* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940 🟢 (upgrades BT3500SLV) 
+* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🟢 (upgrades HS300) 
+* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (upgrades "A" Grippers) 
 
-*The SketchUp 3D drawing below required only new Flange & Gripper drawings. 
+*The SketchUp 3D drawing required only new Flange & Gripper drawings. 
 All the other components were accessible online.*<br />
 <img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600">
 
@@ -51,7 +51,7 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 *The Grippers and Speaker worked, but proved to be clunky.*
 <img src = "images/robot_2.jpg" alt = "robot_2" width = "600">
 
-*LibreCad 2D CAD representation with BOM.*
+*The LibreCad 2D CAD representation with BOM.*
 <img src = "images/robot_2_CAD.png" alt = "robot_2_CAD" width = "600">
 
 ---
