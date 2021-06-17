@@ -19,13 +19,14 @@ intent:
 	Development below shows most recent first.
 
 ---
-### [ ] robot 3 / replaced Steppers with Servos
+### robot 3 / replaced Steppers with Servos
 
 * control	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * servos	(4) Servo Motor, PN: MG995
 * speaker	USB Bluetooth Speaker Insiq PN: 4326595940 (upgrades BT3500SLV)
 * servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
 * grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
+
 	*note: SketchUp 3D had public components, only Flanges & Grippers needed new drawings.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
