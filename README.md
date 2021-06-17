@@ -32,12 +32,11 @@ intent:
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 ---
-** steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
+* steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
 
-** control:	(4) ULN2003 Driver Board (later removed)*
+* control:	(4) ULN2003 Driver Board (later removed)*
 
-	*Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
-	Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
+	*The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor. Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
 
 ---
