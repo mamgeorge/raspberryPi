@@ -20,17 +20,17 @@ intent:
 
 * control	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * servos	(4) Servo Motor, PN: MG995
-* speaker	USB Bluetooth Speaker Insiq PN: 4326595940 <span style = "color: green;"> (upgrades BT3500SLV)</span>
-* servos	(2) Hitec SubMicro Servo motor, PN: HS55 <span style = "color: green;">(upgrades HS300)</span>
-* grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 <span style = "color: green;">(upgrades "A" Grippers)</span>
+* speaker	USB Bluetooth Speaker Insiq PN: 4326595940 🟢 (upgrades BT3500SLV) 
+* servos	(2) Hitec SubMicro Servo motor, PN: HS55 🟢 (upgrades HS300) 
+* grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (upgrades "A" Grippers) 
 
 *The SketchUp 3D drawing below required only new Flange & Gripper drawings. All the other components were accessible online.*<br />
 <img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600">
 
 ---
-* steppers:	(4) Stepper Motor 28BYJ48 <span style = "color: red;">(later removed)</span>
+* steppers:	(4) Stepper Motor 28BYJ48 :stop:(later removed) 
 
-* control:	(4) ULN2003 Driver Board <span style = "color: red;">(later removed)</span>
+* control:	(4) ULN2003 Driver Board :stop:(later removed) 
 
 *The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor. Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
 <img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
