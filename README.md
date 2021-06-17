@@ -24,7 +24,7 @@ intent:
 * servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
 * grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
 
-	*note: The SketchUp 3D drawing below required only new Flange & Gripper drawings. All the other components were publically accessible.*
+*The SketchUp 3D drawing below required only new Flange & Gripper drawings. All the other components were publically accessible.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 ---
@@ -32,7 +32,7 @@ intent:
 
 * control:	(4) ULN2003 Driver Board (later removed)
 
-	*The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor. Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
+*The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor. Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
 
 ---
@@ -61,12 +61,14 @@ intent:
 * chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
 * battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
 * battery:	(4) AA batteries in case (for motors)
+
+*Required using Python PWM coding for the L293D GPIOs thru NodeJS.*
 <img src="images/robot_1.jpg" alt = "robot_1" width="600">
 
 ### software
 * os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
 * control:	Python & IDLE for DC motor PWM control
-* server:	NodeJS (JavaScript, HTML, CSS) for view
+* server:	NodeJS, Express (JavaScript, HTML, CSS) for view
 * drawing:	LibreCad 2D CAD, Sketchup 3D
 
 *pinout:	L293D Controller pinout diagram*
