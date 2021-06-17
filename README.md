@@ -20,20 +20,20 @@ intent:
 
 * control	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * servos	(4) Servo Motor, PN: MG995
-* speaker	USB Bluetooth Speaker Insiq PN: 4326595940 (upgrades BT3500SLV)
-* servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
-* grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
+* speaker	USB Bluetooth Speaker Insiq PN: 4326595940 <span style = "color: green;"> (upgrades BT3500SLV)</span>
+* servos	(2) Hitec SubMicro Servo motor, PN: HS55 <span style = "color: green;">(upgrades HS300)</span>
+* grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 <span style = "color: green;">(upgrades "A" Grippers)</span>
 
 *The SketchUp 3D drawing below required only new Flange & Gripper drawings. All the other components were accessible online.*<br />
-<img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
+<img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600">
 
 ---
-* steppers:	(4) Stepper Motor 28BYJ48 (later removed)
+* steppers:	(4) Stepper Motor 28BYJ48 <span style = "color: red;">(later removed)</span>
 
-* control:	(4) ULN2003 Driver Board (later removed)
+* control:	(4) ULN2003 Driver Board <span style = "color: red;">(later removed)</span>
 
 *The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor. Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
-<img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
+<img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
 
 ---
 ### robot 2 / added camera, grippers
@@ -42,15 +42,15 @@ intent:
 * speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
 * microphone:	USB mini microphone, PN: MI-305
 * light:	10 mm color LED
-* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
+* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 <span style = "color: green;">(upgrades 4 AA batteries)</span>
 * grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
 
 *The Grippers and Speaker worked, but proved to be clunky.*
-<img src="images/robot_2.jpg" alt = "robot_2" width="600">
+<img src = "images/robot_2.jpg" alt = "robot_2" width = "600">
 
 *LibreCad 2D CAD representation with BOM.*
-<img src="images/robot_2_CAD.png" alt = "robot_2_CAD" width="600">
+<img src = "images/robot_2_CAD.png" alt = "robot_2_CAD" width = "600">
 
 ---
 ### robot 1 / travel control via SmartPhone
@@ -63,7 +63,7 @@ intent:
 * battery:	(4) AA batteries in case (for motors)
 
 *Required using Python PWM coding for the L293D GPIOs thru NodeJS.*
-<img src="images/robot_1.jpg" alt = "robot_1" width="600">
+<img src = "images/robot_1.jpg" alt = "robot_1" width = "600">
 
 ### software
 * os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
@@ -72,7 +72,7 @@ intent:
 * drawing:	LibreCad 2D CAD, Sketchup 3D
 
 *L293D Controller pinout diagram.*
-<img src="images/l293d.jpg" alt = "L293D_Controller" width="600">
+<img src = "images/l293d.jpg" alt = "L293D_Controller" width = "600">
 
 ---
 ### xtra
