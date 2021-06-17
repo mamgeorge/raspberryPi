@@ -486,10 +486,18 @@ capacity (power, memory, books) [
 	[ * ] power	Kindle	/ xx$ / DC 5.0V ~0.8A / USB MicroB	/ Kyocera		MN: SCP-38ADT
 	[ * ] power	Drill	/ xx$ / DC 5.0V ~0.6A / USB MicroB	/ BlackDecker	MN: SSA-5CVI-05
 
-	[ * ] battery		/ 35$ / portable smartphone battery / 10400 mAh/ In&Out: 5V ~ 2.5A / TPLink PowerBank model: TL-PB10400/ 8.0 oz, 1.7 x 1.7 x 3.5 in / B00G0AMUE8
-	[ * ] battery		/ 15$ / portable smartphone battery / 5200 mAh / In&Out: 5V ~ 2.5A / TPLink PowerBank model: TL-PB5200 / 4.8 oz, 1.0 x 2.1 x 3.6 in / B014ULADTM
-	[ * ] battery		/ 05$ / portable smartphone battery / 2600 mAh / In&Out: 5V ~ 0.8A / TPLink PowerBank / 90g, 21 x 22 x 94 mm
-	[ * ] battery		/ 05$ / portable smartphone battery / 2600 mAh / In&Out: 5V ~ 0.8A / TPLink PowerBank
+	[ * ] battery		/ 35$ / rechargeable battery / 10400 mAh/ In&Out: 5V ~ 2.5A [ TPLink MN: TL-PB10400
+
+		241g, 44.3 x 44.3 x 88.8 mm / B00G0AMUE8
+	]
+	[ * ] battery		/ 15$ / rechargeable battery / 5200 mAh / In&Out: 5V ~ 2.5A [ TPLink MN: TL-PB5200
+
+		135g, 23 x 53.5 x 92.7 mm / B014ULADTM
+	]
+	[ 2 ] battery		/ 05$ / rechargeable battery / 2600 mAh / In&Out: 5V ~ 0.8A [ TPLink MN: TL-PB2600
+
+		68g, 25.6 x 25.6 x 93.5 mm
+	]						
 	[ _ ] switch		/ 36$ / 5VDC switch for 120VAC / PowerSwitch Tail II
 
 	memory

@@ -64,7 +64,7 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 * battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
 * battery:	(4) AA batteries in case (for motors)
 
-*Required using Python PWM coding for the L293D GPIOs thru NodeJS.*
+*The RPi operates the L293D thru GPIO ports using Python PWM code signaled by a NodeJS server.*
 <img src = "images/robot_1.jpg" alt = "robot_1" width = "600">
 
 ### software
@@ -73,7 +73,7 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 * server:	NodeJS, Express (JavaScript, HTML, CSS) for view
 * drawing:	LibreCad 2D CAD, Sketchup 3D
 
-*L293D Controller pinout diagram.*
+*The L293D Controller pinout diagram.*
 <img src = "images/l293d.jpg" alt = "L293D_Controller" width = "600">
 
 ---
