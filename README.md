@@ -31,6 +31,11 @@ intent:
 	All the other components were publically accessible.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
+---
+*steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
+
+*control:	(4) ULN2003 Driver Board (later removed)*
+
 *Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
 	My research suggests RPI timing is not very reliable for many I2C protocol calls.*
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
@@ -45,11 +50,6 @@ intent:
 * battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
 * grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
-
-	---
-	*steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
-
-	*control:	(4) ULN2003 Driver Board (later removed)*
 <img src="images/robot_2.jpg" alt = "robot_2" width="600">
 
 *LibreCad 2D CAD representation with BOM.*
