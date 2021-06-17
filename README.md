@@ -16,7 +16,7 @@ intent:
 	* power		: Powered by rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
 	Currently designed to act as programmable sentry.
-	Development below shows most recent first.
+	Description below shows most recent developments first.
 
 ---
 ### robot 3 / replaced Steppers with Servos
@@ -27,7 +27,7 @@ intent:
 * servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
 * grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
 
-	*note: SketchUp 3D had public components, only Flanges & Grippers needed new drawings.*
+	*note: SketchUp 3D rrequired only new Flanges & Grippers drawings. All the other components were publically accessible.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 * Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
@@ -39,13 +39,14 @@ intent:
 
 * camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
 * speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
-* microphn:	USB mini microphone, PN: MI-305
+* microphone:	USB mini microphone, PN: MI-305
 * battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
 * light:	10 mm color LED
 * grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
-* steppers:	(4) Stepper Motor 28BYJ48 (later removed)
-* control:	(4) ULN2003 Driver Board (later removed)
+	---
+	*steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
+	*control:	(4) ULN2003 Driver Board (later removed)*
 <img src="images/robot_2.jpg" alt = "robot_2" width="600">
 
 * LibreCad 2D CAD representation with BOM.
@@ -62,6 +63,7 @@ intent:
 * battery:	(4) AA batteries in case (for motors)
 <img src="images/robot_1.jpg" alt = "robot_1" width="600">
 
+### software
 * os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
 * control:	Python & IDLE for DC motor PWM control
 * server:	NodeJS (JavaScript, HTML, CSS) for view
