@@ -2,11 +2,9 @@
 
 ## robotics
 
-see: [mamgeorge main altervista website](http://mamgeorge.altervista.org/)
-
-see: [mamgeorge alternate google site](https://sites.google.com/site/mamgeorge)
-
 intent:
+
+	Currently designed to act as programmable sentry.
 
 	* control	: RPI_0w using NodeJs server to access GPIO Python code
 	* travel	: Tamiya Track, Double Gearbox, 2 F130 DC Motors, L293D
@@ -15,7 +13,6 @@ intent:
 	* added		: 10 mm color LED
 	* power		: Powered by rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
-	Currently designed to act as programmable sentry.
 	Descriptions below show most recent developments first.
 
 ---
@@ -32,9 +29,9 @@ intent:
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 ---
-* steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
+* steppers:	(4) Stepper Motor 28BYJ48 (later removed)
 
-* control:	(4) ULN2003 Driver Board (later removed)*
+* control:	(4) ULN2003 Driver Board (later removed)
 
 	*The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor. Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
