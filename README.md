@@ -16,7 +16,7 @@ intent:
 	* power		: Powered by rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
 	Currently designed to act as programmable sentry.
-	Description below shows most recent developments first.
+	Descriptions below show most recent developments first.
 
 ---
 ### robot 3 / replaced Steppers with Servos
@@ -27,7 +27,8 @@ intent:
 * servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
 * grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
 
-	*note: SketchUp 3D rrequired only new Flanges & Grippers drawings. All the other components were publically accessible.*
+	*note: The SketchUp 3D drawing below required only new Flanges & Grippers drawings. 
+		All the other components were publically accessible.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 * Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
@@ -44,8 +45,10 @@ intent:
 * light:	10 mm color LED
 * grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+
 	---
 	*steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
+	
 	*control:	(4) ULN2003 Driver Board (later removed)*
 <img src="images/robot_2.jpg" alt = "robot_2" width="600">
 
