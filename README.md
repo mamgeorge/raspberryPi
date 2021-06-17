@@ -27,17 +27,17 @@ intent:
 * servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
 * grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
 
-*note: The SketchUp 3D drawing below required only new Flanges & Grippers drawings.
+*note: The SketchUp 3D drawing below required only new Flange & Gripper drawings.
 	All the other components were publically accessible.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 ---
-*steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
+** steppers:	(4) Stepper Motor 28BYJ48 (later removed)*
 
-*control:	(4) ULN2003 Driver Board (later removed)*
+** control:	(4) ULN2003 Driver Board (later removed)*
 
-*Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
-	My research suggests RPI timing is not very reliable for many I2C protocol calls.*
+	*Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
+	Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
 
 ---
