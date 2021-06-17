@@ -31,8 +31,9 @@ intent:
 		All the other components were publically accessible.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
-* Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
-* My research suggests RPI timing is not very reliable for many I2C protocol calls.
+	*Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.*
+	
+	*My research suggests RPI timing is not very reliable for many I2C protocol calls.*
 <img src="images/robot_3_steppers.jpg" alt = "robot_3_steppers" width="600">
 
 ---
@@ -41,8 +42,8 @@ intent:
 * camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
 * speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
 * microphone:	USB mini microphone, PN: MI-305
-* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
 * light:	10 mm color LED
+* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
 * grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
 
