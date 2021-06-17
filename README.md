@@ -24,7 +24,7 @@ intent:
 * servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
 * grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
 
-*The SketchUp 3D drawing below required only new Flange & Gripper drawings. All the other components were publically accessible.*
+*The SketchUp 3D drawing below required only new Flange & Gripper drawings. All the other components were accessible online.*<br />
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 ---
@@ -71,7 +71,7 @@ intent:
 * server:	NodeJS, Express (JavaScript, HTML, CSS) for view
 * drawing:	LibreCad 2D CAD, Sketchup 3D
 
-*pinout:	L293D Controller pinout diagram*
+*L293D Controller pinout diagram.*
 <img src="images/l293d.jpg" alt = "L293D_Controller" width="600">
 
 ---
