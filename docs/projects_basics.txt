@@ -1,5 +1,6 @@
 \\5Personal\Technology\raspberryPi\docs\projects_basics.txt
 
+	see: "\\5Personal\Technology\raspberryPi\README.md"
 	see: "\\5Personal\Technology\raspberryPi\software.txt"
 
 	initial bash python node motion [ speak camera sensor interface / VAC actuator transport / nlp ]
@@ -19,72 +20,73 @@ CAD drawings [ components
 	robot_Assembly
 ]
 
-robotics [
+robotics [ future, robot_v3, robot_v2, robot_v1  
 
-	future possible
+	future possible [ video, AI, sensors, function
 
+		// basics video
 		video feed
 		voice feed & exchange
 		preprogrammed locations
 		location awareness
 
-		voice activation?
+		// AI commands
+		?voice activation
 		basic AI commands text interface
 		basic AI definitions
 
+		// sensors
+		?USB WebCam Nexigo PN: N60
+		?port expander MCP23017 or microcontroller ESP32S
 		laser pointer; movable
 		hiBrightness LED lighting
 		access sensors: heat, height, location, speed
 		stealth mode for night vision
 
+		// function 
 		larger size
 		preprogrammed tasks
 		learnable tasks
+	]
 
-	robot v3 / Replaced Steppers with Servos & PCA9865 for functional armature.
+	[ _ ] robot_v3 / replaced Steppers with Servos [
 
-	[ * ] robot v2 / Includes RPI_0w, Track, L293D, Camera, Speaker, Microphone, Grippers, Light
+		* control	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+		* servos	(4) Servo Motor, PN: MG995
+		* speaker	USB Wireless Speaker Insiq PN: 4326595940 (upgrades BT3500SLV)
+		* servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
+		* grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
+	]
 
-	[ * ] robot v1 / Includes RPI_0w, Track using L293D Controllers
+	[ * ] robot_v2 / added camera, grippers [
 
-	Modular SOC
+		* camera	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
+		* speaker	GearHead Bluetooth Speaker, PN: BT3500SLV
+		* microphn	USB mini microphone, PN: MI-305
+		* battery	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
+		* light		10 mm color LED
+		* grippers	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
+		* servos	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+		x steppers	(4) Stepper Motor 28BYJ48
+		x control	(4) ULN2003 Driver Board
+	]
 
-		* TPLink PowerBank 05200 Ah battery pack
-		* RPi0WF 1.1 BCM2835
-		* Python (bash, putty, IDE)
-		* NodeJS (HTML, CSS, javaScript)
+	[ * ] robot_v1 / travel control via SmartPhone [
 
-		* Camera Module V2.1
-		* USB Wireless Speaker Insiq PN: 4326595940
-		? USB WebCam Nexigo PN: N60
-		? USB microphone mini PN: MI-305
+		* computer	RPi0WF 1.1 SOC with BCM2835 cpu
+		* control	L293D Controller DriveShield
+		* gearbox	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
+		* chassis	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
+		* battery	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
+		* batteries	(4) AA batteries in case (for motors)
 
-	articulation
-
-		MG995/PCA9685
-
-			https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
-
-			(1) PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
-			(4) Servo Motor / MG995, 20 x 38 x 40 mm, 180 deg, Stall Torque: 12kgcm, TianKongRC / B07NQJ1VZ2
-
-		28BYJ48/MCP23017
-
-			(1) port expander MCP23017 or microcontroller ESP32S
-			(4) Stepper Motor / 28BYJ48, Elegoo, 5V
-			(4) Driver ULN2003 Driver Board
-
-		gripper
-
-			(2) Servo Motor / Hitec 31055S HS-55 Sub Micro Servo Universal Economy
-			(2) Gripper / Actobotics SubMicro Gripper Kit / #637104
-
-	transport
-
-		* TPLink PowerBank 10400 Ah battery pack
-		* Tamiya Double Motorized Gearbox PN: 70168
-		* Tamiya Chassis / Tracked Vehicle Chassis PN: 70108-1500
-		* L293D Controller DriveShield
+		software
+		* os base	Raspbian, Bash, Putty, WinSCP, GitHub...
+		* control	Python & IDLE for DC motor PWM control
+		* server	NodeJS (JavaScript, HTML, CSS) for view
+		* drawing	LibreCad 2D CAD, Sketchup 3D
+		* pinout	L293D Controller pinout diagram
+	]
 ]
 
 [ * ] hardware ( GPIO sound camera ) [
