@@ -24,8 +24,7 @@ intent:
 * servos	(2) Hitec SubMicro Servo motor, PN: HS55 (upgrades HS300)
 * grippers	(2) Actobotics subMicro Gripper Kit, PN: 637104 (upgrades "A" Grippers)
 
-*note: The SketchUp 3D drawing below required only new Flange & Gripper drawings.
-	All the other components were publically accessible.*
+	*note: The SketchUp 3D drawing below required only new Flange & Gripper drawings. All the other components were publically accessible.*
 <img src="images/robot_3_ISO.jpg" alt = "robot_3_ISO" width="600">
 
 ---
@@ -46,6 +45,8 @@ intent:
 * battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
 * grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+
+*The Grippers and Speaker worked, but proved to be clunky.*
 <img src="images/robot_2.jpg" alt = "robot_2" width="600">
 
 *LibreCad 2D CAD representation with BOM.*
@@ -67,7 +68,8 @@ intent:
 * control:	Python & IDLE for DC motor PWM control
 * server:	NodeJS (JavaScript, HTML, CSS) for view
 * drawing:	LibreCad 2D CAD, Sketchup 3D
-* pinout:	L293D Controller pinout diagram
+
+*pinout:	L293D Controller pinout diagram*
 <img src="images/l293d.jpg" alt = "L293D_Controller" width="600">
 
 ---
