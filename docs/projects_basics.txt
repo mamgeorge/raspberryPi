@@ -49,13 +49,38 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 		learnable tasks
 	]
 
-	[ _ ] robot_v3 / replaced Steppers with Servos [
+	BOM for Robot Assembly v3 (Modular Articulated Transport) [
 
 		* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 		* servos:	(4) Servo Motor, PN: MG995
-		* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940 🟢 (upgrades BT3500SLV)
-		* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🟢 (upgrades HS300)
-		* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (upgrades "A" Grippers)
+		* speaker:	Bluetooth Speaker Insiq PN: 4326595940 🟢 (was BT3500SLV)
+		* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🟢 (was HS300)
+		* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (was "A" Grippers)
+
+		* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
+		* speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
+		* microphone:	USB mini microphone, PN: MI-305
+		* light:	10 mm color LED
+		* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🟢 (was AA batteries)
+		* grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
+		* servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+
+		* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
+		* control:	L293D Controller DriveShield
+		* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 & (2) F130 DC Motors
+		* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
+		* battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
+		* battery:	(4) AA batteries in case (for motors)
+
+		Software using Python PWM coding for the L293D GPIOs thru NodeJS.
+
+		* os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
+		* control:	Python & IDLE for DC motor PWM control
+		* server:	NodeJS, Express (JavaScript, HTML, CSS) for view
+		* drawing:	LibreCad 2D CAD, Sketchup 3D
+	]
+
+	[ _ ] robot_v3 / replaced Steppers with Servos [
 
 		x steppers: (4) Stepper Motor 28BYJ48 🔴 (later removed)
 		x control: (4) ULN2003 Driver Board 🔴 (later removed)
@@ -69,14 +94,6 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 
 	[ * ] robot_v2 / added camera, grippers [
 
-		* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
-		* speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
-		* microphone:	USB mini microphone, PN: MI-305
-		* light:	10 mm color LED
-		* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🟢 (upgrades 4 AA batteries)
-		* grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
-		* servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
-
 		The Grippers and Speaker worked, but proved to be clunky.
 
 		The LibreCad 2D CAD representation with BOM.
@@ -84,21 +101,8 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 
 	[ * ] robot_v1 / travel control via SmartPhone [
 
-		* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
-		* control:	L293D Controller DriveShield
-		* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
-		* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
-		* battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
-		* battery:	(4) AA batteries in case (for motors)
+		Software using Python PWM coding for the L293D GPIOs thru NodeJS.
 
-		Required using Python PWM coding for the L293D GPIOs thru NodeJS.
-
-		software
-		* os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
-		* control:	Python & IDLE for DC motor PWM control
-		* server:	NodeJS, Express (JavaScript, HTML, CSS) for view
-		* drawing:	LibreCad 2D CAD, Sketchup 3D
-		
 		L293D Controller pinout diagram.
 	]
 ]
