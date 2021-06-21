@@ -1,5 +1,5 @@
 # raspberryPi 
-<img src = "images/raspberrypi.png" alt = "raspberrypi" width = "100"><img src = "images/robot.png" alt = "robot" width = "100"> 
+<img src = "images/raspberrypi.png" alt = "raspberrypi" width = "100">+<img src = "images/robot.png" alt = "robot" width = "100"> 
 
 ## robotics
 
