@@ -1,19 +1,27 @@
-# raspberryPi
+# raspberryPi <img src = "images/robot.png" alt = "robot" width = "50">
 
 ## robotics
 
 intent:
 
 	Currently designed to act as programmable sentry.
-
+	
 	* control	: RPI_0w using NodeJs server to access GPIO Python code
-	* travel	: Tamiya Track, Double Gearbox, 2 F130 DC Motors, L293D
-	* movement	: 4 MG995 Servos, 2 subMicro Grippers, 2 HS55 Servos
+	* movement	: 4 MG995 Servos, 2 subMicro Grippers & HS55 Servos, PCA9685 I2C Controller
 	* sensing	: RPI 2.1 Camera, Insiq Bluetooth Speaker, Microphone MI-305
-	* added		: 10 mm color LED
-	* power		: Powered by rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
+	* travel	: Tamiya Track, Double Gearbox, 2 F130 DC Motors, L293D
+	* added		: 10 mm color LED, USB mini microphone
+	* power		: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
-	Descriptions show most recent developments first.
+	Explores various bare metal programming technologies.
+	
+		Future development plans include:
+		* completion of the I2C servo operation
+		* VAC (Voice Activated Commands) for more autonomous response
+		* simple AI NLP for generalized communication
+		* ESA AstroPi SenseHat for environment detection
+
+	The descriptions below show the most recent developments first.
 
 ---
 ### robot 3 / replaced Steppers with Servos
