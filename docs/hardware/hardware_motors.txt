@@ -480,7 +480,7 @@ controllers [ analog stepper servo microcontroller
 
 grippers [ Actobotics
 
-	[ 1 ] (10$) Gripper / Actobotics Horizontal Standard Gripper Kit A / #637094 / uses HiTec HS-300 servo Standard
+	[ 2 ] (10$) Gripper / Actobotics Horizontal Standard Gripper Kit A / #637094 / uses HiTec HS-300 servo Standard, with C24T or H25T spline
 
 	[ 1 ] (10$) Gripper / Actobotics Vertical Standard Gripper Kit B / #637096 / uses HiTec HS-300 servo, with C24T or H25T spline
 
