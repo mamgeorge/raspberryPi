@@ -1,4 +1,5 @@
-<img src = "images/robot.png" alt = "robot" width = "100"> # raspberryPi 
+# raspberryPi 
+<img src = "images/robot.png" alt = "robot" width = "100"> 
 
 ## robotics
 
@@ -10,8 +11,8 @@ intent:
 	🔹 movement	: 4 MG995 Servos, 2 subMicro Grippers & HS55 Servos, PCA9685 I2C Controller
 	🔹 sensing	: RPI 2.1 Camera, Insiq Bluetooth Speaker, Microphone MI-305
 	🔹 travel	: Tamiya Track, Double Gearbox, 2 F130 DC Motors, L293D
-	🔹 added		: 10 mm color LED, USB mini microphone
-	🔹 power		: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
+	🔹 added	: 10 mm color LED, USB mini microphone
+	🔹 power	: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
 	Explores various bare metal programming technologies.
 	
@@ -28,18 +29,18 @@ intent:
 
 * control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * servos:	(4) Servo Motor, PN: MG995
-* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940 🟢 (upgrades BT3500SLV)
-* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🟢 (upgrades HS300)
-* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (upgrades "A" Grippers)
+* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940		🔹 (upgrades BT3500SLV)
+* servos:	(2) Hitec subMicro Servo motor, PN: HS55		🔹 (upgrades HS300)
+* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104	🔹 (upgrades "A" Grippers)
 
 *The SketchUp 3D drawing required only new Flange & Gripper drawings.
 All the other components were accessible online.*<br />
 <img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600">
 
 ---
-* steppers:	(4) Stepper Motor 28BYJ48 🔴 (later removed)
+* steppers:	(4) Stepper Motor 28BYJ48	🔸 (later removed)
 
-* control:	(4) ULN2003 Driver Board 🔴 (later removed)
+* control:	(4) ULN2003 Driver Board	🔸 (later removed)
 
 *The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
 Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*<br />
@@ -52,7 +53,7 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 * speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
 * microphone:	USB mini microphone, PN: MI-305
 * light:	10 mm color LED
-* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🟢 (upgrades 4 AA batteries)
+* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🔹 (upgrades 4 AA batteries)
 * grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
 
