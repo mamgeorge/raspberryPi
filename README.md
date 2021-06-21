@@ -14,13 +14,12 @@ intent:
 	🔹 added	: 10 mm color LED, USB mini microphone
 	🔹 power	: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
-	Explores various bare metal programming technologies.
+	Explores various bare metal programming technologies. Future plans include:
 	
-		Future development plans include:
-		* completion of the I2C servo operation
-		* VAC (Voice Activated Commands) for more autonomous response
-		* simple AI NLP for generalized communication
-		* ESA AstroPi SenseHat for environment detection
+	▶️ completion of the I2C servo operation
+	▶️ VAC (Voice Activated Commands) for more autonomous response
+	▶️ simple AI NLP for generalized communication
+	▶️ ESA AstroPi SenseHat for environment detection
 
 	The descriptions below show the most recent developments first.
 
