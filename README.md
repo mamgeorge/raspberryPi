@@ -79,11 +79,11 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 ---
 ### xtra
 
-	[github image viewer](https://htmlpreview.github.io/)<br />
-	[stackoverflow github html discussion](https://stackoverflow.com/questions/8446218/how-to-see-an-html-page-on-github-as-a-normal-rendered-html-page-to-see-preview)
+[github image viewer](https://htmlpreview.github.io/)<br />
+[stackoverflow github html discussion](https://stackoverflow.com/questions/8446218/how-to-see-an-html-page-on-github-as-a-normal-rendered-html-page-to-see-preview)
 
-	[HTML5 text folding](https://www.w3schools.com/tags/tag_summary.asp)<br />
-	[CSS&JS folding](https://levelup.gitconnected.com/collapsible-sections-with-or-without-javascript-3fd871955a9d)
+[HTML5 text folding](https://www.w3schools.com/tags/tag_summary.asp)<br />
+[CSS&JS folding](https://levelup.gitconnected.com/collapsible-sections-with-or-without-javascript-3fd871955a9d)
 
-	[markdown guide](https://www.markdownguide.org/basic-syntax/) <br />
-	[collapsible markdown](https://gist.github.com/joyrexus/16041f2426450e73f5df9391f7f7ae5f)
+[markdown guide](https://www.markdownguide.org/basic-syntax/) <br />
+[collapsible markdown](https://gist.github.com/joyrexus/16041f2426450e73f5df9391f7f7ae5f)
