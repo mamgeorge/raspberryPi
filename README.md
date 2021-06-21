@@ -6,12 +6,12 @@ intent:
 
 	Currently designed to act as programmable sentry.
 	
-	<img src = "images/raspberrypi.png"	alt = "raspberrypi" width = "40"> control	: RPI_0w using NodeJs server to access GPIO Python code
-	<img src = "images/raspberrypi.png"	alt = "raspberrypi" width = "40"> movement	: 4 MG995 Servos, 2 subMicro Grippers & HS55 Servos, PCA9685 I2C Controller
-	<img src = "images/raspberrypi.png"	alt = "raspberrypi" width = "40"> sensing	: RPI 2.1 Camera, Insiq Bluetooth Speaker, Microphone MI-305
-	<img src = "images/raspberrypi.png"	alt = "raspberrypi" width = "40"> travel	: Tamiya Track, Double Gearbox, 2 F130 DC Motors, L293D
-	<img src = "images/raspberrypi.png"	alt = "raspberrypi" width = "40"> added		: 10 mm color LED, USB mini microphone
-	<img src = "images/raspberrypi.png"	alt = "raspberrypi" width = "40"> power		: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
+	🔹 control	: RPI_0w using NodeJs server to access GPIO Python code
+	🔹 movement	: 4 MG995 Servos, 2 subMicro Grippers & HS55 Servos, PCA9685 I2C Controller
+	🔹 sensing	: RPI 2.1 Camera, Insiq Bluetooth Speaker, Microphone MI-305
+	🔹 travel	: Tamiya Track, Double Gearbox, 2 F130 DC Motors, L293D
+	🔹 added		: 10 mm color LED, USB mini microphone
+	🔹 power		: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
 	Explores various bare metal programming technologies.
 	
@@ -76,10 +76,10 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 <img src = "images/robot_1.jpg" alt = "robot_1" width = "600">
 
 ### software
-<img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "40"> os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
-<img src = "images/python.png"		alt = "python"		width = "40"> control:	Python & IDLE for DC motor PWM control
-<img src = "images/node.png"		alt = "node"		width = "40"> server:	NodeJS, Express (JavaScript, HTML, CSS) for view
-<img src = "images/sketchup.png"	alt = "sketchup"	width = "40"> drawing:	LibreCad 2D CAD, Sketchup 3D
+<img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "25"> os base:	Raspbian, Bash, Putty, WinSCP, GitHub...<br />
+<img src = "images/python.png"		alt = "python"		width = "25"> control:	Python & IDLE for DC motor PWM control<br />
+<img src = "images/node.png"		alt = "node"		width = "25"> server:	NodeJS, Express (JavaScript, HTML, CSS) for view<br />
+<img src = "images/sketchup.png"	alt = "sketchup"	width = "25"> drawing:	LibreCad 2D CAD, Sketchup 3D
 
 *The L293D Controller pinout diagram.*
 <img src = "images/l293d.jpg" alt = "L293D_Controller" width = "600">
