@@ -32,7 +32,7 @@
 	The descriptions below show the most recent developments first.
 
 ---
-### robot 3 / replaced Steppers with Servos
+### robot 3 / added Servo armature
 
 * servos:	(4) Servo Motor, PN: MG995
 * control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
@@ -42,14 +42,14 @@
 * steppers:	(4) Stepper Motor 28BYJ48	🔸 (later removed)
 * control:	(4) ULN2003 Driver Board	🔸 (later removed)
 
-*The SketchUp 3D drawing required only new Flange & Gripper drawings.
+*The SketchUp 3D drawing required only new Flange & Gripper drawings.<br />
 All the other components were accessible online.*<br />
 <img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600">
 
-*Originally, the Steppers were compact and complimented the size of the device.
-However, they were not scalable; there were too many GPIO leads needed.
-Also, some websites suggested RPI timing is not reliable enough for I2C protocol calls.
-A RPI 40 pin J8 form factor requires a different solution.*<br />
+*Originally, the Steppers were used because they had an optimal fit & flexibility.<br />
+However, they were not scalable; there were too many GPIO leads needed.<br />
+A RPI 40 pin J8 form factor required a different addressing solution.*<br />
+Note that some websites suggest RPI timing is not reliable enough many protocol calls.<br />
 <img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
 
 ---
