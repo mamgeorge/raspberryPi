@@ -452,6 +452,9 @@ controllers [ analog stepper servo microcontroller
 				https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
 				The 16-Channel 12-bit PWM/Servo Driver will drive up to 16 servos over I2C with only 2 pins. 
 
+				made by NXP SemiConductors
+				PCA (Printed Circuit Assembly)
+
 			PCA9685 16-way (channel) steering gear control
 			12-Bit PWM Servo Motor Driver
 			DC5-10V power supply

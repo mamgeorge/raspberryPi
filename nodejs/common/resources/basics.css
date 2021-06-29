@@ -1,0 +1,51 @@
+/* styleAny.css | c2008 Martin George | All rights reserved. */
+
+body , table , td { font-family: verdana ; line-height: 1 ;	font-size: 9pt ;
+	text-align: center ; margin-left:auto ; margin-right:auto ; }
+
+h1 , h2 , h3 , h4 , h5 , h6 , img , form , font { display: inline ; font-family: verdana ; }
+h1 , h2 , h3 , h4 , h5 , h6 { color: #101030 ; }
+
+img.btn { height: 12px ; width: 12px ; border: 0px ; background: transparent ; }
+.rot {
+    -webkit-animation: spin 8s linear infinite;
+    -moz-animation: spin 8s linear infinite;
+    animation: spin 8s linear infinite;
+}
+.spn {
+    -webkit-animation: spin 8s linear infinite;
+    -moz-animation: spin 8s linear infinite;
+    animation: spin 8s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+hr { color: #cccccc ; width: 80% ; }
+
+/* ################################# */
+
+a , a:visited				{ color: #406080 ; font-family: verdana ; text-decoration: none ; font-size:  }
+a:hover , a:active			{ color: #406080 ; text-decoration: none ; }
+
+a.wht , a.wht:visited		{ color: #ffffff ; font-family: verdana ; text-decoration: none ; font-size: }
+a.wht:hover , a.wht:active	{ color: #6060f0 ; text-decoration: none ; }
+
+table {  font-family: verdana ; }
+tr:nth-child( even ) { background: #f0f0f0 ; }
+tr:nth-child( odd ) { background: #ffffff ; }
+
+th { background-color: #000000 ; color: #ffffff ; font-weight: 900 ;
+	padding-left: 8px ; padding-right: 8px ; }
+
+td { padding-left: 8px ; padding-right: 8px ; }
+
+/* ################################# */
+
+.reds { color: #a04080 ; } /* 060 / 112 / 160 */
+.grns { color: #40a060 ; } /* 060 / 112 / 160 */
+.blue { color: #4080a0 ; } /* 060 / 112 / 160 */
+.brwn { color: #909064 ; } /* 144 / 144 / 100 */
+.putt { color: #c0c0a4 ; } /* 192 / 192 / 164 194 , 191 , 165 */
+.tans { color: #e0e0d0 ; } /* 224 / 224 / 208 */
+.blck { color: #000000 ; } /* 060 / 112 / 160 */

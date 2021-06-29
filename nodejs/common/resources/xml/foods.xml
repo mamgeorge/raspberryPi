@@ -1,0 +1,56 @@
+<?xml version = "1.0"?>
+<?xml-stylesheet type = "text/xsl" href = "foods.xslt"?>
+
+<foods>
+
+	<breakfast>
+
+		<dish>
+			<name>Belgian Waffles</name>
+			<price>5.95</price>
+			<description>Two of our famous Belgian Waffles with plenty of real maple syrup</description>
+			<calories>650</calories>
+			</dish>
+
+		<dish>
+			<name>Strawberry Belgian Waffles</name>
+			<price>7.95</price>
+			<description>Light Belgian waffles covered with strawberries and whipped cream</description>
+			<calories>900</calories>
+			</dish>
+
+		<dish>
+			<name>Berry-Berry Belgian Waffles</name>
+			<price>8.95</price>
+			<description>Light Belgian waffles covered with an assortment of fresh berries and whipped cream</description>
+			<calories>900</calories>
+			</dish>
+
+		<dish>
+			<name>French Toast</name>
+			<price>4.50</price>
+			<description>Thick slices made from our homemade sourdough bread</description>
+			<calories>600</calories>
+			</dish>
+
+		<dish>
+			<name>Homestyle Breakfast</name>
+			<price>6.95</price>
+			<description>Two eggs , bacon or sausage , toast , and our ever-popular hash browns</description>
+			<calories>950</calories>
+			</dish>
+
+	</breakfast>
+
+	<lunch>
+
+		<dish>
+			<name>PeanytButter &amp; Jelly</name>
+			<price>5.00</price>
+			<description>PBJ </description>
+			<calories>450</calories>
+			</dish>
+
+	</lunch>
+
+</foods>

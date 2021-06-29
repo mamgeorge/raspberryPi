@@ -1,0 +1,93 @@
+C:\Martin\4Work\toolCode\raspberryPi\hardware_boards.txt
+
+SenseHAT [
+
+	Uses 2 power pins & 6 GPIO pins
+		p01: 3v3
+		p02: 5v
+		p03: i2c1 SDA (GP02)
+		p05: i2c1 SCL (GP03)
+		p16: IMU intr (GP23)
+		p18: IMU intr (GP24)
+		p22: IMU intr (GP25)
+		p24: IMU intr (GP08)
+
+	I2C communication
+	0X46: LED2472G	shift register drives 8×8 RGB LED Matrix; uses ATTINY88
+	0X5C: LPS25H	Pressure/Temperature sensor
+	0X5F: HTS221	Humidity/Temperature sensor, Barometric?
+	0X1C: LSM9DS1	IMU (Accelerometer & Magnetometer); uses ATTINY88, Gyroscope?
+	0X6A: LSM9DS1	IMU (Accelerometer & Magnetometer); uses ATTINY88, Gyroscope?
+
+	HAT form-factor
+	SKRHABE010 Switch/Joystick (5 button multi-directional)
+	Atmel chip can be reprogrammed via the SPI
+	EEPROM auto configuration
+]
+
+PiBrella [
+
+	http://pibrella.com/
+	https://pypi.python.org/pypi/Pibrella
+	http://pinout.xyz/
+	http://pi.gadgetoid.com/pinout/pibrella
+	sales@cyntech.co.uk
+
+	$023 PiBrella LED Add On Board
+
+	attach pibrella to the right of GPIO pins ( power facing up )
+
+	1. install Python Libraries
+
+		sudo apt-get update
+
+			note: had to access terminal from menu , not toolbar
+
+		sudo apt-get upgrade
+		sudo apt-get install python3-pip
+		sudo pip install pibrella
+
+	2. write code in interactive mode
+
+		sudo python -i
+		import pibrella
+		pibrella.buzzer.fail( )
+		pibrella.light.pulse( 0.2 )
+		quit( )
+
+	3. write code
+
+		###################################################
+		help text expects you to connect pins to port A after manually typing in code
+
+		note: this code does not work in a python file
+			could not run with python file in IDE Idle ; had to use interactive mode
+			UNLESS run from root terminal calling python 2.7.3
+			( sudo idle ) due to location of pibrella library
+			otherwise this occurs:
+
+			pibrella error
+			Traceback ( most recent call last ):
+			File "/home/pi/python/pibrella.py" , line 3 , in <module>
+			import pibrella
+		###################################################
+
+		sudo python -i
+
+		import pibrella , signal
+		#import pibrella.input as input
+		#from pibrella import input
+		#
+		def alarm( pin ):
+			pibrella.buzzer.fail( ) # make some noise
+			pibrella.light.pulse( ) # flash lights
+		#
+		def reset( pin ):
+			pibrella.light.stop( )			# reset alarm
+		#
+		pibrella.input.a.changed( alarm )	# listen for intruder
+		pibrella.button.pressed( reset )	# in case of stupid cat
+		signal.pause( )						# wait for intruder! Press enter to finish the line and the code will run!
+		# this project requires adding a wire to the A terminals
+]
+----
