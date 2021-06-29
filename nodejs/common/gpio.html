@@ -1,0 +1,133 @@
+<!-- C:\Users\mamge\OneDrive\Documents\4Work\toolCode\servers\nodejs\html\gpio.html -->
+<html><head><title>GPIO</title>
+
+<meta http-equiv = "Content-Type" content = "text/html ; charset = UTF-8" />
+<link type = "image/x-icon" rel = "shortcut icon" href = "/images/favicon.ico" />
+<link rel = "apple-touch-icon" href = "/images/mlgRed.png">
+
+<link type = "text/css" rel = "StyleSheet" href = "../resources/basics.css" />
+<style>
+table , tr , td { padding-top: 0px ; padding-bottom: 0px ; margin-top: 0px ; margin-bottom: 0px ; border-top: 0px ; border-bottom: 0px ; }
+tr.red { background: #f0d0d0 ; }
+tr.org { background: #f0e0d0 ; }
+tr.yel { background: #e0e0d0 ; }
+tr.grn { background: #d0f0d0 ; }
+tr.blu { background: #d0d0f0 ; }
+tr.pur { background: #f0d0f0 ; }
+tr.blk { background: #d0d0d0 ; }
+th.wht { color: black ; background: #ffffff ; }
+.line { background: black ; height: 5px ; }
+
+</style>
+
+<script type = "text/javascript" src = "/resources/basics.js" ></script>
+<script src = "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+var anyApp = angular.module( 'anyApp' , [ ] ) ;
+anyApp.controller ( 'anyControl' , function( $scope ) { } ) ;
+
+</script>
+</head>
+
+<body><center>
+
+<!-- #### Ohms Law #### -->
+
+<div data-ng-app = "anyApp" data-ng-controller = "anyControl"
+	data-ng-init = "voltageBase = 3.3 ; voltageDraw = 2.2 ; milliamps = 4 ;
+	letters = [ { hbrw:'Aleph' , grkh:'Alpha' } ]" >
+
+<h3>resistance calculation</h3>
+<br /><br />V = I * R , R = V / I
+
+<form action = "/gpio" method = "post" >
+<table>
+<tr><th class = "wht">voltage base </th>
+	<td><input name = "voltageBase" type = "number" ng-model = "voltageBase" step = "0.1" /></td></tr>
+
+<tr><th class = "wht">voltage draw </th>
+	<td><input name = "voltageDraw" type = "number" ng-model = "voltageDraw" step = "0.1" /></td></tr>
+
+<tr><th class = "wht">milli Amps </th>
+	<td><input name = "milliamps" type = "number" ng-model = "milliamps" step = "0.1" /></td></tr>
+
+<tr><th class = "wht">Resistance</th>
+	<td>{{ ( voltageBase - voltageDraw ) | number:4 }} /
+		{{ ( milliamps / 1000 ) | number:4 }} =
+		<input name = "resistance" type = "text" readonly
+			style = "background-color: transparent ; width: 60px ; border: 0 ; font-weight: bold ;"
+			value = "{{ ( voltageBase - voltageDraw ) / ( milliamps / 1000 ) | number:3 }}" />
+		</td></tr>
+
+</table>
+</div>
+
+<br />
+<input name = "abbr" type = "text" value = "MLG" /> /
+<input type = "submit" value = "SUBMIT" />
+
+<!-- #### GPIO #### -->
+<hr />
+<br /><br /><h3>GPIO Header / Pin , BCM Numbering</h3>
+<table><tr><td>
+
+<table style = "border: 0px ; padding: 0px ; margin: 0px ; " >
+<tr class = "red" ><td>3.3v		</td><td>power		</td><td>01<input type = "checkbox" name = "gpio" id = "01" value = "01" /></td></tr>
+<tr class = "yel" ><td>I2C_SDA1	</td><td>GPIO 02	</td><td>03<input type = "checkbox" name = "gpio" id = "03" value = "03" /></td></tr>
+<tr class = "yel" ><td>I2C_SCL1	</td><td>GPIO 03	</td><td>05<input type = "checkbox" name = "gpio" id = "05" value = "05" /></td></tr>
+<tr class = "grn" ><td>GCLK0	</td><td>GPIO 04	</td><td>07<input type = "checkbox" name = "gpio" id = "07" value = "07" /></td></tr>
+<tr class = "blk" ><td>			</td><td>ground		</td><td>09<input type = "checkbox" name = "gpio" id = "09" value = "09" /></td></tr>
+<tr class = "grn" ><td>GEN0		</td><td>GPIO 17	</td><td>11<input type = "checkbox" name = "gpio" id = "11" value = "11" /></td></tr>
+<tr class = "grn" ><td>GEN2		</td><td>GPIO 27	</td><td>13<input type = "checkbox" name = "gpio" id = "13" value = "13" /></td></tr>
+<tr class = "grn" ><td>GEN3		</td><td>GPIO 22	</td><td>15<input type = "checkbox" name = "gpio" id = "15" value = "15" /></td></tr>
+<tr class = "red" ><td>3.3v		</td><td>power		</td><td>17<input type = "checkbox" name = "gpio" id = "17" value = "17" /></td></tr>
+<tr class = "yel" ><td>SPI_MOSI	</td><td>GPIO 10	</td><td>19<input type = "checkbox" name = "gpio" id = "19" value = "19" /></td></tr>
+<tr class = "yel" ><td>SPI_MISO	</td><td>GPIO 09	</td><td>21<input type = "checkbox" name = "gpio" id = "21" value = "21" /></td></tr>
+<tr class = "yel" ><td>SPI_SCLK	</td><td>GPIO 11	</td><td>23<input type = "checkbox" name = "gpio" id = "23" value = "23" /></td></tr>
+<tr class = "blk" ><td>			</td><td>ground		</td><td>25<input type = "checkbox" name = "gpio" id = "25" value = "25" /></td></tr>
+
+<tr ><td colspan = "4" class = "line" ></td></tr>
+<tr class = "pur" ><td>EEPROM	</td><td>ID_SD		</td><td>27<input type = "checkbox" name = "gpio" id = "27" value = "27" /></td></tr>
+<tr class = "grn" ><td>GCLK1	</td><td>GPIO 05	</td><td>29<input type = "checkbox" name = "gpio" id = "29" value = "29" /></td></tr>
+<tr class = "grn" ><td>GCLK2	</td><td>GPIO 06	</td><td>31<input type = "checkbox" name = "gpio" id = "31" value = "31" /></td></tr>
+<tr class = "grn" ><td>PWM1		</td><td>GPIO 13	</td><td>33<input type = "checkbox" name = "gpio" id = "33" value = "33" /></td></tr>
+<tr class = "yel" ><td>SPI_MISO	</td><td>GPIO 19	</td><td>35<input type = "checkbox" name = "gpio" id = "35" value = "35" checked = "checked" /></td></tr>
+<tr class = "grn" ><td>			</td><td>GPIO 26	</td><td>37<input type = "checkbox" name = "gpio" id = "37" value = "37" checked = "checked" /></td></tr>
+<tr class = "blk" ><td>			</td><td>ground		</td><td>39<input type = "checkbox" name = "gpio" id = "39" value = "39" /></td></tr>
+</table>
+
+</td><td>
+
+<table style = "border: 0px ; padding: 0px ; margin: 0px ;" >
+<tr class = "red" ><td><input type = "checkbox" name = "gpio" id = "02" value = "02" checked = "checked" />02</td><td>power		</td><td>5.0v		</td></tr>
+<tr class = "red" ><td><input type = "checkbox" name = "gpio" id = "04" value = "04"					/>04</td><td>power		</td><td>5.0v		</td></tr>
+<tr class = "blk" ><td><input type = "checkbox" name = "gpio" id = "06" value = "06" checked = "checked" />06</td><td>ground	</td><td>			</td></tr>
+<tr class = "yel" ><td><input type = "checkbox" name = "gpio" id = "08" value = "08"					/>08</td><td>GPIO 14	</td><td>UART_TXD	</td></tr>
+<tr class = "yel" ><td><input type = "checkbox" name = "gpio" id = "10" value = "10"					/>10</td><td>GPIO 15	</td><td>UART_RXD	</td></tr>
+<tr class = "grn" ><td><input type = "checkbox" name = "gpio" id = "12" value = "12"					/>12</td><td>GPIO 18	</td><td>GEN1 , PWM0</td></tr>
+<tr class = "blk" ><td><input type = "checkbox" name = "gpio" id = "14" value = "14"					/>14</td><td>ground		</td><td>			</td></tr>
+<tr class = "grn" ><td><input type = "checkbox" name = "gpio" id = "16" value = "16"					/>16</td><td>GPIO 23	</td><td>GEN4		</td></tr>
+<tr class = "grn" ><td><input type = "checkbox" name = "gpio" id = "18" value = "18"					/>18</td><td>GPIO 24	</td><td>GEN5		</td></tr>
+<tr class = "blk" ><td><input type = "checkbox" name = "gpio" id = "20" value = "20"					/>20</td><td>ground		</td><td>			</td></tr>
+<tr class = "grn" ><td><input type = "checkbox" name = "gpio" id = "22" value = "22"					/>22</td><td>GPIO 25	</td><td>GEN6		</td></tr>
+<tr class = "yel" ><td><input type = "checkbox" name = "gpio" id = "24" value = "24"					/>24</td><td>GPIO 08	</td><td>SPI_CE0_N	</td></tr>
+<tr class = "yel" ><td><input type = "checkbox" name = "gpio" id = "26" value = "26"					/>26</td><td>GPIO 07	</td><td>SPI_CE1_N	</td></tr>
+
+<tr ><td colspan = "4" class = "line" ></td></tr>
+<tr class = "pur" ><td><input type = "checkbox" name = "gpio" id = "28" value = "28"					/>28</td><td>ID_SC		</td><td>EEPROM		</td></tr>
+<tr class = "blk" ><td><input type = "checkbox" name = "gpio" id = "30" value = "30"					/>30</td><td>ground		</td><td>			</td></tr>
+<tr class = "grn" ><td><input type = "checkbox" name = "gpio" id = "32" value = "32"					/>32</td><td>GPIO 12	</td><td>PWM0		</td></tr>
+<tr class = "blk" ><td><input type = "checkbox" name = "gpio" id = "34" value = "34"					/>34</td><td>ground		</td><td>			</td></tr>
+<tr class = "grn" ><td><input type = "checkbox" name = "gpio" id = "36" value = "36" checked = "checked" />36</td><td>GPIO 16	</td><td>			</td></tr>
+<tr class = "yel" ><td><input type = "checkbox" name = "gpio" id = "38" value = "38" checked = "checked" />38</td><td>GPIO 20	</td><td>SPI_MOSI	</td></tr>
+<tr class = "yel" ><td><input type = "checkbox" name = "gpio" id = "40" value = "40"					/>40</td><td>GPIO 21	</td><td>SPI_SCLK	</td></tr>
+</table>
+
+</td></tr></table>
+</form>
+
+<br /><br /><a href = "/cgi" >return</a><br /><br />
+
+</center></body>
+</html>

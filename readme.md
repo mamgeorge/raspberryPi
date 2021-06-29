@@ -1,5 +1,11 @@
 # raspberryPi 
-<img src = "images/robot.png" alt = "robot" width = "50"><img src = "images/raspberrypi.png" alt = "raspberrypi" width = "50"><img src = "images/python.png" alt = "python" width = "50"><img src = "images/node.png" alt = "node" width = "50"><img src = "images/sketchup.png" alt = "sketchup" width = "50"> 
+<img src = "images/robot.png"		alt = "robot"		width = "150">
+<img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "50">\
+<img src = "images/bash.png"		alt = "bash"		width = "50">\
+<img src = "images/python.png"		alt = "python"		width = "50">\
+<img src = "images/node.png"		alt = "node"		width = "50">\
+<img src = "images/i2c.png"			alt = "i2c"			width = "50">\
+<img src = "images/sketchup.png"	alt = "sketchup"	width = "50"> 
 
 ## robotics
 
@@ -78,7 +84,7 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 ### software
 <img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "20"> os base:	Raspbian, Bash, Putty, WinSCP, GitHub...<br />
 <img src = "images/python.png"		alt = "python"		width = "20"> control:	Python & IDLE for DC motor PWM control<br />
-<img src = "images/node.png"		alt = "node"		width = "20"> server:	NodeJS, Express (JavaScript, HTML, CSS) for view<br />
+<img src = "images/node.png"		alt = "node"		width = "20"> server:	NodeJS, Express, (JavaScript, HTML, CSS) for view<br />
 <img src = "images/sketchup.png"	alt = "sketchup"	width = "20"> drawing:	LibreCad 2D CAD, Sketchup 3D
 
 *The L293D Controller pinout diagram.*

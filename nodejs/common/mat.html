@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd" >
+<!-- c2017 Martin George , All rights reserved. -->
+<!-- 192.168.1.22:3000 -->
+
+<html><head><title>MAT</title>
+
+<meta http-equiv = "Content-Type" content = "text/html; charset=UTF-8" />
+<meta http-equiv = "keywords" content = "MLG Martin George mamgeorge alterVista MAT" />
+<link type = "image/x-icon" rel = "shortcut icon" href = "images/redLogo.png" />
+<link rel = "apple-touch-icon" href = "images/redLogo.png" />
+
+<script type = "text/javascript" src = "resources/basics.js" ></script>
+<script>
+function clicker( varButton )
+{
+	var varForm = document.getElementById( "formData" ) ;
+	var varSbmt = document.getElementById( "COMMAND" ) ;
+	varSbmt.value = varButton ;
+	//
+	// varForm.submit( ) ;
+	location.href = '/MAT?COMMAND=' + varButton  ;
+ }
+</script>
+
+<!--link type = "text/css" rel = "StyleSheet" href = "resources/basics.css" /-->
+<style type = "text/css" >
+body	{ background-color: #c0c0b0 ; font-family: verdana ; }
+// input { width: 160px; height: 160px; text-align: center; border: 2px solid gray; }
+h1,h2,h3,h4,h5,h6 { display: inline; }
+
+.btn { color: #ffffff; font-weight: bold; border-radius: 10px; 
+	text-align: center; padding: 10px; }
+@media only screen and ( min-width: 600px ) {
+	.btn { min-height: 200px; font-size: 200% }
+}
+	
+	
+.red { background-color: #800000 ; }
+.grn { background-color: #008000 ; }
+.blu { background-color: #000080 ; }
+.pur { background-color: #800080 ; }
+
+.mainCol { display: flex; flex-direction: column; justify-content: center; }
+.mainRw1 { flex: 3; display: flex; flex-direction: row; }
+.mainRw2 { flex: 1; display: flex; flex-direction: row; }
+.mainLft { flex: 3; }
+.mainRgt { flex: 1; }
+.mainBtm { flex: 4; }
+
+.consCol { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+.consRow { flex: 1; display: flex; flex-direction: row; }
+.consItm { flex: 1; }
+
+.spdrCol { display: flex; flex-direction: column; justify-content: center; height: 100%; }
+.spdrRow { flex: 1; display: flex; flex-direction: row; }
+.spdrItm { flex: 1; }
+
+.lcasCol { display: flex; flex-direction: column; justify-content: center; }
+.lcasRow { flex: 1; display: flex; flex-direction: row; }
+.lcasItm { flex: 1; }
+</style>
+
+</head>
+
+<body>
+<form id = "formData" action = "/MAT" method = "post" >
+<input type = "hidden" id = "COMMAND" name = "COMMAND" value = "" />
+
+<center><h1 onClick = "location.href = '/';">MAT control</h1><hr /></center>
+
+<!-- FORWARD PIVOTLEFT STOP PIVOTRIGHT BACKWARD -->
+<div class = "mainCol" > 
+
+<div class = "mainRw1" >
+
+	<div class = "mainLft" >
+		<div class = "consCol" >
+
+			<div class = "consRow" >
+				<span class = "consItm" ></span>
+				<input class = "blu btn consItm" type = "button" name = "FORWARD"		value = "FORWARD"		onClick = "clicker( '8' )" />
+				<span class = "consItm" ></span>
+			</div>
+				
+			<div class = "consRow" >
+				<input class = "blu btn consItm" type = "button" name = "PIVOTLEFT"	value = "PIVOTLEFT"	onClick = "clicker( '4' ) "/>
+				<input class = "red btn consItm" type = "button" name = "STOP" 		value = "STOP" 			onClick = "clicker( '5' ) "/>
+				<input class = "blu btn consItm" type = "button" name = "PIVOTRIGHT"	value = "PIVOTRIGHT"	onClick = "clicker( '6' ) "/>
+			</div>
+				
+			<div class = "consRow" >
+				<span class = "consItm" ></span>
+				<input class = "blu btn consItm" type = "button" name = "BACKWARD"	value = "BACKWARD"		onClick = "clicker( '2' )" />
+				<span class = "consItm" ></span>
+			</div>
+
+		</div>
+	</div>
+
+	<div class = "mainRgt" >
+		<div class = "spdrCol" >
+			<input class = "grn btn spdrItm" type = "button" name = "FAST" value = "FAST" onClick = "clicker( '+' )" />
+			<input class = "grn btn spdrItm" type = "button" name = "SLOW" value = "SLOW" onClick = "clicker( '-' )" />
+		</div>
+	</div>
+</div>
+
+<div class = "mainRw2" >
+	<div class = "mainBtm" >
+		<div class = "lcasCol" >
+			<div class = "lcasRow" >
+				<input class = "pur btn lcasItm" type = "button" name = "LIGHTS" value = "LIGHTS" onClick = "clicker( 'l' )" />
+				<input class = "pur btn lcasItm" type = "button" name = "CAMERA" value = "CAMERA" onClick = "clicker( 'c' )" />
+			</div>
+			<div class = "lcasRow" >
+				<input class = "pur btn lcasItm" type = "button" name = "ACTION" value = "ACTION" onClick = "clicker( 'a' )" />
+				<input class = "pur btn lcasItm" type = "button" name = "SENSOR" value = "SENSOR" onClick = "clicker( 'x' )" />
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<div class = "mainRw2" >
+		<input class = "blu btn lcasItm" type = "button" name = "SPEAKER" value = "SPEAKER" onClick = "clicker( 's' )" />
+	</div>
+
+</form>
+
+</body></html>

@@ -10,6 +10,7 @@ initVars() {
 	tabs 4
 	DATES=$(date +"%Y %B %-d, a %A at %-I:%M:%S %p.")
 	DATEM=$(date +"%Y-%M-%d @ %-I:%M:%S %p.")
+	IPADD=hostname -I
 
 	BRED="\033[31;1m"
 	BORA="\033[38;5;202m"
@@ -277,7 +278,13 @@ robot_hatMG( )	{ ## 8c
 	python mamgeorge/python/hats/sens_b9.py 0
 }
 
-pins( )			{ ## 9, 9a
+pins( )			{ ## 9, 9a, 9b
+	echo -e "${BORA}GPIO${NCLR}"
+	echo -e ""
+	echo -e "${BORA}9a) GPIO diagram, detailed${NCLR}"
+	echo -e "${BORA}9b) GPIO diagram, built-in${NCLR}"
+}
+pinsMG( )		{ ## 9a
 
 	echo -e "${REVR}40 pin is J8 pinout board; 26 pin is P1 pinout${NCLR}"
 	echo -e "					┌────────────┐"
@@ -304,13 +311,23 @@ pins( )			{ ## 9, 9a
 	echo -e "			${BCKW}ground${NCLR}	│ 39 ${BWHT}■${NCLR}	${BGRN}■${NCLR} 40 │	${BGRA}BCM_21${NCLR}	SPI_SCLK	"
 	echo -e "					└────────────┘"
 }
-pinso( )		{ ## 9a
+pinsOT( )		{ ## 9b
 
 pinout
 }
 
 ##################
 exits( )	{ ## 0
+
+	echo -e model...: "$(cat /proc/device-tree/model | xargs --null)"
+	echo -e release.: "$(cat /etc/os-release | grep PRETTY)"
+	echo -e address.: "$(cat /sys/class/net/wlan0/address)"
+	echo -e uname...: "$(uname -a)"
+	echo -e hostname: "$(hostname -I)"
+	echo -e ifconfig: "$(sudo ifconfig | grep 192 | xargs)"
+	echo -e iwgetid.: "$(iwgetid)"
+	echo -e files...: "$(df -h | grep root)"
+	echo -e free....: "$(free -m | grep Mem)"
 
 	echo -e "\n${BGRN}Exits Menu!${NCLR}\n${ENDS}"
 }
@@ -335,11 +352,11 @@ do
 
 	## echo -e "0 EXIT | 1 node | 2 lights | 3 camera | 4 speaker | 5 motors | 6 comm | 7 xxxx | 8 robot | 9 pins | r REBOOT"
 	echo -e "0 EXIT		exits menu"
-	echo -e "1 node		http://192.168.1.22:3000"
+	echo -e "1 node		http://$(hostname -I):3000"
 	echo -e "2 lights	shows LED, ${BRED}R${BGRN}G${BBLU}B${NCLR}, Traffic"
 	echo -e "3 camera	takes a picture & displays it"
-	echo -e "4 speaker	loads GH_BT3500 INSIQBS1 ProHT_88133"
-	echo -e "5 motors	runs servos or stepper"
+	echo -e "4 speaker	loads GH_BT3500, INSIQBS1, ProHT_88133"
+	echo -e "5 motors	runs servos, stepper"
 	echo -e "6 gpio		runs gpio, i2c, or spi based programs"
 	echo -e "─────────────────────────────────────────"
 	echo -e "8 robot		runs robot node interface"
@@ -375,12 +392,11 @@ do
 		7) ;;
 		8) robot		;;
 			8a) robot_ctl	;;
-			8b) robot_hatB9 ;;
-			b9) robot_hatB9 ;;
-			8c) robot_hatMG ;;
-			mg) robot_hatMG ;;
+			8b) robot_hatB9 ;;	b9) robot_hatB9 ;;
+			8c) robot_hatMG ;;	mg) robot_hatMG ;;
 		9) pins			;;
-			9a) pinso	;;
+			9a) pinsMG	;;
+			9b) pinsOT	;;
 		r) reboots		;; x) shutdown ;;
 		## *) ;;
 	esac

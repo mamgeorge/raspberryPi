@@ -1,60 +1,11 @@
 \\5Personal\Technology\raspberryPi\docs\software.txt
 
-common (project github wifi SSH commmands programs) [
-
-	terms [
-
-		28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
-		ADC		Analog 2 Digital Converter
-		ASIC	Application Specific Integrated Circuit - customized IC
-		BCM		Broadcom
-		BJT		Bipolar Junction Transistor
-		CSI		Camera Serial Interface
-		DCE		Data Circuit-Terminating Equipment (ex. modem)
-		DIMM	Dual In Line Memory Module
-		DIP		Dual Inline Package
-		DSI		Display Serial Interface
-		DTE		Data Terminal Equipment (ex. terminal)
-		FET		Field Effect Transistor
-		FPC		Flexible Printed Circuit
-		FPGA	Field Programmable Gate Array
-		FTDI	Future Technology Devices International
-		GPIO	General Purpose Input/Output
-		HDMI	High Definition Multimedia Interface
-		HB		motor Hybrid Synchronous, Combination of PM and VR
-		I2C		Inter Integrated Circuit
-		IC		Integrated Circuit
-		J8		40 pin pinout board
-		LASER	Light Amplification Stimulated Emission Radiation
-		LCD		Liquid Crystal Display
-		LED		Light Emitting Diode
-		LPDDR	Low Power Double Data Rate synchronous
-		MIPI	Mobile Industry Processor Interface
-		MOSFET	Metal Oxide Semiconductor FET
-		NEMA	National Electrical Manufacturers Association
-		OLED	Organic Light Emitting Diode
-		P1		26 pin pinout board
-		PCB		Printed Circuit Board
-		PDIP	Plastic Dip Package
-		PM		motor Permanent Magnet, Active rotor
-		POE		Power over Ethernet
-		RGB		Red Green Blue
-		RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
-		RPI0WHf	0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
-		SIP		Single Inline Package
-		SODIMM	Small Outline DIMM
-		SOIC	Small Outline Integrated Circuit
-		SOC		System on Chip
-		SOP		Small Outline Package
-		SPI 	Serial Peripheral Interface
-		TSSOP	Thin Shrink Small Outline Package
-		UART	Universal Asynchronous Receive/Transmit
-		VR		motor Variable Reluctance, Reactive rotor
-	]
+common (commmands connecting projects updating programs terms) [
 
 	commmands [ general
 
 		https://www.circuitbasics.com/useful-raspberry-pi-commands/
+
 		cut&paste [
 
 			clipboard: note Putty SSH paste: SHIFT-INSERT , copy: CTRL-INSERT
@@ -69,6 +20,7 @@ common (project github wifi SSH commmands programs) [
 		$ sudo raspi-config						// basic config
 		$ sudo apt-get update -y				// 1st super user do advanced packaging tool update
 		$ sudo apt-get upgrade -y				// 2nd super user do advanced packaging tool upgrade
+		$ sudo apt full-upgrade	-y				// 2nd sudo apt command to pick up dependencies
 		$ sudo apt-get autoremove -y			// cleanup
 
 		$ cat /proc/device-tree/model && echo	// Raspberry Pi 2 Model B Rev 1.1 ; MN: q_1_Z_TP
@@ -95,7 +47,7 @@ common (project github wifi SSH commmands programs) [
 			RPI0_WH robot	 pi, s4_m2 | ip 192.168.1.21 | B8:27:EB:2B:0F:91
 			RPI0_WH	male	 pi, s4_m2 | ip 192.168.1.22 | B8:27:EB:fc:a5:72
 			RPI2 sensehat	 pi, s4_m2 | ip 192.168.1.19 | 00:0F:60:05:51:1D, 169.254.62.195
-			RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.20 | DC:A6:32:DB:19:F9
+			RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.14 | DC:A6:32:DB:19:F9
 
 		c:>	arp -a -v							// ARP: Address Resolution Protocol, -a shows arp entries , -v verbose
 
@@ -205,20 +157,58 @@ common (project github wifi SSH commmands programs) [
 		]
 	]
 
-	projects [
+	projects [ links, project_arm, menu, MAT, network, sound, sensehat, monitor
 
-		https://en.wikipedia.org/wiki/Comparison_of_EDA_software
+		links [ simulators
+
+			https://en.wikipedia.org/wiki/Comparison_of_EDA_software
 
 			https://www.element14.com/community/groups/development-tools/blog/2016/09/03/best-free-online-circuit-simulator
 
 			https://www.circuitlab.com
 
 			http://fritzing.org/
+		]
 
-		// menu
-			$ ./menu.sh
+		project_arm [
 
-		// MAT (on RPI0wf , 22)
+			9 motors?
+				stepper + stepper + servo
+				stepper + stepper + servo
+				waist + head + pan
+
+			general [
+
+				https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/
+				https://www.best-microcontroller-projects.com/i2c-tutorial.html
+				https://learn.sparkfun.com/tutorials/i2c/all
+				https://www.robot-electronics.co.uk/i2c-tutorial
+				https://www.bluedot.space/tutorials/how-many-devices-can-you-connect-on-i2c-bus/
+
+				driving Stepper_Servo
+				https://www.raspberrypi.org/forums/viewtopic.php?t=147594
+
+				howMany
+				https://www.raspberrypi.org/forums/viewtopic.php?t=117605
+
+				offload
+				https://www.element14.com/community/community/raspberry-pi/raspberrypi_projects/blog/2017/07/04/offload-raspberry-pi-tasks-with-the-i2c-bus-turning-stepper-motors
+			]
+
+			i2c_stepper: with Polulu A4988 stepper driver
+
+				https://forum.arduino.cc/index.php?topic=277692.0
+
+			i2c_servo: with Adafruit PCA9685 servo driver
+
+				https://learn.adafruit.com/16-channel-pwm-servo-driver
+
+			$ ls /dev/*i2c*			/*/// returns /dev/i2c-1
+		]
+
+		menu [ $ ./menu.sh ]
+
+		MAT (on RPI0wf , 22) [
 
 			see: "MAT.txt"
 			$ node /home/pi/servers/node/expressoMAT.js
@@ -240,59 +230,18 @@ common (project github wifi SSH commmands programs) [
 				$ python python/servos/servo_keys.py	// based on keyboard
 				$ python python/servos/servo_loop.py	// continuous
 				$ python python/servos/servo_once.py
-
-		// for network thru CLI
-			see: "network.txt":internet
-
-		// for USB sound , use "USB Virtual Sound Adapter" , speaker , alsamixer , espeak "HI!"
-			see: "sound.txt":RPI_setup
-
-		// for monitor thru GPIO
-
-			see: "hardware\hardware_notes.txt":monitor
-			see: "hardware\hardware_list.txt":components:comm
-
-			// showcase sensehat (on RPI2B , 13)
-			$ python python/sensehat/sens_samples.py
-	]
-
-	project_arm [
-
-		9 motors?
-			stepper + stepper + servo
-			stepper + stepper + servo
-			waist + head + pan
-
-		general [
-
-			https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/
-			https://www.best-microcontroller-projects.com/i2c-tutorial.html
-			https://learn.sparkfun.com/tutorials/i2c/all
-			https://www.robot-electronics.co.uk/i2c-tutorial
-			https://www.bluedot.space/tutorials/how-many-devices-can-you-connect-on-i2c-bus/
-
-			driving Stepper_Servo
-			https://www.raspberrypi.org/forums/viewtopic.php?t=147594
-
-			howMany
-			https://www.raspberrypi.org/forums/viewtopic.php?t=117605
-
-			offload
-			https://www.element14.com/community/community/raspberry-pi/raspberrypi_projects/blog/2017/07/04/offload-raspberry-pi-tasks-with-the-i2c-bus-turning-stepper-motors
 		]
 
-		i2c_stepper: with Polulu A4988 stepper driver
+		network thru CLI [ see: "network.txt":internet ]
 
-			https://forum.arduino.cc/index.php?topic=277692.0
+		sound USB [ use "USB Virtual Sound Adapter" , speaker , alsamixer , espeak "HI!": see: "sound.txt":RPI_setup ]
 
-		i2c_servo: with Adafruit PCA9685 servo driver
+		sensehat (on RPI2B , 13) [ $ python python/sensehat/sens_samples.py ]
 
-			https://learn.adafruit.com/16-channel-pwm-servo-driver
-
-		$ ls /dev/*i2c*			/*/// returns /dev/i2c-1
+ 		monitor thru GPIO [ see: "hardware\hardware_notes.txt":monitor, see: "hardware\hardware_list.txt":components:comm ]
 	]
 
-	updating github [
+	updating [ raspberryPi, nodeSamples
 
 		c:>
 		cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
@@ -304,9 +253,19 @@ common (project github wifi SSH commmands programs) [
 		git push
 	]
 
-	programs [
+	programs [ Rasbpian, bash, Python, gcc, etc
 
-		Rasbpian (Unix > Linux > Debian 7 Wheezy > Raspbian)
+		Rasbpian (Unix > Linux > Debian 7 Wheezy > Raspbian) [
+
+			Debian releases
+
+			2013-09-27	07 Wheezy	/ kernel 3.06, gcc 4.7.2
+			2015-09-28	08 Jessie	/ kernel 4.01, gcc 4.9
+			2017-08-17	09 Stretch	/ kernel 4.09, gcc 6.3
+			2019-06-24	10 Buster	/ kernel 4.19, gcc 8.3
+			2021-05-07	10 Buster	/ kernel 5.10.17 , gcc 8.3
+			2021-06-07	11 Bullseye	/ kernel 5.10
+		]
 
 		bash 4.3.30(1) // was originally bash 2.2.37(1)
 
@@ -324,7 +283,6 @@ common (project github wifi SSH commmands programs) [
 
 			$ sudo gcc --version
 
-
 		PIXEL (Pi Improved X-Window Environment Lightweight)
 
 			main desktop environment
@@ -336,6 +294,56 @@ common (project github wifi SSH commmands programs) [
 			https://www.osboxes.org/raspbian/#raspbian-2019-04-vmware
 			vmware_Raspbian_20190411_32bit.7z
 			C:\Program Files\Microsoft VS Code\resources
+	]
+
+	terms [
+
+		28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
+		ADC		Analog 2 Digital Converter
+		ASIC	Application Specific Integrated Circuit - customized IC
+		BCM		Broadcom
+		BJT		Bipolar Junction Transistor
+		CSI		Camera Serial Interface
+		DCE		Data Circuit-Terminating Equipment (ex. modem)
+		DIMM	Dual In Line Memory Module
+		DIP		Dual Inline Package
+		DSI		Display Serial Interface
+		DTE		Data Terminal Equipment (ex. terminal)
+		FET		Field Effect Transistor
+		FPC		Flexible Printed Circuit
+		FPGA	Field Programmable Gate Array
+		FTDI	Future Technology Devices International
+		GPIO	General Purpose Input/Output
+		HDMI	High Definition Multimedia Interface
+		HB		motor Hybrid Synchronous, Combination of PM and VR
+		I2C		Inter Integrated Circuit
+		IC		Integrated Circuit
+		J8		40 pin pinout board
+		LASER	Light Amplification Stimulated Emission Radiation
+		LCD		Liquid Crystal Display
+		LED		Light Emitting Diode
+		LPDDR	Low Power Double Data Rate synchronous
+		MIPI	Mobile Industry Processor Interface
+		MOSFET	Metal Oxide Semiconductor FET
+		NEMA	National Electrical Manufacturers Association
+		OLED	Organic Light Emitting Diode
+		P1		26 pin pinout board
+		PCB		Printed Circuit Board
+		PDIP	Plastic Dip Package
+		PM		motor Permanent Magnet, Active rotor
+		POE		Power over Ethernet
+		RGB		Red Green Blue
+		RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
+		RPI0WHf	0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
+		SIP		Single Inline Package
+		SODIMM	Small Outline DIMM
+		SOIC	Small Outline Integrated Circuit
+		SOC		System on Chip
+		SOP		Small Outline Package
+		SPI 	Serial Peripheral Interface
+		TSSOP	Thin Shrink Small Outline Package
+		UART	Universal Asynchronous Receive/Transmit
+		VR		motor Variable Reluctance, Reactive rotor
 	]
 ]
 
