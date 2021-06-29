@@ -1,20 +1,21 @@
-# raspberryPi 
-<img src = "images/robot.png"		alt = "robot"		width = "150">
-<div style = "white-space: nowrap;">
+# raspberryPi
+<table><tr>
+<td><img src = "images/robot.png"	alt = "robot"		width = "150"></td>
+<td>Technologies:<div style = "white-space: nowrap;">
 <img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "50">
 <img src = "images/bash.png"		alt = "bash"		width = "50">
 <img src = "images/python.png"		alt = "python"		width = "50">
 <img src = "images/node.png"		alt = "node"		width = "50">
 <img src = "images/i2c.png"			alt = "i2c"			width = "50">/
-<img src = "images/sketchup.png"	alt = "sketchup"	width = "50"> 
-</div>
+<img src = "images/sketchup.png"	alt = "sketchup"	width = "50">
+</td></tr></table>
 
 ## robotics
 
 intent:
 
 	Currently designed to act as programmable sentry.
-	
+
 	🔹 control	: RPI_0w using NodeJs server to access GPIO Python code
 	🔹 movement	: 4 MG995 Servos, 2 subMicro Grippers & HS55 Servos, PCA9685 I2C Controller
 	🔹 sensing	: RPI 2.1 Camera, Insiq Bluetooth Speaker, Microphone MI-305
@@ -23,7 +24,7 @@ intent:
 	🔹 power	: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
 	Explores various bare metal programming technologies. Future plans include:
-	
+
 	▶️ completion of the I2C servo operation
 	▶️ VAC (Voice Activated Commands) for more autonomous response
 	▶️ simple AI NLP for generalized communication
