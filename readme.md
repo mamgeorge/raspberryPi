@@ -34,23 +34,22 @@
 ---
 ### robot 3 / replaced Steppers with Servos
 
-* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * servos:	(4) Servo Motor, PN: MG995
+* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * speaker:	USB Bluetooth Speaker Insiq PN: 4326595940		🔹 (upgrades BT3500SLV)
 * servos:	(2) Hitec subMicro Servo motor, PN: HS55		🔹 (upgrades HS300)
 * grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104	🔹 (upgrades "A" Grippers)
+* steppers:	(4) Stepper Motor 28BYJ48	🔸 (later removed)
+* control:	(4) ULN2003 Driver Board	🔸 (later removed)
 
 *The SketchUp 3D drawing required only new Flange & Gripper drawings.
 All the other components were accessible online.*<br />
 <img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600">
 
----
-* steppers:	(4) Stepper Motor 28BYJ48	🔸 (later removed)
-
-* control:	(4) ULN2003 Driver Board	🔸 (later removed)
-
-*The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
-Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.*<br />
+*Originally, the Steppers were compact and complimented the size of the device.
+However, they were not scalable; there were too many GPIO leads needed.
+Also, some websites suggested RPI timing is not reliable enough for I2C protocol calls.
+A RPI 40 pin J8 form factor requires a different solution.*<br />
 <img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
 
 ---
@@ -68,7 +67,7 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 <img src = "images/robot_2.jpg" alt = "robot_2" width = "600">
 
 *The LibreCad 2D CAD representation with BOM.*
-<img src = "images/robot_2_CAD.png" alt = "robot_2_CAD" width = "600">
+<img src = "images/robot_2_CAD.jpg" alt = "robot_2_CAD" width = "600">
 
 ---
 ### robot 1 / travel control via SmartPhone
@@ -83,6 +82,7 @@ Some website discussions implied that the RPI timing is not reliable enough for 
 *The RPi operates the L293D thru GPIO ports using Python PWM code signaled by a NodeJS server.*
 <img src = "images/robot_1.jpg" alt = "robot_1" width = "600">
 
+---
 ### software
 <img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "20"> os base:	Raspbian, Bash, Putty, WinSCP, GitHub...<br />
 <img src = "images/python.png"		alt = "python"		width = "20"> control:	Python & IDLE for DC motor PWM control<br />
