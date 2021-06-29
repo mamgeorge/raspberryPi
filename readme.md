@@ -22,7 +22,7 @@
 	🔹 added	: 10 mm color LED, USB mini microphone
 	🔹 power	: rechargeable TL-PB 10400 & TL-PB 5200 mAh Powerbanks
 
-	Explores various bare metal programming technologies. Future plans include:
+	Explores various inexpensive bare metal programming technologies. Future possibilities:
 
 	▶️ completion of the I2C servo operation
 	▶️ VAC (Voice Activated Commands) for more autonomous response
@@ -48,8 +48,8 @@ All the other components were accessible online.*<br />
 
 *Originally, the Steppers were used because they had an optimal fit & flexibility.<br />
 However, they were not scalable; there were too many GPIO leads needed.<br />
-A RPI 40 pin J8 form factor required a different addressing solution.*<br />
-Note that some websites suggest RPI timing is not reliable enough many protocol calls.<br />
+A RPI 40 pin J8 form factor required a different addressing solution.<br />
+Note that some websites suggest RPI timing is not reliable enough many protocol calls.*<br />
 <img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
 
 ---
