@@ -1,11 +1,12 @@
 # raspberryPi 
 <img src = "images/robot.png"		alt = "robot"		width = "150">
-<img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "50">\
-<img src = "images/bash.png"		alt = "bash"		width = "50">\
-<img src = "images/python.png"		alt = "python"		width = "50">\
-<img src = "images/node.png"		alt = "node"		width = "50">\
-<img src = "images/i2c.png"			alt = "i2c"			width = "50">\
-<img src = "images/sketchup.png"	alt = "sketchup"	width = "50"> 
+<img 
+	src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "50"><img 
+	src = "images/bash.png"			alt = "bash"		width = "50"><img 
+	src = "images/python.png"		alt = "python"		width = "50"><img 
+	src = "images/node.png"			alt = "node"		width = "50"><img 
+	src = "images/i2c.png"			alt = "i2c"			width = "50">/<img 
+	src = "images/sketchup.png"		alt = "sketchup"	width = "50"> 
 
 ## robotics
 
