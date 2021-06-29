@@ -1,4 +1,4 @@
-# raspberryPi
+# RaspberryPi Robot Project
 <table><tr>
 <td><img src = "images/robot.png"	alt = "robot"		title = "robot"			width = "150"></td>
 <td>Technologies:<div style = "white-space: nowrap;">
@@ -11,9 +11,7 @@
 <img src = "images/sketchup.png"	alt = "sketchup"	title = "sketchup"		width = "50">
 </td></tr></table>
 
-## robotics
-
-intent:
+## intent
 
 	Currently designed to act as programmable sentry.
 
