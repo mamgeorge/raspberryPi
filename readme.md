@@ -6,7 +6,8 @@
 <img src = "images/bash.png"		alt = "bash"		title = "bash"			width = "50">
 <img src = "images/python.png"		alt = "python"		title = "python"		width = "50">
 <img src = "images/node.png"		alt = "node"		title = "node"			width = "50">
-<img src = "images/i2c.png"			alt = "i2c"			title = "i2c"			width = "50"></td><td>
+<img src = "images/i2c.png"			alt = "i2c"			title = "i2c"			width = "50"></td>
+<td>&nbsp;
 <img src = "images/sketchup.png"	alt = "sketchup"	title = "sketchup"		width = "50">
 </td></tr></table>
 
