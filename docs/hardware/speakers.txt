@@ -9,6 +9,7 @@ terminology [
 	DTO		Device Tree Overlay
 	I2C		Inter-Integrated-Circuit (aka "I squared C") for chips on a single PCB, it is half-duplex ( one direction ) with two lines: SDA for data and SCL for clock, it can handle multiple slaves.
 	I2S		Inter-IC Sound (aka Integrated Interchip Sound, IIS) for audio serial bus protocol, it is used to communicate PCM data between devices, it is common for audio in phones & tablets. the main PCM types are hw & plughw; hw: opens PCM devices directly with parameters required by the application / plughw: used for activating the plug-in layer / format for PCM devices is: PCM type , card number, device number, for example, plughw:0,0.
+	LIRC	Linux Infrared Remote Control
 	LKM		Loadable Kernel Module
 	PCM		Pulse Code Modulation
 	SPI		Serial Peripheral Interface; for faster, synchronous ( clocked ) protocol, it is full duplex ( send and receive ) with master-slave architecture, It has good signal integrity , and fast.
@@ -43,13 +44,54 @@ testing [ alsamixer arecord aplay
 	$ arecord -d 3 test.wav						// -d 3 means duration 3 seconds
 	$ arecord -d 3 -D plughw:1,0 test.wav		// create test sound for 3 seconds
 	$ arecord -D plughw:1,0 test.wav			// -D means associate to device "plughw:1,0"
-	$ aplay test.wav							// play test wav, if sound card installed
+	$ aplay mamgeorge/sound/ping.wav			// play test wav, if sound card installed
 
 		https://linux.die.net/man/1/arecord
 		-c, --channels=#	The number of channels.
 		-r, --rate=#<Hz>	Sampling rate in Hertz.
 		-d, --duration=#	Interrupt after # seconds; 0 means infinity.
 		-t, --file-type TYPE	File type (voc, wav, raw or au); defaults to wav
+
+	$ omxplayer mamgeorge/sound/mlgPiano.mp3	// did NOT work on wav or mp3
+
+	$ mplayer mamgeorge/sound/ping.wav			// worked as expected; later stopped "apparently" missing -ao alsa
+	$ mplayer
+
+		http://www.mplayerhq.hu/DOCS/man/en/mplayer.1.html
+		-ao alsa		set audio output driver to alsa
+		-list-options
+		-really-quiet
+		-volume <-1-100>
+
+		doc sections [
+
+			NAME
+			SYNOPSIS
+			DESCRIPTION
+			INTERACTIVE CONTROL
+			USAGE
+			CONFIGURATION FILES
+			PROFILES
+			GENERAL OPTIONS
+			PLAYER OPTIONS (MPLAYER ONLY)
+			DEMUXER/STREAM OPTIONS
+			OSD/SUBTITLE OPTIONS
+			AUDIO OUTPUT OPTIONS (MPLAYER ONLY)
+			AUDIO OUTPUT DRIVERS (MPLAYER ONLY)
+			VIDEO OUTPUT OPTIONS (MPLAYER ONLY)
+			VIDEO OUTPUT DRIVERS (MPLAYER ONLY)
+			DECODING/FILTERING OPTIONS
+			AUDIO FILTERS
+			VIDEO FILTERS
+			GENERAL ENCODING OPTIONS (MENCODER ONLY)
+			CODEC SPECIFIC ENCODING OPTIONS (MENCODER ONLY)
+			ENVIRONMENT VARIABLES
+			FILES
+			EXAMPLES OF MPLAYER USAGE
+			EXAMPLES OF MENCODER USAGE
+			BUGS
+			AUTHORS
+		]
 
 	// playback
 	$ aplay -l										// lists devices
@@ -67,19 +109,17 @@ tts [ espeak flite festival google pyttsx
 		$ flite -t "Hello, World!"
 		$ echo "Hello, World!" | festival --tts
 		$ ./speech.sh "Hello, World!"
-		
+
 		$ dated=$(date +"%Y-%m-%d_%I:%M:%S%p")
 		$ ./speech.sh $dated
-		
-		$ espeak -f robots.txt
-		$ flite -f robots.txt
-		$ festival --tts robots.txt
 
-		$ sed -n '5,10p;10q' robots.txt | espeak
-		$ sed -n '5,10p;10q' robots.txt | flite
-		$ sed -n '5,10p;10q' robots.txt | festival --tts
-		
-		$ ./speech.sh (sed -n '5,10p;10q' robots.txt)
+		$ espeak -f mamgeorge/docs/speech_robot.txt
+		$ flite -f mamgeorge/docs/speech_robot.txt
+		$ festival --tts mamgeorge/docs/speech_robot.txt
+
+		$ sed -n '5,10p;10q' mamgeorge/docs/speech_robot.txt | espeak
+		$ sed -n '5,10p;10q' mamgeorge/docs/speech_robot.txt | flite
+		$ sed -n '5,10p;10q' mamgeorge/docs/speech_robot.txt | festival --tts
 
 	tts espeak [ v1.48.03  04.Mar.14 (voices date sed python)
 
@@ -160,20 +200,36 @@ tts [ espeak flite festival google pyttsx
 				&q		=$*
 		*/
 
-		$ sudo apt-get install mplayer -y
+		// check to see if mplayer is there
 
-		$ sudo nano speech.sh // CREATE SPEECH FILE; CANNOT BE COPIED FROM DOS
+			$ dpkg -l | grep -i mplayer
 
-			#!/bin/bash
-			link="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=$*"
-			say( ) {
-				local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols $link
-			}
-			say $*
+			$ sudo apt-get install mplayer -y
 
-		$ sudo chmod 777 speech.sh
+			$ sudo nano speech.sh // CREATE SPEECH FILE; CANNOT BE COPIED FROM DOS
 
-		$ ./speech.sh "Hello, World!"
+				#!/bin/bash
+				link="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=$*"
+				say( ) {
+					local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols $link
+				}
+				say $*
+
+			$ sudo chmod 777 speech.sh
+
+			$ ./speech.sh "Hello, World!"
+
+		// dynamically
+
+			$ mplayer -really-quiet "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=HI"
+
+			$ words="Hello There"
+			$ link="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q="
+			$ mplayer -ao alsa -really-quiet $link"$words"
+
+		// file
+		
+			$ .speech.sh (sed -n '5,10p;10q' mamgeorge/docs/speech_robot.txt)
 	]
 
 	pyttsx ( Python text-to-speech library ) [
@@ -310,14 +366,14 @@ ERRORS [
 				x1 USB PnP Sound device <--select
 
 			F5 Item
-			
+
 			tab to device; arrows to raise sound
 
 		$ aplay test.wav
 
 		// usb mic required hovering over it
 		// webcam got better sound
-		
+
 			device: webcam ( logitech c170 using fswebcam or arecord/omxplayer )
 
 			$40 Logitech C270 3MP 1280 x 720pixels USB 2.0 Black Webcam

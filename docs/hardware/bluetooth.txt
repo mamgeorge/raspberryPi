@@ -42,6 +42,8 @@ B8:27:EB:D4:F0:6E	rpi0_wh		(default controller)
 
 68:F7:FA:DF:79:FB	INSIQBS1	(tiny speaker) [
 
+	https://www.insiqinc.com/product/bluetooth-speaker/
+
 	[bluetooth]# info 68:F7:FA:DF:79:FB
 	Device 68:F7:FA:DF:79:FB (public)
 		Name: INSIQBS1
@@ -87,18 +89,24 @@ devices [ unknown InSiq
 
 	InSiq [
 
-		does have a mic, if looking at button, on the right
-		charge with 5v/300mAh; LED is red if charging, turns off when done
 
 		turn on by pressing main button for 3 sec
-		LED flashes blue when pairing is ready
-		connect device to INSIQBS1, once connected, LED stays blue
-			if connected to a phone:
+		
+			LED flashes blue when pairing is ready
+			connect device to INSIQBS1, once connected, LED stays blue
+		
+			while music is played, main button can be pressed to increase volume
+			does have a mic, if looking at button, on the right
+		
+		turn off by pressing main button for 4 sec
+
+		charge with 5v/300mAh; LED is red if charging, turns off when done
+
+		phone connections
+		
 			pressing button once answers calls
 			pressing button twice takes pictures:
 			(iOs > Setting > Camera > VolumeKey > Settings)
-		while music is played, main button can be pressed to increase volume
-		turn of by pressing main button for 4 sec
 	]
 ]
 
@@ -153,14 +161,15 @@ bluetoothctl [ agent scan connect trust pair info exit
 	[bluetooth]# devices
 
 		Discovery started
-		[CHG] Controller xx:xx:xx:xx:xx:xx Discovering: yes
-		[CHG] Device xx:xx:xx:xx:xx:xx RSSI: -69
+		[CHG] Controller	xx:xx:xx:xx:xx:xx Discovering: yes
+		[CHG] Device		xx:xx:xx:xx:xx:xx RSSI: -69
 
-	[bluetooth]# connect 12:12:28:6C:78:8C
-	[bluetooth]# pair 12:12:28:6C:78:8C			// GH_BT3500
-	[bluetooth]# trust 12:12:28:6C:78:8C
-	[bluetooth]# info 12:12:28:6C:78:8C
-	[bluetooth]# disconnect 12:12:28:6C:78:8C
+	[bluetooth]# pair		68:F7:FA:DF:79:FB	// GH_BT3500 12:12:28:6C:78:8C
+	[bluetooth]# connect	68:F7:FA:DF:79:FB
+	[bluetooth]# trust		68:F7:FA:DF:79:FB
+	[bluetooth]# info		68:F7:FA:DF:79:FB
+	[bluetooth]# disconnect	68:F7:FA:DF:79:FB
+	[bluetooth]# remove		68:F7:FA:DF:79:FB	
 	[bluetooth]# paired-devices
 
 	[bluetooth]# exit

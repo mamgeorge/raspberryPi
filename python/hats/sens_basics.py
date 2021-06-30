@@ -17,7 +17,7 @@ sensehat.low_light = True
 sensehat.set_rotation( 180 )
 sensehat.show_message( msg , text_colour = sens_defn.G )
 
-sensehat.show_letter( "MG" , sens_defn.R )
+sensehat.show_letter( "M" , sens_defn.R )
 time.sleep( 1 )
 espeak.synth( "MG!" )
 
