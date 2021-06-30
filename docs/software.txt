@@ -241,16 +241,16 @@ common (commmands connecting projects updating programs terms) [
  		monitor thru GPIO [ see: "hardware\hardware_notes.txt":monitor, see: "hardware\hardware_list.txt":components:comm ]
 	]
 
-	updating [ raspberryPi, nodeSamples
+	updating [ subst, "git"
 
-		c:>
-		cd C:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
-		CD C:\workspace\vscode\nodeSamples
-
-		git branch
-		git add .
-		git commit -m "xxxx"
-		git push
+		$ c:>
+		$ subst r: c:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
+		$ r:
+		
+		$ git branch
+		$ git add .
+		$ git commit -m "xxxx"
+		$ git push
 	]
 
 	programs [ Rasbpian, bash, Python, gcc, etc
@@ -1088,20 +1088,29 @@ install (SDcard NOOBs configure extras) [
 
 	extras [ speakers images sqlite3 git node gpio other
 
-		$ sudo dpkg -l | grep -i  xxx	// dpkg -l | grep -i "ii  sql"
+		$ sudo dpkg -l | grep -i  xxx
+			// dpkg -l | grep -i "ii  sql"
+			// dpkg -l | grep -i blue
 
 		speakers	[ complicated		// espeak v1.48.04+dfsg-7+deb10u1
 
 			see: "\\5Personal\Technology\raspberryPi\docs\bluetooth.txt"
 			see: "\\5Personal\Technology\raspberryPi\docs\sound.txt"
 
-			$ sudo bluetoothctl	// init: uses 12:12:28:6C:78:8C, GH_BT3500
+			$ sudo bluetoothctl
+				// GH_BT3500:	12:12:28:6C:78:8C
+				// InSiq:		68:F7:FA:DF:79:FB
 
-				[bluetooth]# pair 12:12:28:6C:78:8C
-				[bluetooth]# trust 12:12:28:6C:78:8C
-				[bluetooth]# connect 12:12:28:6C:78:8C
-				[bluetooth]# info 12:12:28:6C:78:8C
+				[bluetooth]# power on
+				[bluetooth]# pair		68:F7:FA:DF:79:FB
+				[bluetooth]# connect	68:F7:FA:DF:79:FB
 
+				[bluetooth]# trust		68:F7:FA:DF:79:FB
+				[bluetooth]# info		68:F7:FA:DF:79:FB
+
+				[bluetooth]# exit
+
+			// dpkg -l | grep -i espeak
 			$ sudo apt-get install espeak python-espeak -y
 			$ echo -e 'connect 12:12:28:6C:78:8C \n quit' | sudo bluetoothctl // GH_BT3500
 			$ espeak "Hi There"
