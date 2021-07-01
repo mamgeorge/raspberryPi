@@ -5,13 +5,14 @@
 # https://rosettacode.org/wiki/Terminal_control/Coloured_text
 # https://theasciicode.com.ar/
 
-initVars() {
+initVars( ) {
 
 	tabs 4
 	DATES=$(date +"%Y %B %-d, a %A at %-I:%M:%S %p.")
 	DATEM=$(date +"%Y-%M-%d @ %-I:%M:%S %p.")
 	DATEI=$(date --utc +%FT%T.%3N%Z)
-	IPADD=hostname -I
+	IPADD=$(hostname -I)
+	NODEV=$(node -v)
 
 	BRED="\033[31;1m"
 	BORA="\033[38;5;202m"
@@ -25,7 +26,7 @@ initVars() {
 	NCLR="\033[0m"
 
 	BCKR="\u001b[41;1m"
-	BCKO="\u001b[43;1;202m"
+	BCKO="\u001b[48;5;202m"
 	BCKY="\u001b[43;1m"
 	BCKG="\u001b[42;1m"
 	BCKB="\u001b[44;1m"
@@ -36,42 +37,71 @@ initVars() {
 	BOLD="\u001b[1m"
 	UNDR="\u001b[4m"
 	REVR="\u001b[7m"
-	ENDS="${BGRN}──────────────────────────────────────────────────────────── ${NCLR}"
+	ENDS="${BCKG}───────────────────────────────────────────────────${NCLR}"
 }
 
-##################
-nodejs( )		{ ## 1, 1a, 1b
+menu( ) {
 
-	echo -e "${BMAG}Expects Node to be installed ${NCLR}"
-	node -v
+	clear
+	echo -e "${ENDS}\n${BCKG}Greetings. ${DATES}${NCLR}"
 	echo -e ""
-	echo -e "\t${BCYN}1a) run Node MAT Service ${NCLR}"
+
+	## echo -e "0 EXIT | 1 node | 2 lights | 3 camera | 4 speaker | 5 motors | 6 comm | 7 xxxx | 8 robot | 9 pins | r REBOOT"
+	echo -e "0 EXIT			exits menu"
+	echo -e "1 nodejs		http://$(hostname -I):3000"
+	echo -e "2 light_LEDs	shows LED, ${BRED}R${BGRN}G${BBLU}B${NCLR}, Traffic"
+	echo -e "3 camera		takes a picture & displays"
+	echo -e "4 speakers		loads GH_BT3500, INSIQBS1+ for tts & files"
+	echo -e "5 motors		runs servos, stepper"
+	echo -e "6 gpio_HATs		runs gpio based HAT attachments"
+	echo -e "7 gpio_chips	runs gpio, i2c, or spi based programs"
+	echo -e "─────────────────────────────────────────"
+	echo -e "8 robot_cntl	runs Robot node interface"
+	echo -e "9 show_pins		shows diagram of J8 pinout board"
+	echo -e "r REBOOT		r: reboots, x: shutsDown PI, c: clear"
+	echo -e "${ENDS}"
+}
+
+# 1 #############
+nodejs( )		{ ## 1, 1a, 1b, 1c
+
+	menu
+	echo -e "${BCKC}Expects Node ${NODEV} to be installed ${NCLR}"
+	echo -e ""
+	echo -e "\t${BCYN}1a) run Node Server ${NCLR}"
 	echo -e "\t${BCYN}1b) run Node GPIO: ${BCKW}BLK${NCLR} pin_39 | ${BCKR}RED${NCLR} pin_40 ${NCLR}"
+	echo -e "\t${BCYN}1c) run Node ${NCLR}${BCKR} MAT ${NCLR}${BCYN} Service ${NCLR}"
 	echo -e ""
 }
-node_MAT( )		{ ## 1a
+node_server( )	{ ## 1a
 
-	node nodejs/samples/expressoMAT.js
+	node nodejs/samples/expresso.js
 }
 node_GPIO( )	{ ## 1b
 
 	node nodejs/samples/node_rpio.js
 }
+node_MAT( )		{ ## 1c
 
+	node nodejs/samples/expressoMAT.js
+}
+
+# 2 #############
 light_LEDs( )	{ ## 2, 2a, 2b, 2c
 
-	echo -e "${BMAG}Lighting: LED, RGB, TrafficPi${NCLR}"
+	menu
+	echo -e "${BCKM}Lighting: LED, RGB, TrafficPi${NCLR}"
 	echo -e ""
-	echo -e "\t${BMAG}2a) light1 LED${NCLR}"
+	echo -e "\t${BCKM}2a) light1 LED${NCLR}"
 	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground short cathode"
 	echo -e "\t${BCKR}RED${NCLR} pin_40: BCM_21 long anode"
 	echo -e ""
-	echo -e "\t${BMAG}2b) light2 RGB${NCLR}"
+	echo -e "\t${BCKM}2b) light2 RGB${NCLR}"
 	echo -e "\t${BRED}R${BGRN}G${BBLU}B${NCLR} LED 10mm facing east"
 	echo -e "\tBCM [ ${BBLU}20 - ${BGRN}16 - ${BWHT}34 - ${BRED}12 ${NCLR}]"
 	echo -e "\tPIN [ ${BBLU}38 - ${BGRN}36 - ${BWHT}34 - ${BRED}32 ${NCLR}]"
 	echo -e ""
-	echo -e "\t${BMAG}2c) light3 Traffic${NCLR}"
+	echo -e "\t${BCKM}2c) light3 Traffic${NCLR}"
 	echo -e "\t${BRED}P${NCLR}${BYEL}I${NCLR}${BGRN}T${NCLR}raffic if pin 01 is North: ${NCLR}"
 	echo -e "\tBCM [ ${BWHT}39 - ${BGRN}26 - ${BRED}19 - ${BYEL}13 ${NCLR}] # facing east"
 	echo -e "\tPIN [ ${BWHT}39 - ${BGRN}37 - ${BRED}35 - ${BYEL}33 ${NCLR}] # facing east"
@@ -90,9 +120,11 @@ light_Traffic( ){ ## 2c
 	python mamgeorge/python/leds/led_traffic.py
 }
 
+# 3 #############
 pictures( )		{ ## 3, 3a, 3b, 3c, 3d
 
-	echo -e "${BMAG}Camera & Images: May need HDMI or x11 server${NCLR}"
+	menu
+	echo -e "${BCKM}Camera & Images: May need HDMI or x11 server${NCLR}"
 	echo -e ""
 	echo -e "\t${BCYN}3a) Expects Camera to be connected${NCLR}"
 	echo -e "\t────────────────────────────────────────"
@@ -120,10 +152,12 @@ image_FBI( )	{ ## 3d
 	fbi mamgeorge/images/0_MEG.png
 }
 
+# 4 #############
 speakers( )		{ ## 4, 4a, 4b, 4c / 4d, 4e, 4f, 4g, 4h
 
-	echo -e "${BBLU}Expects BlueTooth enabled; device MAC addresses added${NCLR}"
-	echo -e ""	
+	menu
+	echo -e "${BCKB}Expects BlueTooth enabled; device MAC addresses added${NCLR}"
+	echo -e ""
 	echo -e "\t${BCYN}4a) 12:12:28:6C:78:8C | GH_BT3500	( silver speaker )${NCLR}"
 	echo -e "\t${BCYN}4b) 68:F7:FA:DF:79:FB | INSIQBS1	( tiny speaker )${NCLR}"
 	echo -e "\t${BCYN}4c) 18:45:C9:1D:0B:ED | ProHT_88133	( black speaker )${NCLR}"
@@ -179,10 +213,11 @@ tts_file( )		{ ## 4h
 	espeak "Welcome to the George Household" -ven-us+m5 -p50 -k5 -s180 -a100 --stdout | aplay -f cd
 }
 
-##################
+# 5 #############
 motors( )		{ ## 5, 5a, 5b, 5c
 
-	echo -e "${BMAG}Servos & Steppers!${NCLR}"
+	menu
+	echo -e "${BCKM}Servos & Steppers!${NCLR}"
 	echo -e ""
 	echo -e "\t${BMAG}5a) Servos ! [# ${BYEL}37,${BWHT}39,${BRED}02${NCLR}${BMAG}]${NCLR}"
 	echo -e "\t${BMAG}5b) Stepper! [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
@@ -226,9 +261,11 @@ steppers( )		{ ## 5c
 	python -u mamgeorge/python/servos/stepper_arg.py $MY_PARM
 }
 
+# 6 #############
 gpio_HATs( )	{ ## 6, 6a, 6b, 6c, 6d
 
-	echo -e "${BMAG}GPIO HATs${NCLR}"
+	menu
+	echo -e "${BCKM}gpio HATs${NCLR}"
 	echo -e ""
 	echo -e "\t${BMAG}6a) SenseHat${NCLR} basics"
 	echo -e "\t${BMAG}6b) SenseHat${NCLR} samples"
@@ -253,27 +290,30 @@ hat_showMG( )	{ ## 6d
 	python mamgeorge/python/hats/sens_b9.py 0
 }
 
+# 7 #############
 gpio_chips( )	{ ## 7, 7a-g, 7s, 7m
 
-	echo -e "${BMAG}gpio circuits${NCLR}"
+	menu
+	echo -e "${BCKM}gpio chips${NCLR}"
 	echo -e ""
-	echo -e "\t6a ${BBLU}HCSR04	distance: [${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKO}p38${NCLR}:B20 ${BCKB}p40${NCLR}:B21 ${BBLU}]${NCLR}"
+	echo -e "\t7a ${BBLU}HCSR04	distance	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKO}p38${NCLR}:B20 ${BCKB}p40${NCLR}:B21 ${BBLU}]${NCLR}"
 	echo -e ""
-	echo -e "${BMAG}6i) i2c_sample${NCLR}"
+	echo -e "${BCKM}7i) i2c_sample${NCLR}"
 	echo -e ""
-	echo -e "\t6b ${BBLU}BMP180	pressure	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
-	echo -e "\t6c ${BBLU}HMC5883L	compass		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
-	echo -e "\t6d ${BRED}MCP4725	DAC			${BBLU}[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
-	echo -e "\t6e ${BBLU}SSD1306	OLED		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
-	echo -e "\t6f ${BWHT}MCP23017	expander	[]${NCLR}"
-	echo -e "\t6g ${BWHT}PCA9685	controller	[]${NCLR}"
+	echo -e "\t7b ${BBLU}BMP180	pressure	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t7c ${BBLU}HMC5883L	compass		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t7d ${BRED}MCP4725	DAC			${BBLU}[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t7e ${BBLU}SSD1306	OLED		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t7f ${BWHT}MCP23017	expander	[]${NCLR}"
+	echo -e "\t7g ${BWHT}PCA9685	controller	[]${NCLR}"
 	echo -e ""
-	echo -e "${BMAG}6s) spi_sample${NCLR}"
+	echo -e "${BCKM}7s) spi_sample${NCLR}"
 	echo -e ""
-	echo -e "\t6m ${BWHT}MCP3008	DAC	${NCLR}"
+	echo -e "\t7m ${BWHT}MCP3008	DAC	${NCLR}"
 	echo -e ""
 }
 gpio_HCSR04( )	{ ## 7a
+
 	python mamgeorge/python/comm/gpio_HCSR04.py
 }
 i2c_sample( )	{ ## 7i
@@ -283,21 +323,27 @@ i2c_sample( )	{ ## 7i
 	python mamgeorge/python/comm/i2c_sample.py
 }
 i2c_BMP180( )	{ ## 7b
+
 	python mamgeorge/python/comm/i2c_BMP180.py
 }
 i2c_HMC5883L( )	{ ## 7c
+
 	python mamgeorge/python/comm/i2c_HMC5883L.py
 }
 i2c_MCP4725( )	{ ## 7d
+
 	python mamgeorge/python/comm/i2c_MCP4725.py
 }
 i2c_SSD1306( )	{ ## 7e
+
 	python mamgeorge/python/comm/i2c_SSD1306.py
 }
 i2c_MCP23017( )	{ ## 7f
+
 	python mamgeorge/python/comm/i2c_MCP23017.py
 }
 i2c_PCA9685( )	{ ## 7g
+
 	python mamgeorge/python/comm/i2c_PCA9685.py
 }
 spi_sample( )	{ ## 7s
@@ -306,12 +352,14 @@ spi_sample( )	{ ## 7s
 	python mamgeorge/python/comm/spi_sample.py
 }
 spi_MCP3008( )	{ ## 7m
+
 	python mamgeorge/python/comm/spi_MCP3008.py
 }
 
-##################
+# 8 #############
 robot_cntl( )	{ ## 8, 8a
 
+	menu
 	echo -e "${BCKR}ROBOT${NCLR}"
 	echo -e ""
 	echo -e "\t${BRED}8a) Robot_Interface${NCLR} expects GPIO, Node, etc."
@@ -337,9 +385,11 @@ robot_iface( )	{ ## 8a
 	python mamgeorge/python/mat/robot.py
 }
 
+# 9 #############
 show_pins( )	{ ## 9, 9a, 9b
 
-	echo -e "${BORA}show GPIO${NCLR}"
+	menu
+	echo -e "${BCKO}show GPIO${NCLR}"
 	echo -e ""
 	echo -e "\t${BORA}9a) GPIO diagram, MLG details${NCLR}"
 	echo -e "\t${BORA}9b) GPIO diagram, pinout.xyz ${NCLR}"
@@ -383,9 +433,9 @@ gpio readall
 }
 
 ##################
-exits( )	{ ## 0
+exits( )		{ ## 0
 
-	echo
+	echo -e "\n${BCKG}${ENDS}\n${BCKG}Exits Menu!${NCLR}\n"
 	echo -e MLG DATE: "$DATEM"
 	echo -e ISO DATE: "$DATEI"
 	echo -e model...: "$(cat /proc/device-tree/model | xargs --null)"
@@ -398,51 +448,39 @@ exits( )	{ ## 0
 	echo -e files...: "$(df -h | grep root)"
 	echo -e free....: "$(free -m | grep Mem)"
 
-	echo -e "\n${BGRN}Exits Menu!${NCLR}\n${ENDS}"
+	echo -e "\n${NCLR}\n${ENDS}"
 }
-reboots( )	{ ## r
+reboots( )		{ ## r
 
-	echo -e "\n${BGRN} Rebooting!${NCLR}\n${ENDS}"
+	echo -e "\n${BCKG} Rebooting!${NCLR}\n${ENDS}"
 	sudo reboot
 }
 shutdown( )	{ ## x
 
-	echo -e "\n${BGRN} Shutting Down!${NCLR}\n${ENDS}"
+	echo -e "\n${BCKG} Shutting Down!${NCLR}\n${ENDS}"
 	sudo shutdown -h now
 }
 
 ##################
 initVars
+menu
 
 while [ "$option" != "0" ]
 do
-
-	echo -e "${ENDS}\n${BGRN}Greetings. ${DATES} \n ${NCLR}"
-
-	## echo -e "0 EXIT | 1 node | 2 lights | 3 camera | 4 speaker | 5 motors | 6 comm | 7 xxxx | 8 robot | 9 pins | r REBOOT"
-	echo -e "0 EXIT			exits menu"
-	echo -e "1 nodejs		http://$(hostname -I):3000"
-	echo -e "2 light_LEDs	shows LED, ${BRED}R${BGRN}G${BBLU}B${NCLR}, Traffic"
-	echo -e "3 camera		takes a picture & displays"
-	echo -e "4 speakers		loads GH_BT3500, INSIQBS1, ProHT_88133; plays tts & files"
-	echo -e "5 motors		runs servos, stepper"
-	echo -e "6 gpio_HATs		runs gpio based HAT attachments"
-	echo -e "7 gpio_chips	runs gpio, i2c, or spi based programs"
-	echo -e "─────────────────────────────────────────"
-	echo -e "8 robot_cntl	runs Robot node interface"
-	echo -e "9 show_pins		shows diagram of J8 pinout board"
-	echo -e "r REBOOT		reboots PI, x shutsDown PI"
-	echo -e "${ENDS}"
-
 	read option
 
 	case $option in
 
 		## if [[ ( $option == "1" ) ]]; then nodejs; fi
-		0) exits 		;;
-		1) nodejs		;;
-			1a) node_MAT	;;
+		0) exits 			;;
+			r) reboots		;;
+			x) shutdown		;;
+			c) clear; menu	;;
+
+		1) nodejs			;;
+			1a) node_server	;;
 			1b) node_GPIO	;;
+			1c) node_MAT	;;
 
 		2) light_LEDs		;;
 			2a) light_blink	;;
@@ -498,8 +536,6 @@ do
 			9b) show_pinsOT	;;
 			9c) show_pinsWP	;;
 
-		r) reboots		;; x) shutdown ;;
-		## *) ;;
 	esac
 done
 ####
