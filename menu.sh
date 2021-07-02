@@ -11,6 +11,7 @@ initVars( ) {
 	DATES=$(date +"%Y %B %-d, a %A at %-I:%M:%S %p.")
 	DATEM=$(date +"%Y-%M-%d @ %-I:%M:%S %p.")
 	DATEI=$(date --utc +%FT%T.%3N%Z)
+	DATEQ=$(date +"%A %p")
 	IPADD=$(hostname -I)
 	NODEV=$(node -v)
 
@@ -38,12 +39,14 @@ initVars( ) {
 	UNDR="\u001b[4m"
 	REVR="\u001b[7m"
 	ENDS="${BCKG}───────────────────────────────────────────────────${NCLR}"
+	DVDR="─────────────────────────────────────────"
 }
 
 menu( ) {
 
 	clear
-	echo -e "${ENDS}\n${BCKG}Greetings. ${DATES}${NCLR}"
+	echo -e "${ENDS}"
+	echo -e "${BCKG}Greetings. ${DATEI} / ${DATEQ}${NCLR}"
 	echo -e ""
 
 	## echo -e "0 EXIT | 1 node | 2 lights | 3 camera | 4 speaker | 5 motors | 6 comm | 7 xxxx | 8 robot | 9 pins | r REBOOT"
@@ -55,7 +58,7 @@ menu( ) {
 	echo -e "5 motors		runs servos, stepper"
 	echo -e "6 gpio_HATs		runs gpio based HAT attachments"
 	echo -e "7 gpio_chips	runs gpio, i2c, or spi based programs"
-	echo -e "─────────────────────────────────────────"
+	echo -e "${DVDR}"
 	echo -e "8 robot_cntl	runs Robot node interface"
 	echo -e "9 show_pins		shows diagram of J8 pinout board"
 	echo -e "r REBOOT		r: reboots, x: shutsDown PI, c: clear"
@@ -75,15 +78,15 @@ nodejs( )		{ ## 1, 1a, 1b, 1c
 }
 node_server( )	{ ## 1a
 
-	node nodejs/samples/expresso.js
+	node raspberryPi/nodejs/expresso.js
 }
 node_GPIO( )	{ ## 1b
 
-	node nodejs/samples/node_rpio.js
+	node raspberryPi/nodejs/samples/node_rpio.js
 }
 node_MAT( )		{ ## 1c
 
-	node nodejs/samples/expressoMAT.js
+	node raspberryPi/nodejs/samples/expressoMAT.js
 }
 
 # 2 #############
@@ -109,15 +112,15 @@ light_LEDs( )	{ ## 2, 2a, 2b, 2c
 }
 light_blink( )	{ ## 2a
 
-	python mamgeorge/python/leds/led_blink.py
+	python raspberryPi/python/leds/led_blink.py
 }
 light_RGB( )	{ ## 2b
 
-	python mamgeorge/python/leds/led_rgb_more.py
+	python raspberryPi/python/leds/led_rgb_more.py
 }
 light_Traffic( ){ ## 2c
 
-	python mamgeorge/python/leds/led_traffic.py
+	python raspberryPi/python/leds/led_traffic.py
 }
 
 # 3 #############
@@ -127,7 +130,7 @@ pictures( )		{ ## 3, 3a, 3b, 3c, 3d
 	echo -e "${BCKM}Camera & Images: May need HDMI or x11 server${NCLR}"
 	echo -e ""
 	echo -e "\t${BCYN}3a) Expects Camera to be connected${NCLR}"
-	echo -e "\t────────────────────────────────────────"
+	echo -e "\t${DVDR}"
 	echo -e "\t${BCYN}3b) Showing ASCII view (but may take a minute)${NCLR}"
 	echo -e "\t${BCYN}3c) FEH expects X11 server to be running${NCLR}"
 	echo -e "\t${BCYN}3d) FBI expects X11 server to be running${NCLR}"
@@ -141,15 +144,15 @@ camera( )		{ ## 3a
 }
 image_caca( )	{ ## 3b
 
-	cacaview mamgeorge/images/0_MEG.png
+	cacaview raspberryPi/images/0_MEG.png
 }
 image_FEH( )	{ ## 3c
 
-	feh -g 600x400 --scale-down -d mamgeorge/images/0_MEG.png
+	feh -g 600x400 --scale-down -d raspberryPi/images/0_MEG.png
 }
 image_FBI( )	{ ## 3d
 
-	fbi mamgeorge/images/0_MEG.png
+	fbi raspberryPi/images/0_MEG.png
 }
 
 # 4 #############
@@ -161,7 +164,7 @@ speakers( )		{ ## 4, 4a, 4b, 4c / 4d, 4e, 4f, 4g, 4h
 	echo -e "\t${BCYN}4a) 12:12:28:6C:78:8C | GH_BT3500	( silver speaker )${NCLR}"
 	echo -e "\t${BCYN}4b) 68:F7:FA:DF:79:FB | INSIQBS1	( tiny speaker )${NCLR}"
 	echo -e "\t${BCYN}4c) 18:45:C9:1D:0B:ED | ProHT_88133	( black speaker )${NCLR}"
-	echo -e "\t────────────────────────────────────────"
+	echo -e "\t${DVDR}"
 	echo -e "\t${BCYN}4d) file aplay${NCLR}"
 	echo -e "\t${BCYN}4e) tts espeak${NCLR}"
 	echo -e "\t${BCYN}4f) tts flite${NCLR}"
@@ -183,10 +186,10 @@ blue_black( )	{ ## 4c
 }
 file_aplay( )	{ ## 4d
 
-	echo Expects Speaker connected; wav files in directory "mamgeorge/sound/"
+	echo Expects Speaker connected; wav files in directory "raspberryPi/sound/"
 	aplay -l
 	aplay -L
-	aplay mamgeorge/sound/ping.wav
+	aplay raspberryPi/sound/ping.wav
 }
 tts_espeak( )	{ ## 4e
 
@@ -230,7 +233,7 @@ servos( )		{ ## 5a
 	echo -e "\t${BYEL}YLW${NCLR} pin_37: BCM26"
 	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_02: 5V+"
-	python mamgeorge/python/servos/servo_one.py
+	python raspberryPi/python/servos/servo_one.py
 }
 stepper( )		{ ## 5b
 
@@ -241,7 +244,7 @@ stepper( )		{ ## 5b
 	echo -e "\t${BORA}ORA${NCLR} pin_19: BCM_10"
 	echo -e "\t${BCKW}BLK${NCLR} pin_06: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_04: 5V+"
-	python mamgeorge/python/servos/stepper_one.py
+	python raspberryPi/python/servos/stepper_one.py
 }
 steppers( )		{ ## 5c
 
@@ -253,12 +256,12 @@ steppers( )		{ ## 5c
 	echo -e "\t${BCKW}BLK${NCLR} pin_06: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_04: 5V+"
 
-	#python mamgeorge/python/servos/stepper_arg.py
+	#python raspberryPi/python/servos/stepper_arg.py
 	# echo ${my_param_str}|xargs python -u pathFile.py
 
 	echo -e "\nEnter a value between .01 (slow) and .001 (fast)"
 	read MY_PARM
-	python -u mamgeorge/python/servos/stepper_arg.py $MY_PARM
+	python -u raspberryPi/python/servos/stepper_arg.py $MY_PARM
 }
 
 # 6 #############
@@ -275,19 +278,19 @@ gpio_HATs( )	{ ## 6, 6a, 6b, 6c, 6d
 }
 hat_basics( )	{ ## 6a
 
-	python mamgeorge/python/hats/sens_basics.py
+	python raspberryPi/python/hats/sens_basics.py
 }
 hat_sample( )	{ ## 6b
 
-	python mamgeorge/python/hats/sens_samples.py 0
+	python raspberryPi/python/hats/sens_samples.py 0
 }
 hat_showB9( )	{ ## 6c
 
-	python mamgeorge/python/hats/sens_b9.py 9
+	python raspberryPi/python/hats/sens_b9.py 9
 }
 hat_showMG( )	{ ## 6d
 
-	python mamgeorge/python/hats/sens_b9.py 0
+	python raspberryPi/python/hats/sens_b9.py 0
 }
 
 # 7 #############
@@ -314,55 +317,57 @@ gpio_chips( )	{ ## 7, 7a-g, 7s, 7m
 }
 gpio_HCSR04( )	{ ## 7a
 
-	python mamgeorge/python/comm/gpio_HCSR04.py
+	python raspberryPi/python/comm/gpio_HCSR04.py
 }
 i2c_sample( )	{ ## 7i
 
 	ls /dev/i2c* /dev/spi*
 	i2cdetect -y 1
-	python mamgeorge/python/comm/i2c_sample.py
+	python raspberryPi/python/comm/i2c_sample.py
 }
 i2c_BMP180( )	{ ## 7b
 
-	python mamgeorge/python/comm/i2c_BMP180.py
+	python raspberryPi/python/comm/i2c_BMP180.py
 }
 i2c_HMC5883L( )	{ ## 7c
 
-	python mamgeorge/python/comm/i2c_HMC5883L.py
+	python raspberryPi/python/comm/i2c_HMC5883L.py
 }
 i2c_MCP4725( )	{ ## 7d
 
-	python mamgeorge/python/comm/i2c_MCP4725.py
+	python raspberryPi/python/comm/i2c_MCP4725.py
 }
 i2c_SSD1306( )	{ ## 7e
 
-	python mamgeorge/python/comm/i2c_SSD1306.py
+	python raspberryPi/python/comm/i2c_SSD1306.py
 }
 i2c_MCP23017( )	{ ## 7f
 
-	python mamgeorge/python/comm/i2c_MCP23017.py
+	python raspberryPi/python/comm/i2c_MCP23017.py
 }
 i2c_PCA9685( )	{ ## 7g
 
-	python mamgeorge/python/comm/i2c_PCA9685.py
+	python raspberryPi/python/comm/i2c_PCA9685.py
 }
 spi_sample( )	{ ## 7s
 
 	ls /dev/i2c* /dev/spi*
-	python mamgeorge/python/comm/spi_sample.py
+	python raspberryPi/python/comm/spi_sample.py
 }
 spi_MCP3008( )	{ ## 7m
 
-	python mamgeorge/python/comm/spi_MCP3008.py
+	python raspberryPi/python/comm/spi_MCP3008.py
 }
 
 # 8 #############
-robot_cntl( )	{ ## 8, 8a
+robot_cntl( )	{ ## 8, 8a, 8b
 
 	menu
 	echo -e "${BCKR}ROBOT${NCLR}"
 	echo -e ""
 	echo -e "\t${BRED}8a) Robot_Interface${NCLR} expects GPIO, Node, etc."
+	echo -e "\t${DVDR}"
+	echo -e "\t${BRED}8b) Robot_Articulation${NCLR}"
 	echo -e ""
 }
 robot_iface( )	{ ## 8a
@@ -382,7 +387,11 @@ robot_iface( )	{ ## 8a
 	echo -e "${BGRN}	│${BMAG} A action	│  X sensor ${BGRN}│${NCLR}"
 	echo -e "${BGRN}	└───────┐${BBLU} S speak ${BGRN}┌─────┘${NCLR}"
 	echo -e "${BGRN}			└─────────┘		 ${NCLR}"
-	python mamgeorge/python/mat/robot.py
+	python raspberryPi/python/mat/robot.py
+}
+robot_arms( )	{ ## 8b
+
+	python raspberryPi/python/mat/robot_arms.py
 }
 
 # 9 #############
@@ -530,6 +539,7 @@ do
 		############################
 		8) robot_cntl		;;
 			8a) robot_iface	;;
+			8b) robot_arms	;;
 
 		9) show_pins		;;
 			9a) show_pinsMG	;;
