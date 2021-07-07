@@ -14,7 +14,6 @@ pca_channel_number = 16
 #pca_control_object = ServoKit( channels=16, address=64 ) # address is 40 in hex
 #pca_control_object = ServoKit( channels=16, i2c=None, address=64, reference_clock_speed=25000000, frequency=50)
 
-pca_control_object = ServoKit( channels=16 )
 chnl=16
 i2cv=None
 addr=64
@@ -27,6 +26,7 @@ MIN_ANG = 0	# min angle rotational range
 MAX_ANG = 0	# max angle rotational range
 entryChannel = ''
 channelUsed = 0
+increments = 0.01
 
 # methods
 def init( ):
@@ -84,18 +84,18 @@ def init( ):
 
 def pcaTestItem( ):
 
-	print('\nrunning pcaTestItem') 
+	print('\n' + 'running pcaTestItem') 
 	for ctrAngle in range( MIN_ANG, MAX_ANG, 1 ): # MIN_ANG[ channelUsed ], MAX_ANG[ channelUsed ]
 
-		print('\tSend angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
+		print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
 		pca_control_object.servo[ channelUsed ].angle = ctrAngle
-		time.sleep( 0.01 )
+		time.sleep( increments )
 
 	for ctrAngle in range( MAX_ANG, MIN_ANG, -1 ):
 
-		print('\tSend angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
+		print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
 		pca_control_object.servo[ channelUsed ].angle = ctrAngle
-		time.sleep( 0.01 )
+		time.sleep( increments )
 
 	pca_control_object.servo[ channelUsed ].angle = None #disable channel
 	time.sleep( 0.5 )
@@ -103,31 +103,40 @@ def pcaTestItem( ):
 
 def pcaTestLoop( ):
 
-	print('\nrunning pcaTestLoop') 
+	print('\n' + 'running pcaTestLoop') 
 	for ctrChannel in range( pca_channel_number ):
 
 		for ctrAngle in range( MIN_ANG, MAX_ANG, 10 ):
 
-			print('\tSend angle {:03d} to Servo {}'.format( ctrAngle, ctrChannel + 1 ) , end = '\r' )
+			print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, ctrChannel + 1 ) , end = '\r' )
 			pca_control_object.servo[ ctrChannel ].angle = ctrAngle
-			time.sleep( 0.01 )
+			time.sleep( increments )
 
 		for ctrAngle in range( MAX_ANG, MIN_ANG, -10 ):
 
-			print('\tSend angle {:03d} to Servo {}'.format( ctrAngle, ctrChannel + 1 ) , end = '\r' )
+			print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, ctrChannel + 1 ) , end = '\r' )
 			pca_control_object.servo[ ctrChannel ].angle = ctrAngle
-			time.sleep( 0.01 )
+			time.sleep( increments )
 
 		pca_control_object.servo[ ctrChannel ].angle = None #disable channel
-		time.sleep( 0.5 )
+		time.sleep( 0.25 )
+		
 	print('')
 
 # execute
-init( )
-if entryChannel == 'a':
-	pcaTestLoop( )
-else:
-	pcaTestItem( )
+
+try:
+	pca_control_object = ServoKit( channels=16 )
+
+	init( )
+	if entryChannel == 'a':
+		pcaTestLoop( )
+	else:
+		pcaTestItem( )
+		
+except (RuntimeError, ValueError) as err:
+	print( "ServoKit pca_control_object not started" )
+	print( "Error:", sys.exc_info()[0], err )
 
 # finish
 print( 'DONE' )
