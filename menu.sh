@@ -38,6 +38,9 @@ initVars( ) {
 	BOLD="\u001b[1m"
 	UNDR="\u001b[4m"
 	REVR="\u001b[7m"
+
+	MENU="${BCKG}0 EXIT |1 node |2 lights |3 cam |4 sound |5 motor |6 HAT |7 GPIO |8 robot |9 pins |rxc${NCLR}"
+
 	ENDS="${BCKG}───────────────────────────────────────────────────${NCLR}"
 	DVDR="─────────────────────────────────────────"
 }
@@ -49,7 +52,6 @@ menu( ) {
 	echo -e "${BCKG}Greetings. ${DATEI} / ${DATEQ}${NCLR}"
 	echo -e ""
 
-	## echo -e "0 EXIT | 1 node | 2 lights | 3 camera | 4 speaker | 5 motors | 6 comm | 7 xxxx | 8 robot | 9 pins | r REBOOT"
 	echo -e "0 EXIT			exits menu"
 	echo -e "1 nodejs		http://$(hostname -I):3000"
 	echo -e "2 light_LEDs	shows LED, ${BRED}R${BGRN}G${BBLU}B${NCLR}, Traffic"
@@ -222,22 +224,15 @@ motors( )		{ ## 5, 5a, 5b, 5c
 	menu
 	echo -e "${BCKM}Servos & Steppers!${NCLR}"
 	echo -e ""
-	echo -e "\t${BMAG}5a) Servos ! [# ${BYEL}37,${BWHT}39,${BRED}02${NCLR}${BMAG}]${NCLR}"
-	echo -e "\t${BMAG}5b) Stepper! [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
-	echo -e "\t${BMAG}5c) Steppers [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5a) Stepper! [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5b) Steppers [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5c) Servos ! [# ${BYEL}37,${BWHT}39,${BRED}02${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5d) ServoPCA [# ${BBLU}02,${BGRN}03,${BWHT}05,${BCKW}09${NCLR}${BMAG}]${NCLR}"
 	echo -e ""
 }
-servos( )		{ ## 5a
+stepper( )		{ ## 5a
 
-	echo -e "${BMAG}SERVOS${NCLR}\n"
-	echo -e "\t${BYEL}YLW${NCLR} pin_37: BCM26"
-	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground-"
-	echo -e "\t${BCKR}RED${NCLR} pin_02: 5V+"
-	python raspberryPi/python/servos/servo_one.py
-}
-stepper( )		{ ## 5b
-
-	echo -e "${BMAG}STEPPER${NCLR}\n"
+	echo -e "${BCKM}STEPPER${NCLR}\n"
 	echo -e "\t${BBLU}BLU${NCLR} pin_11: BCM_17"
 	echo -e "\t${BMAG}PUR${NCLR} pin_13: BCM_27"
 	echo -e "\t${BYEL}YEL${NCLR} pin_15: BCM_22"
@@ -246,9 +241,9 @@ stepper( )		{ ## 5b
 	echo -e "\t${BCKR}RED${NCLR} pin_04: 5V+"
 	python raspberryPi/python/servos/stepper_one.py
 }
-steppers( )		{ ## 5c
+steppers( )		{ ## 5b
 
-	echo -e "${BMAG}STEPPERS${NCLR}\n"
+	echo -e "${BCKM}STEPPERS${NCLR}\n"
 	echo -e "\t${BBLU}BLU${NCLR} pin_11: BCM_17"
 	echo -e "\t${BMAG}PUR${NCLR} pin_13: BCM_27"
 	echo -e "\t${BYEL}YEL${NCLR} pin_15: BCM_22"
@@ -262,6 +257,39 @@ steppers( )		{ ## 5c
 	echo -e "\nEnter a value between .01 (slow) and .001 (fast)"
 	read MY_PARM
 	python -u raspberryPi/python/servos/stepper_arg.py $MY_PARM
+}
+servos( )		{ ## 5c
+
+	echo -e "${BCKM}SERVOS${NCLR}\n"
+	echo -e "\t${BYEL}YLW${NCLR} pin_37: BCM26"
+	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground-"
+	echo -e "\t${BCKR}RED${NCLR} pin_02: 5V+"
+	python raspberryPi/python/servos/servo_one.py
+}
+servo_PCA( )	{ ## 5d
+
+	echo -e "${BCKM}ServoPCA${NCLR}\n"
+	echo -e "\t${BBLU}BLU${NCLR} pin_02: VCC"
+	echo -e "\t${BGRN}GRN${NCLR} pin_03: SDA"
+	echo -e "\t${BWHT}WHT${NCLR} pin_05: SCL"
+	echo -e "\t${BCKW}GRA${NCLR} pin_09: GND"
+	echo -e ""
+	echo -e "\t1) ${BMAG}MG90S AranaCorp sample		${NCLR}"
+	echo -e "\t2) ${BMAG}HS-55 SubMicro, Gripper	${NCLR}"
+	echo -e "\t3) ${BMAG}HS-81 Micro, sample		${NCLR}"
+	echo -e "\t4) ${BMAG}HS311 Standard, Gripper	${NCLR}"
+	echo -e "\t5) ${BMAG}MG995 armature, TowerPro	${NCLR}"
+	echo -e "\t6) ${BMAG}MG995 armature, TianKongRC	${NCLR}"
+	echo -e ""
+	read -p "Enter servo number between 1-6: " MY_SERVO
+	MY_SERVO=${MY_SERVO:-'3'}
+	echo -e ""
+	echo -e "Neg number cycles all channels "
+	read -p "Enter a channel between 1 & 16: " MY_CHANNEL
+	MY_CHANNEL=${MY_CHANNEL:-'1'}
+	echo -e ""
+	python3 raspberryPi/python/servos/servo_PCA9685.py $MY_SERVO $MY_CHANNEL
+	echo -e "\n${MENU}"
 }
 
 # 6 #############
@@ -301,7 +329,7 @@ gpio_chips( )	{ ## 7, 7a-g, 7s, 7m
 	echo -e ""
 	echo -e "\t7a ${BBLU}HCSR04	distance	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKO}p38${NCLR}:B20 ${BCKB}p40${NCLR}:B21 ${BBLU}]${NCLR}"
 	echo -e ""
-	echo -e "${BCKM}7i) i2c_sample${NCLR}"
+	echo -e "${BCKM}7i) i2c_sample (run i2cdetect, ls)${NCLR}" 
 	echo -e ""
 	echo -e "\t7b ${BBLU}BMP180	pressure	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
 	echo -e "\t7c ${BBLU}HMC5883L	compass		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
@@ -310,7 +338,7 @@ gpio_chips( )	{ ## 7, 7a-g, 7s, 7m
 	echo -e "\t7f ${BWHT}MCP23017	expander	[]${NCLR}"
 	echo -e "\t7g ${BWHT}PCA9685	controller	[]${NCLR}"
 	echo -e ""
-	echo -e "${BCKM}7s) spi_sample${NCLR}"
+	echo -e "${BCKM}7s) spi_sample (run ls /dev/i2c* /dev/spi*)${NCLR}"
 	echo -e ""
 	echo -e "\t7m ${BWHT}MCP3008	DAC	${NCLR}"
 	echo -e ""
@@ -324,6 +352,7 @@ i2c_sample( )	{ ## 7i
 	ls /dev/i2c* /dev/spi*
 	i2cdetect -y 1
 	python raspberryPi/python/comm/i2c_sample.py
+	python3 raspberryPi/python/comm/test_blinka.py
 }
 i2c_BMP180( )	{ ## 7b
 
@@ -352,7 +381,8 @@ i2c_PCA9685( )	{ ## 7g
 spi_sample( )	{ ## 7s
 
 	ls /dev/i2c* /dev/spi*
-	python raspberryPi/python/comm/spi_sample.py
+	python3 raspberryPi/python/comm/spi_sample.py
+	python3 raspberryPi/python/comm/test_blinka.py
 }
 spi_MCP3008( )	{ ## 7m
 
@@ -514,9 +544,10 @@ do
 
 		############################
 		5) motors			;;
-			5a) servos		;;
-			5b) stepper		;;
-			5c) steppers	;;
+			5a) stepper		;;
+			5b) steppers	;;
+			5c) servos		;;
+			5d) servo_PCA	;;
 
 		6) gpio_HATs		;;
 			6a) hat_basics	;;
