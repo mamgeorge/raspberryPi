@@ -281,11 +281,12 @@ servo_PCA( )	{ ## 5d
 	echo -e "\t5) ${BMAG}MG995 armature, TowerPro	${NCLR}"
 	echo -e "\t6) ${BMAG}MG995 armature, TianKongRC	${NCLR}"
 	echo -e ""
-	read -p "Enter servo number between 1-6: " MY_SERVO
+	echo -e "${BCKM}Enter servo number between 1-6: ${NCLR}"  
+	read -p "" MY_SERVO
 	MY_SERVO=${MY_SERVO:-'3'}
-	echo -e ""
-	echo -e "Neg number cycles all channels "
-	read -p "Enter a channel between 1 & 16: " MY_CHANNEL
+	echo -e "Note: anything outside range cycles all channels!"
+	echo -e "${BCKM}Enter a channel between 1 & 16: ${NCLR}"  
+	read -p "" MY_CHANNEL
 	MY_CHANNEL=${MY_CHANNEL:-'1'}
 	echo -e ""
 	python3 raspberryPi/python/servos/servo_PCA9685.py $MY_SERVO $MY_CHANNEL
