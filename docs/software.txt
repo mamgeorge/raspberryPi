@@ -246,11 +246,20 @@ common (commmands connecting projects updating programs terms) [
 		$ c:>
 		$ subst r: c:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
 		$ r:
-		
+
 		$ git branch
 		$ git add .
 		$ git commit -m "xxxx"
-		$ git push
+		$ git push origin develop
+
+		$ git branch
+		$ git checkout master
+		$ git pull
+		$ git merge develop
+		$ git push origin master
+		$ git checkout develop
+		$ git branch
+		$ git status
 	]
 
 	programs [ Rasbpian, bash, Python, gcc, etc
