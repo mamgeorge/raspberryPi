@@ -224,6 +224,12 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 				JR Servos are supposedly better; much more expensive
 	]
 
+		purchased:
+		HiTec HS-55 | SubMicro, Gripper
+		HiTec HS-81 | Micro, sample
+		HiTec HS-311 | Standard, Gripper
+		TowerPro MG995 | armature, TianKongRC
+
 	[ 2 ] (13$) Hitec HS-55 SubMicro, Economy / 203 deg		[ PN: 31055S, shaft: 15 tooth spline, aka A15T
 
 		https://www.servocity.com/hitec-hs-55-servo
@@ -450,7 +456,7 @@ controllers [ analog stepper servo microcontroller
 
 				https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
 				https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
-				The 16-Channel 12-bit PWM/Servo Driver will drive up to 16 servos over I2C with only 2 pins. 
+				The 16-Channel 12-bit PWM/Servo Driver will drive up to 16 servos over I2C with only 2 pins.
 
 				made by NXP SemiConductors
 				PCA (Printed Circuit Assembly)

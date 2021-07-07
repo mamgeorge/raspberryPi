@@ -1,4 +1,4 @@
-# python3 python/comm/test_blinka.py
+# python3 raspberrypi/python/comm/test_blinka.py
 
 import board
 import digitalio
