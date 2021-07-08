@@ -422,7 +422,7 @@ robot_iface( )	{ ## 8a
 }
 robot_arms( )	{ ## 8b
 
-	python raspberryPi/python/mat/robot_arms.py
+	python3 raspberryPi/python/mat/robot_arms.py
 }
 
 # 9 #############

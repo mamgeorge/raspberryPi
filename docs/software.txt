@@ -243,14 +243,30 @@ common (commmands connecting projects updating programs terms) [
 
 	updating [ subst, "git"
 
+		// https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+
+			$ git config
+			$ git config --global core.autocrlf true // for windows
+
 		$ c:>
 		$ subst r: c:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
 		$ r:
-		
+
 		$ git branch
+		
+		$ git config --global core.autocrlf false
 		$ git add .
 		$ git commit -m "xxxx"
-		$ git push
+		$ git push origin develop
+
+		$ git branch
+		$ git checkout master
+		$ git pull
+		$ git merge develop
+		$ git push origin master
+		$ git checkout develop
+		$ git branch
+		$ git status
 	]
 
 	programs [ Rasbpian, bash, Python, gcc, etc
