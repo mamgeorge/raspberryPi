@@ -254,7 +254,7 @@ common (commmands connecting projects updating programs terms) [
 
 		$ git branch
 		
-		$ git config --global core.autocrlf false
+		$ git config --global core.autocrlf false // for linux
 		$ git add .
 		$ git commit -m "xxxx"
 		$ git push origin develop
