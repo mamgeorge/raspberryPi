@@ -243,11 +243,18 @@ common (commmands connecting projects updating programs terms) [
 
 	updating [ subst, "git"
 
+		// https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
+
+			$ git config
+			$ git config --global core.autocrlf true // for windows
+
 		$ c:>
 		$ subst r: c:\Users\mamge\OneDrive\Documents\5Personal\Technology\raspberryPi
 		$ r:
 
 		$ git branch
+		
+		$ git config --global core.autocrlf false
 		$ git add .
 		$ git commit -m "xxxx"
 		$ git push origin develop
