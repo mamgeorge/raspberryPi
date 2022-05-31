@@ -1,4 +1,4 @@
-C:\Martin\4Work\toolCode\raspberryPi\hardware_boards.txt
+\\raspberryPi\docs\hardware\hardware_boards.txt
 
 SenseHAT [
 
@@ -89,5 +89,160 @@ PiBrella [
 		pibrella.button.pressed( reset )	# in case of stupid cat
 		signal.pause( )						# wait for intruder! Press enter to finish the line and the code will run!
 		# this project requires adding a wire to the A terminals
+]
+
+rPi SBC [ raspberryPi Single Board Computer
+
+	CPU 
+	
+		Broadcom
+
+			BCM2835 (uses ARM1176JZF-S processor)		A, B, B+, 0
+			BCM2836 (uses Cortex-A7 MPcore Processor)	Model2
+		
+		ARM Advanced RISC Machines
+
+	GPIO
+
+		GPIO pins use 3.3 V rail and cannot exceed 16 mA of current
+
+			3.3 v has 50 mA to 500 mA for the B+
+			5.0 v has 1.5 A
+
+		GPIO is unsuitable for realtime or timing critical applications
+
+			1 Python garbage collecting is unpredictable
+			2 Linux kernel is multitasking O/S that can override CPU process priority
+		
+			An Arduino can permit real-time performance and predictability.
+
+		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+		$cat /proc/cpuinfo
+
+	versions
+
+		[ _ ] model SOC			CPU								LPDDR2SDRAM	port	pins	card		conn
+		-----+----------------+-----------------------------+----------+-------+------+----------+-----
+		[ _ ] RPi1 A	BCM2835	700 MHZ 1 -core ARM1176JZF-S	256MB RAM	1 USB	26 GPIO	SDHC		-
+		[ _ ] RPi1 A+	BCM2835	700 MHZ 1 -core ARM1176JZF-S	256MB RAM	1 USB	40 GPIO	microSDHC	-
+		[ _ ] RPi1 B+	BCM2835	700 MHZ 1 -core ARM1176JZF-S	512MB RAM	4 USB	40 GPIO	microSDHC	Ethernet
+		[ _ ] RPi1 B	BCM2835	700 MHZ 1 -core ARM1176JZF-S	512MB RAM	2 USB	26 GPIO	SDHC		-
+
+		[ * ] RPi0 		BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ 40PIN GPIO female header pushed in ]
+		[ * ] RPi0 WHf	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ Wifi, Header, Bluetooth
+
+			RPI0_WH	female (for robot)
+			
+			* Wifi: 802.11 b/g/n wireless LAN
+			* Bluetooth 4.1, Bluetooth Low Energy (BLE)
+			* Header (40PIN pre-soldered GPIO male headers)
+		]
+		[ * ] RPi0 WHm	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ Wifi, Header, Bluetooth
+
+			RPI0_WH	male
+
+			* Wifi: 802.11 b/g/n wireless LAN
+			* Bluetooth 4.1, Bluetooth Low Energy (BLE)
+			* Header (40PIN pre-soldered GPIO male headers)
+
+			Pi0 same or upgraded:
+			* 1GHz, single-core CPU
+			* 512MB RAM
+			* mini HDMI port
+			* micro USB OTG (On-The-Go) port
+			* micro USB power
+			* microSD card slot
+			* Composite video and reset headers
+			* CSI camera connector
+			* 65mm x 30mm			
+		]
+		[ _ ] RPi02W	BCM2710A1 1 GHZ 4 -core ARMCortex-A53	512MB SDRAM 1 USB	40 GPIO	microSDHC	- [
+
+			* Wifi: 2.4GHz 802.11 b/g/n wireless LAN
+			* Bluetooth 4.2, Bluetooth Low Energy (BLE), onboard antenna
+			* HAT-compatible 40-pin header footprint (unpopulated)
+
+				BCM2710A1 RP3A0 system-in-package (SiP)
+				Multimedia: H.264, MPEG-4 decode (1080p30); H.264 encode (1080p30)
+				OpenGL ES 1.1, 2.0 graphics
+				Composite video and reset pins via solder test points
+
+			Pi0 same or upgraded:
+			* 1GHz quad-core 64-bit Arm Cortex-A53 CPU
+			* 512MB LPDDR2 SDRAM
+			* mini HDMI port
+			* micro USB OTG (On-The-Go) port
+			* micro USB power
+			* microSD card slot
+			* CSI-2 camera connector
+			* FormFactor: 65mm x 30mm, Operating temperature: -20°C to +70°C
+			* Input power: 5V DC 2.5A
+		]
+
+		[ * ] RPi2 B+2	BCM2836	900 MHZ 4 -core ARM Cortex-A7	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [ encased for sensehat ]
+		[ _ ] RPi3 B 3	BCM2837	900 MHZ 4 -core ARM Cortex-A53	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
+
+			GPU:	Broadcom VideoCore IV @ 250 MHZ, OpenGL ES 2.0 (24 GFLOPS), MPEG-2 and VC-1, 1080p30 H.264/MPEG-4 AVC high-profile decoder and encoder
+			power:	5 V via MicroUSB drawing 800 mA (4.0 W)
+			RPiB2+:	size: 86 mm x 57 mm x 19 mm (3.4 in x 2.2 in x 0.8 in), weight: 45 g (1.60 oz)
+			RPi0:	size: 65 mm x 30 mm x 05 mm (2.7 in x 1.2 in x 0.2 in), weight: 09 g (0.32 oz); drawing 160 mA (0.8 W)
+
+			https://www.raspberrypi.org/documentation/usage/gpio/
+
+			note:
+			200-pin LPDDR2 SO-DIMM:
+		]
+		[ * ] RPi4 B 4	BCM2711 1.5 GHZ 4 -core ARMv7 rev 3		8.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
+
+			BCM2711 CPU; 64 bit Quad Core ARMv7 Processor rev 3 (v71)
+
+				8.0GB RAM
+				micro SD memory Card Slot (32GB)
+				40 pin GPIO
+				WiFi 2.4/5GHZ
+				BlueTooth 5.0
+
+			connectors
+
+				power	USB type C 5V 3A power supply
+				Ether	port Gigabit Ethernet
+				USB		2x port USB 3.0
+				USB		2x port USB 2.0
+				audio	2x port 3.5mm Audio Jack 4 pole Stereo Audio
+				video	2x port micro HDMI for 4k 60p displays
+				display	two lane MIPI DSI connector
+				camera	two lane MIPI CSI connector
+				PoE HAT Header
+		]
+
+	general [ Hardware Revision Code
+
+		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+
+		$ cat /proc/cpuinfo
+
+		Model & PCB Rev.		RAM		Hardware Revision Code
+		----------------		---		----------------------
+		Compute Module			512MB	0011
+		Compute Module			512MB	0014 (Embest, China)
+		RPi1 - 1 Model A		256MB	0007, 0008, 0009
+		RPi1 - 1 Model A+		256MB	0012
+		RPi1 - 1 Model A+		256MB	0015 (Embest, China)
+		RPi1 - 1 Model A+		512MB	0015 (Embest, China)
+		RPi1 - 1 Model B Rev 1	256MB	0002 (0003 for ECN0001)
+		RPi1 - 1 Model B Rev 2	256MB	0004, 0005, 0006
+		RPi1 - 1 Model B Rev 2	512MB	000d, 000e, 000f
+		RPi1 - 1 Model B+		512MB	0010, 0013, 900032
+		RPi2 - 2 Model B v1.1	1GB		a01041 (Sony, UK)
+		RPi2 - 2 Model B v1.1	1GB		a21041 (Embest, China)
+		RPi2 - 2 Model B v1.2	1GB		a22042
+		RPi3 - 3 Model B		1GB		a02082 (Sony, UK)
+		RPi3 - 3 Model B		1GB		a22082 (Embest, China)
+		RPi4 - 4 Model B v1.4	8GB		d03114
+
+		RPi0 - Zero W			512MB	0x9000C1
+		RPi0 - Zero v1.2		512MB	900092
+		RPi0 - Zero v1.3		512MB	900093
+	]
 ]
 ----

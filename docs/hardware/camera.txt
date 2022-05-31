@@ -9,7 +9,7 @@ init [
 		FEH: Image viewer
 		https://man.finalrewind.org/1/feh/
 
-		$ feh -g 600x400 --scale-down -d mamgeorge/images/0_MEG.jpg // g: geometrySize, d: drawFilename
+		$ feh -g 600x400 --scale-down -d mamgeorge/images/anyPic.jpg // g: geometrySize, d: drawFilename
 	]
 
 	$ sudo apt-get install fbi -y [ // fbi v2.10-3
@@ -59,7 +59,7 @@ camera pix [
 
 		// https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
 
-		$ raspistill -vf -o anyPic.jpg
+		$ raspistill -o anyPic.jpg
 		$ raspistill -vf -o anyPic.jpg	-w 640 -h 480 -v
 		$ raspistill -t 100 -vf -o anyPic.jpg -md 6
 		$ raspistill -t 100 -vf -o anyPic.jpg -md 6 -q 10
@@ -209,13 +209,19 @@ webcam video [
 
 extra [
 
+	raspberry pi camera validation
+
+		$ vcgencmd get_camera
+		
+			> supported=1 detected=1
+		
 	raspberry pi camera connector broken: molex 54548-2271
 
-	Here it is: https://www.raspberrypi.org/forums/viewtopic.php?f=44&t=151834
-		And here's the part information, not sure who sells it though:
+		https://www.raspberrypi.org/forums/viewtopic.php?f=44&t=151834
+
 		Item, Quantity, Reference, Part, Manufacturer, Manuf. Part No, Description,
 		15, 4, J9 J10 J11 J12, 54548-2271, Molex, 54548-2271, 0.5MM FFC 22W RA BC
-		You're looking for a 1mm pitch, 15 pin FFC or Flexible Printed Circuit (FPC) connector.
+		this is a 1mm pitch, 15 pin FFC or Flexible Printed Circuit (FPC) connector.
 
 		GeorgeHousehold
 		https://www.mouser.com/api-orderhistory/

@@ -6,7 +6,7 @@ general [
 
 		1 "putty" allows a command shell connection
 			pros: the lowest overhead
-			cons: only command shell possible , but no CLI
+			cons: only command shell possible , but no graphics
 
 		2 "X11" allows a graphical screen
 			uses command shell client AND graphical x11 server ( like putty AND Xming )
@@ -32,7 +32,7 @@ general [
 
 internet [ wifi
 
-	terms [
+	terminology [
 
 		ssid		Service Set Identifier name of wireless network (shows up when you search for wifi)
 		key_mgmt	type either open, wep, wpa, wpa2
@@ -203,7 +203,7 @@ internet [ wifi
 	]
 
 	responses [ wlan iwlist scan
-	
+
 		ipconfig (on Windows) [
 
 			Wireless LAN adapter Wi-Fi:
@@ -294,7 +294,26 @@ network_SSH [
 		GUI: HostName = "raspberrypi" , Port 22
 		shell: login: "pi" password: "xxxxxx"
 
-	sudosudo raspi-config allows change to some of these defaults
+	Putty_Configuration
+
+		Session
+
+			> HostName:			192.168.1.xx
+			> Port:				22
+			> Connection type:	SSH
+
+		Window
+			
+			> Appearance > Font: Lucida Console, 14pt 
+		
+		Connection
+			
+			> Data > Auto-login username: pi		
+			
+			> SSH > X11 > [x] Enable X11 Forwarding
+
+
+	"sudo raspi-config" allows change to some of these defaults
 
 	clipboard
 		Putty SSH uses

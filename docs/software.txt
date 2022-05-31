@@ -1,9 +1,216 @@
 \\5Personal\Technology\raspberryPi\docs\software.txt
 
-common (commmands connecting projects updating programs terms) [
+common [ projects, connecting, commmands, updating, programs
 
-	commmands [ general
+	see: "electronics.txt" for abbreviations
+	see: "hardware_motors.txt" > controllers > servo > PCA9685
 
+	projects [ servos, sound, MAT, sensehat, emulators
+
+		C:\workspace\github\nodeSamples\samples\blinkstick.js
+
+		servos [ PCA9685
+
+			https://www.learnrobotics.org/blog/raspberry-pi-servo-motor/
+			https://maker.pro/raspberry-pi/projects/raspberry-pi-pico-simulator-driving-servo-motor-using-pi-pico
+
+			menu [ $ ./raspberryPi/menu.sh ]
+
+				\\raspberryPi/python/servos/servo_PCA9685.py
+				// plug RPi into powerSource
+				// plug motors battery
+				5d, 2 (grppr) , 1 (left)	/ 16 (right)
+				5d, 6 (elbow) , 2 (left)	/ 15 (right)
+				5d, 6 (shldr) , 3 (left)	/ 14 (right)
+
+			$ sudo nano python/servos/servo_acts.py
+
+				$ python python/servos/servo_keys.py	// based on keyboard
+				$ python python/servos/servo_loop.py	// continuous
+				$ python python/servos/servo_once.py
+		]
+
+		sound [ USB: RPI_setup, STT
+
+			see: "sound.txt": RPI_setup
+				use "USB Virtual Sound Adapter", speaker, alsamixer, espeak "HI!"
+
+			see: "speakers.txt" > STT
+		]
+
+		MAT [ on RPI0wf , 22
+
+			see: "MAT.txt" // $ node /home/pi/servers/node/expressoMAT.js
+
+			see: "camera.txt" [
+
+				// controlling camera
+				shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
+				- or -
+				shell: C:\servers\Xming\Xming.exe :0 -clipboard -multiwindow
+				$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10
+				$ feh -g 600x400 -d img.jpg
+			]
+
+			greet speech [
+
+				see: "\\raspberryPi\docs\bluetooth.txt"
+
+				$ sudo bluetoothctl > # power on > # agent on > # pairable on > # scan on > # devices
+
+					[bluetooth]# pair > connect	> info > trust	68:F7:FA:DF:79:FB > exit`
+
+				menu [ $ ./raspberryPi/menu.sh ]
+
+					4b (loads Insiq)
+					4d (aplay)
+					4e (espeak)
+					4g (google)
+			]
+		]
+
+		sensehat [ $ python python/sensehat/sens_samples.py | (on RPI2B, 13) ]
+
+		emulators [ EDA, simulators
+
+			https://en.wikipedia.org/wiki/Comparison_of_EDA_software
+
+			https://www.element14.com/community/groups/development-tools/blog/2016/09/03/best-free-online-circuit-simulator
+
+			https://www.circuitlab.com
+
+			http://fritzing.org/
+
+			https://wokwi.com/
+		]
+	]
+
+	connecting [ wifi, SSH
+
+		wifi thru ips [
+
+			see: "\\raspberryPi\docs\network.txt" > network_SSH > Putty_Configuration
+
+				http://192.168.1.1 , admin , q-1-Z-TP
+
+				RPI0			 pi, s4_m2 | ip 192.168.1.xx |?B8:27:EB:D4:F0:6E?
+				RPI0_WH robot	 pi, s4_m2 | ip 192.168.1.17 | B8:27:EB:2B:0F:91
+				RPI0_WH	male	 pi, s4_m2 | ip 192.168.1.xx | B8:27:EB:fc:a5:72
+				RPI2 sensehat	 pi, s4_m2 | ip 192.168.1.xx | 00:0F:60:05:51:1D, 169.254.62.195
+				RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.02 | DC:A6:32:DB:19:F9
+
+			c:>	arp -a -v							// ARP: Address Resolution Protocol, -a shows arp entries , -v verbose
+
+			$ cat /sys/class/net/wlan0/address		// MAC address
+		]
+
+		SSH thru USB [
+
+			connecting raspberryPi with SSH thru USB:
+
+				https://desertbot.io/blog/headless-pi-zero-ssh-access-over-usb-windows
+
+			1 save a file named only "ssh" with one space in the RPi root drive:
+
+				"G:>ssh"
+
+			2 save "G:>config.txt" with the following appended:
+
+				dtoverlay=dwc2
+
+			3 save "G:>cmdline.txt" with the following inserted after rootwait and one space:
+
+				modules-load=dwc2,g_ether
+
+			4 plug in pi at usb (using USB C adaptor)
+
+				// appears to work if using USB C adaptor on connected network: s4_m2 shu4mei2
+
+			5 shell into RPi: "ssh pi@raspberrypi.local" [
+
+				C:> ssh pi@raspberrypi.local
+
+				ERROR: this did NOT work on USB port without network [
+
+					somes guides say to set key first:
+						C:> ssh-keygen -R raspberrypi.local
+						FAIL
+
+					RESOLUTION:
+
+					somes guides say to add "Bonjour"
+						Bonjour networking protocol sends and receives network packets on UDP port 5353
+						https://support.apple.com/kb/DL999?locale=en_US
+						no help
+						FAIL
+
+					somes guides say to add "RNDIS Ethernet gadget"
+						RNDIS (Remote Network Driver Interface Specification) is a Microsoft proprietary protocol
+						https://www.raspberrypi.org/forums/viewtopic.php?t=245184
+						https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
+							assumed device shows up in com port
+						"RNDIS Ethernet gadget" is NOT added in Windows 10!
+						FAIL
+				]
+
+				FAIL: NO RNDIS
+			]
+
+			6 installing RNDIS for Windows 10 [
+
+				RNDIS is an Ethernet via USB driver
+					which enables virtual Ethernet connection link between the Pi and your Laptop
+
+					downloaded: "http://web1.moddevices.com/shared/mod-duo-rndis.zip"
+						into: "C:\Users\mamge\Downloads\RNDIS_W10_cat"
+
+					Open Device Manager and you can see the Pi is detected as USB Serial Device at COM port under the
+						Ports(COM & LPT). Right click on it and select “Update Driver Software”.
+
+						https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
+
+					FAIL: NO COM PORT
+
+				show hidden
+
+					System > DeviceManager > View > "Show hidden devices"
+
+					System > DeviceManager > <computer> NetworkAdapters > "USB Ethernet/RNDIS Gadget"
+
+						weird because "it was not there earlier" , it was "greyed" out
+
+						General
+							Device type:		Network adapters
+							Manufacturer:		Acer Incorporated
+							Location:			Port_#0003.Hub_#0001
+
+						Driver
+							Driver Provider:	Acer Incorporated
+							Driver Date:		1/13/2010
+							Driver Version:		1.0.0.0
+							Driver Signer:		Microsoft Windows Hardware Compatibility Publisher
+
+							Driver Details
+								Driver Files:	"C:\Windows\System32\drivers\usb8023.sys"
+								Provider:			Microsoft Corporation
+								File version:		10.0.18362.1 (WinBuild. 160101.0600)
+								Copyright:			@Microsoft Corporation
+								Digital Signer:		Microsoft Windows
+
+						Details
+							Property
+								Device description
+								Value			USB Ethernet/RNDIS Gadget
+
+						Events
+							Device USB\VID_0525&PID_A4A2\5&8b74c98&0&3 requires further installation.
+			]
+		]
+	]
+
+	commmands [ ($ sudo apt-get update -y | $ sudo apt-get upgrade -y)
+
+		https://ss64.com
 		https://www.circuitbasics.com/useful-raspberry-pi-commands/
 
 		cut&paste [
@@ -14,6 +221,7 @@ common (commmands connecting projects updating programs terms) [
 
 		to add remote shell access , see: "network.txt": network_SSH
 
+		$ ./raspberryPi/menu.sh					// run menu shell
 		$ sudo shutdown -h now					// shutdown
 		$ sudo reboot							// reboot
 
@@ -39,208 +247,6 @@ common (commmands connecting projects updating programs terms) [
 		$ pinout								// printout gpio cooler
 	]
 
-	connecting wifi thru ips [
-
-		http://192.168.1.1 , admin , q-1-Z-TP
-
-			RPI0			 pi, s4_m2 | ip 192.168.1.xx |?B8:27:EB:D4:F0:6E?
-			RPI0_WH robot	 pi, s4_m2 | ip 192.168.1.21 | B8:27:EB:2B:0F:91
-			RPI0_WH	male	 pi, s4_m2 | ip 192.168.1.22 | B8:27:EB:fc:a5:72
-			RPI2 sensehat	 pi, s4_m2 | ip 192.168.1.19 | 00:0F:60:05:51:1D, 169.254.62.195
-			RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.14 | DC:A6:32:DB:19:F9
-
-		c:>	arp -a -v							// ARP: Address Resolution Protocol, -a shows arp entries , -v verbose
-
-		$ cat /sys/class/net/wlan0/address		// MAC address
-	]
-
-	connecting SSH thru USB [
-
-		connecting raspberryPi with SSH thru USB:
-
-			https://desertbot.io/blog/headless-pi-zero-ssh-access-over-usb-windows
-
-		1 save a file named only "ssh" with one space in the RPi root drive:
-
-			"G:>ssh"
-
-		2 save "G:>config.txt" with the following appended:
-
-			dtoverlay=dwc2
-
-		3 save "G:>cmdline.txt" with the following inserted after rootwait and one space:
-
-			modules-load=dwc2,g_ether
-
-		4 plug in pi at usb (using USB C adaptor)
-
-			// appears to work if using USB C adaptor on connected network: s4_m2 shu4mei2
-
-		5 shell into RPi: "ssh pi@raspberrypi.local" [
-
-			C:> ssh pi@raspberrypi.local
-
-			ERROR: this did NOT work on USB port without network [
-
-				somes guides say to set key first:
-					C:> ssh-keygen -R raspberrypi.local
-					FAIL
-
-				RESOLUTION:
-
-				somes guides say to add "Bonjour"
-					Bonjour networking protocol sends and receives network packets on UDP port 5353
-					https://support.apple.com/kb/DL999?locale=en_US
-					no help
-					FAIL
-
-				somes guides say to add "RNDIS Ethernet gadget"
-					RNDIS (Remote Network Driver Interface Specification) is a Microsoft proprietary protocol
-					https://www.raspberrypi.org/forums/viewtopic.php?t=245184
-					https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
-						assumed device shows up in com port
-					"RNDIS Ethernet gadget" is NOT added in Windows 10!
-					FAIL
-			]
-
-			FAIL: NO RNDIS
-		]
-
-		6 installing RNDIS for Windows 10 [
-
-			RNDIS is an Ethernet via USB driver
-				which enables virtual Ethernet connection link between the Pi and your Laptop
-
-				downloaded: "http://web1.moddevices.com/shared/mod-duo-rndis.zip"
-					into: "C:\Users\mamge\Downloads\RNDIS_W10_cat"
-
-				Open Device Manager and you can see the Pi is detected as USB Serial Device at COM port under the
-					Ports(COM & LPT). Right click on it and select “Update Driver Software”.
-
-					https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
-
-				FAIL: NO COM PORT
-
-			show hidden
-
-				System > DeviceManager > View > "Show hidden devices"
-
-				System > DeviceManager > <computer> NetworkAdapters > "USB Ethernet/RNDIS Gadget"
-
-					weird because "it was not there earlier" , it was "greyed" out
-
-					General
-						Device type:		Network adapters
-						Manufacturer:		Acer Incorporated
-						Location:			Port_#0003.Hub_#0001
-
-					Driver
-						Driver Provider:	Acer Incorporated
-						Driver Date:		1/13/2010
-						Driver Version:		1.0.0.0
-						Driver Signer:		Microsoft Windows Hardware Compatibility Publisher
-
-						Driver Details
-							Driver Files:	"C:\Windows\System32\drivers\usb8023.sys"
-							Provider:			Microsoft Corporation
-							File version:		10.0.18362.1 (WinBuild. 160101.0600)
-							Copyright:			@Microsoft Corporation
-							Digital Signer:		Microsoft Windows
-
-					Details
-						Property
-							Device description
-							Value			USB Ethernet/RNDIS Gadget
-
-					Events
-						Device USB\VID_0525&PID_A4A2\5&8b74c98&0&3 requires further installation.
-		]
-	]
-
-	projects [ links, project_arm, menu, MAT, network, sound, sensehat, monitor
-
-		links [ simulators
-
-			https://en.wikipedia.org/wiki/Comparison_of_EDA_software
-
-			https://www.element14.com/community/groups/development-tools/blog/2016/09/03/best-free-online-circuit-simulator
-
-			https://www.circuitlab.com
-
-			http://fritzing.org/
-		]
-
-		project_arm [
-
-			9 motors?
-				stepper + stepper + servo
-				stepper + stepper + servo
-				waist + head + pan
-
-			general [
-
-				https://www.circuitbasics.com/basics-of-the-i2c-communication-protocol/
-				https://www.best-microcontroller-projects.com/i2c-tutorial.html
-				https://learn.sparkfun.com/tutorials/i2c/all
-				https://www.robot-electronics.co.uk/i2c-tutorial
-				https://www.bluedot.space/tutorials/how-many-devices-can-you-connect-on-i2c-bus/
-
-				driving Stepper_Servo
-				https://www.raspberrypi.org/forums/viewtopic.php?t=147594
-
-				howMany
-				https://www.raspberrypi.org/forums/viewtopic.php?t=117605
-
-				offload
-				https://www.element14.com/community/community/raspberry-pi/raspberrypi_projects/blog/2017/07/04/offload-raspberry-pi-tasks-with-the-i2c-bus-turning-stepper-motors
-			]
-
-			i2c_stepper: with Polulu A4988 stepper driver
-
-				https://forum.arduino.cc/index.php?topic=277692.0
-
-			i2c_servo: with Adafruit PCA9685 servo driver
-
-				https://learn.adafruit.com/16-channel-pwm-servo-driver
-
-			$ ls /dev/*i2c*			/*/// returns /dev/i2c-1
-		]
-
-		menu [ $ ./menu.sh ]
-
-		MAT (on RPI0wf , 22) [
-
-			see: "MAT.txt"
-			$ node /home/pi/servers/node/expressoMAT.js
-
-			// controlling camera
-			see: "camera.txt"
-			shell: C:\servers\Xming\Xming.exe :0 -screen 0 800x600+100+100@1
-			- or -
-			shell: C:\servers\Xming\Xming.exe :0 -clipboard -multiwindow
-			$ raspistill -t 100 -vf -o img.jpg	-md 6 -q 10
-			$ feh -g 600x400 -d img.jpg
-
-			// controlling gripper (on RPI0wf , 22)
-
-				// red to p2, blk to grnd (p6), ylw to p7
-
-				$ sudo nano python/servos/servo_acts.py
-
-				$ python python/servos/servo_keys.py	// based on keyboard
-				$ python python/servos/servo_loop.py	// continuous
-				$ python python/servos/servo_once.py
-		]
-
-		network thru CLI [ see: "network.txt":internet ]
-
-		sound USB [ use "USB Virtual Sound Adapter" , speaker , alsamixer , espeak "HI!": see: "sound.txt":RPI_setup ]
-
-		sensehat (on RPI2B , 13) [ $ python python/sensehat/sens_samples.py ]
-
- 		monitor thru GPIO [ see: "hardware\hardware_notes.txt":monitor, see: "hardware\hardware_list.txt":components:comm ]
-	]
-
 	updating [ subst, "git"
 
 		// https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
@@ -253,7 +259,7 @@ common (commmands connecting projects updating programs terms) [
 		$ r:
 
 		$ git branch
-		
+
 		$ git config --global core.autocrlf false // for linux
 		$ git add .
 		$ git commit -m "xxxx"
@@ -311,59 +317,11 @@ common (commmands connecting projects updating programs terms) [
 			vmware_Raspbian_20190411_32bit.7z
 			C:\Program Files\Microsoft VS Code\resources
 	]
-
-	terms [
-
-		28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
-		ADC		Analog 2 Digital Converter
-		ASIC	Application Specific Integrated Circuit - customized IC
-		BCM		Broadcom
-		BJT		Bipolar Junction Transistor
-		CSI		Camera Serial Interface
-		DCE		Data Circuit-Terminating Equipment (ex. modem)
-		DIMM	Dual In Line Memory Module
-		DIP		Dual Inline Package
-		DSI		Display Serial Interface
-		DTE		Data Terminal Equipment (ex. terminal)
-		FET		Field Effect Transistor
-		FPC		Flexible Printed Circuit
-		FPGA	Field Programmable Gate Array
-		FTDI	Future Technology Devices International
-		GPIO	General Purpose Input/Output
-		HDMI	High Definition Multimedia Interface
-		HB		motor Hybrid Synchronous, Combination of PM and VR
-		I2C		Inter Integrated Circuit
-		IC		Integrated Circuit
-		J8		40 pin pinout board
-		LASER	Light Amplification Stimulated Emission Radiation
-		LCD		Liquid Crystal Display
-		LED		Light Emitting Diode
-		LPDDR	Low Power Double Data Rate synchronous
-		MIPI	Mobile Industry Processor Interface
-		MOSFET	Metal Oxide Semiconductor FET
-		NEMA	National Electrical Manufacturers Association
-		OLED	Organic Light Emitting Diode
-		P1		26 pin pinout board
-		PCB		Printed Circuit Board
-		PDIP	Plastic Dip Package
-		PM		motor Permanent Magnet, Active rotor
-		POE		Power over Ethernet
-		RGB		Red Green Blue
-		RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
-		RPI0WHf	0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
-		SIP		Single Inline Package
-		SODIMM	Small Outline DIMM
-		SOIC	Small Outline Integrated Circuit
-		SOC		System on Chip
-		SOP		Small Outline Package
-		SPI 	Serial Peripheral Interface
-		TSSOP	Thin Shrink Small Outline Package
-		UART	Universal Asynchronous Receive/Transmit
-		VR		motor Variable Reluctance, Reactive rotor
-	]
 ]
 
-bash 1 (system executables navigation GUIs) [
+bash 1 [ system, executables, navigation, GUIs
+
+	// in Linux, a software driver is known as a kernel module
 
 	https://www.raspberrypi.org/documentation/linux/usage/commands.md
 	https://lsingelectronics.org/articles/raspberry-PI/ten-things-raspberry-PI/
@@ -441,6 +399,7 @@ navigation [
 	$ find / -mtime 50					// find all the files which are modified 50 days back
 	$ find / -atime 50					// find all the files which are accessed 50 days back
 	$ find / -amin -60					// find all the files which are accessed in last 1 hour
+	$ sudo find / -name anyFile.txt
 
 	$ find . -type f -name "anyFile.txt" -exec rm -f { } \ ;	// find a single file called tecmint.txt and remove it
 	$ find /home -user anyUser -iname "*.txt"					// find all files that belongs to group Developer under /home directory
@@ -464,6 +423,7 @@ xtra [
 	$ flite -t "Hello, World!"
 	$ echo "Hello, World!" | festival --tts
 	$ ./speech.sh "Hello, World!"
+	$ ./raspberryPi/docs/speech.sh "Hello, World!"
 
 	$ sed -n '5,10p;10q' robots.txt | espeak
 	$ sed -n '5,10p;10q' robots.txt | flite
@@ -481,7 +441,9 @@ xtra [
 ]
 ]
 
-bash 2 (ANSI configs network usb Xming cpp comm) [
+bash 2 [ ANSI, configs, network, usb, Xming, cpp, comm
+
+	// in Linux, a software driver is known as a kernel module
 
 ANSI [
 
@@ -856,34 +818,53 @@ comm [
 ]
 ]
 
-startup (beg end) [
+startup [ beg, end
 
 beg scripts [
 
 	note: modify the "interfaces" file to connect to the lan:
+
 	$ sudo nano /etc/network/interfaces
 
-	https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
+		https://www.dexterindustries.com/howto/run-a-program-on-your-raspberry-pi-at-startup/
 
 	$ sudo nano /etc/rc.local	// when the Pi boots ; use & to spawn separate thread
 
 		"rc" stands for "run commands"
+		dmesg --console-off		// suppress kernel messages
 
 	$ sudo nano ~/.bashrc		// when any terminal loads
 
+		#export PATH=$PATH:/home/pi/servers/nodejs:/home/pi/servers/nodejs/bin
+		#vncserver
+
 		alias lsx='ls -lSX --color=auto'	// redefine listing with colors
 		lsx
-		#vncserver
-		#export PATH=$PATH:/home/pi/servers/nodejs:/home/pi/servers/nodejs/bin
 		tabs -4
 
+		cat /var/log/syslog		//to show boot log?
+		dmesg					//to show boot log?
+		TTS_LINK="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q="
+
 		espeak "Greetings. Computer initialized."
+
+	$ sudo nano /boot/config.txt
+
+		disable_splash=1		// add at end of file to disable rainbow splash screen
+
+	$ sudo nano /boot/cmdline.txt
+
+		logo.nologo				// added to EOF to remove rPi logo
+		console=tty3			// to reduce messages
+		quiet					// to reduce messages
 
 	init.d						// directory for scripts started during boot process
 
 	systemd						#
 
 	crontab						// for timed entries
+
+	sudo cp ~/splash.png /usr/share/plymouth/themes/pix/splash.png	// changes splash screen
 ]
 
 end scripts [
@@ -905,7 +886,7 @@ end scripts [
 ]
 ]
 
-python (idle nodejs) [
+python [ idle, nodejs
 
 idle python [
 
@@ -971,7 +952,7 @@ nodejs python [
 ]
 ]
 
-ERRORS [ updating booting
+ERRORS [ updating, booting
 
 	ERROR: trouble updating/upgrading
 
@@ -1028,7 +1009,7 @@ ERRORS [ updating booting
 	]
 ]
 
-install (SDcard NOOBs configure extras) [
+install [ SDcard, NOOBs, configure, extras
 
 	SDcard prepare [ card download format SSH
 
@@ -1110,31 +1091,70 @@ install (SDcard NOOBs configure extras) [
 
 		speakers	[ complicated		// espeak v1.48.04+dfsg-7+deb10u1
 
+			https://iotbytes.wordpress.com/connect-configure-and-test-usb-microphone-and-speaker-with-raspberry-pi/
+			https://www.instructables.com/Test-Sound-Card-and-Speakers-in-Raspberry-Pi/
+			https://www.raspberrypi.org/magpi-issues/MagPi72.pdf
+			https://pimylifeup.com/raspberry-pi-google-assistant/
+
+				http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=HelloWorld
+
 			see: "\\5Personal\Technology\raspberryPi\docs\bluetooth.txt"
+
+				assumes:
+				$ sudo apt-get update -y
+				$ sudo apt-get upgrade -y
+
+				assumes:
+				$ sudo dpkg -l | grep -i xxx
+				$ sudo apt-get install espeak python-espeak -y
+				$ sudo apt-get install alsa-utils -y
+
+				assumes:
+				$ sudo jack_control start
+				$ sudo alsamixer
+				$ sudo bluetoothctl
+
 			see: "\\5Personal\Technology\raspberryPi\docs\sound.txt"
 
 			$ sudo bluetoothctl
-				// GH_BT3500:	12:12:28:6C:78:8C
-				// InSiq:		68:F7:FA:DF:79:FB
+				// GH_BT3500	12:12:28:6C:78:8C
+				// InSiq		68:F7:FA:DF:79:FB
+				// EWA_A109		F5:C6:BE:13:D4:1B
 
 				[bluetooth]# power on
-				[bluetooth]# pair		68:F7:FA:DF:79:FB
-				[bluetooth]# connect	68:F7:FA:DF:79:FB
+				[bluetooth]# agent on
+				[bluetooth]# pairable on
+				[bluetooth]# scan on
+				[bluetooth]# devices
 
+				[bluetooth]# pair		68:F7:FA:DF:79:FB // pair 68:F7:FA:DF:79:FB
+				[bluetooth]# connect	68:F7:FA:DF:79:FB // connect 68:F7:FA:DF:79:FB
 				[bluetooth]# trust		68:F7:FA:DF:79:FB
 				[bluetooth]# info		68:F7:FA:DF:79:FB
 
 				[bluetooth]# exit
 
 			// dpkg -l | grep -i espeak
-			$ sudo apt-get install espeak python-espeak -y
-			$ echo -e 'connect 12:12:28:6C:78:8C \n quit' | sudo bluetoothctl // GH_BT3500
-			$ espeak "Hi There"
 
-			$ aplay mamgeorge/sound/ping.wav
+				$ echo -e 'connect 68:F7:FA:DF:79:FB \n quit' | sudo bluetoothctl //
+				$ espeak "Hi There"
+				$ espeak "Hi There" 2>/dev/null
+				$ ./raspberryPi/docs/speech.sh Greetings!
+
+				$ words="Hello There"
+				$ TTS_LINK="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q="
+				$ mplayer -ao alsa -really-quiet $TTS_LINK"$words"
+				$ mplayer -ao pulse -really-quiet $TTS_LINK"$words"
+
+				$ aplay raspberryPi/sound/ping.wav
 		]
 
 		images		[ feh fbi cacaview; requires XMing
+
+			$ vcgencmd get_camera
+
+				// When the camera is connected, the output is like this:
+				supported=1 detected=1
 
 			$ sudo apt-get install feh -y			// feh v3.1.3-1
 

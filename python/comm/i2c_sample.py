@@ -28,6 +28,8 @@ def showI2C( ):
 
 			print( "%d | " % DEV_ADD ),
 			lngVal=0
+	print( "DONE I2C" )
+	
 # exec
 showI2C( )
 

@@ -103,3 +103,5 @@ Note that some websites suggest RPI timing is not reliable enough many protocol 
 
 [markdown guide](https://www.markdownguide.org/basic-syntax/) <br />
 [collapsible markdown](https://gist.github.com/joyrexus/16041f2426450e73f5df9391f7f7ae5f)
+
+Copyright 2021, Martin George, Columbus Ohio

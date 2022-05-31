@@ -1,5 +1,25 @@
 \\5Personal\Technology\raspberryPi\docs\bluetooth.txt
 
+basics [
+
+	// $ sudo apt-get install pi-bluetooth
+	// $ sudo apt-get install bluetooth bluez blueman
+
+	$ sudo bluetoothctl
+
+		# pair		F5:C6:BE:13:D4:1B	EWA A109
+					12:12:28:6C:78:8C	GH_BT3500
+					68:F7:FA:DF:79:FB	INSIQBS1
+
+		# connect	F5:C6:BE:13:D4:1B	EWA A109
+
+		# info		F5:C6:BE:13:D4:1B	EWA A109
+
+	$ espeak "Hi There" -a 50		// a: audioVolume
+
+	$ ./docs/speech.sh "Hello, World!"
+]
+
 ----------------
 
 B8:27:EB:D4:F0:6E	rpi0_wh		(default controller)
@@ -20,24 +40,6 @@ B8:27:EB:D4:F0:6E	rpi0_wh		(default controller)
 		UUID: A/V Remote Control Target (0000110c-0000-1000-8000-00805f9b34fb)
 		UUID: Advanced Audio Distribu.. (0000110d-0000-1000-8000-00805f9b34fb)
 		UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
-]
-
-18:45:C9:1D:0B:ED	ProHT 88133	(black speaker) [
-
-	[bluetooth]# info 18:45:C9:1D:0B:ED
-	Device 18:45:C9:1D:0B:ED
-		Name: ProHT 88133
-		Alias: ProHT 88133
-		Class: 0x240404
-		Icon: audio-card
-		Paired: yes
-		Trusted: no
-		Blocked: no
-		Connected: no
-		LegacyPairing: no
-		UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
-		UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
-		UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
 ]
 
 68:F7:FA:DF:79:FB	INSIQBS1	(tiny speaker) [
@@ -66,6 +68,36 @@ B8:27:EB:D4:F0:6E	rpi0_wh		(default controller)
 		Modalias: usb:v04E8p7021d011B
 ]
 
+F5:C6:BE:13:D4:1B	EWA_A109	(tapered speaker) [
+
+	Ewa Audio A109 mini
+	model		: A109 mini
+	power		: 5V, 500 mAh
+	RMS			: 3W
+	frequency	: 100-18 khz
+	size		: 46.5 x 39.5 mm
+	BT freq		: 2.4-2.48 ghz
+	website		: www.eawcn.com
+]
+
+18:45:C9:1D:0B:ED	ProHT_88133	(black speaker) [
+
+	[bluetooth]# info 18:45:C9:1D:0B:ED
+	Device 18:45:C9:1D:0B:ED
+		Name: ProHT 88133
+		Alias: ProHT 88133
+		Class: 0x240404
+		Icon: audio-card
+		Paired: yes
+		Trusted: no
+		Blocked: no
+		Connected: no
+		LegacyPairing: no
+		UUID: Audio Sink                (0000110b-0000-1000-8000-00805f9b34fb)
+		UUID: A/V Remote Control        (0000110e-0000-1000-8000-00805f9b34fb)
+		UUID: Handsfree                 (0000111e-0000-1000-8000-00805f9b34fb)
+]
+
 20:20:00:19:60:18	Bluetooth 3.0 Keyboard (using dongle)
 
 DC:A6:32:DB:19:F8	epi4 ether
@@ -89,28 +121,35 @@ devices [ unknown InSiq
 
 	InSiq [
 
+		InSiq Portable Bluetooth Speaker
+
+			1.2 inches in diameter
+			2.1 oz in weight
+			2 hour time on a full charge via micro USB
+			Bluetooth 4.1
+			volume of 90DB
 
 		turn on by pressing main button for 3 sec
-		
+
 			LED flashes blue when pairing is ready
 			connect device to INSIQBS1, once connected, LED stays blue
-		
-			while music is played, main button can be pressed to increase volume
+
+		while music is played, main button can be pressed to increase volume
 			does have a mic, if looking at button, on the right
-		
+
 		turn off by pressing main button for 4 sec
 
 		charge with 5v/300mAh; LED is red if charging, turns off when done
 
 		phone connections
-		
+
 			pressing button once answers calls
 			pressing button twice takes pictures:
 			(iOs > Setting > Camera > VolumeKey > Settings)
 	]
 ]
 
-terminology [ profiles protocols
+abbreviations [ profiles protocols
 
 	A2DP	BT profiles: Advanced Audio Distribution Profile
 	GAP		BT profiles: Generic Access Profile
@@ -131,6 +170,7 @@ terminology [ profiles protocols
 	ISM		Industrial, Scientific, Medical
 	MAC		Media Access Control address; "xx:xx:xx:xx:xx:xx" for address of remote bluetooth device
 	PAN		Personal Area Networks
+	RMS		Root Mean Square (peak power in watts)
 	RSSI	Received Signal Strength Indication [
 
 		higher RSSI value is stronger
@@ -169,17 +209,17 @@ bluetoothctl [ agent scan connect trust pair info exit
 	[bluetooth]# trust		68:F7:FA:DF:79:FB
 	[bluetooth]# info		68:F7:FA:DF:79:FB
 	[bluetooth]# disconnect	68:F7:FA:DF:79:FB
-	[bluetooth]# remove		68:F7:FA:DF:79:FB	
+	[bluetooth]# remove		68:F7:FA:DF:79:FB
 	[bluetooth]# paired-devices
 
 	[bluetooth]# exit
 
 	ERROR [ paired but not connected
-	
-		RESOLUTION: run 
-		
-			pulseaudio -k		// kill an already running PulseAudio daemon of the calling user 
-			pulseaudio --start 
+
+		RESOLUTION: run
+
+			pulseaudio -k		// kill an already running PulseAudio daemon of the calling user
+			pulseaudio --start
 	]
 
 	$ sudo apt-get install espeak python-espeak
@@ -191,7 +231,7 @@ config files [ asoundrc rc alsa
 
 	2018/02/08	https://youness.net/raspberry-pi/how-to-connect-bluetooth-headset-or-speaker-to-raspberry-pi-3
 
-	$ sudo nano ~/.asoundrc
+	$ sudo nano ~/.asoundrc (or "/home/pi/.asoundrc")
 
 		defaults.bluealsa.interface "hci0"
 		defaults.bluealsa.device "xx:xx:xx:xx:xx:xx"
@@ -203,12 +243,21 @@ config files [ asoundrc rc alsa
 		jack_control start
 		## echo -e 'connect any_profile_name \n quit' | sudo bluetoothctl
 		echo -e 'connect xx:xx:xx:xx:xx:xx \n quit' | sudo bluetoothctl xx:xx:xx:xx:xx:xx // ProHT 88133
-
 		aplay -D bluealsa Music/ping.wav
+		aplay -D bluealsa raspberryPi/sound/ping.wav
 
 	$ sudo nano /usr/share/alsa/alsa.conf
 
 		may need some updates
+
+	// tests: https://howchoo.com/pi/bluetooth-raspberry-pi
+	$ sudo apt install bluetooth pi-bluetooth bluez blueman
+	$ sudo bluetoothctl > scan on > pair 68:F7:FA:DF:79:FB > connect 68:F7:FA:DF:79:FB
+	$ sudo jack_control start
+	$ sudo amixer -D bluealsa
+	$ sudo amixer -c 1 set Master 95%
+	$ pulseaudio -k		// kill an already running PulseAudio daemon of the calling user
+	$ pulseaudio --start
 ]
 
 testing [ hcitool hciconfig
@@ -228,12 +277,32 @@ testing [ hcitool hciconfig
 
 ERRORS [
 
+	ERROR [ PuTTY X11 proxy: unable to connect to forwarded X server: Network error: Connection refused
+
+		PuTTY X11 proxy: unable to connect to forwarded X server: Network error: Connection refused
+
+			PuTTY can not find where your X server is, because you did not tell it.
+			ssh on Linux does not have this problem because it runs under X so it just uses that one.
+
+			RESOLUTION
+
+				Fill in the blank box after "X display location" with your Xming servers address
+
+				? add ssh file?
+
+				? raspi-config > Interfacing Options > Enable/Disable remote command line access to your Pi using SSH
+
+				$ espeak "Hello World" 2>/dev/null
+
+				https://web.archive.org/web/20151016182428/http://danfountain.com/2013/03/raspberry-pi-text-to-speech/
+	]
+
 	ERROR [ raspberry pi 4 bluetooth speaker connected, trusted, paired but no sound
-	
+
 		raspberry pi 4 bluetooth speaker connected, trusted, paired but no sound
-	
+
 		RESOLUTION
-		
+
 			https://youness.net/raspberry-pi/how-to-connect-bluetooth-headset-or-speaker-to-raspberry-pi-3
 			sudo apt-get install pulseaudio pulseaudio-module-bluetooth
 			dpkg -l pulseaudio pulseaudio-module-bluetooth
@@ -241,6 +310,15 @@ ERRORS [
 
 			rebooted, set bluetoothctl to default-agent
 			note: was already paired
+	]
+
+	ERROR [ unable to connect to forwarded X server
+
+		KiTTY X11 proxy: unable to connect to forwarded X server: Network error: Connection refused
+		xcb_connection_has_error() returned true
+		ALSA lib confmisc.c:767:(parse_card) cannot find card '1'
+
+		RESOLUTION
 	]
 ]
 ----

@@ -2,7 +2,85 @@
 
 	https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart\\5Personal\Technology\raspberryPi\electronics.txt
 
-physics [
+abbreviations [ see also: hardware "bluetooth.txt", "speakers.txt"
+
+	i: ic, c: computer, m: motors, p: packaging, t: transmission
+	
+	c	ANSI	American National Standards Institute
+	c	ARM		Advanced RISC Machines
+	c	BCM		Broadcom
+	c	BMp		Bare Metal Programming
+	c	CSI		Camera Serial Interface; see MIPI
+	c	DSI		Display Serial Interface; see MIPI
+	c	EDA		Electronic Design Automation (CAD/CAM, Fritzing)
+	c	MIPI	Mobile Industry Processor Interface
+	c	GPIO	General Purpose Input Output
+	c	HDMI	High Definition Multimedia Interface
+	c	J8		RPi 40 pin pinout board
+	c	LASER	Light Amplification Stimulated Emission Radiation
+	c	LCD		Liquid Crystal Display
+	c	NEMA	National Electrical Manufacturers Association
+	c	P1		RPi 26 pin pinout board
+	c	POE		Power over Ethernet
+	c	PWM		Pulse Width Modulation
+	c	RGB		Red Green Blue
+	c	RPI0WHf	RPi 0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
+	c	SBC		Single Board Computer, Session Border Controller
+	c	STT		Speech To Text
+	c	TTS		Text To Speech 
+	c	VAC		Voice Activated commands
+
+	i	ASIC	Application Specific Integrated Circuit - customized IC
+	i	BJT		Bipolar Junction Transistor
+	i	DIMM	Dual In Line Memory Module
+	i	FET		Field Effect Transistor
+	i	FPC		Flexible Printed Circuit
+	i	FPGA	Field Programmable Gate Array
+	i	ICs		integrated circuits
+	i	LED		Light Emitting Diode
+	i	MOSFET	Metal Oxide Semiconductor FET
+	i	OLED	Organic Light Emitting Diode
+	i	PCA		Printed Circuit Assembly
+	i	PCB		Printed Circuit Board
+	i	RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
+	i	SOC		System on Chip
+	i	SODIMM	Small Outline DIMM
+
+	m	28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
+	m	ACIM	AC Induction Motors (vs synchronous?)
+	m	BLDC	Brushless DC Motors
+	m	HB		motor Hybrid Synchronous, Combination of PM and VR
+	m	MDS		Motor Driver Shield
+	m	PMAC	Permanent Magnet AC
+	m	PMDC	Permanent Magnet DC
+	m	PMSM	Permanent Magnet Synchronous Motor (brushless)
+	m	SMD		Stepper Motor Driver
+	m	VR		motor Variable Reluctance, Reactive rotor
+
+	p	DIP		Dual Inline Package
+	p	MCP		Multi Chip Package
+	p	PDIP	Plastic Dip
+	p	SIP		Single Inline Package
+	p	SOIC	Small Outline Integrated Circuit
+	p	SOP		Small Outline Package
+	p	TSSOP	Thin Shrink Small Outline Package
+
+	t	ADC		Analog 2 Digital Converter
+	t	BLE		Bluetooth Low Energy
+	t	DAC		Digital to Analog Converter
+	t	DCE		Data Circuit Terminating Equipment (ex. modem) 
+	t	DTE		Data Terminal Equipment (ex. terminal)
+	t	FTDI	Future Technology Devices International
+	t	I2C		Inter Integrated Circuit; uses: SDA, SCL, VCC, GND
+	t	I2S		Inter IC Sound, I²S, IIS
+	t	LPDDR	Low Power Double Data Rate synchronous
+	t	MIPI	Mobile Industry Processor Interface
+	t	RS232	Recommended Standard 232
+	t	SPI		Serial Peripheral Interface; uses: SCLK, MOSI, MISO, SS
+	t	UART	Universal Asynchronous Receive/Transmit
+]
+
+physics [ intro, power, circuits
 
 	Kirchoffs law: current is the same at all points in closed circuits
 
@@ -12,7 +90,7 @@ physics [
 
 		https://chemistry.stackexchange.com/questions/16785/positive-or-negative-anode-cathode-in-electrolytic-galvanic-cell
 
-	power (batteries)
+	power [ batteries
 
 		http://www.techlib.com/reference/batteries.html
 
@@ -56,15 +134,14 @@ physics [
 				N is the Number of turns
 				A is the Inner Core Area (pi*r^2) in m^2
 				l is the length of the Coil in metres
+	]
 
-	CircuitLab web software
-	https://www.circuitlab.com/
+	CircuitLab web software: https://www.circuitlab.com/
 
-	PCB etching
-	https://electronics.stackexchange.com/questions/42840/how-to-go-from-a-development-board-to-a-production-board
+	PCB etching: https://electronics.stackexchange.com/questions/42840/how-to-go-from-a-development-board-to-a-production-board
 ]
 
-components (resistor relay transistor diode inductor capacitor transceiver) [
+components (resistor, relay, transistor, diode, inductor, capacitor, transceiver) [
 
 	resistor [
 
@@ -277,7 +354,7 @@ ICs (includes ADC) [
 	MCP3008 / 8-Channel 10-Bit ADC with SPI
 ]
 
-controllers (HBridge ULN2003 others) [
+controllers [ HBridge, ULN2003, I2C, others
 
 	controller (hardware) vs driver (software)
 
@@ -301,7 +378,7 @@ controllers (HBridge ULN2003 others) [
 			similar to newer technology, cheaper, handles more amperage
 	]
 
-	ULN2003 (transistor array) [
+	ULN2003 (transistor array) [ pibrella
 
 		[ _ ] ($15) pibrella; peripheral connectors
 
@@ -324,18 +401,16 @@ controllers (HBridge ULN2003 others) [
 			A		plastic dip, L: surface mounted SOIC
 	]
 
-	I2C for multiple steppers [
+	I2C for multiple steppers [ see: "hardware_motors.txt", this is conceptual only
 
 		MCP23017 / 16 bit port expander
 
 		DRV8847-s / dual H-Bridge motor driver
 	]
 
-	I2C for multiple servos [
+	I2C for multiple servos [ see: "hardware_motors.txt", this is conceptual only
 
-		AdaFruit 16 Channel PWM Servo HAT / handles 16 servos
-		
-			Pi Servo pHat
+		AdaFruit 16 Channel PWM Servo HAT / handles 16 servos; also see: Pi Servo pHat
 
 		Dexter PivotPi / handles 8 servos
 
@@ -343,7 +418,7 @@ controllers (HBridge ULN2003 others) [
 
 		MSP430  controller 20 pin DIP chip (TSSOP20); MSP430-F2013
 			MSP430 Mixed Signal low Power microcontroller
-			MCU (Micro Controller Unit)
+			MCU (MicroController Unit)
 	]
 
 	others [
@@ -374,7 +449,7 @@ controllers (HBridge ULN2003 others) [
 	]
 ]
 
-packaging (PCB SIP DIP PDIP SOIC SOP TSSOP) [
+packaging [ PCB, SIP, DIP, PDIP, SOIC, SOP, TSSOP
 
 	https://en.wikipedia.org/wiki/List_of_integrated_circuit_packaging_types
 
@@ -388,7 +463,7 @@ packaging (PCB SIP DIP PDIP SOIC SOP TSSOP) [
 	TSSOP	Thin Shrink Small Outline Package
 ]
 
-interfaces (UART I2C SPI RS232 I2S) [
+interfaces [ UART, I2C, SPI, RS232, I2S
 
 	UART (Universal Asynchronous Receive/Transmit) [
 
@@ -448,9 +523,9 @@ interfaces (UART I2C SPI RS232 I2S) [
 			SPI several variants, limited wire length
 	]
 
-	I2C (Inter Integrated Circuit) [
+	I2C (Inter Integrated Circuit) [ 
 
-		RPI SPI & I2C tutorial
+		RPI SPI & I2C tutorial: uses SDA, SCL, VCC, GND
 
 			https://www.instructables.com/id/Raspberry-Pi-I2C-Python/
 			https://learn.sparkfun.com/tutorials/raspberry-pi-spi-and-i2c-tutorial/all
@@ -466,6 +541,15 @@ interfaces (UART I2C SPI RS232 I2S) [
 			like Asynchronous Serial Interfaces (RS-232 or UARTs) it uses two signal wires for info
 
 		comm starts with a unique start sequence
+
+			VCC Voltage Common Collector; "CC" means supply voltage is positive or negative
+				
+				VCC		Voltage Common Collector	in BJT
+				VEE		Voltage Emitter supply		in BJT
+				VDD		Voltage Drain supply		in FET
+				VSS		Voltage Source Supply		in FET
+	
+			GND Ground
 
 			SDA (Serial Data) is pulled low
 				a pull-down resistor connects unused input pins (OR and NOR gates) to ground (0V) to keep the given input LOW
@@ -680,8 +764,8 @@ interfaces (UART I2C SPI RS232 I2S) [
 				]
 			]
 
-			MCP23017 [ Port Expander 
-			
+			MCP23017 [ Port Expander
+
 				https://www.best-microcontroller-projects.com/mcp23017.html
 			]
 		]
@@ -710,11 +794,36 @@ interfaces (UART I2C SPI RS232 I2S) [
 
 	RS232 (currently TIA-232-F) [
 
-		A standard for serial communication that defines the signals connecting a
+		A standard for serial communication that defines the signals connecting a DTE to a DCE
+		
 			DTE (data terminal equipment such as a computer terminal) and a
 			DCE (data circuit-terminating equipment or data communication equipment such as a modem)
-			It defines the electrical characteristics and timing & meaning of signals,
-				and the physical size and pinout of connectors.
+			Defines electrical characteristics, timing, meaning of signals, physical size, & pinout of connectors.
+
+			Primary Channel data and control signals
+				
+				abr	name					purpose											DTE	DCE	DB25
+
+				DTR	Data Terminal Ready		DTE is ready to receive, initiate, or continue	out	in	20
+				DCD	Data Carrier Detect		DCE is receiving a carrier from a remote DCE	in	out	08
+				DSR	Data Set Ready			DCE is ready to receive and send data			in	out	06
+				RI	Ring Indicator			DCE detects incoming ring signal on telephone	in	out	22
+				RTS	Request To Send			DTE requests the DCE prepare to transmit data	out	in	04
+				RTR	Ready To Receive		DTE ready to receive from DCE; assumed asserted	out	in	04
+				CTS	Clear To Send			DCE is ready to accept data from the DTE		in	out	05
+				TxD	Transmitted Data		Carries data from DTE to DCE					out	in	02
+				RxD	Received Data			Carries data from DCE to DTE					in	out	03
+				GND	Common Ground			Zero voltage reference for all of the above		common	07
+				PG	Protective Ground		Connected to chassis ground						common	01
+			
+			Secondary Channel	
+			
+				common	Common Ground				7 (same as primary)
+				STD		Secondary Transmitted Data	14
+				SRD		Secondary Received Data		16
+				SRTS	Secondary Request To Send	19
+				SCTS	Secondary Clear To Send		13
+				SDCD	Secondary Carrier Detect	12
 	]
 
 	I2S (Inter IC Sound, I²S, IIS) [
@@ -728,28 +837,23 @@ interfaces (UART I2C SPI RS232 I2S) [
 	]
 ]
 
-rPi SBC (Single Board Computer) [
+SBC & SOC [ see: "hardware_boards.txt" 
 
-	Broadcom
-
-		BCM2835 (uses ARM1176JZF-S processor)		A, B, B+, 0
-		BCM2836 (uses Cortex-A7 MPcore Processor)	Model2
-
-	GPIO
-
-		GPIO pins use 3.3 V rail and cannot exceed 16 mA of current
-
-		3.3 v has 50 mA to 500 mA for the B+
-		5.0 v has 1.5 A
-
-	GPIO is unsuitable for realtime or timing critical applications
-
-		1 Python garbage collecting is unpredictable
-		2 Linux kernel is multitasking O/S that can override CPU process priority
-		An Arduino can permit real-time performance and predictability.
-
-	GPIO
-		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
-		$cat /proc/cpuinfo
+	ESP32 
+	
+		ESP32
+			https://www.youtube.com/watch?v=lvmNLuHj25o
+			press & hold boot button to enable erasing of flash
+			loads on 0x100
+		
+		Python for Windows
+			C:\Python310, includes IDLE
+			functins are called mudules in python
+		MicroPython bin file
+			must choose flash specific bin
+		Thonny 
+			needs to plug in ESP32 to read port
+			
+		>>> REPL Read Evaluate Print Loop
 ]
 ----

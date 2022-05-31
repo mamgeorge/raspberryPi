@@ -1,3 +1,4 @@
+# Copyright 2021, Martin George, Columbus Ohio
 
 import os
 import sys

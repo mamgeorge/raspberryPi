@@ -2,10 +2,6 @@
 
 	note: this document is for transport & articulation hardware only; see "electronics" for principles
 
-	google: handling multiple stepper motors
-		what driver handles multiple stepper motor
-	google: handling multiple servo motors
-
 chassis [ parts: chassis, gearbox, motor, plate, transport
 
 	[ * ] (16$) Chassis / Tracked Vehicle Chassis / Tamiya PN: 70108-1500 [
@@ -57,10 +53,11 @@ motor analog [ description, items (Tamiya 980112M)
 
 		can be controlled thru PWM
 
-		ACIM (AC Induction Motors) (vs synchronous?)
-		PMAC (Permanent Magnet AC), also PMDC
-		PMSM (Permanent Magnet Synchronous Motor) (brushless)
-		BLDC (Brushless DC Motors)
+		ACIM	AC Induction Motors (vs synchronous?)
+		PMAC	Permanent Magnet AC
+		PMDC	Permanent Magnet DC
+		PMSM	Permanent Magnet Synchronous Motor (brushless)
+		BLDC	Brushless DC Motors
 
 	[ _ ] (02$) analog brushed DC motor [
 
@@ -228,7 +225,7 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 		HiTec HS-55 | SubMicro, Gripper
 		HiTec HS-81 | Micro, sample
 		HiTec HS-311 | Standard, Gripper
-		TowerPro MG995 | armature, TianKongRC
+		TowerPro MG995 | armature, TianKongRC; similar to: TowerPro SG-5010
 
 	[ 2 ] (13$) Hitec HS-55 SubMicro, Economy / 203 deg		[ PN: 31055S, shaft: 15 tooth spline, aka A15T
 
@@ -385,7 +382,7 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 	]
 ]
 
-controllers [ analog stepper servo microcontroller
+controllers [ analog, stepper, servo, microcontroller
 
 	// controller (hardware) vs driver (software)
 
@@ -396,7 +393,7 @@ controllers [ analog stepper servo microcontroller
 		[ * ] (07$) HBridge L293D analog Motor Drive Shield / SainSmart
 	]
 
-	stepper driver [  ULN2003 DRV8825 A4988 TB6560 / L298N Atmega2560 / MCP23017 TB6612
+	stepper driver [ ULN2003, DRV8825, A4988, TB6560 / L298N, Atmega2560 / MCP23017, TB6612
 
 		https://forum.arduino.cc/t/is-it-possible-to-use-i2c-to-control-multiple-a4988-stepper-driver-boards/505675
 			Stepper drivers almost invariably have a step+direction interface, not a bus interface.
@@ -441,7 +438,7 @@ controllers [ analog stepper servo microcontroller
 		[ _ ] (xx$) TB6600 Stepper Motor Driver, 4A 9-42V, 28x72x95 or 1.1x2.8x3.7, CNC Controller / Usongshine
 	]
 
-	servo driver [ PivotPi XC4005XL PCA9685
+	servo driver [ PivotPi, XC4005XL, PCA9685
 
 		[ _ ] (20$) PivotPi i2c Servo Controller / upto 8 servos / Dexter
 
@@ -452,22 +449,26 @@ controllers [ analog stepper servo microcontroller
 
 		[ 2 ] (10$) PCA9685 16 Channel 12-Bit PWM Servo Motor Driver [
 
-			PCA9685 aka PCA-9685
+			PCA9685 (aka PCA-9685)
 
-				https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
-				https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
+				github driver libraries: https://github.com/adafruit/Adafruit-PWM-Servo-Driver-Library
+				sample single servo (1): https://www.aranacorp.com/en/using-a-pca9685-module-with-raspberry-pi/
+				sample multi servo (16): https://learn.adafruit.com/16-channel-pwm-servo-driver?view=all
+
 				The 16-Channel 12-bit PWM/Servo Driver will drive up to 16 servos over I2C with only 2 pins.
+
+			specs
 
 				made by NXP SemiConductors
 				PCA (Printed Circuit Assembly)
 
-			PCA9685 16-way (channel) steering gear control
-			12-Bit PWM Servo Motor Driver
-			DC5-10V power supply
-			PWM outputs have 220 ohm resistor
-			Communication Interface: i2c
-			Manf: HiLetgo, PN: 3-01-1070-2pcs, 2 pieces / Adafruit PN: 815 (1 @ 15$)
-			ASIN: B07BRS249H
+				PCA9685 16-way (channel) steering gear control
+				12-Bit PWM Servo Motor Driver
+				DC5-10V power supply
+				PWM outputs have 220 ohm resistor
+				Communication Interface: i2c
+				Manf: HiLetgo, PN: 3-01-1070-2pcs, 2 pieces / Adafruit PN: 815 (1 @ 15$)
+				ASIN: B07BRS249H
 		]
 	]
 

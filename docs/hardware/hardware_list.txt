@@ -81,7 +81,7 @@ strutural (structures, plastic, flanges) [
 					Square	1 1/2 x 1 1/2 x 1/8 inch, Anodized Aluminum 8809T7, 2feet:
 					Bolt-Together Framing Component
 
- 
+
 				[ 6$ ] GRAINGER APPROVED Grainger Choice Product
 					Square Tube, 6063AL, 7/8 In Inside Sq, 3 ft
 					Item # 6ALR7, Mfr. Model # 6ALR7, Catalog Page # 2183
@@ -113,8 +113,9 @@ strutural (structures, plastic, flanges) [
 		gearing
 
 			see: "https://www.servocity.com/glossary/#servo-splines"
-			Mg995 uses H25T spline (aka 3F), 5.9mm dia
+			servo Mg995 uses H25T spline (aka 3F), 5.9mm dia
 			servoCity may call flanges "Servo Shaft Hub"
+			gear coupling horn
 
 			gage	#screw	mm		inch
 			12g		#2		2mm		5/64"
@@ -135,11 +136,11 @@ strutural (structures, plastic, flanges) [
 		]
 
 		[ 4 ] (07$) Servo Aluminum Flange / 6mm shaft	[ PN: B08334N261, seller: Daier
-		
+
 			22mm base dia, 6mm inner dia, 10mm outer dia x 12mm ht total, 2mm base ht
 			4x hole dia: 2.85mm (#M3, or #4, 7/64 in), 16mm cross centers
 			4x #M3 mini hex wrench, 8 x #M3 set screw
-			45# steel (Aluminum, Alloy Steel, Copper)		
+			45# steel (Aluminum, Alloy Steel, Copper)
 		]
 
 		[ 5 ] (08$) Servo Aluminum Flange / 25t gear	[ PN: B00NOGMK3M, seller: Mallofusa
@@ -235,6 +236,23 @@ I/O (I/O: inputs, screens, camera, speakers) [
 	[ * ] headset		/ 30$ / microphone headset USB / Logitech ClearChat H390
 	[ * ] microphone	/ 05$ / microphone analog / -
 	[ * ] microphone	/ 05$ / USB mini microphone / model: MI-305 (supposed to be Kinobo "Makio" ASIN: B00IR8R7WQ) / frequency: 100-16 khz, sensitivity: -67 dBV/pBar, -47 dBV/Pascal +/- 4dB
+	[ * ] microphone	/ 30$ / USB gooseneck microphone / FIFINE model: K052 [
+
+		FIFINE K052 USB PC Computer Microphone 
+		(Mute Button/Volume Dial/LED Indicator, rigid gooseneck)
+		Bus 001 Device 004: ID 0c76:161e JMTek, LLC.
+		
+		model				K052
+		type				Condenser
+		polar pattern		Cardioid
+		frequency response	50-17kHz
+		sensitivity			-47±2dB
+		s/n ratio			More than 70dB
+		power supply		5V USB power
+		output connection 	USB 2.0
+		item weight 		9.1 ounces, shipping weight: 1.9 kg
+		ASIN				B07JB984Y7
+	]
 	[ * ] microamp		/ 08$ / USB Virtual Sound Adapter 7.1 Channel / Microphone In and 3.5mm Speaker Out / Digital Class-B Power Amplifier
 	[ _ ] microamp		/ 13$ / Stereo Audio Amplifier 3.7W class D, MAX98306 / adafruit ID: 987
 	[ _ ] microamp		/ 08$ / Plugable USB Audio Adapter / with 3.5mm Speaker Headphone Microphone Jacks, Black Aluminum, C-Media HS 100B Chip / Plugable
@@ -497,7 +515,7 @@ capacity (power, memory, books) [
 	[ 2 ] battery		/ 05$ / rechargeable battery / 2600 mAh / In&Out: 5V ~ 0.8A [ TPLink MN: TL-PB2600
 
 		68g, 25.6 x 25.6 x 93.5 mm
-	]						
+	]
 	[ _ ] switch		/ 36$ / 5VDC switch for 120VAC / PowerSwitch Tail II
 
 	memory

@@ -1,9 +1,14 @@
 #!/bin/bash
+# Copyright 2021, Martin George, Columbus Ohio
 # \home\pi\menu.sh
 # http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 # https://misc.flogisoft.com/bash/tip_colors_and_formatting
 # https://rosettacode.org/wiki/Terminal_control/Coloured_text
 # https://theasciicode.com.ar/
+
+# ERROR: bash commmand not found >> replace \r\n files with \n
+# ERROR: PCA9685 not running >> pins loose or not connected properly
+# ERROR: classes not found >> wrong version, needs Python3
 
 initVars( ) {
 
@@ -14,6 +19,7 @@ initVars( ) {
 	DATEQ=$(date +"%A %p")
 	IPADD=$(hostname -I)
 	NODEV=$(node -v)
+	TTS_LINK="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q="
 
 	BRED="\033[31;1m"
 	BORA="\033[38;5;202m"
@@ -33,6 +39,7 @@ initVars( ) {
 	BCKB="\u001b[44;1m"
 	BCKM="\u001b[45;1m"
 	BCKC="\u001b[46;1m"
+	BCKD="\u001b[40;1m\u001b[37m"
 	BCKW="\u001b[47;1m\u001b[30m"
 
 	BOLD="\u001b[1m"
@@ -74,7 +81,7 @@ nodejs( )		{ ## 1, 1a, 1b, 1c
 	echo -e "${BCKC}Expects Node ${NODEV} to be installed ${NCLR}"
 	echo -e ""
 	echo -e "\t${BCYN}1a) run Node Server ${NCLR}"
-	echo -e "\t${BCYN}1b) run Node GPIO: ${BCKW}BLK${NCLR} pin_39 | ${BCKR}RED${NCLR} pin_40 ${NCLR}"
+	echo -e "\t${BCYN}1b) run Node GPIO: ${BCKD}BLK${NCLR} pin_39 | ${BCKR}RED${NCLR} pin_40 ${NCLR}"
 	echo -e "\t${BCYN}1c) run Node ${NCLR}${BCKR} MAT ${NCLR}${BCYN} Service ${NCLR}"
 	echo -e ""
 }
@@ -98,7 +105,7 @@ light_LEDs( )	{ ## 2, 2a, 2b, 2c
 	echo -e "${BCKM}Lighting: LED, RGB, TrafficPi${NCLR}"
 	echo -e ""
 	echo -e "\t${BCKM}2a) light1 LED${NCLR}"
-	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground short cathode"
+	echo -e "\t${BCKD}BLK${NCLR} pin_39: ground short cathode"
 	echo -e "\t${BCKR}RED${NCLR} pin_40: BCM_21 long anode"
 	echo -e ""
 	echo -e "\t${BCKM}2b) light2 RGB${NCLR}"
@@ -141,7 +148,7 @@ pictures( )		{ ## 3, 3a, 3b, 3c, 3d
 camera( )		{ ## 3a
 
 	echo -e "${BMAG}Taking Picture!${NCLR}"
-	#raspistill -t 100 -vf -o anyPic.jpg -md 6 -q 10
+	raspistill -t 100 -vf -o anyPic.jpg -md 6 -q 10
 	echo -e "${BMAG}Done!${NCLR}"
 }
 image_caca( )	{ ## 3b
@@ -158,64 +165,66 @@ image_FBI( )	{ ## 3d
 }
 
 # 4 #############
-speakers( )		{ ## 4, 4a, 4b, 4c / 4d, 4e, 4f, 4g, 4h
+speakers( )		{ ## 4, 4a, 4b, 4c, 4d / 4m, 4n, 4o, 4p, 4q
 
 	menu
 	echo -e "${BCKB}Expects BlueTooth enabled; device MAC addresses added${NCLR}"
 	echo -e ""
 	echo -e "\t${BCYN}4a) 12:12:28:6C:78:8C | GH_BT3500	( silver speaker )${NCLR}"
 	echo -e "\t${BCYN}4b) 68:F7:FA:DF:79:FB | INSIQBS1	( tiny speaker )${NCLR}"
-	echo -e "\t${BCYN}4c) 18:45:C9:1D:0B:ED | ProHT_88133	( black speaker )${NCLR}"
+	echo -e "\t${BCYN}4c) F5:C6:BE:13:D4:1B | EWA_A109	( taper speaker )${NCLR}"
+	echo -e "\t${BCYN}4d) 18:45:C9:1D:0B:ED | ProHT_88133	( black speaker )${NCLR}"
 	echo -e "\t${DVDR}"
-	echo -e "\t${BCYN}4d) file aplay${NCLR}"
-	echo -e "\t${BCYN}4e) tts espeak${NCLR}"
-	echo -e "\t${BCYN}4f) tts flite${NCLR}"
-	echo -e "\t${BCYN}4g) tts google${NCLR}"
-	echo -e "\t${BCYN}4h) tts espeak & aplay${NCLR}"
+	echo -e "\t${BCYN}4m) tts espeak${NCLR}"
+	echo -e "\t${BCYN}4n) tts flite${NCLR}"
+	echo -e "\t${BCYN}4o) tts google${NCLR}"
+	echo -e "\t${BCYN}4p) tts espeak & aplay${NCLR}"
+	echo -e "\t${BCYN}4q) file aplay${NCLR}"
 	echo -e ""
 }
-blue_silver( )	{ ## 4a
+blue_silver( )	{ ## 4a GH_BT3500
 
 	echo -e 'connect 12:12:28:6C:78:8C\nquit\n' | sudo bluetoothctl
 }
-blue_tiny( )	{ ## 4b
+blue_tiny( )	{ ## 4b INSIQBS1
 
 	echo -e 'connect 68:F7:FA:DF:79:FB\nquit\n' | sudo bluetoothctl
 }
-blue_black( )	{ ## 4c
+blue_taper( )	{ ## 4c EWA_A109
+
+	echo -e 'connect F5:C6:BE:13:D4:1B\nquit\n' | sudo bluetoothctl
+}
+blue_black( )	{ ## 4d ProHT_88133
 
 	echo -e 'connect 18:45:C9:1D:0B:ED\nquit\n' | sudo bluetoothctl
 }
-file_aplay( )	{ ## 4d
+tts_espeak( )	{ ## 4m
+
+	echo Expects Speaker to be connected
+	espeak "Greetings. It is $DATES" -ven-us+m5 -p50 -k5 -s180 -a100
+}
+tts_flite( )	{ ## 4n
+
+	echo Expects Speaker to be connected
+	flite -t "Greetings. It is $DATES"
+}
+tts_google( )	{ ## 4o
+
+	./raspberryPi/docs/speech.sh "Hello, World!"
+
+	mplayer $TTS_LINK"$DATES"
+	# mplayer -ao alsa -really-quiet $TTS_LINK"$words"
+}
+tts_file( )		{ ## 4p
+
+	espeak "Welcome to the George Household" -ven-us+m5 -p50 -k5 -s180 -a100 --stdout | aplay -f cd
+}
+file_aplay( )	{ ## 4q
 
 	echo Expects Speaker connected; wav files in directory "raspberryPi/sound/"
 	aplay -l
 	aplay -L
 	aplay raspberryPi/sound/ping.wav
-}
-tts_espeak( )	{ ## 4e
-
-	echo Expects Speaker to be connected
-	espeak "Greetings. It is $DATES" -ven-us+m5 -p50 -k5 -s180 -a100
-}
-tts_flite( )	{ ## 4f
-
-	echo Expects Speaker to be connected
-	flite -t "Greetings. It is $DATES"
-}
-tts_google( )	{ ## 4g
-
-	./speech.sh "Hello, World!"
-
-	mplayer -really-quiet "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=HI"
-
-	words="Hello There"
-	link="http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q="
-	mplayer -ao alsa -really-quiet $link"$words"
-}
-tts_file( )		{ ## 4h
-
-	espeak "Welcome to the George Household" -ven-us+m5 -p50 -k5 -s180 -a100 --stdout | aplay -f cd
 }
 
 # 5 #############
@@ -227,8 +236,11 @@ motors( )		{ ## 5, 5a, 5b, 5c
 	echo -e "\t${BMAG}5a) Stepper! [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
 	echo -e "\t${BMAG}5b) Steppers [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
 	echo -e "\t${BMAG}5c) Servos ! [# ${BYEL}37,${BWHT}39,${BRED}02${NCLR}${BMAG}]${NCLR}"
-	echo -e "\t${BMAG}5d) ServoPCA [# ${BBLU}02,${BGRN}03,${BWHT}05,${BCKW}09${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5d) ServoPCA [# ${BBLU}02,${BGRN}03,${BWHT}05,${BCKD}06${NCLR}${BMAG}]${NCLR}"
 	echo -e ""
+	echo -e "\tLFT [ 01:grips, 02:elbow, 03:shldr [ ] 14:shldr, 15:elbow, 16:grips ] RGT"
+	echo -e "\t\t[ 04:light, 05:xxxxx, 06:xxxxx, 07:xxxxx, 08:xxxxx ]"
+	echo -e "\t\t[ 09:laser, 10:xxxxx, 11:xxxxx, 12:xxxxx, 13:xxxxx ]"
 }
 stepper( )		{ ## 5a
 
@@ -237,7 +249,7 @@ stepper( )		{ ## 5a
 	echo -e "\t${BMAG}PUR${NCLR} pin_13: BCM_27"
 	echo -e "\t${BYEL}YEL${NCLR} pin_15: BCM_22"
 	echo -e "\t${BORA}ORA${NCLR} pin_19: BCM_10"
-	echo -e "\t${BCKW}BLK${NCLR} pin_06: ground-"
+	echo -e "\t${BCKD}BLK${NCLR} pin_06: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_04: 5V+"
 	python raspberryPi/python/servos/stepper_one.py
 }
@@ -248,7 +260,7 @@ steppers( )		{ ## 5b
 	echo -e "\t${BMAG}PUR${NCLR} pin_13: BCM_27"
 	echo -e "\t${BYEL}YEL${NCLR} pin_15: BCM_22"
 	echo -e "\t${BORA}ORA${NCLR} pin_19: BCM_10"
-	echo -e "\t${BCKW}BLK${NCLR} pin_06: ground-"
+	echo -e "\t${BCKD}BLK${NCLR} pin_06: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_04: 5V+"
 
 	#python raspberryPi/python/servos/stepper_arg.py
@@ -262,7 +274,7 @@ servos( )		{ ## 5c
 
 	echo -e "${BCKM}SERVOS${NCLR}\n"
 	echo -e "\t${BYEL}YLW${NCLR} pin_37: BCM26"
-	echo -e "\t${BCKW}BLK${NCLR} pin_39: ground-"
+	echo -e "\t${BCKD}BLK${NCLR} pin_39: ground-"
 	echo -e "\t${BCKR}RED${NCLR} pin_02: 5V+"
 	python raspberryPi/python/servos/servo_one.py
 }
@@ -272,7 +284,7 @@ servo_PCA( )	{ ## 5d
 	echo -e "\t${BBLU}BLU${NCLR} pin_02: VCC"
 	echo -e "\t${BGRN}GRN${NCLR} pin_03: SDA"
 	echo -e "\t${BWHT}WHT${NCLR} pin_05: SCL"
-	echo -e "\t${BCKW}GRA${NCLR} pin_09: GND"
+	echo -e "\t${BCKD}GRA${NCLR} pin_06: GND"
 	echo -e ""
 	echo -e "\t1) ${BMAG}MG90S AranaCorp sample		${NCLR}"
 	echo -e "\t2) ${BMAG}HS-55 SubMicro, Gripper	${NCLR}"
@@ -281,11 +293,11 @@ servo_PCA( )	{ ## 5d
 	echo -e "\t5) ${BMAG}MG995 armature, TowerPro	${NCLR}"
 	echo -e "\t6) ${BMAG}MG995 armature, TianKongRC	${NCLR}"
 	echo -e ""
-	echo -e "${BCKM}Enter servo number between 1-6: ${NCLR}"  
+	echo -e "${BCKM}Enter servo number between 1-6: ${NCLR}"
 	read -p "" MY_SERVO
 	MY_SERVO=${MY_SERVO:-'3'}
 	echo -e "Note: anything outside range cycles all channels!"
-	echo -e "${BCKM}Enter a channel between 1 & 16: ${NCLR}"  
+	echo -e "${BCKM}Enter a channel between 1 & 16: ${NCLR}"
 	read -p "" MY_CHANNEL
 	MY_CHANNEL=${MY_CHANNEL:-'1'}
 	echo -e ""
@@ -323,21 +335,22 @@ hat_showMG( )	{ ## 6d
 }
 
 # 7 #############
-gpio_chips( )	{ ## 7, 7a-g, 7s, 7m
+gpio_chips( )	{ ## 7, 7a-i, 7s, 7m
 
 	menu
 	echo -e "${BCKM}gpio chips${NCLR}"
 	echo -e ""
-	echo -e "\t7a ${BBLU}HCSR04	distance	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKO}p38${NCLR}:B20 ${BCKB}p40${NCLR}:B21 ${BBLU}]${NCLR}"
+	echo -e "\t7a ${BBLU}HCSR04	distance	[${NCLR} ${BCKR}VCC${NCLR}5V, ${BCKD}GND${NCLR}-v, ${BCKO}p38${NCLR}:B20, ${BCKB}p40${NCLR}:B21 ${BBLU}]${NCLR}"
 	echo -e ""
-	echo -e "${BCKM}7i) i2c_sample (run i2cdetect, ls)${NCLR}" 
+	echo -e "${BCKM}7i) i2c_sample (run i2cdetect, ls)${NCLR}"
 	echo -e ""
-	echo -e "\t7b ${BBLU}BMP180	pressure	[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
-	echo -e "\t7c ${BBLU}HMC5883L	compass		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
-	echo -e "\t7d ${BRED}MCP4725	DAC			${BBLU}[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
-	echo -e "\t7e ${BBLU}SSD1306	OLED		[${NCLR} ${BCKR}VCC${NCLR}5V ${BCKW}GND${NCLR}-v ${BCKB}p03${NCLR}:SDA ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t7b ${BBLU}BMP180.	pressure	[${NCLR} ${BCKR}VCC${NCLR}5V, ${BCKD}GND${NCLR}-v, ${BCKB}p03${NCLR}:SDA, ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t7c ${BBLU}HMC5883L	compass		[${NCLR} ${BCKR}VCC${NCLR}5V, ${BCKD}GND${NCLR}-v, ${BCKB}p03${NCLR}:SDA, ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
+	echo -e "\t7d ${BRED}MCP4725	DAC.		[${NCLR} ${BCKR}VCC${NCLR}5V, ${BCKD}GND${NCLR}-v, ${BCKB}p03${NCLR}:SDA, ${BCKO}p05${NCLR}:SCL ${BRED}]${NCLR}"
+	echo -e "\t7e ${BBLU}SSD1306	OLED		[${NCLR} ${BCKR}VCC${NCLR}5V, ${BCKD}GND${NCLR}-v, ${BCKB}p03${NCLR}:SDA, ${BCKO}p05${NCLR}:SCL ${BBLU}]${NCLR}"
 	echo -e "\t7f ${BWHT}MCP23017	expander	[]${NCLR}"
-	echo -e "\t7g ${BWHT}PCA9685	controller	[]${NCLR}"
+	echo -e "\t7g ${BWHT}PCA9685	cntl LED	[${BCKB}VCC5V p2${NCLR}, ${BCKG}SDA p3${NCLR}, ${BCKW}SCL p5${NCLR}, ${BCKD}GND p9${NCLR} ${BWHT}]${NCLR}"
+	echo -e "\t7h ${BWHT}PCA9685	cntl servo	[${BCKB}VCC5V p2${NCLR}, ${BCKG}SDA p3${NCLR}, ${BCKW}SCL p5${NCLR}, ${BCKD}GND p9${NCLR} ${BWHT}]${NCLR}"
 	echo -e ""
 	echo -e "${BCKM}7s) spi_sample (run ls /dev/i2c* /dev/spi*)${NCLR}"
 	echo -e ""
@@ -375,9 +388,13 @@ i2c_MCP23017( )	{ ## 7f
 
 	python raspberryPi/python/comm/i2c_MCP23017.py
 }
-i2c_PCA9685( )	{ ## 7g
+i2c_PCA9685_LED( )		{ ## 7g
 
-	python raspberryPi/python/comm/i2c_PCA9685.py
+	python3 raspberryPi/python/comm/i2c_PCA9685_LED.py
+}
+i2c_PCA9685_servo( )	{ ## 7h
+
+	python3 raspberryPi/python/comm/i2c_PCA9685_servo.py
 }
 spi_sample( )	{ ## 7s
 
@@ -396,9 +413,8 @@ robot_cntl( )	{ ## 8, 8a, 8b
 	menu
 	echo -e "${BCKR}ROBOT${NCLR}"
 	echo -e ""
-	echo -e "\t${BRED}8a) Robot_Interface${NCLR} expects GPIO, Node, etc."
-	echo -e "\t${DVDR}"
-	echo -e "\t${BRED}8b) Robot_Articulation${NCLR}"
+	echo -e "\t${BCKR}8a) Robot_Interface!${NCLR} / expects GPIO, Node, etc."
+	echo -e "\t${BCKR}8b) Robot_Articulate${NCLR} / expects GPIO, selection"
 	echo -e ""
 }
 robot_iface( )	{ ## 8a
@@ -429,12 +445,16 @@ robot_arms( )	{ ## 8b
 show_pins( )	{ ## 9, 9a, 9b
 
 	menu
-	echo -e "${BCKO}show GPIO${NCLR}"
+	echo -e "${BCKO}show GPIO${NCLR} ${BCKO}9a${NCLR} ${BORA}MLG${NCLR} ${BCKO}9b${NCLR} ${BORA}pinout.xyz${NCLR} ${BCKO}9c${NCLR} ${BORA}WiringPi${NCLR}"
 	echo -e ""
-	echo -e "\t${BORA}9a) GPIO diagram, MLG details${NCLR}"
-	echo -e "\t${BORA}9b) GPIO diagram, pinout.xyz ${NCLR}"
-	echo -e "\t${BORA}9c) GPIO diagram, WiringPi   ${NCLR}"
-	echo -e ""
+	echo -e "${BGRA}  ${BWHT}GR ${BGRN}26 ${BGRN}SM ${BGRN}PW ${BGRN}G2 ${BGRN}G1 ${BYEL}ID   ${BWHT}GR ${BMAG}SC ${BMAG}SM ${BMAG}SM ${BRED}+3 ${BGRN}G3 ${BGRN}G2 ${BGRN}G0 ${BWHT}GR ${BGRN}GC ${BCYN}IC ${BCYN}ID ${BRED}+3${NCLR}  ${NCLR}"
+	echo -e "${BGRN}┌───────────────────────────────────────────────────────────────┐${NCLR}"                                                                                                               
+	echo -e "${BGRN}| ${BWHT}39 ${BGRN}37 ${BGRN}35 ${BGRN}33 ${BGRN}31 ${BGRN}29 ${BYEL}27 ${BGRN}| ${BWHT}25 ${BMAG}23 ${BMAG}21 ${BMAG}19 ${BRED}17 ${BGRN}15 ${BGRN}13 ${BGRN}11 ${BWHT}09 ${BGRN}07 ${BCYN}05 ${BCYN}03 ${BRED}01${NCLR} ${BGRN}|${NCLR}"
+	echo -e "${BGRN}| ${BWHT} ■ ${BGRN} ■ ${BGRN} ■ ${BGRN} ■ ${BGRN} ■ ${BGRN} ■ ${BYEL} ■ ${BGRN}| ${BWHT} ■ ${BMAG} ■ ${BMAG} ■ ${BMAG} ■ ${BRED} ■ ${BGRN} ■ ${BGRN} ■ ${BGRN} ■ ${BWHT} ■ ${BGRN} ■ ${BCYN} ■ ${BCYN} ■ ${BRED} ■${NCLR} ${BGRN}|${NCLR}"
+	echo -e "${BGRN}| ${BGRN} ■ ${BGRN} ■ ${BGRN} ■ ${BWHT} ■ ${BGRN} ■ ${BWHT} ■ ${BYEL} ■ ${BGRN}| ${BMAG} ■ ${BMAG} ■ ${BGRN} ■ ${BWHT} ■ ${BGRN} ■ ${BGRN} ■ ${BWHT} ■ ${BGRN} ■ ${BORA} ■ ${BORA} ■ ${BWHT} ■ ${BRED} ■ ${BRED} ■${NCLR} ${BGRN}|${NCLR}"
+	echo -e "${BGRN}| ${BGRN}40 ${BGRN}38 ${BGRN}36 ${BWHT}34 ${BGRN}32 ${BWHT}30 ${BYEL}28 ${BGRN}| ${BMAG}26 ${BMAG}24 ${BGRN}22 ${BWHT}20 ${BGRN}18 ${BGRN}16 ${BWHT}14 ${BGRN}12 ${BORA}10 ${BORA}08 ${BWHT}06 ${BRED}04 ${BRED}02${NCLR} ${BGRN}|${NCLR}"
+	echo -e "${BGRN}└───────────────────────────────────────────────────────────────┘${NCLR}"                                                                                                               
+	echo -e "${BGRA}  ${BGRN}SC ${BGRN}SM ${BGRN}16 ${BWHT}GR ${BGRN}PW ${BWHT}GR ${BYEL}IC   ${BMAG}S1 ${BMAG}S0 ${BGRN}G6 ${BWHT}GR ${BGRN}G5 ${BGRA}G4 ${BWHT}GR ${BGRN}G1 ${BORA}RX ${BORA}TX ${BWHT}GR ${BRED}+5 ${BRED}+5  ${NCLR}"
 }
 show_pinsMG( )	{ ## 9a
 
@@ -442,25 +462,25 @@ show_pinsMG( )	{ ## 9a
 	echo -e "					┌────────────┐"
 	echo -e "			${BCKR}pw:+3v3${NCLR}	│ 01 ${BRED}■${NCLR}	${BRED}■${NCLR} 02 │	${BCKR}pw:+5V${NCLR}				"
 	echo -e "I2C_SDA1	${BGRA}BCM_02${NCLR}	│ 03 ${BYEL}■${NCLR}	${BRED}■${NCLR} 04 │	${BCKR}pw:+5V${NCLR}				"
-	echo -e "I2C_SCL1	${BGRA}BCM_03${NCLR}	│ 05 ${BYEL}■${NCLR}	${BWHT}■${NCLR} 06 │	${BCKW}ground${NCLR}				"
+	echo -e "I2C_SCL1	${BGRA}BCM_03${NCLR}	│ 05 ${BYEL}■${NCLR}	${BWHT}■${NCLR} 06 │	${BCKD}ground${NCLR}				"
 	echo -e "	GCLK0	${BGRA}BCM_04${NCLR}	│ 07 ${BGRN}■${NCLR}	${BCYN}■${NCLR} 08 │	${BGRA}BCM_14${NCLR}	UART_TXD0	"
-	echo -e "			${BCKW}ground${NCLR}	│ 09 ${BWHT}■${NCLR}	${BCYN}■${NCLR} 10 │	${BGRA}BCM_15${NCLR}	UART_RXD0	"
+	echo -e "			${BCKD}ground${NCLR}	│ 09 ${BWHT}■${NCLR}	${BCYN}■${NCLR} 10 │	${BGRA}BCM_15${NCLR}	UART_RXD0	"
 	echo -e "	GEN0	${BGRA}BCM_17${NCLR}	│ 11 ${BGRN}■${NCLR}	${BGRN}■${NCLR} 12 │	${BGRA}BCM_18${NCLR}	GEN1 , PWM0	"
-	echo -e "	GEN2	${BGRA}BCM_27${NCLR}	│ 13 ${BGRN}■${NCLR}	${BWHT}■${NCLR} 14 │	${BCKW}ground${NCLR}				"
+	echo -e "	GEN2	${BGRA}BCM_27${NCLR}	│ 13 ${BGRN}■${NCLR}	${BWHT}■${NCLR} 14 │	${BCKD}ground${NCLR}				"
 	echo -e "	GEN3	${BGRA}BCM_22${NCLR}	│ 15 ${BGRN}■${NCLR}	${BGRN}■${NCLR} 16 │	${BGRA}BCM_23${NCLR}	GEN4		"
 	echo -e "			${BCKR}pw:+3v3${NCLR}	│ 17 ${BRED}■${NCLR}	${BGRN}■${NCLR} 18 │	${BGRA}BCM_24${NCLR}	GEN5		"
-	echo -e "SPI_MOSI	${BGRA}BCM_10${NCLR}	│ 19 ${BMAG}■${NCLR}	${BWHT}■${NCLR} 20 │	${BCKW}ground${NCLR}	-			"
+	echo -e "SPI_MOSI	${BGRA}BCM_10${NCLR}	│ 19 ${BMAG}■${NCLR}	${BWHT}■${NCLR} 20 │	${BCKD}ground${NCLR}	-			"
 	echo -e "SPI_MISO	${BGRA}BCM_09${NCLR}	│ 21 ${BMAG}■${NCLR}	${BGRN}■${NCLR} 22 │	${BGRA}BCM_25${NCLR}	GEN6		"
 	echo -e "SPI_SCLK	${BGRA}BCM_11${NCLR}	│ 23 ${BMAG}■${NCLR}	${BMAG}■${NCLR} 24 │	${BGRA}BCM_08${NCLR}	SPI_CE0_N	"
-	echo -e "			${BCKW}ground${NCLR}	│ 25 ${BWHT}■${NCLR}	${BMAG}■${NCLR} 26 │	${BGRA}BCM_07${NCLR}	SPI_CE1_N	"
+	echo -e "			${BCKD}ground${NCLR}	│ 25 ${BWHT}■${NCLR}	${BMAG}■${NCLR} 26 │	${BGRA}BCM_07${NCLR}	SPI_CE1_N	"
 	echo -e "					├────────────┤"
 	echo -e "I2C_IDSD	${BGRA}EEPROM${NCLR}	│ 27 ${BYEL}■${NCLR}	${BYEL}■${NCLR} 28 │	${BGRA}EEPROM${NCLR}	I2C_IDSC	"
-	echo -e "	GCLK1	${BGRA}BCM_05${NCLR}	│ 29 ${BGRN}■${NCLR}	${BWHT}■${NCLR} 30 │	${BCKW}ground${NCLR}				"
+	echo -e "	GCLK1	${BGRA}BCM_05${NCLR}	│ 29 ${BGRN}■${NCLR}	${BWHT}■${NCLR} 30 │	${BCKD}ground${NCLR}				"
 	echo -e "	GCLK2	${BGRA}BCM_06${NCLR}	│ 31 ${BGRN}■${NCLR}	${BGRN}■${NCLR} 32 │	${BGRA}BCM_12${NCLR}	PWM0		"
-	echo -e "	PWM1	${BGRA}BCM_13${NCLR}	│ 33 ${BGRN}■${NCLR}	${BWHT}■${NCLR} 34 │	${BCKW}ground${NCLR}				"
+	echo -e "	PWM1	${BGRA}BCM_13${NCLR}	│ 33 ${BGRN}■${NCLR}	${BWHT}■${NCLR} 34 │	${BCKD}ground${NCLR}				"
 	echo -e "SPI_MISO	${BGRA}BCM_19${NCLR}	│ 35 ${BGRN}■${NCLR}	${BGRN}■${NCLR} 36 │	${BGRA}BCM_16${NCLR}				"
 	echo -e "			${BGRA}BCM_26${NCLR}	│ 37 ${BGRN}■${NCLR}	${BGRN}■${NCLR} 38 │	${BGRA}BCM_20${NCLR}	SPI_MOSI	"
-	echo -e "			${BCKW}ground${NCLR}	│ 39 ${BWHT}■${NCLR}	${BGRN}■${NCLR} 40 │	${BGRA}BCM_21${NCLR}	SPI_SCLK	"
+	echo -e "			${BCKD}ground${NCLR}	│ 39 ${BWHT}■${NCLR}	${BGRN}■${NCLR} 40 │	${BGRA}BCM_21${NCLR}	SPI_SCLK	"
 	echo -e "					└────────────┘"
 }
 show_pinsOT( )	{ ## 9b from ????
@@ -535,13 +555,14 @@ do
 
 		4) speakers			;;
 			4a) blue_silver	;;
-			4b) blue_timy	;;
-			4c) blue_black	;;
-			4d) file_aplay	;;
-			4e) tts_espeak	;;
-			4f) tts_flite	;;
-			4g) tts_google	;;
-			4h) tts_file	;;
+			4b) blue_tiny	;;
+			4c) blue_taper	;;
+			4d) blue_black	;;
+			4m) tts_espeak	;;
+			4n) tts_flite	;;
+			4o) tts_google	;;
+			4p) tts_file	;;
+			4q) file_aplay	;;
 
 		############################
 		5) motors			;;
@@ -564,9 +585,11 @@ do
 				7d) i2c_MCP4725	 ;;
 				7e) i2c_SSD1306	 ;;
 				7f) i2c_MCP23017 ;;
-				7g) i2c_PCA9685	 ;;
-				7m) spi_MCP3008	 ;;
+				7g) i2c_PCA9685_LED		;;
+				7h) i2c_PCA9685_servo	;;
+
 			7s) spi_sample ;;
+				7m) spi_MCP3008	 ;;
 
 		############################
 		8) robot_cntl		;;

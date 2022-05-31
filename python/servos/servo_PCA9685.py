@@ -1,10 +1,16 @@
 # \\5Personal\Technology\raspberryPi\python\servos\servo_PCA9685.py
 '''
-PCA9685
+arana
 
-arana		https://www.aranacorp.com/en/using-a-pca9685-module-with-raspberry-pi/
+	https://www.aranacorp.com/en/using-a-pca9685-module-with-raspberry-pi/
 
 	sudo pip3 install adafruit-circuitpython-servokit
+		ERROR: Could not find a version that satisfies the requirement adafruit-circuitpython-servokit (from versions: )
+			update, upgrade
+		ERROR: Command "python setup.py egg_info" failed with error code 1 in /tmp/pip-build-uc571csj/sysv-ipc/
+			sudo -H pip3 install --upgrade pip
+			sudo pip3 install setuptools wheel
+			sudo pip3 install --upgrade setuptools
 	sudo pip3 install adafruit-circuitpython-pca9685
 	sudo pip3 install smbus2
 	sudo raspi-config
@@ -20,8 +26,9 @@ arana		https://www.aranacorp.com/en/using-a-pca9685-module-with-raspberry-pi/
 	API	pca9685 		https://github.com/adafruit/Adafruit_CircuitPython_PCA9685
 	API	PWMServoDriver	http://adafruit.github.io/Adafruit-PWM-Servo-Driver-Library/html/class_adafruit___p_w_m_servo_driver.html
 
-https://servodatabase.com/servos/hitec
+HiTec DB
 
+	https://servodatabase.com/servos/hitec
 	pw: pulse widths, pc: pulse cycle (20ms width for 50Hz frequency), ang: angle rotational range
 '''
 import time
@@ -51,7 +58,7 @@ increments = 0.01
 # methods
 def init( ):
 
-	print('running init') 
+	print('running init')
 	################
 	global MIN_IMP
 	global MAX_IMP
@@ -84,9 +91,9 @@ def init( ):
 	entryChannel = sys.argv[2]
 	print( '\t' + 'entryChannel: [{}]'.format( entryChannel ) )
 	if entryChannel.isnumeric():
-		
+
 		if int(entryChannel) >= 1 and int(entryChannel) <= 16:
-		
+
 			channelUsed = int( sys.argv[2] ) - 1
 		else:
 			entryChannel = 'a'
@@ -104,7 +111,7 @@ def init( ):
 
 def pcaTestItem( ):
 
-	print('\n' + 'running pcaTestItem') 
+	print('\n' + 'running pcaTestItem')
 	for ctrAngle in range( MIN_ANG, MAX_ANG, 1 ): # MIN_ANG[ channelUsed ], MAX_ANG[ channelUsed ]
 
 		print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
@@ -123,7 +130,7 @@ def pcaTestItem( ):
 
 def pcaTestLoop( ):
 
-	print('\n' + 'running pcaTestLoop') 
+	print('\n' + 'running pcaTestLoop')
 	for ctrChannel in range( pca_channel_number ):
 
 		for ctrAngle in range( MIN_ANG, MAX_ANG, 10 ):
@@ -140,7 +147,7 @@ def pcaTestLoop( ):
 
 		pca_control_object.servo[ ctrChannel ].angle = None #disable channel
 		time.sleep( 0.25 )
-		
+
 	print('')
 
 # execute
@@ -153,7 +160,7 @@ try:
 		pcaTestLoop( )
 	else:
 		pcaTestItem( )
-		
+
 except (RuntimeError, ValueError) as err:
 	print( "ServoKit pca_control_object not started" )
 	print( "Error:", sys.exc_info()[0], err )
