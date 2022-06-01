@@ -124,7 +124,7 @@ common [ projects, connecting, commmands, updating, programs
 
 			4 plug in pi at usb (using USB C adaptor)
 
-				// appears to work if using USB C adaptor on connected network: s4_m2 shu4mei2
+				// appears to work if using USB C adaptor on connected network: s4_m2
 
 			5 shell into RPi: "ssh pi@raspberrypi.local" [
 
@@ -165,7 +165,7 @@ common [ projects, connecting, commmands, updating, programs
 						into: "C:\Users\mamge\Downloads\RNDIS_W10_cat"
 
 					Open Device Manager and you can see the Pi is detected as USB Serial Device at COM port under the
-						Ports(COM & LPT). Right click on it and select “Update Driver Software”.
+						Ports(COM & LPT). Right click on it and select ï¿½Update Driver Softwareï¿½.
 
 						https://www.factoryforward.com/pi-zero-w-headless-setup-windows10-rndis-driver-issue-resolved/
 
@@ -544,7 +544,7 @@ encoding [
 system [
 
 	$ sudo killall applicationName.bin	// force quit (kill) an application type
-	$ sudo kill -9 XXXXX				// XXXXX is the PID for the process you want to kill. Can be found using the ‘top’ command
+	$ sudo kill -9 XXXXX				// XXXXX is the PID for the process you want to kill. Can be found using the ï¿½topï¿½ command
 ]
 ]
 

@@ -107,7 +107,7 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 	]
 ]
 
-[ * ] hardware ( GPIO sound camera ) [
+[ * ] hardware ( GPIO, sound, camera ) [
 
 	[ x ] GPIO: python leds cycle
 	[ x ] GPIO: python 8 ohm speaker ; tone & play
@@ -122,7 +122,7 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 	[ * ] QEMU emulation	https://www.pcsteps.com/1199-raspberry-pi-emulation-for-windows-qemu/
 ]
 
-[ * ] software ( language database server ) [
+[ * ] software ( language, database, server ) [
 
 	( see: "network_nodejs.txt" )
 
@@ -155,7 +155,7 @@ robotics [ future, robot_v3, robot_v2, robot_v1
 	[ * ] internet ( see: "network.txt" )
 ]
 
-[ * ] basics ( install bash python RPI ) [
+[ * ] basics ( install, bash, python, RPI ) [
 
 	$ sudo apt-get update				# 1 super user do advanced packaging tool update
 	$ sudo apt-get upgrade				# 2 super user do advanced packaging tool upgrade
