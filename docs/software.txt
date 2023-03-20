@@ -1,13 +1,86 @@
 \\5Personal\Technology\raspberryPi\docs\software.txt
 
-common [ projects, connecting, commmands, updating, programs
+common	[ projects, connecting, commmands, updating, programs
 
 	see: "electronics.txt" for abbreviations
 	see: "hardware_motors.txt" > controllers > servo > PCA9685
 
+		NetGear:	192.168.1.22
+		Putty:		password 42
+		sudo apt-get update -y
+		sudo apt-get upgrade -y
+
 	projects [ servos, sound, MAT, sensehat, emulators
 
-		C:\workspace\github\nodeSamples\samples\blinkstick.js
+		"C:/workspace/github/nodeSamples/samples/blinkstick.js"
+
+		sound [ USB: RPI_setup, STT
+
+			see: "sound.txt": RPI_setup
+				use "USB Virtual Sound Adapter", speaker, alsamixer, espeak "HI!"
+
+			see: "speakers.txt" > STT
+		]
+
+		MAT [ on RPI0wf, 22
+
+
+		tractor [
+
+			* Tamiya 70108 Tracked Vehicle Chassis
+			* Tamiya 70168 Double Gearbox 4-Speed
+			* Tamiya 980112M Mabuchi FA-130 Motor (2)
+			* Rechargeable Battery, In&Out: 5V ~ 2.5A [ 5200 mAh, TPLink MN: TL-PB5200 ]
+			* Motor Drive Shield, HBridge L293D Analog Controller
+				see: "\\raspberryPi\docs\hardware\hardware_motors.txt"
+
+			x pinout [ "\\raspberryPi\docs\hardware\hardware_gpio_pinout.txt"
+
+				#5 wires
+
+				1		RED	p01 > BRDp02=5Vpwr
+				2		WHT p02 > BRDp37=GPIO26
+					G	RED p03 > M1+
+						xxx p04 ┐ p39, neg grnd
+						xxx p05 ┘
+					R	GRN p06 > M1-
+				3		GRN p07 > BRDp35=GPIO19
+						RED p08 > POWER+
+						#######################
+						RED p16 > p01 > p09
+				4		BLU p15 > BRDp38=GPIO20
+					B	BLU p14 > M2+
+						xxx p13 ┐ p39, neg grnd
+						xxx p12 ┘
+					Y	YLW p11 > M2-
+				5		YLW	p10 > BRDp36=GPIO16
+						RED p09 > p01 > p16
+
+						┌───┐┌───┐
+						│	└┘	 │
+				5v+	p02	│ 01  16 │ +5v (logic)
+			 WHT p37/26 │ 02  15 │ p38/20 BLU
+				 	M1+	│ 03  14 │ M2+
+					  ┌─│ 04  13 │─┐
+				 p39 ─┤	│		 │ ├─ p39, neg grnd
+					  └─│ 05  12 │─┘
+				 	M1-	│ 06  11 │ M2-
+			 GRN p35/19	│ 07  10 │ p36/16 YLW
+				12v+ ───│ 08  09 │ +5v
+						│		 │
+						└────────┘
+
+						├////////┤
+						│		 │
+						│[_]  [_]│
+				  19grn │p35  p36│ ylw16
+				  26wht │p37  p38│ blu20
+					blk	│p39  [_]│
+						└────────┘
+			]
+
+			x $ python ./python/servos/motor_L293D.py
+		]
 
 		servos [ PCA9685
 
@@ -30,15 +103,6 @@ common [ projects, connecting, commmands, updating, programs
 				$ python python/servos/servo_once.py
 		]
 
-		sound [ USB: RPI_setup, STT
-
-			see: "sound.txt": RPI_setup
-				use "USB Virtual Sound Adapter", speaker, alsamixer, espeak "HI!"
-
-			see: "speakers.txt" > STT
-		]
-
-		MAT [ on RPI0wf , 22
 
 			see: "MAT.txt" // $ node /home/pi/servers/node/expressoMAT.js
 
@@ -97,7 +161,7 @@ common [ projects, connecting, commmands, updating, programs
 				RPI0_WH robot	 pi, s4_m2 | ip 192.168.1.17 | B8:27:EB:2B:0F:91
 				RPI0_WH	male	 pi, s4_m2 | ip 192.168.1.xx | B8:27:EB:fc:a5:72
 				RPI2 sensehat	 pi, s4_m2 | ip 192.168.1.xx | 00:0F:60:05:51:1D, 169.254.62.195
-				RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.02 | DC:A6:32:DB:19:F9
+				RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.16 | DC:A6:32:DB:19:F9
 
 			c:>	arp -a -v							// ARP: Address Resolution Protocol, -a shows arp entries , -v verbose
 
@@ -208,7 +272,7 @@ common [ projects, connecting, commmands, updating, programs
 		]
 	]
 
-	commmands [ ($ sudo apt-get update -y | $ sudo apt-get upgrade -y)
+	commmands [ "https://ss64.com"
 
 		https://ss64.com
 		https://www.circuitbasics.com/useful-raspberry-pi-commands/
@@ -319,7 +383,7 @@ common [ projects, connecting, commmands, updating, programs
 	]
 ]
 
-bash 1 [ system, executables, navigation, GUIs
+bash 1	[ system, executables, navigation, GUIs
 
 	// in Linux, a software driver is known as a kernel module
 
@@ -441,7 +505,7 @@ xtra [
 ]
 ]
 
-bash 2 [ ANSI, configs, network, usb, Xming, cpp, comm
+bash 2	[ ANSI, configs, network, usb, Xming, cpp, comm
 
 	// in Linux, a software driver is known as a kernel module
 
@@ -818,7 +882,7 @@ comm [
 ]
 ]
 
-startup [ beg, end
+startup	[ beg, end
 
 beg scripts [
 
@@ -886,7 +950,7 @@ end scripts [
 ]
 ]
 
-python [ idle, nodejs
+python	[ idle, nodejs
 
 idle python [
 
@@ -952,7 +1016,7 @@ nodejs python [
 ]
 ]
 
-ERRORS [ updating, booting
+ERRORS	[ updating, booting
 
 	ERROR: trouble updating/upgrading
 
@@ -1009,7 +1073,7 @@ ERRORS [ updating, booting
 	]
 ]
 
-install [ SDcard, NOOBs, configure, extras
+install	[ SDcard, NOOBs, configure, extras
 
 	SDcard prepare [ card download format SSH
 

@@ -245,4 +245,17 @@ rPi SBC [ raspberryPi Single Board Computer
 		RPi0 - Zero v1.3		512MB	900093
 	]
 ]
+
+Arduino [
+
+	Arduino Pro Mini
+	Arduino Micro
+	Arduino Pro Micro
+	Arduino Nano
+	
+	Arduino Uno
+	Arduino YUn
+	
+	Arduino MEGA ADK
+]	
 ----

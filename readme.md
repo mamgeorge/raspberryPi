@@ -32,15 +32,32 @@
 	The descriptions below show the most recent developments first.
 
 ---
-### robot 3 / added Servo armature
+### robot 3 (MAT) / added Servo armature
 
-* servos:	(4) Servo Motor, PN: MG995
-* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+Modular
+* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
+* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
 * speaker:	USB Bluetooth Speaker Insiq PN: 4326595940		🔹 (upgrades BT3500SLV)
+* mic:		USB mini microphone, PN: MI-305
+* lights:	10 mm color LED
+* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 
+
+* software control:	Python & IDLE for DC motor PWM control
+* software system:	Raspbian, Bash, Putty, WinSCP, GitHub...
+* software server:	NodeJS, Express (JavaScript, HTML, CSS) for view
+
+Articulation
+* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+* servos:	(4) Servo Motor, PN: MG995 (for shoulders, elbows)
 * servos:	(2) Hitec subMicro Servo motor, PN: HS55		🔹 (upgrades HS300)
 * grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104	🔹 (upgrades "A" Grippers)
-* steppers:	(4) Stepper Motor 28BYJ48	🔸 (later removed)
-* control:	(4) ULN2003 Driver Board	🔸 (later removed)
+* flanges:	Servo Aluminum Flange 25t gear; additional parts
+
+Transport
+* control:	SN754410NE Controller DriveShield (replaced L293D)
+* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
+* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
+* battery:	(4) AA batteries in case
 
 *The SketchUp 3D drawing required only new Flange & Gripper drawings.<br />
 All the other components were accessible online.*<br />
@@ -50,6 +67,9 @@ All the other components were accessible online.*<br />
 However, they were not scalable; there were too many GPIO leads needed.<br />
 A RPI 40 pin J8 form factor required a different addressing solution.<br />
 Note that some websites suggest RPI timing is not reliable enough many protocol calls.*<br />
+early attempts at steppers: (4) Stepper Motor 28BYJ48 (later removed)
+early attempts at controls: (4) ULN2003 Driver Board (later removed)
+see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 <img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
 
 ---

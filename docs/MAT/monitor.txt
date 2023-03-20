@@ -1,12 +1,4 @@
-C:\Users\mamge\OneDrive\Documents
 \5Personal\Technology\MAT\monitor.txt
-
-	[ * ] device: camera v2 ( image:raspistill , fbi / video: raspivid , omxplayer )
-	[ * ] device: webcam ( logitech c170 using fswebcam )
-	[ * ] remote viewer
-	[ _ ] device: webcam mic ( logitech c170 mic using arecord/omxplayer )
-	[ _ ] remote monitor
-	-------------------------------
 
 	note:
 	sudo apt-get update			( super user do advanced packaging tool )
@@ -14,9 +6,9 @@ C:\Users\mamge\OneDrive\Documents
 	sudo rpi-update				( firmware update )
 	sudo cp .Xauthority ~root/	( sudo lxterminal leafpad pcmanfm )
 
-[ * ] device: camera v2 ( image:raspistill , fbi / video: raspivid , omxplayer )
+[ * ] device: camera v2 [ image:raspistill , fbi / video: raspivid , omxplayer
 
-	[ * ] image ( using picam with raspistill , fbi )
+	[ * ] image [ using picam with raspistill , fbi
 
 		# take image
 
@@ -46,8 +38,9 @@ C:\Users\mamge\OneDrive\Documents
 				sudo fbi -T 1 -d /dev/fb2 -noverbose image.jpg
 
 		# try ethernet connection instead?
+	]
 
-	[ * ] video ( using picam with raspivid , omxplayer )
+	[ * ] video [ using picam with raspivid , omxplayer
 
 		# take video
 
@@ -58,8 +51,10 @@ C:\Users\mamge\OneDrive\Documents
 			omxplayer testvideo.h264
 
 			monitor: raspivid -t 0 ( does not save , break with CTRL-C )
+	]
+]
 
-[ * ] device: webcam ( logitech c170 using fswebcam )
+[ * ] device: webcam [ logitech c170 using fswebcam
 
 	https://www.raspberrypi.org/documentation/usage/webcams/
 	http://mutsuda.com/2012/09/07/raspberry-pi-into-an-audio-spying-device/
@@ -76,10 +71,11 @@ C:\Users\mamge\OneDrive\Documents
 
 		sudo apt-get install fbi		# view in commnad line
 		sudo fbi -a Pictures/mlg00.jpg	# fbi stands for frame buffer image
+]
 
-[ * ] remote viewer
+[ * ] remote viewer [ prep, motion, files, modprobe
 
-	prep
+	prep [ links
 
 		$ sudo raspi-config
 		$ sudo apt-get update
@@ -88,13 +84,14 @@ C:\Users\mamge\OneDrive\Documents
 		$ sudo rpi-update
 		$ sudo reboot
 
-	http://www.techradar.com/how-to/computing/use-a-raspberry-pi-to-remotely-watch-your-home-1314466
-	http://www.techradar.com/how-to/computing/how-to-build-a-raspberry-pi-security-camera-1321441
-	http://www.instructables.com/id/Raspberry-Pi-as-low-cost-HD-surveillance-camera/
-	https://www.raspberrypi.org/forums/viewtopic.php?t=36009&p=302814
-	https://pimylifeup.com/raspberry-pi-webcam-server/
-
-		motion / open source Linux software for CCTV motion detection
+		http://www.techradar.com/how-to/computing/use-a-raspberry-pi-to-remotely-watch-your-home-1314466
+		http://www.techradar.com/how-to/computing/how-to-build-a-raspberry-pi-security-camera-1321441
+		http://www.instructables.com/id/Raspberry-Pi-as-low-cost-HD-surveillance-camera/
+		https://www.raspberrypi.org/forums/viewtopic.php?t=36009&p=302814
+		https://pimylifeup.com/raspberry-pi-webcam-server/
+	]
+	
+	motion [ open source Linux software for CCTV motion detection
 
 		stable release: 4.0 , 2016/10/16
 		motion-project.github.io
@@ -132,21 +129,25 @@ C:\Users\mamge\OneDrive\Documents
 		$ sudo service motion stop
 
 		http://192.168.0.21:8081
-
-	files
+	]
+	
+	motion files [ ls -1 | wc -l
 
 		$ ls -1 | wc -l
 		$ sudo rm -f /var/lib/motion/0*.xxx
-
-	switching cam
+	]
+	
+	switching cam [ modprobe
 
 		$ sudo modprobe bcm2835-v4l2		# uses "L" not "1"
 		$ lsmod								# checks status
 		$ v4l2-ctl --all | less 			# checks status
 
 		$ sudo nano ~/.bashrc				# add v4l2 for this config!
+	]
+]
 
-[ _ ] device: webcam mic ( logitech c170 mic using arecord/omxplayer )
+[ _ ] device: webcam mic [ logitech c170 mic using arecord/omxplayer
 
 	arecord --version				( 1.0.25 )
 	arecord -l						( list devices )
@@ -163,3 +164,5 @@ C:\Users\mamge\OneDrive\Documents
 	# for mp3
 	sudo apt-get install lame
 	arecord -f cd -t raw | lame -x -r webcam/test.mp3
+]
+----

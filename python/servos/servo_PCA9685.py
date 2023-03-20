@@ -71,7 +71,8 @@ def init( ):
 		[ 3, [ 900 , 2100, 0, 165, 20, 'HS-81 Micro, sample'		] ],
 		[ 4, [ 900 , 2100, 0, 180, 20, 'HS311 Standard, Gripper'	] ],
 		[ 5, [ 1000, 2000, 0, 180, 20, 'MG995 armature, TowerPro'	] ],
-		[ 6, [ 500 , 2500, 0, 180, 20, 'MG995 armature, TianKongRC'	] ]
+		[ 6, [ 500 , 2500, 0,  90, 20, 'MG995 armature, TianKongRC'	] ]
+	#	[ 6, [ 500 , 2500, 0, 180, 20, 'MG995 armature, TianKongRC' ] ]
 	]
 	servoSelected = sys.argv[1]
 
@@ -112,17 +113,32 @@ def init( ):
 def pcaTestItem( ):
 
 	print('\n' + 'running pcaTestItem')
-	for ctrAngle in range( MIN_ANG, MAX_ANG, 1 ): # MIN_ANG[ channelUsed ], MAX_ANG[ channelUsed ]
+	if channelUsed < 8:
+	
+		for ctrAngle in range( MIN_ANG, MAX_ANG, 1 ): # MIN_ANG[ channelUsed ], MAX_ANG[ channelUsed ]
 
-		print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
-		pca_control_object.servo[ channelUsed ].angle = ctrAngle
-		time.sleep( increments )
+			print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
+			pca_control_object.servo[ channelUsed ].angle = ctrAngle
+			time.sleep( increments )
 
-	for ctrAngle in range( MAX_ANG, MIN_ANG, -1 ):
+		for ctrAngle in range( MAX_ANG, MIN_ANG, -1 ):
 
-		print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
-		pca_control_object.servo[ channelUsed ].angle = ctrAngle
-		time.sleep( increments )
+			print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
+			pca_control_object.servo[ channelUsed ].angle = ctrAngle
+			time.sleep( increments )
+	else: 
+	
+		for ctrAngle in range( MAX_ANG, MIN_ANG, -1 ):
+
+			print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
+			pca_control_object.servo[ channelUsed ].angle = ctrAngle
+			time.sleep( increments )
+
+		for ctrAngle in range( MIN_ANG, MAX_ANG, 1 ): # MIN_ANG[ channelUsed ], MAX_ANG[ channelUsed ]
+
+			print('\t' + 'Send angle {:03d} to Servo {}'.format( ctrAngle, channelUsed + 1 ) , end = '\r' )
+			pca_control_object.servo[ channelUsed ].angle = ctrAngle
+			time.sleep( increments )
 
 	pca_control_object.servo[ channelUsed ].angle = None #disable channel
 	time.sleep( 0.5 )

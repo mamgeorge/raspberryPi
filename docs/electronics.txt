@@ -1,86 +1,117 @@
 \\5Personal\Technology\raspberryPi\docs\electronics.txt
 
 	https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart\\5Personal\Technology\raspberryPi\electronics.txt
+	see: Sparkfun, Texas_Instruments, DigiKey, Mouser
 
-abbreviations [ see also: hardware "bluetooth.txt", "speakers.txt"
+terms		[ see: "bluetooth.txt", "speakers.txt"
 
-	i: ic, c: computer, m: motors, p: packaging, t: transmission
-	
-	c	ANSI	American National Standards Institute
-	c	ARM		Advanced RISC Machines
-	c	BCM		Broadcom
-	c	BMp		Bare Metal Programming
-	c	CSI		Camera Serial Interface; see MIPI
-	c	DSI		Display Serial Interface; see MIPI
-	c	EDA		Electronic Design Automation (CAD/CAM, Fritzing)
-	c	MIPI	Mobile Industry Processor Interface
-	c	GPIO	General Purpose Input Output
-	c	HDMI	High Definition Multimedia Interface
-	c	J8		RPi 40 pin pinout board
-	c	LASER	Light Amplification Stimulated Emission Radiation
-	c	LCD		Liquid Crystal Display
-	c	NEMA	National Electrical Manufacturers Association
-	c	P1		RPi 26 pin pinout board
-	c	POE		Power over Ethernet
-	c	PWM		Pulse Width Modulation
-	c	RGB		Red Green Blue
-	c	RPI0WHf	RPi 0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
-	c	SBC		Single Board Computer, Session Border Controller
-	c	STT		Speech To Text
-	c	TTS		Text To Speech 
-	c	VAC		Voice Activated commands
+	i: i22c, c: computer, m: motors, p: packaging, t: transmission
 
-	i	ASIC	Application Specific Integrated Circuit - customized IC
-	i	BJT		Bipolar Junction Transistor
-	i	DIMM	Dual In Line Memory Module
-	i	FET		Field Effect Transistor
-	i	FPC		Flexible Printed Circuit
-	i	FPGA	Field Programmable Gate Array
-	i	ICs		integrated circuits
-	i	LED		Light Emitting Diode
-	i	MOSFET	Metal Oxide Semiconductor FET
-	i	OLED	Organic Light Emitting Diode
-	i	PCA		Printed Circuit Assembly
-	i	PCB		Printed Circuit Board
-	i	RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
-	i	SOC		System on Chip
-	i	SODIMM	Small Outline DIMM
+	computer
 
-	m	28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
-	m	ACIM	AC Induction Motors (vs synchronous?)
-	m	BLDC	Brushless DC Motors
-	m	HB		motor Hybrid Synchronous, Combination of PM and VR
-	m	MDS		Motor Driver Shield
-	m	PMAC	Permanent Magnet AC
-	m	PMDC	Permanent Magnet DC
-	m	PMSM	Permanent Magnet Synchronous Motor (brushless)
-	m	SMD		Stepper Motor Driver
-	m	VR		motor Variable Reluctance, Reactive rotor
+		c	ANSI	American National Standards Institute
+		c	ARM		Advanced RISC Machines
+		c	BCM		Broadcom
+		c	BMp		Bare Metal Programming
+		c	CSI		Camera Serial Interface; see MIPI
+		c	DSI		Display Serial Interface; see MIPI
+		c	EDA		Electronic Design Automation (CAD/CAM, Fritzing)
+		c	MIPI	Mobile Industry Processor Interface
+		c	GPIO	General Purpose Input Output
+		c	HDMI	High Definition Multimedia Interface
+		c	J8		RPi 40 pin pinout board
+		c	LASER	Light Amplification Stimulated Emission Radiation
+		c	LCD		Liquid Crystal Display
+		c	NEMA	National Electrical Manufacturers Association
+		c	P1		RPi 26 pin pinout board
+		c	POE		Power over Ethernet
+		c	PWM		Pulse Width Modulation
+		c	RGB		Red Green Blue
+		c	RPI0WHf	RPi 0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
+		c	SBC		Single Board Computer, Session Border Controller
+		c	STT		Speech To Text
+		c	TTS		Text To Speech
+		c	VAC		Voice Activated commands
 
-	p	DIP		Dual Inline Package
-	p	MCP		Multi Chip Package
-	p	PDIP	Plastic Dip
-	p	SIP		Single Inline Package
-	p	SOIC	Small Outline Integrated Circuit
-	p	SOP		Small Outline Package
-	p	TSSOP	Thin Shrink Small Outline Package
+	ic
 
-	t	ADC		Analog 2 Digital Converter
-	t	BLE		Bluetooth Low Energy
-	t	DAC		Digital to Analog Converter
-	t	DCE		Data Circuit Terminating Equipment (ex. modem) 
-	t	DTE		Data Terminal Equipment (ex. terminal)
-	t	FTDI	Future Technology Devices International
-	t	I2C		Inter Integrated Circuit; uses: SDA, SCL, VCC, GND
-	t	I2S		Inter IC Sound, I²S, IIS
-	t	LPDDR	Low Power Double Data Rate synchronous
-	t	MIPI	Mobile Industry Processor Interface
-	t	RS232	Recommended Standard 232
-	t	SPI		Serial Peripheral Interface; uses: SCLK, MOSI, MISO, SS
-	t	UART	Universal Asynchronous Receive/Transmit
+		i	ASIC	Application Specific Integrated Circuit - customized IC
+		i	BJT		Bipolar Junction Transistor
+		i	DIMM	Dual In Line Memory Module
+		i	FET		Field Effect Transistor
+		i	FPC		Flexible Printed Circuit
+		i	FPGA	Field Programmable Gate Array
+		i	IC		integrated circuits
+		i	LED		Light Emitting Diode
+		i	MOSFET	Metal Oxide Semiconductor FET
+		i	OCP		Over Current Proection, see: IEC 60364-4-43
+		i	OLED	Organic Light Emitting Diode
+		i	PCA		Printed Circuit Assembly
+		i	PCB		Printed Circuit Board
+		i	RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
+		i	SOC		System on Chip
+		i	SODIMM	Small Outline DIMM
+		i	TSD		Thermal Shutdown (TI)
+		i	UVLO	Under Voltage Lockout
+
+	motors
+
+		m	28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
+		m	ACIM	AC Induction Motors (vs synchronous?)
+		m	BDC		Brushed DC Motors
+		m	BLDC	Brushless DC Motors
+		m	HB		motor Hybrid Synchronous, Combination of PM and VR
+		m	MDS		Motor Driver Shield
+		m	PMAC	Permanent Magnet AC
+		m	PMDC	Permanent Magnet DC
+		m	PMSM	Permanent Magnet Synchronous Motor (brushless)
+		m	SMD		Stepper Motor Driver
+		m	VR		motor Variable Reluctance, Reactive rotor
+		m	PMIC	Power Management Integrated Circuits
+
+	packaging
+
+		https://www.ti.com/support-packaging/packaging-terminology.html#packagePins
+		https://www.ti.com/lit/ml/slyz022k/slyz022k.pdf?ts=1679102542192&ref_url=https%253A%252F%252Fwww.google.com%252F
+		https://en.wikipedia.org/wiki/List_of_integrated_circuit_packaging_types
+
+		p	MCP		Multi Chip Package
+		p	PCB		Printed Circuit Board
+
+		p1	DIP		Dual Inline Package
+		p1	PDIP	Plastic DIP (see NE name)
+		p1	SIP		Single Inline Package
+		p1	NE		Notched Edge? (TI package name for package type PDIP)
+
+		p2	HTSSOP	Heatsink Thin Shrink SOP (see PWP name)
+		p2	MSOP	Mini Small Outline Package
+		p2	PWP		TI Package Drawing; see TSSOP (PowerPad?)
+		p2	SOIC	Small Outline Integrated Circuit
+		p2	SOP		Small Outline Package
+		p2	TSSOP	Thin Shrink SOP (see PWP name)
+
+		p3	QFN		Quad Flat No-lead (see RTE)
+		p3	RTE		TI Package Drawing; see QFN (ReelTape Elements?)
+		p3	WQFN	VeryVery Thin Quad Flat, No-lead (see RTE name)
+
+	transmission
+
+		t	ADC		Analog 2 Digital Converter
+		t	BLE		Bluetooth Low Energy
+		t	DAC		Digital to Analog Converter
+		t	DCE		Data Circuit Terminating Equipment (ex. modem)
+		t	DTE		Data Terminal Equipment (ex. terminal)
+		t	FTDI	Future Technology Devices International
+		t	I2C		Inter Integrated Circuit; uses: SDA, SCL, VCC, GND
+		t	I2S		Inter IC Sound, I²S, IIS
+		t	LPDDR	Low Power Double Data Rate synchronous
+		t	MIPI	Mobile Industry Processor Interface
+		t	RS232	Recommended Standard 232
+		t	SPI		Serial Peripheral Interface; uses: SCLK, MOSI, MISO, SS
+		t	UART	Universal Asynchronous Receive/Transmit
 ]
 
-physics [ intro, power, circuits
+physics		[ intro, power, circuits
 
 	Kirchoffs law: current is the same at all points in closed circuits
 
@@ -141,7 +172,7 @@ physics [ intro, power, circuits
 	PCB etching: https://electronics.stackexchange.com/questions/42840/how-to-go-from-a-development-board-to-a-production-board
 ]
 
-components (resistor, relay, transistor, diode, inductor, capacitor, transceiver) [
+components	[ resistor, relay, transistor, diode, inductor, capacitor, transceiver
 
 	resistor [
 
@@ -336,7 +367,7 @@ components (resistor, relay, transistor, diode, inductor, capacitor, transceiver
 	]
 ]
 
-ICs (includes ADC) [
+ICs & ADC	[ ICs, ADC, tools, ComputeStick, MCP3008
 
 	ICs	integrated circuits
 
@@ -354,7 +385,7 @@ ICs (includes ADC) [
 	MCP3008 / 8-Channel 10-Bit ADC with SPI
 ]
 
-controllers [ HBridge, ULN2003, I2C, others
+controllers	[ HBridge, ULN2003, I2C, others
 
 	controller (hardware) vs driver (software)
 
@@ -362,20 +393,46 @@ controllers [ HBridge, ULN2003, I2C, others
 
 		motor drive controller (aka SMD: stepper motor driver, MDS: motor drive shield)
 
-	HBridge (switch circuit allow multiple directions) [
+	HBridge (switch circuit allow multiple directions) [ L298N, L293D, SN754410
 
 		L298N
 			dual HBridge Drive Controller Board Module
 			http://www.instructables.com/id/Control-DC-and-stepper-motors-with-L298N-Dual-Moto/?ALLSTEPS
 
 		L293D
-			drive controller with 16 pin IC that can control two DC motors in any direction /
-			allows bipolar motors, provides around 600 mA
+			drive controller with 16 pin IC for 2 bipolar motors (in both directions)
+			provides around 600 mA, about 6.35mm x 19.8mm
+			https://microcontrollerslab.com/l293d-motor-driver-ic-introduction-pinouts-example/
+			replace with: SN754410 which is cheaper and handles more amperage
+
+			L293DNE: "NE" appears to explicitly identify the package type
 
 		SN754410
-			drive controller with 16 pin IC that can control two DC motors in any direction /
-			allows bipolar motors, provides around 1 mA
-			similar to newer technology, cheaper, handles more amperage
+			drive controller with 16 pin IC for 2 bipolar motors (in both directions), or 4 motors in a single direction
+			provides around 1 A from 4.5 V to 36 V, about 6.35mm x 19.8mm
+			designed for operation from -40°C to 85°C
+			Half-H Driver, 2 Element 2 Bit per Element 3-State Output
+
+			SN754410		appears to be the base type
+			SN754410NE		"NE" appears to explicitly identify the package type
+			SN754410NEE4	"E4" means Pb-free, but there is no variant with Pb
+
+			see: Sparkfun OOS, Texas_Instruments OOS, DigiKey OOS, Mouser OOS
+				Digi-Key Part Number: 296-9911-5-ND
+
+			also see DRV8833, DRV8833CPWP, DRV8844
+
+		DRV8833 is a 10.8 V, 2 amp dual H-bridge motor driver
+
+			Number of full bridges	2
+				2.7 to 11.8 Volts, Fulll scale current 1.5 to Peak output 2 amps
+				RDS ON  (HS + LS) (mO): 360, Sleep current (µA): 1.6, Control mode: PWM, Control interface: Hardware GPIO
+				Features: Current Regulation, Operating temperature -40°C to 85°C
+
+			DRV8833 appears to be the base type
+			DRV8833C is a common designation
+			There are many variations including DRV8833CPWP
+			DRV8844, DRV8411A appear to be replacements
 	]
 
 	ULN2003 (transistor array) [ pibrella
@@ -449,21 +506,7 @@ controllers [ HBridge, ULN2003, I2C, others
 	]
 ]
 
-packaging [ PCB, SIP, DIP, PDIP, SOIC, SOP, TSSOP
-
-	https://en.wikipedia.org/wiki/List_of_integrated_circuit_packaging_types
-
-	PCB		Printed Circuit Board
-
-	SIP		Single Inline Package
-	DIP		Dual Inline Package
-	PDIP	Plastic Dip
-	SOIC	Small Outline Integrated Circuit
-	SOP		Small Outline Package
-	TSSOP	Thin Shrink Small Outline Package
-]
-
-interfaces [ UART, I2C, SPI, RS232, I2S
+interfaces	[ UART, I2C, SPI, RS232, I2S
 
 	UART (Universal Asynchronous Receive/Transmit) [
 
@@ -523,7 +566,7 @@ interfaces [ UART, I2C, SPI, RS232, I2S
 			SPI several variants, limited wire length
 	]
 
-	I2C (Inter Integrated Circuit) [ 
+	I2C (Inter Integrated Circuit) [
 
 		RPI SPI & I2C tutorial: uses SDA, SCL, VCC, GND
 
@@ -543,12 +586,12 @@ interfaces [ UART, I2C, SPI, RS232, I2S
 		comm starts with a unique start sequence
 
 			VCC Voltage Common Collector; "CC" means supply voltage is positive or negative
-				
+
 				VCC		Voltage Common Collector	in BJT
 				VEE		Voltage Emitter supply		in BJT
 				VDD		Voltage Drain supply		in FET
 				VSS		Voltage Source Supply		in FET
-	
+
 			GND Ground
 
 			SDA (Serial Data) is pulled low
@@ -795,13 +838,13 @@ interfaces [ UART, I2C, SPI, RS232, I2S
 	RS232 (currently TIA-232-F) [
 
 		A standard for serial communication that defines the signals connecting a DTE to a DCE
-		
+
 			DTE (data terminal equipment such as a computer terminal) and a
 			DCE (data circuit-terminating equipment or data communication equipment such as a modem)
 			Defines electrical characteristics, timing, meaning of signals, physical size, & pinout of connectors.
 
 			Primary Channel data and control signals
-				
+
 				abr	name					purpose											DTE	DCE	DB25
 
 				DTR	Data Terminal Ready		DTE is ready to receive, initiate, or continue	out	in	20
@@ -815,9 +858,9 @@ interfaces [ UART, I2C, SPI, RS232, I2S
 				RxD	Received Data			Carries data from DCE to DTE					in	out	03
 				GND	Common Ground			Zero voltage reference for all of the above		common	07
 				PG	Protective Ground		Connected to chassis ground						common	01
-			
-			Secondary Channel	
-			
+
+			Secondary Channel
+
 				common	Common Ground				7 (same as primary)
 				STD		Secondary Transmitted Data	14
 				SRD		Secondary Received Data		16
@@ -837,23 +880,23 @@ interfaces [ UART, I2C, SPI, RS232, I2S
 	]
 ]
 
-SBC & SOC [ see: "hardware_boards.txt" 
+SBC & SOC	[ see: "hardware_boards.txt"
 
-	ESP32 
-	
+	ESP32
+
 		ESP32
 			https://www.youtube.com/watch?v=lvmNLuHj25o
 			press & hold boot button to enable erasing of flash
 			loads on 0x100
-		
+
 		Python for Windows
 			C:\Python310, includes IDLE
 			functins are called mudules in python
 		MicroPython bin file
 			must choose flash specific bin
-		Thonny 
+		Thonny
 			needs to plug in ESP32 to read port
-			
+
 		>>> REPL Read Evaluate Print Loop
 ]
 ----

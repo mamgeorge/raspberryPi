@@ -28,13 +28,25 @@ addr=64
 clck=25000000
 freq=50
 
+class bcolors:
+    HEADER	= '\033[95m'
+    OKBLUE	= '\033[94m'
+    OKCYAN	= '\033[96m'
+    OKGREEN	= '\033[92m'
+    WARNING	= '\033[93m'
+    FAIL	= '\033[91m'
+    BOLD	= '\033[1m'
+    UNDERLINE = '\033[4m'
+    ENDC	= '\033[0m'
+
 servoList = [ #[ pwmin, pwmax, angmin, angmax, pcfreq, 'type' ]
 	[ 1, [ 500 , 2500, 0, 180, 20, '4.8-6v', 'MG90S AranaCorp, Towerpro '	] ],
 	[ 2, [ 900 , 2100, 0, 102, 20, '4.8-6v', 'HS-55 SubMicro, Gripper'		] ],
 	[ 3, [ 900 , 2100, 0, 165, 20, '4.8-6v', 'HS-81 Micro, sample'			] ],
 	[ 4, [ 900 , 2100, 0, 180, 20, '4.8-6v', 'HS311 Standard, Gripper'		] ],
 	[ 5, [ 1000, 2000, 0, 180, 20, '4.8-6v', 'MG995 armature, TowerPro'		] ],
-	[ 6, [ 500 , 2500, 0, 180, 20, '3-7.2v', 'MG995 armature, TianKongRC'	] ]
+	[ 6, [ 500 , 2500, 0,  90, 20, '3-7.2v', 'MG995 armature, TianKongRC'	] ]
+#	[ 6, [ 500 , 2500, 0, 180, 20, '3-7.2v', 'MG995 armature, TianKongRC'	] ]
 ]
 
 channelsUsed = 6
@@ -53,7 +65,7 @@ def init( ):
 	PCA_ServoKit.servo[ 14 ].set_pulse_width_range( servoList[5][1][0], servoList[5][1][1] )
 	#print ( servoList[5][1][6] )
 
-def pcaFlex( ):
+def pcaJoints( ):
 
 	print ('pcaFlex')
 	global servoList
@@ -90,7 +102,7 @@ def pcaFlex( ):
 
 	print('')
 
-def pcaStretch( ):
+def pcaShoulders( ):
 
 	print ('pcaStretch')
 	global servoList
@@ -100,23 +112,22 @@ def pcaStretch( ):
 	minAng = servoItem[1][2]
 	maxAng = servoItem[1][3]
 
-	PCA_ServoKit.servo[  0 ].angle = maxAng
-	PCA_ServoKit.servo[ 14 ].angle = maxAng
+	for ctrAngle1 in range( minAng, maxAng, angIncrements ):
 
-	for ctrAngle in range( maxAng, minAng, -angIncrements ):
-
-		PCA_ServoKit.servo[  0 ].angle = ctrAngle
-		PCA_ServoKit.servo[ 14 ].angle = ctrAngle
-		print ( '\t' + 'chn: {}, ang: {:03d}, serv: {}'.format('x', ctrAngle, servoItem[1][6]), end = '\r' )
+		ctrAngle2 = maxAng - angIncrements
+		PCA_ServoKit.servo[  0 ].angle = ctrAngle1
+	#	PCA_ServoKit.servo[ 14 ].angle = ctrAngle2
+		print ( '\t' + 'chn: {}, ang: {:03d}, ang: {:03d}, serv: {}'.format('x', ctrAngle1, ctrAngle2, servoItem[1][6]) ) #[1][6]), end = '\r' )
 		time.sleep( timeSlices )
 
 	print('')
 
-	for ctrAngle in range( minAng, maxAng, angIncrements ):
+	for ctrAngle1 in range( maxAng, minAng, -angIncrements ):
 
-		PCA_ServoKit.servo[  0 ].angle = ctrAngle
-		PCA_ServoKit.servo[ 14 ].angle = ctrAngle
-		print ( '\t' + 'chn: {}, ang: {:03d}, serv: {}'.format('x', ctrAngle, servoItem[1][6]), end = '\r' )
+		ctrAngle2 = maxAng - angIncrements
+		PCA_ServoKit.servo[  0 ].angle = ctrAngle1
+	#	PCA_ServoKit.servo[ 14 ].angle = ctrAngle2
+		print ( '\t' + 'chn: {}, ang: {:03d}, ang: {:03d}, serv: {}'.format('x', ctrAngle1, ctrAngle2, servoItem[1][6]) ) #[1][6]), end = '\r' )
 		time.sleep( timeSlices )
 
 	print('')
@@ -156,21 +167,26 @@ def pcaGrasp( ):
 
 #### execute
 print ('Python: ' + sys.version)
-action = sys.argv[1]
-options = {
-	'f' : pcaFlex,
-	's' : pcaStretch,
-	'g' : pcaGrasp
-}
 
-try:
-	PCA_ServoKit = ServoKit( channels=16 )
-	#PCA_ServoKit = ServoKit( channels=chnl, i2c=i2cv, address=addr, reference_clock_speed=clck, frequency=freq )
-	init( )
-	options[ action ]( )
+while True:
 
-except (RuntimeError, ValueError) as err:
-	print( 'Error:', sys.exc_info()[0], err )
+	action = input( bcolors.HEADER + "Enter j, s, g, x: " + bcolors.ENDC ) # action = sys.argv[1]
+	options = {
+		'j' : pcaJoints,
+		's' : pcaShoulders,
+		'g' : pcaGrasp,
+	}
+
+	if action =='x': break
+	
+	try:
+		PCA_ServoKit = ServoKit( channels=16 )
+		#PCA_ServoKit = ServoKit( channels=chnl, i2c=i2cv, address=addr, reference_clock_speed=clck, frequency=freq )
+		init( )
+		options[ action ]( )
+
+	except (RuntimeError, ValueError) as err:
+		print( 'Error:', sys.exc_info()[0], err )
 
 # finish
 print( 'DONE' )

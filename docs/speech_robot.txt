@@ -1,6 +1,6 @@
 \\5Personal\Technology\raspberryPi\docs\speech_robot.txt
 
-LIS B9 [
+Lost_In_Space B9 [
 
 	Affirmative.
 	Negative.

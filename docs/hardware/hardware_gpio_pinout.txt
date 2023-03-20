@@ -1,4 +1,4 @@
-hardware_gpio_pinout.txt
+\\raspberryPi\docs\hardware\hardware_gpio_pinout.txt
 
 	see: "http://pinout.xyz"
 
@@ -20,7 +20,7 @@ MAT [
 		gripA grnd	14 *o 13
 		gripA yel	12 *o 11
 					10 oo 09 grnd
-					08 o* 07 gripB yel 
+					08 o* 07 gripB yel
 		gripB grnd	06 *o 05
 		gripA/B(5V)	04 *o 03
 		L293D (5V)	02 *o 01 (3.3V)
@@ -30,55 +30,78 @@ raspberryPI 2 Model B [
 
 	40 pin ( aka J8 ) pinout board
 	26 pin is P1 pinout
-
-				pw:+3v3	01	02	pw:+5V
-	I2C_SDA1	GPIO02	03	04	pw:+5V
-	I2C_SCL1	GPIO03	05	06	ground
-		GCLK0	GPIO04	07	08	GPIO14	UART_TXD0
-				ground	09	10	GPIO15	UART_RXD0
-		GEN0	GPIO17	11	12	GPIO18	GEN1 , PWM0
-		GEN2	GPIO27	13	14	ground
-		GEN3	GPIO22	15	16	GPIO23	GEN4
-				pw:+3v3	17	18	GPIO24	GEN5
-	SPI_MOSI	GPIO10	19	20	ground	-
-	SPI_MISO	GPIO09	21	22	GPIO25	GEN6
-	SPI_SCLK	GPIO11	23	24	GPIO08	SPI_CE0_N
-				ground	25	26	GPIO07	SPI_CE1_N
-	---------------------------------------------
-	I2C_IDSD	EEPROM	27	28	EEPROM	I2C_IDSC
-		GCLK1	GPIO05	29	30	ground
-		GCLK2	GPIO06	31	32	GPIO12 , PWM0
-		PWM1	GPIO13	33	34	ground
-	SPI_MISO	GPIO19	35	36	GPIO16
-				GPIO26	37	38	GPIO20	SPI_MOSI
-				ground	39	40	GPIO21	SPI_SCLK
+						┌─────────┐
+				+3v3	│ 01 │ 02 │ pw:+5V
+	I2C_SDA1	GPIO02	│ 03 │ 04 │ pw:+5V
+	I2C_SCL1	GPIO03	│ 05 │ 06 │ ground
+		GCLK0	GPIO04	│ 07 │ 08 │ GPIO14	UART_TXD0
+				ground	│ 09 │ 10 │ GPIO15	UART_RXD0
+		GEN0	GPIO17	│ 11 │ 12 │ GPIO18	GEN1 , PWM0
+		GEN2	GPIO27	│ 13 │ 14 │ ground
+		GEN3	GPIO22	│ 15 │ 16 │ GPIO23	GEN4
+				+3v3	│ 17 │ 18 │ GPIO24	GEN5
+	SPI_MOSI	GPIO10	│ 19 │ 20 │ ground	-
+	SPI_MISO	GPIO09	│ 21 │ 22 │ GPIO25	GEN6
+	SPI_SCLK	GPIO11	│ 23 │ 24 │ GPIO08	SPI_CE0_N
+				ground	│ 25 │ 26 │ GPIO07	SPI_CE1_N
+						│ -- │ -- │
+	I2C_IDSD	EEPROM	│ 27 │ 28 │ EEPROM	I2C_IDSC
+		GCLK1	GPIO05	│ 29 │ 30 │ ground
+		GCLK2	GPIO06	│ 31 │ 32 │ GPIO12 , PWM0
+		PWM1	GPIO13	│ 33 │ 34 │ ground
+	SPI_MISO	GPIO19	│ 35 │ 36 │ GPIO16
+				GPIO26	│ 37 │ 38 │ GPIO20	SPI_MOSI
+				ground	│ 39 │ 40 │ GPIO21	SPI_SCLK
+						└─────────┘
 ]
 
-controller L293D or SN754410 pinout [
+controller L293D [ or SN754410 pinout
 
-	( L293D supplies 0.6A , SN754410 is newer , supplies 1A )
+	L293D supplies max 0.6A (600mA)
+
+		SN754410 is newer, supplies 1A, but requires external diodes
+		DRV8837 2-Channel H-Bridge DC 11V
+		$ python mamgeorge/python/mat/L293D_temp.py
 
 	facing top near camera ( J8-GPIO )
 
-			[_]|blk
-			wht|blu
-			grn|ylw
+				┌───┐┌───┐
+				│	└┘	 │
+		5v+	p02	│ 01  16 │ +5v (logic)
+		WHT	p37 │ 02  15 │ p38 BLU
+		RED	M1+	│ 03  14 │ M2+ BLU
+			  ┌	│ 04  13 │ ┐
+		p39? ─┤	│		 │ ├─ neg ground; p39
+			  └	│ 05  12 │ ┘
+		GRN	M1-	│ 06  11 │ M2- YLW
+		GRN	p35	│ 07  10 │ p36 YLW
+		12v+ ───┤ 08  09 │ +5v
+				│		 │
+				└────────┘
 
-	facing top ( notched out "u" )
+				│_ _ _ _ │
+				│	     │
+				│[_]  [_]│
+			grn │p35  p36│ ylw
+			wht │p37  p38│ blu
+			blk	│p39  [_]│
+				└────────┘
 
-				+────__────+
-	[ p02 ]	5v+	| 01	16 | 5v+	( wired to #1 ; logic )
-	[ p26 ]	P0	| 02	15 | P2		[ p20 ] wht|blu
-	[ M1+ ]	M1+	| 03	14 | M2+	[ M2+ ]
-	[ p39 ]	gnd	| 04	13 | gnd	( ground )
-			gnd	| 05	12 | gnd	[ wired to bt- ]
-	[ M1- ]	M1-	| 06	11 | M2-	[ M2- ]
-	[ p19 ]	P1	| 07	10 | P3		[ p16 ] grn|ylw
-	[ bt+ ]	12v+| 08	09 | 5v+
-				+──────────+
+	*	RED	L293D_p01 > BRDp02=5v_pwr		<<
+	*	WHT L293D_p02 > BRDp37=gpio26		<<
+	*	RED L293D_p03 > M1+
+	x	xxx L293D_p04 o L293D_p05
+	x	GRN L293D_p06 > M1-
+	x	GRN L293D_p07 > BRDp35=gpio19		<<
+	x	RED L293D_p08 > power+
 
-	ground wired to #4, #13, #5, #12
-	ground wired to bt- & pin 39
+	x	RED L293D_p16 > L293D_p01 > L293D_p09
+	x	BLU L293D_p15 > BRDp38=gpio20		<<
+	x	BLU L293D_p14 > M2+
+	x	xxx L293D_p13 o L293D_p12
+	x	BLK L293D_p13 > BRDp39=ground-		<<
+	x	YLW L293D_p11 > M2-
+	x	YLW	L293D_p10 > BRDp36=gpio16		<<
 ]
 
 controller L298N pinout [

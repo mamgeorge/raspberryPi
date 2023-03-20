@@ -228,21 +228,33 @@ file_aplay( )	{ ## 4q
 }
 
 # 5 #############
-motors( )		{ ## 5, 5a, 5b, 5c
+motors( )		{ ## 5, 5a, 5b, 5c, 5d, 5e
 
 	menu
-	echo -e "${BCKM}Servos & Steppers!${NCLR}"
+	echo -e "${BCKM}DCMs, Servos, Steppers!${NCLR}"
 	echo -e ""
-	echo -e "\t${BMAG}5a) Stepper! [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
-	echo -e "\t${BMAG}5b) Steppers [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
-	echo -e "\t${BMAG}5c) Servos ! [# ${BYEL}37,${BWHT}39,${BRED}02${NCLR}${BMAG}]${NCLR}"
-	echo -e "\t${BMAG}5d) ServoPCA [# ${BBLU}02,${BGRN}03,${BWHT}05,${BCKD}06${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5a) DCMotors [# ${BWHT}37,${BGRN}35,${BBLU}38,${BYEL}36 ${BMAG}| ${BWHT}39,${BRED}02${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5b) Stepper! [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5c) Steppers [# ${BBLU}11,${BMAG}13,${BYEL}15,${BORA}19 ${BMAG}| ${BWHT}06,${BRED}04${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5d) Servos ! [# ${BYEL}37,${BWHT}39,${BRED}02${NCLR}${BMAG}]${NCLR}"
+	echo -e "\t${BMAG}5e) ServoPCA [# ${BBLU}02,${BGRN}03,${BWHT}05,${BCKD}06${NCLR}${BMAG}]${NCLR}"
 	echo -e ""
 	echo -e "\tLFT [ 01:grips, 02:elbow, 03:shldr [ ] 14:shldr, 15:elbow, 16:grips ] RGT"
 	echo -e "\t\t[ 04:light, 05:xxxxx, 06:xxxxx, 07:xxxxx, 08:xxxxx ]"
 	echo -e "\t\t[ 09:laser, 10:xxxxx, 11:xxxxx, 12:xxxxx, 13:xxxxx ]"
 }
-stepper( )		{ ## 5a
+l293d( )		{ ## 5a
+
+	echo -e "${BCKM}DCMotors L293D${NCLR}\n"
+	echo -e "\t${BCKR}RED${NCLR} pin_02: 5V+"
+	echo -e "\t${BWHT}WHT${NCLR} pin_37: BCM_26"
+	echo -e "\t${BGRN}GRN${NCLR} pin_35: BCM_19"
+	echo -e "\t${BBLU}BLU${NCLR} pin_38: BCM_20"
+	echo -e "\t${BYEL}YEL${NCLR} pin_36: BCM_16"
+	echo -e "\t${BCKD}BLK${NCLR} pin_39: ground-"
+	python raspberryPi/python/servos/motor_L293D.py
+}
+stepper( )		{ ## 5b
 
 	echo -e "${BCKM}STEPPER${NCLR}\n"
 	echo -e "\t${BBLU}BLU${NCLR} pin_11: BCM_17"
@@ -253,7 +265,7 @@ stepper( )		{ ## 5a
 	echo -e "\t${BCKR}RED${NCLR} pin_04: 5V+"
 	python raspberryPi/python/servos/stepper_one.py
 }
-steppers( )		{ ## 5b
+steppers( )		{ ## 5c
 
 	echo -e "${BCKM}STEPPERS${NCLR}\n"
 	echo -e "\t${BBLU}BLU${NCLR} pin_11: BCM_17"
@@ -270,7 +282,7 @@ steppers( )		{ ## 5b
 	read MY_PARM
 	python -u raspberryPi/python/servos/stepper_arg.py $MY_PARM
 }
-servos( )		{ ## 5c
+servos( )		{ ## 5d
 
 	echo -e "${BCKM}SERVOS${NCLR}\n"
 	echo -e "\t${BYEL}YLW${NCLR} pin_37: BCM26"
@@ -278,7 +290,7 @@ servos( )		{ ## 5c
 	echo -e "\t${BCKR}RED${NCLR} pin_02: 5V+"
 	python raspberryPi/python/servos/servo_one.py
 }
-servo_PCA( )	{ ## 5d
+servo_PCA( )	{ ## 5e
 
 	echo -e "${BCKM}ServoPCA${NCLR}\n"
 	echo -e "\t${BBLU}BLU${NCLR} pin_02: VCC"
@@ -566,10 +578,11 @@ do
 
 		############################
 		5) motors			;;
-			5a) stepper		;;
-			5b) steppers	;;
-			5c) servos		;;
-			5d) servo_PCA	;;
+			5a) l293d		;;
+			5b) stepper		;;
+			5c) steppers	;;
+			5d) servos		;;
+			5e) servo_PCA	;;
 
 		6) gpio_HATs		;;
 			6a) hat_basics	;;

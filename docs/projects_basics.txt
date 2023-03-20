@@ -3,189 +3,160 @@
 	see: "\\5Personal\Technology\raspberryPi\README.md"
 	see: "\\5Personal\Technology\raspberryPi\software.txt"
 
-	initial bash python node motion [ speak camera sensor interface / VAC actuator transport / nlp ]
+future [ AI_commands, sensors, function
 
-CAD drawings [ components
+	AI_commands
 
-	see: "C:\workspace\images\CAD"
+		# voice activation
+		# preprogrammed tasks
+		* basic AI commands text interface
+		* basic AI definitions?, machine learnable?
+		* integration with other AI or systems
 
-	servo_MG995.stl
-	servo_HS55.stl
-	gripper_micro.stl
-	flange_6mm_id.stl
-	flange_H25T.stl
-	tamiya_gearbox.stl
+	sensors
 
-	r3_Arm.stl
-	robot_Assembly
+		# speaker_mic: voice feed & exchange
+		* camera: video, night vision
+		* sensors: heat, height, location, speed
+
+	function
+
+		# lighting: LED hi_bright
+		# laser: pointer, movable
+		* larger size
 ]
 
-robotics [ future, robot_v3, robot_v2, robot_v1
+[ x ] robot_v3 [ updated servos, articulation controller
 
-	future possible [ video, AI, sensors, function
+	// BOM for Robot Assembly v3 MAT (Modular Articulated Transport)
+	// # represents new addition in version
 
-		// basics video
-		video feed
-		voice feed & exchange
-		preprogrammed locations
-		location awareness
-
-		// AI commands
-		?voice activation
-		basic AI commands text interface
-		basic AI definitions
-
-		// sensors
-		?USB WebCam Nexigo PN: N60
-		?port expander MCP23017 or microcontroller ESP32S
-		laser pointer; movable
-		hiBrightness LED lighting
-		access sensors: heat, height, location, speed
-		stealth mode for night vision
-
-		// function
-		larger size
-		preprogrammed tasks
-		learnable tasks
-	]
-
-	BOM for Robot Assembly v3 (Modular Articulated Transport) [
-
-		* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
-		* servos:	(4) Servo Motor, PN: MG995
-		* speaker:	Bluetooth Speaker Insiq PN: 4326595940 🟢 (was BT3500SLV)
-		* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🟢 (was HS300)
-		* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104 🟢 (was "A" Grippers)
-
-		* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
-		* speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
-		* microphone:	USB mini microphone, PN: MI-305
-		* light:	10 mm color LED
-		* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🟢 (was AA batteries)
-		* grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
-		* servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+	Modular
 
 		* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
+		* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
+		# speaker:	Bluetooth Speaker Insiq PN: 4326595940
+		# mic:		USB mini microphone, PN: MI-305
+		# lights:	10 mm color LED
+		* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (for RPi)
+
+		* software control:	Python & IDLE for DC motor PWM control
+		* software system:	Raspbian, Bash, Putty, WinSCP, GitHub...
+		* software server:	NodeJS, Express (JavaScript, HTML, CSS) for view
+
+	Articulation
+
+		# control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+		# servos:	(4) Servo Motor, PN: MG995 (for shoulders, elbows)
+		# servos:	(2) Hitec subMicro Servo motor, PN: HS55 (for grippers)
+		# grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104
+		# flanges:	Servo Aluminum Flange 25t gear; additional parts
+
+	Transport
+
+		* control:	SN754410NE Controller DriveShield (replaces L293D)
+		* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 & (2) F130 DC Motors
+		* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
+		* battery:	(4) AA batteries in case (for motors; later integrated with PowerBank?)
+
+	notes
+
+		* documented with: SketchUp 3D drawing of all components
+
+		x trouble with transport; probably wires or L293D quality
+		x trouble with flange attachment; not yet modular
+		x Speaker, Mic, Lights added but not integrated or responsive
+		x Articulation, Grippers, PCA9685 not fully integrated
+]
+
+[ * ] robot_v2.1 [ added steppers, upgraded battery
+
+	Modular
+
+		* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
+		* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
+		* speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV (later replaced with smaller Insiq)
+		# battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (for RPi)
+
+		* software control:	Python & IDLE for DC motor PWM control
+		# software system:	Raspbian, Bash, Putty, WinSCP, GitHub...
+		* software server:	NodeJS, Express (JavaScript, HTML, CSS) for view
+
+	Articulation
+
+		# steppers: (4) Stepper Motor 28BYJ48 (later replaced with servos)
+		# control:	(4) ULN2003 Driver Board (later removed)
+
+	Transport
+
 		* control:	L293D Controller DriveShield
 		* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 & (2) F130 DC Motors
 		* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
-		* battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
 		* battery:	(4) AA batteries in case (for motors)
 
-		Software using Python PWM coding for the L293D GPIOs thru NodeJS.
+	notes
 
-		* os base:	Raspbian, Bash, Putty, WinSCP, GitHub...
-		* control:	Python & IDLE for DC motor PWM control
-		* server:	NodeJS, Express (JavaScript, HTML, CSS) for view
-		* drawing:	LibreCad 2D CAD, Sketchup 3D
+		# documented with: SketchUp 3D drawing required only new Flange & Gripper drawings.
+
+		* Speaker added but not integrated
+		* Articulation never fully integrated
+		* Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor
+		* website discussions implied RPI timing not reliable for many I2C protocol calls
+]
+
+[ * ] robot_v2 [ added camera, grippers
+
+	Modular
+
+		* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
+		# camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
+		# speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
+		* battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
+
+		* sofware control: using Python PWM coding for the L293D GPIOs thru NodeJS
+		* sofware system: using IOs thru NodeJS, Express / HTML, CSS
+
+	Articulation
+
+		# grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
+		# servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+
+	Transport
+
+		* control:	L293D Controller DriveShield
+		* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 & (2) F130 DC Motors
+		* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
+		* battery:	(4) AA batteries in case (for motors)
+
+	notes
+
+		# documented with: LibreCad 2D CAD representation with BOM
+		# camera easily integrated
+
+		* Grippers worked, but proved to be oversized
+		* Speaker added but not integrated
+		* no shoulder or elbow movement
+]
+
+[ * ] robot_v1 [ travel control via SmartPhone
+
+		Modular
+
+			* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
+			* battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
+
+			* sofware control: using Python PWM coding for the L293D GPIOs thru NodeJS
+			* sofware system: using IOs thru NodeJS, Express / HTML, CSS
+
+		Transport
+
+			* control:	L293D Controller DriveShield
+			* gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 & (2) F130 DC Motors
+			* chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
+			* battery:	(4) AA batteries in case (for motors)
+
+		notes
+
+			* documented with: L293D Controller pinout diagram
 	]
-
-	[ _ ] robot_v3 / replaced Steppers with Servos [
-
-		x steppers: (4) Stepper Motor 28BYJ48 🔴 (later removed)
-		x control: (4) ULN2003 Driver Board 🔴 (later removed)
-
-		The SketchUp 3D drawing required only new Flange & Gripper drawings.
-		All the other components were accessible online.
-
-		The Steppers were compact, but required too many GPIO leads for a RPI 40 pin J8 form factor.
-		Some website discussions implied that the RPI timing is not reliable enough for many I2C protocol calls.
-	]
-
-	[ * ] robot_v2 / added camera, grippers [
-
-		The Grippers and Speaker worked, but proved to be clunky.
-
-		The LibreCad 2D CAD representation with BOM.
-	]
-
-	[ * ] robot_v1 / travel control via SmartPhone [
-
-		Software using Python PWM coding for the L293D GPIOs thru NodeJS.
-
-		L293D Controller pinout diagram.
-	]
-]
-
-[ * ] hardware ( GPIO, sound, camera ) [
-
-	[ x ] GPIO: python leds cycle
-	[ x ] GPIO: python 8 ohm speaker ; tone & play
-	[ * ] Sensehat		python python/sens_samples.py
-	[ * ] Pibrella		python pibrella_samples.py
-
-	[ * ] sound record		( webcam logitech c170 mic : using arecord/omxplayer )
-	[ * ] webcam record		( webcam nexigo N60 mic : using motion )
-	[ * ] camera video		( using picam with raspivid, omxplayer )
-	[ * ] camera picture	( using picam with raspistill, fbi )
-	[ * ] camera picture	( webcam logitech c170 : using fswebcam )
-	[ * ] QEMU emulation	https://www.pcsteps.com/1199-raspberry-pi-emulation-for-windows-qemu/
-]
-
-[ * ] software ( language, database, server ) [
-
-	( see: "network_nodejs.txt" )
-
-	[ * ] language ( thru node ) python, java
-	[ * ] database ( thru node ) SQLite
-	[ * ] server nodejs ( basics, files, static )
-	[ * ] server nodejs invoke interactive
-	[ * ] language & HATs
-]
-
-[ * ] networks ( printer, internet, ethernet, VNC ) [
-
-	[ * ] printer
-		CookBook 2.12
-		sudo apt-get install cups
-		sudo usermod -a -G lpadmin pi
-		yhttp://localhost:631
-
-	[ * ] network_VNC install ; updating node
-	[ * ] network_VNC adding cutPaste ability ( autocutsel )
-	[ * ] network_VNC run automatically ( altering .bashrc )
-	[ * ] network_x11
-	[ * ] network_SSH
-		"putty" shell: login: "pi" password: "xxxxxx"
-		use http://192.168.1.1, admin to get rPi: 192.168.1.22
-
-	[ * ] ethernet connects, remoting ( see: "network.txt" )
-		note: sudo cp .Xauthority ~root/	# sudo lxterminal leafpad pcmanfm
-
-	[ * ] internet ( see: "network.txt" )
-]
-
-[ * ] basics ( install, bash, python, RPI ) [
-
-	$ sudo apt-get update				# 1 super user do advanced packaging tool update
-	$ sudo apt-get upgrade				# 2 super user do advanced packaging tool upgrade
-	$ sudo apt-get install rpi-update	# firmware update
-	$ sudo rpi-update					# firmware update
-	$ sudo shutdown now
-
-	[ * ] RPI0 1.3 ( camera )
-	[ * ] RPI0
-	[ * ] RPI2
-
-		[ * ] Pi Foundation PiTFT - 7 inch Touchscreen 800x480 pixels & DSI cable
-		[ * ] Pimoroni Raspberry Pi 7 inch Touchscreen Display Case - Noir
-		[ * ] LCD Monitor AOC E2425SWD 24-inch wide Black
-		[ * ] Speaker 8 ohm / 0.25 watt / F / rohs
-		[ * ] wireless USB MK270 K&M
-		[ * ] power source 2 amp with micro USB plug
-
-		https://www.raspberrypi.org/help/noobs-setup/
-		[ * ] download SDFormatter4 / install / insert SD card / run SDFormatter4 / format
-		[ * ] download NOOBs / extract / copy to SD card / load card onto RPi / attach cables to RPi and run
-
-		http://elinux.org/RPi_VerifiedPeripherals
-		[ * ] PRODUCT ID: 0961 $22 USB 2.0 Powered Hub - 7 Ports with 5V 2A Power Supply | GE USB 2.0 Powered Hub - 4 Ports with 5V 2.6A Power Supply
-		[ * ] PRODUCT ID: 0814 $12 dongle Miniature WiFi ( 802.11b/g/n ) Module: For Raspberry Pi and more
-
-	see: "C:\Martin\4Work\toolCode\raspberryPi\software.txt"
-	[ * ] bash
-	[ * ] python, IDLE
-	[ * ] browser, ideWeasel
-	[ * ] sonicPi
-]
 ----

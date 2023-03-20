@@ -1,4 +1,4 @@
-# /home/pi/python/motor.py
+# //python/servos/motor_L293D.py
 # Controlling a DC Motor / Gaven MacDonald
 #
 # L293D
@@ -19,10 +19,10 @@ sleepLen = .01
 frequency = 50
 dtyCycleRng = 100
 
-pinM1_POS = 26	# mLFT + wht
-pinM1_NEG = 19	# mLFT - grn
-pinM2_POS = 20	# mRGT + blu
-pinM2_NEG = 16	# mRGT - ylw
+pinM1_POS = 26	# mLFT + wht37
+pinM1_NEG = 19	# mLFT - grn35
+pinM2_POS = 20	# mRGT + blu38
+pinM2_NEG = 16	# mRGT - ylw36
 
 GPIO.setup( pinM1_POS , GPIO.OUT )
 GPIO.setup( pinM1_NEG , GPIO.OUT )
@@ -34,10 +34,10 @@ pwmM1_NEG = GPIO.PWM( pinM1_NEG , frequency )
 pwmM2_POS = GPIO.PWM( pinM2_POS , frequency )
 pwmM2_NEG = GPIO.PWM( pinM2_NEG , frequency )
 
-pwmM1_NEG.start( 0 )
 pwmM1_POS.start( 0 )
-pwmM2_NEG.start( 0 )
+pwmM1_NEG.start( 0 )
 pwmM2_POS.start( 0 )
+pwmM2_NEG.start( 0 )
 
 ########################
 # motions

@@ -1,4 +1,4 @@
-\\5Personal\Technology\raspberryPi\docs\hardware\hardware_motors.txt
+\\raspberryPi\docs\hardware\hardware_motors.txt
 
 	note: this document is for transport & articulation hardware only; see "electronics" for principles
 
@@ -226,6 +226,8 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 		HiTec HS-81 | Micro, sample
 		HiTec HS-311 | Standard, Gripper
 		TowerPro MG995 | armature, TianKongRC; similar to: TowerPro SG-5010
+		
+		see: "hardware_list.txt" > strutural > flanges (for gearing)
 
 	[ 2 ] (13$) Hitec HS-55 SubMicro, Economy / 203 deg		[ PN: 31055S, shaft: 15 tooth spline, aka A15T
 
@@ -386,11 +388,11 @@ controllers [ analog, stepper, servo, microcontroller
 
 	// controller (hardware) vs driver (software)
 
-	analog driver [ pibrella, L293D
+	analog driver [ Pibrella, L293D
 
-		[ _ ] (15$) pibrella; peripheral connectors with ULN2003A controller / PiMoroni
+		[ * ] (07$) L293D analog Dual H-Bridge Motor Drive Shield 600mA / Adafruit [ADA807]
 
-		[ * ] (07$) HBridge L293D analog Motor Drive Shield / SainSmart
+		[ _ ] (03$) SN754410  H-Bridge Motor Driver 1A / 
 	]
 
 	stepper driver [ ULN2003, DRV8825, A4988, TB6560 / L298N, Atmega2560 / MCP23017, TB6612
@@ -402,6 +404,8 @@ controllers [ analog, stepper, servo, microcontroller
 			Bear in mind many (microstepping) stepper drivers go upto 100,000 step pulses/second.
 
 		[ 5 ] (08$) ULN2003 Driver Board, 1 channel
+
+		[ _ ] (15$) Pibrella; peripheral connectors with ULN2003A controller / PiMoroni Pibrella
 
 		[ _ ] (11$) DRV8825 Driver Board, 1 channel / Pololu
 

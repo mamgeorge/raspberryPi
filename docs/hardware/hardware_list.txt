@@ -1,7 +1,7 @@
 \\5Personal\Technology\raspberryPi\hardware\hardware_list.txt
 
 	FOR RPI DETAIL
-	see: "\\5Personal\Technology\raspberryPi\hardware\hardware_notes.txt"
+	see: "\\5Personal\Technology\raspberryPi\hardware\hardware_details.txt"
 
 suppliers (raspberryPi, robotics, tooling) [
 
@@ -15,14 +15,18 @@ suppliers (raspberryPi, robotics, tooling) [
 		MakeBlock		metal structural assemblies, parts, complex, expensive
 		vexRobotics		plastic structural assemblies, expensive
 
-		extra:
+		extra: Sparkfun, Texas_Instruments, DigiKey, Mouser
 
 		Sparkfun		USA: motor controller and Tamiya parts
+		TexasInstr.		USA: Texas_Instruments
+		DigiKey			USA
+		Mouser			UK/EU/USA: most components
+
 		Pololu			USA: Tamiya parts and motors
 		Rapid Elect		UK/EU/USA: most component parts and hardware
-		Mouser			UK/EU/USA: most components
 		Techbotics		UK: Tamiya parts – cheaper than Sparkfun/ Pololu
 		Active robots	UK: motors, SRF05 expensive
+
 
 	tooling
 
@@ -32,7 +36,7 @@ suppliers (raspberryPi, robotics, tooling) [
 
 strutural (structures, plastic, flanges) [
 
-	structures [ screwSet, Schylling, metal
+	structures [ screwSet, Schylling, Loongon, Meccano, metal
 
 		// plate, beam, angle, axel
 
@@ -68,6 +72,18 @@ strutural (structures, plastic, flanges) [
 			Schylling Steel Works 4 x 4 Vehicle
 			includes: wheels
 			MN: STW4, 350 parts
+		]
+
+		[ * ] (42$)	Loongon 2 lbs Technic Parts			[ PN: B08KTCTZMN, 2lbs
+
+			Random Lot of Pieces, Compatible with Lego Technic
+		]
+
+		[ * ] (83$) Meccano Construction Motorized Set	[ PN: B08258N6LK, 638 Parts
+
+			// Meccano, Super Construction 25-in-1 Set, Motorized Construction
+			item: 6055038
+			Manufacturer: Spin Master
 		]
 
 		metal [ (durable, limited, expensive)
@@ -143,7 +159,7 @@ strutural (structures, plastic, flanges) [
 			45# steel (Aluminum, Alloy Steel, Copper)
 		]
 
-		[ 5 ] (08$) Servo Aluminum Flange / 25t gear	[ PN: B00NOGMK3M, seller: Mallofusa
+		[ 5 ] (08$) Servo Aluminum Flange / 25t gear	[ PN: B00NOGMK3M, seller: Mallofusa, thinner
 
 			20mm base dia, 5.5mm inner dia, 9mm outer dia x 4.5mm ht total?, 1mm base ht?
 			4x hole dia: 2.85mm (#M3, #4, 7/64 in)
@@ -238,10 +254,10 @@ I/O (I/O: inputs, screens, camera, speakers) [
 	[ * ] microphone	/ 05$ / USB mini microphone / model: MI-305 (supposed to be Kinobo "Makio" ASIN: B00IR8R7WQ) / frequency: 100-16 khz, sensitivity: -67 dBV/pBar, -47 dBV/Pascal +/- 4dB
 	[ * ] microphone	/ 30$ / USB gooseneck microphone / FIFINE model: K052 [
 
-		FIFINE K052 USB PC Computer Microphone 
+		FIFINE K052 USB PC Computer Microphone
 		(Mute Button/Volume Dial/LED Indicator, rigid gooseneck)
 		Bus 001 Device 004: ID 0c76:161e JMTek, LLC.
-		
+
 		model				K052
 		type				Condenser
 		polar pattern		Cardioid
@@ -495,11 +511,11 @@ capacity (power, memory, books) [
 
 	power supplies (all input: AC 100-240v 50hz-60hz, 200mA ~ 500Ma)
 
+	[ * ] power	rPi		/ 09$ / DC 5.0V ~3.5A / USB C		/ CanaKit		MN: DCAR-RSP-3A5C
 	[ * ] power	rPi		/ 11$ / DC 5.0V ~2.5A / USB MicroB	/ QOS			MN: xxxx
 	[ * ] power	rPi		/ 08$ / DC 5.0V ~2.5A / USB MicroB	/ CanaKit		MN: DCAR-052A5
-	[ * ] power	rPi		/ 09$ / DC 5.0V ~3.5A / USB C		/ CanaKit		MN: DCAR-RSP-3A5C
-	[ * ] power	rPi		/ 08$ / DC 5.0V ~2.0A / USB MicroB	/ QVS			MN: ARUSB-2A
 	[ * ] power	USBHub	/ XX$ / DC 5.0V ~2.5A / DC connect.	/ GE			MN: PSO526; DC Cylindrical connectors: https://en.wikipedia.org/wiki/Coaxial_power_connector
+	[ * ] power	rPi		/ 08$ / DC 5.0V ~2.0A / USB MicroB	/ QVS			MN: ARUSB-2A
 	[ * ] power spkrHT	/ xx$ / DC 5.0V ~0.7A / USB MicroB	/ ZTE			MN: STC-A22O501700M5-C
 	[ * ] power	Kindle	/ xx$ / DC 5.0V ~0.8A / USB MicroB	/ Kyocera		MN: SCP-38ADT
 	[ * ] power	Drill	/ xx$ / DC 5.0V ~0.6A / USB MicroB	/ BlackDecker	MN: SSA-5CVI-05
