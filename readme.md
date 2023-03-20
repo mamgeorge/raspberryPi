@@ -37,11 +37,10 @@
 Modular
 * computer:	RPi0WF 1.1 SOC with BCM2835 cpu
 * camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
-* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940		🔹 (upgrades BT3500SLV)
+* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940 🔹 (upgrades BT3500SLV)
 * mic:		USB mini microphone, PN: MI-305
 * lights:	10 mm color LED
-* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 
-
+* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400
 * software control:	Python & IDLE for DC motor PWM control
 * software system:	Raspbian, Bash, Putty, WinSCP, GitHub...
 * software server:	NodeJS, Express (JavaScript, HTML, CSS) for view
@@ -67,8 +66,8 @@ All the other components were accessible online.*<br />
 However, they were not scalable; there were too many GPIO leads needed.<br />
 A RPI 40 pin J8 form factor required a different addressing solution.<br />
 Note that some websites suggest RPI timing is not reliable enough many protocol calls.*<br />
-early attempts at steppers: (4) Stepper Motor 28BYJ48 (later removed)
-early attempts at controls: (4) ULN2003 Driver Board (later removed)
+early attempts at steppers: (4) Stepper Motor 28BYJ48 (later removed)<br />
+early attempts at controls: (4) ULN2003 Driver Board (later removed)<br />
 see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 <img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
 
