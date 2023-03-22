@@ -62,7 +62,7 @@ Peripherals
 
 *The SketchUp 3D drawing required only new Flange & Gripper drawings.<br />
 All the other components were accessible online.*<br />
-<img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600">
+<img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600"><br />
 
 *Originally, the Steppers were used because they had an optimal fit & flexibility.<br />
 However, they were not scalable; there were too many GPIO leads needed.<br />
@@ -71,7 +71,7 @@ Note that some websites suggest RPI timing is not reliable enough many protocol 
 early attempts at steppers: (4) Stepper Motor 28BYJ48 (later removed)<br />
 early attempts at controls: (4) ULN2003 Driver Board (later removed)<br />
 see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
-<img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600">
+<img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600"><br />
 
 ---
 ### robot 2 / added camera, grippers
@@ -84,11 +84,11 @@ see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 * articulation:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * articulation:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
 
-*The Grippers and Speaker worked, but proved to be clunky.*
-<img src = "images/robot_2.jpg" alt = "robot_2" width = "600">
+*The Grippers and Speaker worked, but proved to be clunky.*<br />
+<img src = "images/robot_2.jpg" alt = "robot_2" width = "600"><br />
 
-*The LibreCad 2D CAD representation with BOM.*
-<img src = "images/robot_2_CAD.jpg" alt = "robot_2_CAD" width = "600">
+*The LibreCad 2D CAD representation with BOM.*<br />
+<img src = "images/robot_2_CAD.jpg" alt = "robot_2_CAD" width = "600"><br />
 
 ---
 ### robot 1 / travel control via SmartPhone
@@ -100,18 +100,18 @@ see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 * power:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
 * power:	(4) AA batteries in case (for DC motors)
 
-*The RPi operates the L293D thru GPIO ports using Python PWM code signaled by a NodeJS server.*
-<img src = "images/robot_1.jpg" alt = "robot_1" width = "600">
+*The RPi operates the L293D thru GPIO ports using Python PWM code signaled by a NodeJS server.*<br />
+<img src = "images/robot_1.jpg" alt = "robot_1" width = "600"><br />
 
 ---
-### software
+### software<br />
 <img src = "images/raspberrypi.png"	alt = "raspberrypi"	width = "20"> os base:	Raspbian, Bash, Putty, WinSCP, GitHub...<br />
 <img src = "images/python.png"		alt = "python"		width = "20"> control:	Python & IDLE for DC motor PWM control<br />
 <img src = "images/node.png"		alt = "node"		width = "20"> server:	NodeJS, Express, (JavaScript, HTML, CSS) for view<br />
-<img src = "images/sketchup.png"	alt = "sketchup"	width = "20"> drawing:	LibreCad 2D CAD, Sketchup 3D
+<img src = "images/sketchup.png"	alt = "sketchup"	width = "20"> drawing:	LibreCad 2D CAD, Sketchup 3D<br />
 
-*The L293D Controller pinout diagram.*
-<img src = "images/l293d.jpg" alt = "L293D_Controller" width = "600">
+*The L293D Controller pinout diagram.*<br />
+<img src = "images/l293d.jpg" alt = "L293D_Controller" width = "600"><br />
 
 ---
 ### xtra
