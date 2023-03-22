@@ -37,10 +37,7 @@
 Modular
 * computer:	RPi0WF 1.1 SOC with BCM2835 cpu
 * camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
-* speaker:	USB Bluetooth Speaker Insiq PN: 4326595940 🔹 (upgrades BT3500SLV)
-* mic:		USB mini microphone, PN: MI-305
-* lights:	10 mm color LED
-* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400
+* power:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
 * software control:	Python & IDLE for DC motor PWM control
 * software system:	Raspbian, Bash, Putty, WinSCP, GitHub...
 * software server:	NodeJS, Express (JavaScript, HTML, CSS) for view
@@ -48,15 +45,20 @@ Modular
 Articulation
 * control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * servos:	(4) Servo Motor, PN: MG995 (for shoulders, elbows)
-* servos:	(2) Hitec subMicro Servo motor, PN: HS55		🔹 (upgrades HS300)
-* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104	🔹 (upgrades "A" Grippers)
+* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🔹 (replaces HS300)
+* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104	🔹 (replaces "A" Grippers)
 * flanges:	Servo Aluminum Flange 25t gear; additional parts
 
 Transport
 * control:	SN754410NE Controller DriveShield (replaced L293D)
 * gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
 * chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
-* battery:	(4) AA batteries in case
+* power:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🔹 (replaces 4 AAs)
+
+Peripherals
+* speaker:	USB Bluetooth, Insiq PN: 4326595940 🔹 (replaces BT3500SLV)
+* microphone:	USB mini microphone, PN: MI-305
+* lighting:	10 mm color LED 
 
 *The SketchUp 3D drawing required only new Flange & Gripper drawings.<br />
 All the other components were accessible online.*<br />
@@ -75,12 +77,12 @@ see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 ### robot 2 / added camera, grippers
 
 * camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
-* speaker:	GearHead Bluetooth Speaker, PN: BT3500SLV
-* microphone:	USB mini microphone, PN: MI-305
-* light:	10 mm color LED
-* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🔹 (upgrades 4 AA batteries)
-* grippers:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
-* servos:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
+* peripherals:	GearHead Bluetooth Speaker, PN: BT3500SLV
+* peripherals:	USB mini microphone, PN: MI-305
+* peripherals:	10 mm color LED
+* power:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🔹 (upgrades 4 AA batteries)
+* articulation:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
+* articulation:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
 
 *The Grippers and Speaker worked, but proved to be clunky.*
 <img src = "images/robot_2.jpg" alt = "robot_2" width = "600">
@@ -95,8 +97,8 @@ see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 * control:	L293D Controller DriveShield
 * gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
 * chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
-* battery:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
-* battery:	(4) AA batteries in case (for motors)
+* power:	TPLink PowerBank 5200 mAh, PN: TP-PB5200 (for RPi)
+* power:	(4) AA batteries in case (for DC motors)
 
 *The RPi operates the L293D thru GPIO ports using Python PWM code signaled by a NodeJS server.*
 <img src = "images/robot_1.jpg" alt = "robot_1" width = "600">
