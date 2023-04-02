@@ -62,7 +62,7 @@ Peripherals
 
 *The SketchUp 3D drawing required only new Flange & Gripper drawings.<br />
 All the other components were accessible online.*<br />
-<img src = "images/robot_3_ISO.jpg" alt = "robot_3_ISO" width = "600"><br />
+<img src = "images/robot_3_ISO_202303.jpg" alt = "robot_3_ISO_202303" width = "600"><br />
 
 *Originally, the Steppers were used because they had an optimal fit & flexibility.<br />
 However, they were not scalable; there were too many GPIO leads needed.<br />
@@ -111,7 +111,7 @@ see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 <img src = "images/sketchup.png"	alt = "sketchup"	width = "20"> drawing:	LibreCad 2D CAD, Sketchup 3D<br />
 
 *The L293D Controller pinout diagram.*<br />
-<img src = "images/l293d.jpg" alt = "L293D_Controller" width = "600"><br />
+<img src = "images/chip_L293D_layout.jpg" alt = "L293D_Controller" width = "600"><br />
 
 ---
 ### xtra
