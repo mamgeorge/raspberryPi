@@ -1,5 +1,6 @@
 \\raspberryPi\docs\hardware\hardware_motors.txt
 
+	see: "hardware_list.txt" > strutural > flanges (for gearing)
 	note: this document is for transport & articulation hardware only; see "electronics" for principles
 
 chassis [ parts: chassis, gearbox, motor, plate, transport
@@ -226,8 +227,6 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 		HiTec HS-81 | Micro, sample
 		HiTec HS-311 | Standard, Gripper
 		TowerPro MG995 | armature, TianKongRC; similar to: TowerPro SG-5010
-		
-		see: "hardware_list.txt" > strutural > flanges (for gearing)
 
 	[ 2 ] (13$) Hitec HS-55 SubMicro, Economy / 203 deg		[ PN: 31055S, shaft: 15 tooth spline, aka A15T
 
@@ -291,6 +290,7 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 	[ _ ] (10$) HiTec HS-318 Standard, Stock / 210 deg		[ PN: 31318 , shaft: H25T spline, aka 3F
 
 		shaft: H25T spline, aka 3F
+		210°, 51 oz-in, 0.15 sec/60°	
 	]
 
 	[ _ ] (20$) Hitec HSR-1425CR Continuous / 360 deg		[ PN: 31425CR, shaft: C24T spline, aka C1 ]
@@ -317,7 +317,7 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 
 		Servo Weight:		55g
 		Item Dimension:		40.7*19.7*42.9mm(1.60*0.78*1.69inch)
-		Stall torque:		6V 12kg/cm, 7.2V 13kg/cm
+		Stall torque:		6V, 12kg/cm (1075 oz/in) | 7.2V, 13kg/cm (1165 oz/in)
 		Positioning speed:	at 4.8V without load 0.17s / 60 degrees; 6.0V without load 0.13s / 60 degrees
 		Operation Voltage:	3.0V - 7.2V
 		Dead Band Width:	4us

@@ -1,9 +1,10 @@
 \\5Personal\Technology\raspberryPi\docs\software.txt
 
-common	[ projects, connecting, commmands, updating, programs
-
 	see: "electronics.txt" for abbreviations
 	see: "hardware_motors.txt" > controllers > servo > PCA9685
+	see: "hardware_list.txt" > strutural > flanges (for gearing)
+
+common	[ projects, connecting, commmands, updating, programs
 
 		NetGear:	192.168.1.22
 		Putty:		password 42

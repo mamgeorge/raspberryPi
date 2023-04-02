@@ -11,7 +11,7 @@ suppliers (raspberryPi, robotics, tooling) [
 
 	robotics
 
-		ActoBotics		(ServoCity) metal structural assemblies, parts, easy website, cheaper
+		ServoCity		(ActoBotics) metal structural assemblies, parts, easy website, cheaper
 		MakeBlock		metal structural assemblies, parts, complex, expensive
 		vexRobotics		plastic structural assemblies, expensive
 
@@ -124,9 +124,9 @@ strutural (structures, plastic, flanges) [
 			Meccano
 	]
 
-	flanges [ gearing, flanges
+	flanges [ bolting, flanges, coupling
 
-		gearing
+		bolting [ gage, #screw, mm, inch
 
 			see: "https://www.servocity.com/glossary/#servo-splines"
 			servo Mg995 uses H25T spline (aka 3F), 5.9mm dia
@@ -134,14 +134,59 @@ strutural (structures, plastic, flanges) [
 			gear coupling horn
 
 			gage	#screw	mm		inch
-			12g		#2		2mm		5/64"
-			10g		#3		2.4mm	3/32"
-			8g		#4/5	3mm		1/8"
-			6g		#8		4mm		5/32"
-			4g		#11		5mm		3/16"
-			2g		#13		6mm		1/4"
-			1g		#16		7mm		9/32"
-			0g		#20		8mm		5/16"
+			xxg		#00		1.5		1/16
+			xxg		#01		1.8		5/64
+			12g		#02		2.0		3/32
+			10g		#03		2.3		7/64
+			09g		#04		2.8		7/64
+			08g		#05		3.1		1/8
+			07g		#06		3.3		9/64
+			06g		#08		4.2		5/32
+			05g		#10		4.8		3/16
+			04g		#11		5.0		3/16
+			03g		#12		5.5		7/32
+			02g		#13		6.0		1/4
+			xxg		#14		6.3		1/4
+			01g		#16		7.0		9/32
+			00g		#20		8.0		5/16
+
+							9.525	3/8"
+							12.7	1/2"
+							15.875	5/8"
+							19.05	3/4"
+							22.225	7/8"
+							25.4	1"
+		]
+
+		[ _ ] (xx$) SLOTTED/SOCKET set screw, 1/4" dia, 1" length [ M6 x 25mm+
+
+			// 2 gage, #13/#14, 6.0/6.3mm, 1/4in x 19mm+|3/4in+
+
+			SLOTTED
+
+			10$ (qty: 20) 1/4-20 x 1 inch slotted headless set screws, Stainless_Steel Grade 18-8, ASIN: B00L1KYIK6
+				PN: 014973312831 
+
+			02$ (qty: 02) 1/4-20 x 3/4 inch slotted headless set screws, Steel, PN: 88324, LOT: LXW6325
+				Menards, LOT: LXW6325
+
+			07$ (qty: 05) M6 x 25mm long, material: Stainless_Steel DIN 551 ISO 4766, McMasterCarr PN: 91067A152
+				M6 x 1mm Metric Slotted 18-8 Stainless Steel Flat-Tip Set screws
+
+			SOCKET
+
+			09$ (qty: 10) 1/4-20 x 1 inch socket set screws, Stainless_Steel Grade 18-8, ASIN: B07DS4R345
+				PN: 9183765
+
+			10$ (qty: 20) M6 x 20mm long, socket Set screws, material: Stainless_Steel, ASIN: B07958GWDP
+				M6-1 UNC x 20mm, Cup Point, material: Stainless_Steel DIN 551 ISO 4029
+
+
+			35$ (qty: 99) M6 x 25mm long, socket Set screws, material: Stainless_Steel, Grainger PN: 31KC43
+				M6-1 Thread Size, 25 mm Overall Lg, Cone pt, Plain
+		]
+
+		# flanges
 
 		[ 5 ] (12$) Stepper Aluminum Flange / 5mm shaft	[ PN: B07PMMPSXW, seller: PATOPS
 
@@ -159,7 +204,7 @@ strutural (structures, plastic, flanges) [
 			45# steel (Aluminum, Alloy Steel, Copper)
 		]
 
-		[ 5 ] (08$) Servo Aluminum Flange / 25t gear	[ PN: B00NOGMK3M, seller: Mallofusa, thinner
+		[ 5 ] (08$) Servo Aluminum Flange / H25T gear	[ PN: B00NOGMK3M, seller: Mallofusa, thinner
 
 			20mm base dia, 5.5mm inner dia, 9mm outer dia x 4.5mm ht total?, 1mm base ht?
 			4x hole dia: 2.85mm (#M3, #4, 7/64 in)
@@ -169,7 +214,7 @@ strutural (structures, plastic, flanges) [
 			CNC Aluminum Alloy, silver
 		]
 
-		[ 5 ] (07$) Servo Aluminum Flange / 25t gear	[ PN: B08597JG9P, seller: ZYAMY
+		[ 5 ] (07$) Servo Aluminum Flange / H25T gear	[ PN: B08597JG9P, seller: ZYAMY
 
 			20mm base dia, 5.5mm inner dia, 9mm outer dia x 4.5mm ht total, 2mm base ht
 			4x hole dia: 2.85mm (#M3, #4, 7/64 in), 14mm cross centers
@@ -178,6 +223,43 @@ strutural (structures, plastic, flanges) [
 			for Mg945 Mg995 Mg996
 			Aluminum Alloy, silver
 		]
+
+		[ 2 ] (10$) Servo Aluminum Flange / H25T gear	[ PN: 525123, seller: ServoCity
+
+			Servo Shaft Hub (1/2 inch dia, H25T Spline)
+			shaft: 1/2 inch dia with H25T Spline x 1 inch long
+			hub: 1" dia x .2" thick hub, (8) 6-32 UNC bolt holes, .3" bore x .82" depth
+			holes @ .770 centers
+
+			use with 2800 Series Zinc-Plated Steel Socket Head Screw (M4 x 0.7mm, 20mm Length) - 25 Pack
+				2800-0004-0020
+		]
+
+		# coupling; also see Clamping Hub
+
+		[ 2 ] (07$)	Servo Aluminum Coupling / 25 Tooth (3F/H25T) Spline to 0.250 inch [ PN: 525150, seller: ServoCity
+
+			25 Tooth (3F/H25T) Spline to 0.250 inch
+
+				25 Tooth (3F/H25T) Spline @ .14 inch (3.6 mm) depth
+				accepts a 1/4 inch round shaft x 3/8 inch depth (or 1/4 inch d-shaft aka drive shaft)
+				6-32 x 0.313 inch Socket Head Screw (7/64 inch hex drive)
+
+			Servo to Shaft Clamping Coupler
+			ServoCity SKU: 525150
+		]
+
+		[ _ ] (07$)	Servo Aluminum Coupling / 25 Tooth (3F/H25T) Spline to 8mm REX Bore [ PN: 4001-0025-4008, seller: ServoCity
+
+				25 Tooth (3F/H25T) Spline to 8mm REX Bore
+
+					25 Tooth (3F/H25T) Spline @ .13 inch (3.4 mm) depth
+					accepts a 8mm REX Bore, 7mm flat to flat, 12.5mm depth
+					M4 x 0.7mm Screw x 10mm length (3mm hex drive)
+
+				4001 Series Clamping Servo to Shaft Coupler
+				ServoCity SKU: 4001-0025-4008
+			]
 	]
 ]
 
