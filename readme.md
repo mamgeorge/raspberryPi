@@ -45,31 +45,35 @@ Modular
 Articulation
 * control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
 * servos:	(4) Servo Motor, PN: MG995 (for shoulders, elbows)
-* servos:	(2) Hitec subMicro Servo motor, PN: HS55 🔹 (replaces HS300)
-* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104	🔹 (replaces "A" Grippers)
-* flanges:	Servo Aluminum Flange 25t gear; additional parts
+* servos:	(2) Hitec subMicro Servo motor, PN: HS55 (replaces HS300)
+* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104 (replaces "A" Grippers)
+* coupling:	(2) 25 Tooth (3F/H25T) Spline to 0.250 inch (replaces Servo Flanges)
+* shafting:	(2) slotted set screw, 1/4" dia, 1" length (or M6 x 25mm+)
 
 Transport
-* control:	SN754410NE Controller DriveShield (replaced L293D)
+* control:	SN754410NE Controller DriveShield (replaces L293D)
 * gearbox:	Tamiya Double Motorized Gearbox, PN: 70168 with (2) F130 DC Motors
 * chassis:	Tamiya Tracked Vehicle Chassis, PN: 70108-1500
-* power:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🔹 (replaces 4 AAs)
+* power:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (replaces 4 AAs)
 
 Peripherals
-* speaker:	USB Bluetooth, Insiq PN: 4326595940 🔹 (replaces BT3500SLV)
-* microphone:	USB mini microphone, PN: MI-305
-* lighting:	10 mm color LED 
+* speaker:		USB Bluetooth, Insiq PN: 4326595940 (replaces BT3500SLV)
+? microphone:	USB mini microphone, PN: MI-305
+? signal:		Color LED, 10 mm
+? ligting		High Power LED, 1W, Cool White Light
+? pointing		Red Dot Diode Laser, 6mm, 5V, 650nm 5mW
 
-*The SketchUp 3D drawing required only new Flange & Gripper drawings.<br />
+*The SketchUp 3D drawing required only new Coupling & Gripper drawings.<br />
 All the other components were accessible online.*<br />
 <img src = "images/robot_3_ISO_202303.jpg" alt = "robot_3_ISO_202303" width = "600"><br />
 
 *Originally, the Steppers were used because they had an optimal fit & flexibility.<br />
 However, they were not scalable; there were too many GPIO leads needed.<br />
 A RPI 40 pin J8 form factor required a different addressing solution.<br />
-Note that some websites suggest RPI timing is not reliable enough many protocol calls.*<br />
+Some websites suggest RPI timing is not reliable enough many protocol calls.*<br />
 early attempts at steppers: (4) Stepper Motor 28BYJ48 (later removed)<br />
 early attempts at controls: (4) ULN2003 Driver Board (later removed)<br />
+early attempts at flanges: (2) Aluminum H25T gear, PN: ServoCity 525123 (later removed)<br />
 see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 <img src = "images/robot_3_steppers.jpg" alt = "robot_3_steppers" width = "600"><br />
 
@@ -80,7 +84,7 @@ see: "\\5Personal\Technology\raspberryPi\docs\projects_basics.txt"<br />
 * peripherals:	GearHead Bluetooth Speaker, PN: BT3500SLV
 * peripherals:	USB mini microphone, PN: MI-305
 * peripherals:	10 mm color LED
-* power:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 🔹 (upgrades 4 AA batteries)
+* power:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (upgrades 4 AA batteries)
 * articulation:	(2) Actobotics Horizontal Gripper Kit "A", PN: 637094
 * articulation:	(2) HiTec Servo motor, PN: HS300, with C24T or H25T spline
 

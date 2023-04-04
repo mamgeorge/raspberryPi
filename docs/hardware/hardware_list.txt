@@ -34,9 +34,9 @@ suppliers (raspberryPi, robotics, tooling) [
 		Vellman 		boxes
 ]
 
-strutural (structures, plastic, flanges) [
+strutural (structures, plastic, connectors) [
 
-	structures [ screwSet, Schylling, Loongon, Meccano, metal
+	structures [ screwSets, Schylling, Loongon, Meccano, metal
 
 		// plate, beam, angle, axel
 
@@ -124,7 +124,17 @@ strutural (structures, plastic, flanges) [
 			Meccano
 	]
 
-	flanges [ bolting, flanges, coupling
+	connectors [ shaft, bolting, flanges, coupling
+
+		# shaft
+		
+		[ 1 ] (07$) 1/4 inch dia x 36 inch, Solid Round Rod, aluminum [ PN: 11407	
+		
+			1/4" x 36", Solid Round Rod, Aluminum 6063-T5, Hillman MN: 11407, Menards SKU: 2278280
+			for use as: 1/4 inch dia x 3 1/4 (81.5mm) inch long shaft
+		]
+
+		# bolting
 
 		bolting [ gage, #screw, mm, inch
 
@@ -145,7 +155,7 @@ strutural (structures, plastic, flanges) [
 			05g		#10		4.8		3/16
 			04g		#11		5.0		3/16
 			03g		#12		5.5		7/32
-			02g		#13		6.0		1/4
+			02g		#13		6.0		1/4		uses #7 drill
 			xxg		#14		6.3		1/4
 			01g		#16		7.0		9/32
 			00g		#20		8.0		5/16
@@ -161,6 +171,7 @@ strutural (structures, plastic, flanges) [
 		[ _ ] (xx$) SLOTTED/SOCKET set screw, 1/4" dia, 1" length [ M6 x 25mm+
 
 			// 2 gage, #13/#14, 6.0/6.3mm, 1/4in x 19mm+|3/4in+
+			drill bit for a 1/4 inch 20 tap is a #7 if you’re using 75% thread or a 7/32 inch 
 
 			SLOTTED
 
@@ -381,8 +392,8 @@ components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
 	[ * ] leds			/ 07$ / 10 pcs High Power LED Chip 1W Cool White Light 10000K-15000K Cold Bulbs / Hontiey PN: 43222-6136
 	[ * ] lasers		/ 06$ / 10 pcs 5V 650nm 5mW 6mm Red Dot Diode Laser / HiLetgo, ASIN: B071FT9HSV [
 
-							PICO 70115420 point laser module, red, 650 nm, 3 VDC, 6x17 mm, class 2
-							https://cdn-reichelt.de/documents/datenblatt/A300/LFD650-1-3%286X17%29-ADJ.pdf
+		PICO 70115420 point laser module, red, 650 nm, 3 VDC, 6x17 mm, class 2
+		"https://cdn-reichelt.de/documents/datenblatt/A300/LFD650-1-3%286X17%29-ADJ.pdf"
 						]
 	[ * ] sensor		/ 06$ / HC-SR501 Body Sensor Module Infrared PIR Motion Detector / PIR: passive infrared sensor
 	[ * ] sensor		/ 02$ / TMP-36 analogue temperature sensor / PN: TMP36GZ #1602 379440
@@ -409,7 +420,7 @@ components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
 	]
 	]
 
-	comm [ I2C SPI
+	comm [ I2C, SPI
 
 	[ 5 ] I2C distance	/ 10$ / I2C SRF08 Ultra sonic range finder [
 
@@ -578,15 +589,16 @@ components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
 	]
 	]
 
-	HATs+
+	HATs+ [ SenseHat, PiBrella, PiTraffic
 
 		OTHER: gearbox, articulation, lighting, IC chips, controllers
 
-		see: "hardware_notes.txt"
+			see: "hardware_notes.txt"
 
-	[ * ] SenseHat		/ 40$ / SenseHat	/ Raspberry Pi	/ 3.9 x 2.9 x 1.2 in / used in space
-	[ * ] piBrella		/ 20$ / PiBrella	/ Pimoroni		/ 2.2 x 1.6 x 0.5 in / see: "C:\Martin\4Work\toolCode\raspberryPi\hardware_pibrella.txt"
-	[ * ] piTraffic (2)	/ 07$ / PiTraffic	/ LowVoltageLabs/ 2.1 x 0.8 x 0.8 in / Red Yellow Green
+		[ * ] (40$) SenseHat	/ Raspberry Pi	/ 3.9 x 2.9 x 1.2 in / used in space
+		[ * ] (20$) PiBrella	/ Pimoroni		/ 2.2 x 1.6 x 0.5 in / see: "C:\Martin\4Work\toolCode\raspberryPi\hardware_pibrella.txt"
+		[ * ] (07$) PiTraffic	/ LowVoltageLabs/ 2.1 x 0.8 x 0.8 in / Red Yellow Green
+	]
 ]
 
 capacity (power, memory, books) [
