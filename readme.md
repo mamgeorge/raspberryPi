@@ -59,9 +59,9 @@ Transport
 Peripherals
 * speaker:		USB Bluetooth, Insiq PN: 4326595940 (replaces BT3500SLV)
 * ?microphone:	USB mini microphone, PN: MI-305
-* ?signal:		Color LED, 10 mm
-* ?ligting		High Power LED, 1W, Cool White Light
-* ?pointing		Red Dot Diode Laser, 6mm, 5V, 650nm 5mW
+* ?signal:		TriColor LED, 10 mm
+* ?lighting:	High Power LED, 1W, Cool White Light
+* ?pointing:	Red Dot Diode Laser, 6mm, 5V x 5mW x 650nm
 
 *The SketchUp 3D drawing required only new Coupling & Gripper drawings.<br />
 All the other components were accessible online.*<br />
