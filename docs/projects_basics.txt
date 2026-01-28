@@ -35,9 +35,9 @@ future [ AI_commands, sensors, function
 
 		* computer:	RPi0WF 1.1 SOC with BCM2835 cpu
 		* camera:	RPi Camera v2.1 with 8 Megapixel & 1080p resolution, PN: 2.1
-		# speaker:	Bluetooth Speaker Insiq PN: 4326595940
-		# mic:		USB mini microphone, PN: MI-305
-		# lights:	10 mm color LED
+		x speaker:	Bluetooth Speaker Insiq PN: 4326595940
+		x mic:		USB mini microphone, PN: MI-305
+		x lights:	10 mm color LED
 		* battery:	TPLink PowerBank 10400 mAh, PN: TP-PB10400 (for RPi)
 
 		* software control:	Python & IDLE for DC motor PWM control
@@ -46,11 +46,11 @@ future [ AI_commands, sensors, function
 
 	Articulation
 
-		# control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
-		# servos:	(4) Servo Motor, PN: MG995 (for shoulders, elbows)
-		# servos:	(2) Hitec subMicro Servo motor, PN: HS55 (for grippers)
-		# grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104
-		# flanges:	Servo Aluminum Flange 25t gear; additional parts
+		* control:	PCA9685 16 Channel 12-Bit PWM Servo Motor Driver
+		* servos:	(4) Servo Motor, PN: MG995 (for shoulders, elbows)
+		* servos:	(2) Hitec subMicro Servo motor, PN: HS55 (for grippers)
+		* grippers:	(2) Actobotics subMicro Gripper Kit, PN: 637104
+		* flanges:	Servo Aluminum Flange 25t gear; additional parts
 
 	Transport
 

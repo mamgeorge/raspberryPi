@@ -1,115 +1,7 @@
-\\5Personal\Technology\raspberryPi\docs\electronics.txt
+//raspberryPi/docs/electronics.txt
 
 	https://raspberry-projects.com/pi/programming-in-c/uart-serial-port/using-the-uart\\5Personal\Technology\raspberryPi\electronics.txt
 	see: Sparkfun, Texas_Instruments, DigiKey, Mouser
-
-terms		[ see: "bluetooth.txt", "speakers.txt"
-
-	i: i22c, c: computer, m: motors, p: packaging, t: transmission
-
-	computer
-
-		c	ANSI	American National Standards Institute
-		c	ARM		Advanced RISC Machines
-		c	BCM		Broadcom
-		c	BMp		Bare Metal Programming
-		c	CSI		Camera Serial Interface; see MIPI
-		c	DSI		Display Serial Interface; see MIPI
-		c	EDA		Electronic Design Automation (CAD/CAM, Fritzing)
-		c	MIPI	Mobile Industry Processor Interface
-		c	GPIO	General Purpose Input Output
-		c	HDMI	High Definition Multimedia Interface
-		c	J8		RPi 40 pin pinout board
-		c	LASER	Light Amplification Stimulated Emission Radiation
-		c	LCD		Liquid Crystal Display
-		c	NEMA	National Electrical Manufacturers Association
-		c	P1		RPi 26 pin pinout board
-		c	POE		Power over Ethernet
-		c	PWM		Pulse Width Modulation
-		c	RGB		Red Green Blue
-		c	RPI0WHf	RPi 0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
-		c	SBC		Single Board Computer, Session Border Controller
-		c	STT		Speech To Text
-		c	TTS		Text To Speech
-		c	VAC		Voice Activated commands
-
-	ic
-
-		i	ASIC	Application Specific Integrated Circuit - customized IC
-		i	BJT		Bipolar Junction Transistor
-		i	DIMM	Dual In Line Memory Module
-		i	FET		Field Effect Transistor
-		i	FPC		Flexible Printed Circuit
-		i	FPGA	Field Programmable Gate Array
-		i	IC		integrated circuits
-		i	LED		Light Emitting Diode
-		i	MOSFET	Metal Oxide Semiconductor FET
-		i	OCP		Over Current Proection, see: IEC 60364-4-43
-		i	OLED	Organic Light Emitting Diode
-		i	PCA		Printed Circuit Assembly
-		i	PCB		Printed Circuit Board
-		i	RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
-		i	SOC		System on Chip
-		i	SODIMM	Small Outline DIMM
-		i	TSD		Thermal Shutdown (TI)
-		i	UVLO	Under Voltage Lockout
-
-	motors
-
-		m	28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
-		m	ACIM	AC Induction Motors (vs synchronous?)
-		m	BDC		Brushed DC Motors
-		m	BLDC	Brushless DC Motors
-		m	HB		motor Hybrid Synchronous, Combination of PM and VR
-		m	MDS		Motor Driver Shield
-		m	PMAC	Permanent Magnet AC
-		m	PMDC	Permanent Magnet DC
-		m	PMSM	Permanent Magnet Synchronous Motor (brushless)
-		m	SMD		Stepper Motor Driver
-		m	VR		motor Variable Reluctance, Reactive rotor
-		m	PMIC	Power Management Integrated Circuits
-
-	packaging
-
-		https://www.ti.com/support-packaging/packaging-terminology.html#packagePins
-		https://www.ti.com/lit/ml/slyz022k/slyz022k.pdf?ts=1679102542192&ref_url=https%253A%252F%252Fwww.google.com%252F
-		https://en.wikipedia.org/wiki/List_of_integrated_circuit_packaging_types
-
-		p	MCP		Multi Chip Package
-		p	PCB		Printed Circuit Board
-
-		p1	DIP		Dual Inline Package
-		p1	PDIP	Plastic DIP (see NE name)
-		p1	SIP		Single Inline Package
-		p1	NE		Notched Edge? (TI package name for package type PDIP)
-
-		p2	HTSSOP	Heatsink Thin Shrink SOP (see PWP name)
-		p2	MSOP	Mini Small Outline Package
-		p2	PWP		TI Package Drawing; see TSSOP (PowerPad?)
-		p2	SOIC	Small Outline Integrated Circuit
-		p2	SOP		Small Outline Package
-		p2	TSSOP	Thin Shrink SOP (see PWP name)
-
-		p3	QFN		Quad Flat No-lead (see RTE)
-		p3	RTE		TI Package Drawing; see QFN (ReelTape Elements?)
-		p3	WQFN	VeryVery Thin Quad Flat, No-lead (see RTE name)
-
-	transmission
-
-		t	ADC		Analog 2 Digital Converter
-		t	BLE		Bluetooth Low Energy
-		t	DAC		Digital to Analog Converter
-		t	DCE		Data Circuit Terminating Equipment (ex. modem)
-		t	DTE		Data Terminal Equipment (ex. terminal)
-		t	FTDI	Future Technology Devices International
-		t	I2C		Inter Integrated Circuit; uses: SDA, SCL, VCC, GND
-		t	I2S		Inter IC Sound, I²S, IIS
-		t	LPDDR	Low Power Double Data Rate synchronous
-		t	MIPI	Mobile Industry Processor Interface
-		t	RS232	Recommended Standard 232
-		t	SPI		Serial Peripheral Interface; uses: SCLK, MOSI, MISO, SS
-		t	UART	Universal Asynchronous Receive/Transmit
-]
 
 physics		[ intro, power, circuits
 
@@ -387,52 +279,88 @@ ICs & ADC	[ ICs, ADC, tools, ComputeStick, MCP3008
 
 controllers	[ HBridge, ULN2003, I2C, others
 
-	controller (hardware) vs driver (software)
+		some duplication, see: "//raspberryPi/hardware/hardware_motors.txt"
 
-		(see: "\\5Personal\Technology\raspberryPi\hardware\hardware_motors.txt")
+	controller (hardware) vs driver (software)
 
 		motor drive controller (aka SMD: stepper motor driver, MDS: motor drive shield)
 
-	HBridge (switch circuit allow multiple directions) [ L298N, L293D, SN754410
+	HBridge (switch circuit allow multiple directions) [ L293D, SN754410, TB6112, L298, DAGU ...
 
-		L298N
-			dual HBridge Drive Controller Board Module
-			http://www.instructables.com/id/Control-DC-and-stepper-motors-with-L298N-Dual-Moto/?ALLSTEPS
+		L293D	[ max 0.6A (600mA), 4.5-36V,
 
-		L293D
-			drive controller with 16 pin IC for 2 bipolar motors (in both directions)
-			provides around 600 mA, about 6.35mm x 19.8mm
+			see: "//raspberryPi/docs/hardware/hardware_gpio_pinout.txt"
+
+			provides around 600 mA
+			a quadruple motor driver that employs a half-H drive
+			EMFs are delivered in L293D, but must be provided externally in L298N
+			16 pin IC for 2 bipolar motors (in both directions)
+
 			https://microcontrollerslab.com/l293d-motor-driver-ic-introduction-pinouts-example/
 			replace with: SN754410 which is cheaper and handles more amperage
+			about 6.35mm x 19.8mm
 
+			D = protection diodes added
 			L293DNE: "NE" appears to explicitly identify the package type
 
-		SN754410
-			drive controller with 16 pin IC for 2 bipolar motors (in both directions), or 4 motors in a single direction
-			provides around 1 A from 4.5 V to 36 V, about 6.35mm x 19.8mm
-			designed for operation from -40°C to 85°C
-			Half-H Driver, 2 Element 2 Bit per Element 3-State Output
+			compare with
+				DS14C232CN (by TI)
+				MAX4623CPE (by Maxim)
+				MAX4623EPE (by Maxim)
+				MAX4621EPE (by Maxim)
+		]
 
-			SN754410		appears to be the base type
-			SN754410NE		"NE" appears to explicitly identify the package type
-			SN754410NEE4	"E4" means Pb-free, but there is no variant with Pb
+		SN754410[ max 1A, 4.5-36 V
 
-			see: Sparkfun OOS, Texas_Instruments OOS, DigiKey OOS, Mouser OOS
-				Digi-Key Part Number: 296-9911-5-ND
+			for physical, see: "//raspberryPi/docs/hardware/hardware_motors.txt"
+			for pinouts, see: "//raspberryPi/docs/hardware/hardware_gpio_pinout.txt"
+		]
 
-			also see DRV8833, DRV8833CPWP, DRV8844
+		TB6112	[ max 3A, 4.5-15V
 
-		DRV8833 is a 10.8 V, 2 amp dual H-bridge motor driver
+			1.2A per channel (3A peak)
+			2.7V-5V logic
+			4.5V-13.5V motor
+			has FETs & kick-back diodes
 
-			Number of full bridges	2
-				2.7 to 11.8 Volts, Fulll scale current 1.5 to Peak output 2 amps
+			Toshiba
+			TB6112 FNG
+		]
+
+		L298N 	[ max 3A, 4.5-7V
+
+			L298N
+			dual HBridge Drive Controller, aka dual full-H driver
+				which means that in L293D all four input-output lines are independent
+			EMFs must be provided externally in L298N
+
+			http://www.instructables.com/id/Control-DC-and-stepper-motors-with-L298N-Dual-Moto/?ALLSTEPS
+
+			L298HW Horizontal Multiwatt
+			L298P SOIC Packaging
+			L298N handles 3A, 4.5-7V
+		]
+
+		DAGU	[ max 15A ]
+
+		L9110	[ 800mA ]
+		LV8406T [ 1.4A, 0.5-16V ]
+		MX1508	[ 1.5A ]
+		DRV8837 [ good for low voltages ]
+		DRV8833	[ max 2A
+
+			Number of full H-Bridges (Channels) 2
+				2.7 to 12 Volts
+				Full scale current 1.5 to Peak output 2 amps
 				RDS ON  (HS + LS) (mO): 360, Sleep current (µA): 1.6, Control mode: PWM, Control interface: Hardware GPIO
 				Features: Current Regulation, Operating temperature -40°C to 85°C
+				has FET outputs
 
 			DRV8833 appears to be the base type
 			DRV8833C is a common designation
 			There are many variations including DRV8833CPWP
 			DRV8844, DRV8411A appear to be replacements
+		]
 	]
 
 	ULN2003 (transistor array) [ pibrella
@@ -880,23 +808,5 @@ interfaces	[ UART, I2C, SPI, RS232, I2S
 	]
 ]
 
-SBC & SOC	[ see: "hardware_boards.txt"
-
-	ESP32
-
-		ESP32
-			https://www.youtube.com/watch?v=lvmNLuHj25o
-			press & hold boot button to enable erasing of flash
-			loads on 0x100
-
-		Python for Windows
-			C:\Python310, includes IDLE
-			functins are called mudules in python
-		MicroPython bin file
-			must choose flash specific bin
-		Thonny
-			needs to plug in ESP32 to read port
-
-		>>> REPL Read Evaluate Print Loop
-]
+SBC & SOC [ see: "hardware_boards.txt" ]
 ----

@@ -1,4 +1,4 @@
-\\raspberryPi\docs\hardware\hardware_motors.txt
+//raspberryPi/docs/hardware/hardware_motors.txt
 
 	see: "hardware_list.txt" > strutural > flanges (for gearing)
 	note: this document is for transport & articulation hardware only; see "electronics" for principles
@@ -62,7 +62,8 @@ motor analog [ description, items (Tamiya 980112M)
 
 	[ _ ] (02$) analog brushed DC motor [
 
-		https://www.pololu.com/product/77
+		"https://www.pololu.com/product/77"
+		
 		Tamiya 980112M Mabuchi FA-130 Motor, PN#: FA-130RA-18100, Pololu PN#: 77
 			Operating voltage: 1.5 - 3.0 V
 			3 V No-load speed: 12.3 kRPM
@@ -71,6 +72,14 @@ motor analog [ description, items (Tamiya 980112M)
 
 		Brushed DC Motor: 130-Size, 6V, 11.5 kRPM, 800 mA Stall, Pololu PN#: 1117
 			replaces discontinued Solarbotics RM3, Pololu PN#: 604 (see AdaFruit: PN#: 711)
+			
+		calculations
+		
+			2 * ( AA 1.5 V @ 2.4 A/h ) = 3 V @ 2.4 A/h
+			
+				3V / 2.4 A/hR = 1.25 Ω = Brown|Red|Black|Silver
+			
+			TPLink 5200 mAh: In&Out 5V ~ 2.5A
 	]
 ]
 
@@ -290,7 +299,7 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 	[ _ ] (10$) HiTec HS-318 Standard, Stock / 210 deg		[ PN: 31318 , shaft: H25T spline, aka 3F
 
 		shaft: H25T spline, aka 3F
-		210°, 51 oz-in, 0.15 sec/60°	
+		210°, 51 oz-in, 0.15 sec/60°
 	]
 
 	[ _ ] (20$) Hitec HSR-1425CR Continuous / 360 deg		[ PN: 31425CR, shaft: C24T spline, aka C1 ]
@@ -386,13 +395,31 @@ motor servo [ description, vendors, types, items (Hitec 31055S), programming
 
 controllers [ analog, stepper, servo, microcontroller
 
+	for pinouts, see: "//raspberryPi/docs/hardware/hardware_gpio_pinout.txt"
 	// controller (hardware) vs driver (software)
 
-	analog driver [ Pibrella, L293D
+	analog driver [ L293D, SN754410
 
 		[ * ] (07$) L293D analog Dual H-Bridge Motor Drive Shield 600mA / Adafruit [ADA807]
 
-		[ _ ] (03$) SN754410  H-Bridge Motor Driver 1A / 
+		[ * ] (03$) SN754410  H-Bridge Motor Driver 1A [
+
+			protection diodes included
+
+			about 6.35mm x 19.8mm
+			drive controller with 16 pin IC for 2 bipolar motors (in both directions), or 4 motors in a single direction
+			designed for operation from -40°C to 85°C
+			Half-H Driver, 2 Element 2 Bit per Element 3-State Output
+
+			SN754410		appears to be the base type
+			SN754410NE		"NE" appears to explicitly identify the package type
+			SN754410NEE4	"E4" means Pb-free, but there is no variant with Pb
+
+			see: Sparkfun OOS, Texas_Instruments OOS, DigiKey OOS, Mouser OOS
+				Digi-Key Part Number: 296-9911-5-ND
+
+			also see DRV8833, DRV8833CPWP, DRV8844
+		]
 	]
 
 	stepper driver [ ULN2003, DRV8825, A4988, TB6560 / L298N, Atmega2560 / MCP23017, TB6612
@@ -404,27 +431,20 @@ controllers [ analog, stepper, servo, microcontroller
 			Bear in mind many (microstepping) stepper drivers go upto 100,000 step pulses/second.
 
 		[ 5 ] (08$) ULN2003 Driver Board, 1 channel
-
 		[ _ ] (15$) Pibrella; peripheral connectors with ULN2003A controller / PiMoroni Pibrella
-
 		[ _ ] (11$) DRV8825 Driver Board, 1 channel / Pololu
-
 		[ _ ] (09$) A4988 Driver Board, 1 channel / Pololu
-
 		[ ? ] (xx$) TB6560 Driver Board, 4 channel / Toshiba
 
 		---------------------------------------
 
 		[ * ] (07$) HBridge L298N Stepper Motor Driver / 2 channels / Qunqi
-
 		[ x ] (17$) Atmega2560-16au / 14 channels
 
 		---- i2c -------------------------------
 
 		[ _ ] (xx$) MotorHAT / uses TB6612 / 2 channels / Adafruit
-
 		[ _ ] (23$) TB6612 MOSFET i2c drivers HAT, DC / 2 channels / Adafruit ProductID: 2348
-
 		[ ? ] PCA9629 / 4 channels / NXP
 
 		[ _ ] Big EasyDriver Stepper Motor Driver / ? channels / uses Allegro A4988
@@ -434,8 +454,6 @@ controllers [ analog, stepper, servo, microcontroller
 			upto 16 i2c io port expander, upto 8 MCP23017 on each I2C bus
 			https://www.raspberrypi.org/forums/viewtopic.php?t=22602
 			https://forums.adafruit.com/viewtopic.php?f=22&t=171384
-
-
 
 		DRV8847S ?
 

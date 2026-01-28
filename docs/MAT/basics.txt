@@ -221,7 +221,7 @@ classification knowledge [ GKT RSHA, other
 
 		LOC ( Library of Congress )
 		DDS ( Dewey Decimal System )
-		MJA ( Mortimer J Adler ) inludes "Circle of Knowledge" framework used in Encyclopedia Britannica
+		MJA ( Mortimer J Adler ) includes "Circle of Knowledge" framework used in Encyclopedia Britannica
 
 		others include: Bliss, Colon, Universal Decimal, Thesaurus
 ]

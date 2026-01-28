@@ -1,125 +1,10 @@
-\\raspberryPi\docs\hardware\hardware_boards.txt
+//raspberryPi/docs/hardware/hardware_boards.txt
 
-SenseHAT [
+SBC rPi [ versions, CPU, GPIO, HRC
 
-	Uses 2 power pins & 6 GPIO pins
-		p01: 3v3
-		p02: 5v
-		p03: i2c1 SDA (GP02)
-		p05: i2c1 SCL (GP03)
-		p16: IMU intr (GP23)
-		p18: IMU intr (GP24)
-		p22: IMU intr (GP25)
-		p24: IMU intr (GP08)
+	// raspberryPi Single Board Computer
 
-	I2C communication
-	0X46: LED2472G	shift register drives 8×8 RGB LED Matrix; uses ATTINY88
-	0X5C: LPS25H	Pressure/Temperature sensor
-	0X5F: HTS221	Humidity/Temperature sensor, Barometric?
-	0X1C: LSM9DS1	IMU (Accelerometer & Magnetometer); uses ATTINY88, Gyroscope?
-	0X6A: LSM9DS1	IMU (Accelerometer & Magnetometer); uses ATTINY88, Gyroscope?
-
-	HAT form-factor
-	SKRHABE010 Switch/Joystick (5 button multi-directional)
-	Atmel chip can be reprogrammed via the SPI
-	EEPROM auto configuration
-]
-
-PiBrella [
-
-	http://pibrella.com/
-	https://pypi.python.org/pypi/Pibrella
-	http://pinout.xyz/
-	http://pi.gadgetoid.com/pinout/pibrella
-	sales@cyntech.co.uk
-
-	$023 PiBrella LED Add On Board
-
-	attach pibrella to the right of GPIO pins ( power facing up )
-
-	1. install Python Libraries
-
-		sudo apt-get update
-
-			note: had to access terminal from menu , not toolbar
-
-		sudo apt-get upgrade
-		sudo apt-get install python3-pip
-		sudo pip install pibrella
-
-	2. write code in interactive mode
-
-		sudo python -i
-		import pibrella
-		pibrella.buzzer.fail( )
-		pibrella.light.pulse( 0.2 )
-		quit( )
-
-	3. write code
-
-		###################################################
-		help text expects you to connect pins to port A after manually typing in code
-
-		note: this code does not work in a python file
-			could not run with python file in IDE Idle ; had to use interactive mode
-			UNLESS run from root terminal calling python 2.7.3
-			( sudo idle ) due to location of pibrella library
-			otherwise this occurs:
-
-			pibrella error
-			Traceback ( most recent call last ):
-			File "/home/pi/python/pibrella.py" , line 3 , in <module>
-			import pibrella
-		###################################################
-
-		sudo python -i
-
-		import pibrella , signal
-		#import pibrella.input as input
-		#from pibrella import input
-		#
-		def alarm( pin ):
-			pibrella.buzzer.fail( ) # make some noise
-			pibrella.light.pulse( ) # flash lights
-		#
-		def reset( pin ):
-			pibrella.light.stop( )			# reset alarm
-		#
-		pibrella.input.a.changed( alarm )	# listen for intruder
-		pibrella.button.pressed( reset )	# in case of stupid cat
-		signal.pause( )						# wait for intruder! Press enter to finish the line and the code will run!
-		# this project requires adding a wire to the A terminals
-]
-
-rPi SBC [ raspberryPi Single Board Computer
-
-	CPU 
-	
-		Broadcom
-
-			BCM2835 (uses ARM1176JZF-S processor)		A, B, B+, 0
-			BCM2836 (uses Cortex-A7 MPcore Processor)	Model2
-		
-		ARM Advanced RISC Machines
-
-	GPIO
-
-		GPIO pins use 3.3 V rail and cannot exceed 16 mA of current
-
-			3.3 v has 50 mA to 500 mA for the B+
-			5.0 v has 1.5 A
-
-		GPIO is unsuitable for realtime or timing critical applications
-
-			1 Python garbage collecting is unpredictable
-			2 Linux kernel is multitasking O/S that can override CPU process priority
-		
-			An Arduino can permit real-time performance and predictability.
-
-		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
-		$cat /proc/cpuinfo
-
-	versions
+	versions [ numbers relate to container boxes
 
 		[ _ ] model SOC			CPU								LPDDR2SDRAM	port	pins	card		conn
 		-----+----------------+-----------------------------+----------+-------+------+----------+-----
@@ -128,16 +13,23 @@ rPi SBC [ raspberryPi Single Board Computer
 		[ _ ] RPi1 B+	BCM2835	700 MHZ 1 -core ARM1176JZF-S	512MB RAM	4 USB	40 GPIO	microSDHC	Ethernet
 		[ _ ] RPi1 B	BCM2835	700 MHZ 1 -core ARM1176JZF-S	512MB RAM	2 USB	26 GPIO	SDHC		-
 
-		[ * ] RPi0 		BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ 40PIN GPIO female header pushed in ]
-		[ * ] RPi0 WHf	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ Wifi, Header, Bluetooth
+		[ 1 ] Pico_WH
+
+		[ ! ] RPi0 		BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ 40PIN GPIO
+
+			40PIN GPIO female header pushed in
+
+			i think i burned it out soldering in new headers
+		]
+		[ 9 ] RPi0_WHf	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ Wifi, Header, Bluetooth
 
 			RPI0_WH	female (for robot)
-			
+
 			* Wifi: 802.11 b/g/n wireless LAN
 			* Bluetooth 4.1, Bluetooth Low Energy (BLE)
 			* Header (40PIN pre-soldered GPIO male headers)
 		]
-		[ * ] RPi0 WHm	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ Wifi, Header, Bluetooth
+		[ 8 ] RPi0_WHm	BCM2835	1.0 GHZ 1 -core ARM1176JZF-S	512MB RAM	1 USB	40 GPIO	microSDHC	- [ Wifi, Header, Bluetooth
 
 			RPI0_WH	male
 
@@ -154,32 +46,43 @@ rPi SBC [ raspberryPi Single Board Computer
 			* microSD card slot
 			* Composite video and reset headers
 			* CSI camera connector
-			* 65mm x 30mm			
+			* 65mm x 30mm
 		]
-		[ _ ] RPi02W	BCM2710A1 1 GHZ 4 -core ARMCortex-A53	512MB SDRAM 1 USB	40 GPIO	microSDHC	- [
+		[ _ ] RPi0_2WHm	BCM2710A1 1 GHZ 4 -core ARMCortex-A53	512MB SDRAM 1 USB	40 GPIO	microSDHC	- [ "faster"
 
+			https://www.sparkfun.com/raspberry-pi-zero-2-w-with-headers.html
+			https://www.adafruit.com/product/6008
+
+			core:
+			* 1GHz quad-core 64-bit Arm Cortex-A53 CPU
+			* RP3A0 system-in-package (SiP)
+			* Broadcom BCM2710A1 die
+			* 512MB LPDDR2 SDRAM
+
+			connectivity:
 			* Wifi: 2.4GHz 802.11 b/g/n wireless LAN
-			* Bluetooth 4.2, Bluetooth Low Energy (BLE), onboard antenna
+			* Bluetooth 4.2 & BLE, onboard antenna
+			* CSI-2 camera connector
 			* HAT-compatible 40-pin header footprint (unpopulated)
 
-				BCM2710A1 RP3A0 system-in-package (SiP)
 				Multimedia: H.264, MPEG-4 decode (1080p30); H.264 encode (1080p30)
 				OpenGL ES 1.1, 2.0 graphics
 				Composite video and reset pins via solder test points
 
-			Pi0 same or upgraded:
-			* 1GHz quad-core 64-bit Arm Cortex-A53 CPU
-			* 512MB LPDDR2 SDRAM
+			modular:
 			* mini HDMI port
 			* micro USB OTG (On-The-Go) port
 			* micro USB power
 			* microSD card slot
-			* CSI-2 camera connector
 			* FormFactor: 65mm x 30mm, Operating temperature: -20°C to +70°C
 			* Input power: 5V DC 2.5A
+
+			https://www.youtube.com/watch?v=Fyet0-L1IWI
+			15$ RPi Zero 2W, 16$ Radxa Zero 3W, 20$ Orange Pi Zero 2W
 		]
 
-		[ * ] RPi2 B+2	BCM2836	900 MHZ 4 -core ARM Cortex-A7	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [ encased for sensehat ]
+		[SAG] RPi2 B+1.2
+		[ 3 ] RPi2 B+2	BCM2836	900 MHZ 4 -core ARM Cortex-A7	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [ encased for sensehat ]
 		[ _ ] RPi3 B 3	BCM2837	900 MHZ 4 -core ARM Cortex-A53	1.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
 
 			GPU:	Broadcom VideoCore IV @ 250 MHZ, OpenGL ES 2.0 (24 GFLOPS), MPEG-2 and VC-1, 1080p30 H.264/MPEG-4 AVC high-profile decoder and encoder
@@ -192,7 +95,7 @@ rPi SBC [ raspberryPi Single Board Computer
 			note:
 			200-pin LPDDR2 SO-DIMM:
 		]
-		[ * ] RPi4 B 4	BCM2711 1.5 GHZ 4 -core ARMv7 rev 3		8.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
+		[ 8 ] RPi4 B 4	BCM2711 1.5 GHZ 4 -core ARMv7 rev 3		8.0GB RAM	4 USB	40 GPIO	microSDHC	Ethernet [
 
 			BCM2711 CPU; 64 bit Quad Core ARMv7 Processor rev 3 (v71)
 
@@ -214,8 +117,41 @@ rPi SBC [ raspberryPi Single Board Computer
 				camera	two lane MIPI CSI connector
 				PoE HAT Header
 		]
+	]
 
-	general [ Hardware Revision Code
+	CPU [ Broadcom, ARM
+
+		Broadcom
+
+			BCM2835 (uses ARM1176JZF-S processor)		A, B, B+, 0
+			BCM2836 (uses Cortex-A7 MPcore Processor)	Model2
+
+		ARM Advanced RISC Machines
+
+			ARM Cortex-A7
+			ARM Cortex-A53
+			ARMv7
+	]
+
+	GPIO [ specs
+
+		GPIO pins use 3.3 V rail and cannot exceed 16 mA of current
+
+			3.3 v has 50 mA to 500 mA for the B+
+			5.0 v has 1.5 A
+
+		GPIO is unsuitable for realtime or timing critical applications
+
+			1 Python garbage collecting is unpredictable
+			2 Linux kernel is multitasking O/S that can override CPU process priority
+
+			An Arduino can permit real-time performance and predictability.
+
+		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
+		$cat /proc/cpuinfo
+	]
+
+	HRC [ CPU Hardware Revision Code
 
 		http://www.raspberrypi-spy.co.uk/2012/09/checking-your-raspberry-pi-board-version/
 
@@ -246,16 +182,201 @@ rPi SBC [ raspberryPi Single Board Computer
 	]
 ]
 
-Arduino [
+SBC others [ RPI, Radxa, Orange, Arduino, ESP32
 
-	Arduino Pro Mini
-	Arduino Micro
-	Arduino Pro Micro
-	Arduino Nano
-	
-	Arduino Uno
-	Arduino YUn
-	
-	Arduino MEGA ADK
-]	
+	RPi_Zero 2W [ "https://www.youtube.com/watch?v=Qxcyb5z2HDM&list=PL2m2YvnrOYxKKd_sY_ADPnbXcF71n4RRD"
+
+		CPU: RPI RP340 SIP SOC, Quad core CPU with 4 x A53 cores @ 1GHZ
+		RAM: LP-DDR2 RAM (512 MB) @ 450 MHZ
+		I/O: MicroSD, Mini HDMI 2.0, 2 x MicroUSB2, 40 pin GPIO
+		ADD: CSI Connector // Camera Serial Interface
+		LAN: 802.11 b/g/n WiFi & Bluetooth 5.0
+	]
+
+	Radxa_Zero 3W [ "https://www.youtube.com/watch?v=BaH4BBij5N4"
+
+		CPU: RockChip RK3566 SOC, CPU with 4 x A55 cores @ 1.6GHZ, Mali G52 2EE GPU
+		RAM: LP-DDR4 RAM (2GB; 1-8GB available); 16GB eMMC Flash Storage (0-64 available)
+		I/O: MicroSD, Micro HDMI @ 1080p 60FPS, 2 x USBC 2, 40 pin GPIO
+		ADD: MIPI CSI Connector, MaskROM Button
+	    LAN: WiFi 6 & Bluetooth 5.4 & Antenna Connector
+	]
+
+	Orange_Pi 2W [ "https://www.youtube.com/watch?v=4o1TT0B42hs"
+
+		CPU: AllWinner H618 SOC, CPU with 4 x A53 cores @ 1.5GHZ, Mali G31 MP2 GPU
+		RAM: LP-DDR4 RAM (4GB; 1-4GB available)
+		I/O: MicroSD, Mini HDMI 2.0 @ 4k 60FPS, 2 x USBC, 40 pin GPIO; 16MB SPI NOR Flash Storage
+		ADD: 24 pin function expansion interface (allows connection with expansion board for: 2 USB2, 100MB Ethernet, IR Receiver, Audio Output, Composite Video Output, power button, 2 user buttons)
+		LAN: WiFi 5 & Bluetooth 5.0 & Antenna Connector
+	]
+
+	Arduino [ uses Arduino_IDE, syntax is C++ variant
+
+		smaller form factors
+
+			Teensy 3.1			[ ]
+
+			Arduino Nano		[ ]
+			Arduino Nano ESP32	[ ]
+
+			Arduino Pro			[ Arduino Uno w/o headers ]
+			Arduino Pro	Mini	[ ]
+
+			Arduino Micro		[ ]
+			Arduino Micro Pro	[ ]
+
+		Arduino Uno
+
+			regular		[ plain, PTH & SMD versions ]
+
+			R4 Minima	[ "https://www.youtube.com/watch?v=FkTgKc-IOyM", 20$
+
+				CPU: 32 bit Renesas R7FA4M1-AB3CFM#AA0 MCU with ArmCortex M4 CPU @ 48MHZ // Microcontroller Unit
+				RAM: 32KB RAM, 256KB Flash, 8KB EEPROM
+				I/O: 1x USBC2, 18+14 pin GPIO, Barrel Jack , VinGnd pins
+				ADD: Reset Power, UART, 10 pin SWD, 6 pin ICSP, RTC
+				LAN: -
+
+					CAN BUS = 18 pin GPIO
+			]
+
+			Uno R4		[ "https://www.youtube.com/watch?v=-QByW6aQ_og", 28$
+
+				/* processor for programs & wireless
+
+					processor for programs: Renesas RA4M1 MCU
+
+					processor for wireless
+						MCU ESP32-S3-MINI-1-N8 (from ExpressIf)
+						built in antenna
+						LLT TXB0108DQSR (LLT: Logic Level Translator)
+						Cual Core Xtensa LX7 32 bit MPU
+				*/
+
+				CPU: Renesas RA4M1 MCU with ArmCortex M4 CPU @ 48MHZ // Microcontroller Unit
+				RAM: 32KB SRAM, 256KB Flash, 8KB EEPROM
+				I/O: 1x USBC2, 18+14 pin GPIO, Barrel Jack (or VinGnd pins)
+				ADD: Reset Power, CAN, UART, 10 pin SWD, 6 pin ICSP, RTC, Qwiic I2C
+				LAN: WiFi 4, 802.11 b/g/n  & Bluetooth LE 5, from ESP32-S3-MINI-1-N8 MCU
+
+					xtra: Red 12x8 LED Matrix, Operational Amplifier
+			]
+
+			Arduino MEGA [ many more headers]
+
+		Arduino Yun [ SBC ]
+	]
+
+	ESP32 [ ESP-32 C6 WROOM1
+
+		ESP-32 C6 WROOM1
+
+			CPU Single Core 32 bit RISC V, 160 Mhz
+			RAM 512 MB, Flash 8 MB
+			WiFi 6 (2.4 Ghz), Bluetooth 5.3, Zigbee 3.0
+			2 USB-C ports
+			user buttons
+			UART, I2C, SPI
+
+			9$, Brand: AITRIP
+	]
+]
+
+HAT SenseHAT [ GPIO, I2C, HAT
+
+	Uses 2 power pins & 6 GPIO pins
+
+		p01: 3v3
+		p02: 5v
+		p03: i2c1 SDA (GP02)
+		p05: i2c1 SCL (GP03)
+		p16: IMU intr (GP23)
+		p18: IMU intr (GP24)
+		p22: IMU intr (GP25)
+		p24: IMU intr (GP08)
+
+	I2C communication
+
+		0X46: LED2472G	shift register drives 8×8 RGB LED Matrix; uses ATTINY88
+		0X5C: LPS25H	Pressure/Temperature sensor
+		0X5F: HTS221	Humidity/Temperature sensor, Barometric?
+		0X1C: LSM9DS1	IMU (Accelerometer & Magnetometer); uses ATTINY88, Gyroscope?
+		0X6A: LSM9DS1	IMU (Accelerometer & Magnetometer); uses ATTINY88, Gyroscope?
+
+	HAT form-factor
+
+		SKRHABE010 Switch/Joystick (5 button multi-directional)
+		Atmel chip can be reprogrammed via the SPI
+		EEPROM auto configuration
+]
+
+HAT PiBrella [ install, python, import
+
+	$23 PiBrella LED Add On Board
+
+		http://pibrella.com/
+		https://pypi.python.org/pypi/Pibrella
+		http://pinout.xyz/
+		http://pi.gadgetoid.com/pinout/pibrella
+		sales@cyntech.co.uk
+
+		attach pibrella to the right of GPIO pins ( power facing up )
+
+	1 install Python Libraries [ sudo pip install pibrella
+
+		sudo apt-get update
+
+			note: had to access terminal from menu , not toolbar
+
+		sudo apt-get upgrade
+		sudo apt-get install python3-pip
+		sudo pip install pibrella
+	]
+
+	2 write code in interactive mode [ sudo python -i
+
+		sudo python -i
+		import pibrella
+		pibrella.buzzer.fail( )
+		pibrella.light.pulse( 0.2 )
+		quit( )
+	]
+
+	3 write code [ import pibrella , signal
+
+		/*
+			help text expects you to connect pins to port A after manually typing in code
+
+			note: this code does not work in a python file
+				could not run with python file in IDE Idle ; had to use interactive mode
+				UNLESS run from root terminal calling python 2.7.3
+				( sudo idle ) due to location of pibrella library
+				otherwise this occurs:
+
+				pibrella error
+				Traceback ( most recent call last ):
+				File "/home/pi/python/pibrella.py" , line 3 , in <module>
+				import pibrella
+		*/
+
+		sudo python -i
+
+		import pibrella , signal
+		#import pibrella.input as input
+		#from pibrella import input
+		#
+		def alarm( pin ):
+			pibrella.buzzer.fail( ) # make some noise
+			pibrella.light.pulse( ) # flash lights
+		#
+		def reset( pin ):
+			pibrella.light.stop( )			# reset alarm
+		#
+		pibrella.input.a.changed( alarm )	# listen for intruder
+		pibrella.button.pressed( reset )	# in case of stupid cat
+		signal.pause( )						# wait for intruder! Press enter to finish the line and the code will run!
+		# this project requires adding a wire to the A terminals
+	]
+]
 ----

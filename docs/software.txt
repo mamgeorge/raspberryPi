@@ -1,109 +1,245 @@
-\\5Personal\Technology\raspberryPi\docs\software.txt
+//5Personal/Technology/raspberryPi/docs/software.txt
 
-	see: "electronics.txt" for abbreviations
-	see: "hardware_motors.txt" > controllers > servo > PCA9685
-	see: "hardware_list.txt" > strutural > flanges (for gearing)
+terms	[ see: "bluetooth.txt", "speakers.txt"
 
-common	[ projects, connecting, commmands, updating, programs
+	c: computer, i: integratedChips, im: memory, t: transmission, tp: protocols, m: motors
 
-		NetGear:	192.168.1.22
-		Putty:		password 42
-		sudo apt-get update -y
-		sudo apt-get upgrade -y
+	computer
 
-	projects [ servos, sound, MAT, sensehat, emulators
+		c	ANSI	American National Standards Institute
+		c	ARM		Advanced RISC Machines
+		c	BCM		Broadcom
+		c	BMP		Bare Metal Programming, Bit Mapped Picture?
+		c	CPU		Computer Processor Unit
+		c	CSI		Camera Serial Interface; see MIPI
+		c	DSI		Display Serial Interface; see MIPI
+		c	EDA		Electronic Design Automation (CAD/CAM, Fritzing)
+		c	eMMC	Embedded MultiMediaCard
+		c	MIPI	Mobile Industry Processor Interface
+		c	GPIO	General Purpose Input Output
+		c	HID		Human Interface Device
+		c	HDMI	High Definition Multimedia Interface
+		c	ICSP	In Circuit Serial Programming
+		c	J8		RPi 40 pin pinout board
+		c	LASER	Light Amplification Stimulated Emission Radiation; see MASER, RASER
+		c	LCD		Liquid Crystal Display
+		c	MCU		Micro ControllerS Unit
+		c	MPU		Micro Processor Unit
+		c	NEMA	National Electrical Manufacturers Association
+		c	NLP		Natural Language Processing
+		c	P1		RPi 26 pin pinout board
+		c	POE		Power over Ethernet
+		c	PWM		Pulse Width Modulation
+		c	RGB		Red Green Blue
+		c	RPI0WHf	RPi 0: Zero, W: WiFi, H: 40PIN pre-soldered GPIO headers, f: female
+		c	RTC		Real Time Clock
+		c	SBC		Single Board Computer: RPI, Radax
+		c	SBM		Single Board microcontroller: Arduino, PIC
+		c	SOC		System On a chip: ESP32
+		c	STT		Speech To Text
+		c	SWD		Serial Wire Debug: ARM CPUs with two debug pins (SWDIO & SWCLK)
+		c	TTS		Text To Speech
+		c	VAC		Voice Activated commands
 
-		"C:/workspace/github/nodeSamples/samples/blinkstick.js"
+	ic/memory
 
-		sound [ USB: RPI_setup, STT
+		i	ASIC	Application Specific Integrated Circuit - customized IC
+		i	BJT		Bipolar Junction Transistor
+		i	FET		Field Effect Transistor
+		i	FPC		Flexible Printed Circuit
+		i	FPGA	Field Programmable Gate Array
+		i	IC		integrated circuits
+		i	LED		Light Emitting Diode
+		i	LLT		Logic Level Translator (circuits that allows different voltages)
+		i	MOSFET	Metal Oxide Semiconductor FET
+		i	OCP		Over Current Proection, see: IEC 60364-4-43
+		i	OLED	Organic Light Emitting Diode
+		i	PCA		Printed Circuit Assembly
+		i	PCB		Printed Circuit Board
+		i	PTH		Pated Through Hole: PCB hole that is conductive
+		i	RoHS	Restriction of Hazardous Substances, aka Directive 2002/95/EC
+		i	SMD		Surface Mount Device: circuit component that attaches directly to PCB
+		i	SOC		System on Chip
+		i	TSD		Thermal Shutdown (TI)
+		i	UVLO	Under Voltage Lockout
+		i	VDD		Voltage at the Drain (positive supply voltage in digital and MOSFET circuits)
 
-			see: "sound.txt": RPI_setup
-				use "USB Virtual Sound Adapter", speaker, alsamixer, espeak "HI!"
+		im	DDR		Double Data Rate, aka DDR
+		im	DIMM	Dual In Line Memory Module
+		im	LP		Low Power
+		im	LPDDR	Low Power Double Data Rate synchronous
+		im	SDRAM	Synchronous Dynamic Random Access Memory
+		im	SODIMM	Small Outline DIMM
 
-			see: "speakers.txt" > STT
+	transmission/protocols
+
+		t	ADC		Analog 2 Digital Converter
+		t	BLE		Bluetooth Low Energy
+		t	DAC		Digital to Analog Converter
+		t	DCE		Data Circuit Terminating Equipment (ex. modem)
+		t	DTE		Data Terminal Equipment (ex. terminal)
+		t	FTDI	Future Technology Devices International
+		t	I2S		Inter IC Sound, I²S, IIS
+		t	RS232	Recommended Standard 232
+
+		tp	I2C		Inter Integrated Circuit; I²C, IIC; uses: SDA, SCL, VCC, GND
+		tp	GND		I2C ground
+		tp	MISO	SPI Master In Slave Out
+		tp	MOSI	SPI Master Out Slave In
+		tp	SCL		I2C Serial Clock
+		tp	SCLK	SPI Serial Clock
+		tp	SDA		I2C Serial Data Line
+		tp	SPI		Serial Peripheral Interface; uses: SCLK, MOSI, MISO, SS
+		tp	SS		SPI Slave Select
+		tp	UART	Universal Asynchronous Receiver/Transmitter
+		tp	VCC		I2C Voltage at the Common Collector (power supply)
+
+	motors
+
+		m	28BYJ48	Frame: 28=dia mm, Category: BY=PM/VR/HY, Configuration: J/Z/HJ built in reducer, 48: steps per rev, 28BYJ-48-A: A is Derivative Code
+		m	ACIM	AC Induction Motors (vs synchronous?)
+		m	BDC		Brushed DC Motors
+		m	BLDC	Brushless DC Motors
+		m	EMF		electromotive force
+		m	HB		motor Hybrid Synchronous, Combination of PM and VR
+		m	MDS		Motor Driver Shield
+		m	PMAC	Permanent Magnet AC
+		m	PMDC	Permanent Magnet DC
+		m	PMSM	Permanent Magnet Synchronous Motor (brushless)
+		m	SMD		Stepper Motor Driver
+		m	VR		motor Variable Reluctance, Reactive rotor
+		m	PMIC	Power Management Integrated Circuits
+
+	packaging
+
+		https://www.ti.com/support-packaging/packaging-terminology.html#packagePins
+		https://www.ti.com/lit/ml/slyz022k/slyz022k.pdf?ts=1679102542192&ref_url=https%253A%252F%252Fwww.google.com%252F
+		https://en.wikipedia.org/wiki/List_of_integrated_circuit_packaging_types
+
+		p	MCP		Multi Chip Package
+		p	PCB		Printed Circuit Board
+
+		p1	DIP		Dual Inline Package
+		p1	PDIP	Plastic DIP (see NE name)
+		p1	SIP		Single Inline Package
+		p1	NE		Notched Edge? (TI package name for package type PDIP)
+
+		p2	HTSSOP	Heatsink Thin Shrink SOP (see PWP name)
+		p2	MSOP	Mini Small Outline Package
+		p2	PWP		TI Package Drawing; see TSSOP (PowerPad?)
+		p2	SOIC	Small Outline Integrated Circuit
+		p2	SOP		Small Outline Package
+		p2	TSSOP	Thin Shrink SOP (see PWP name)
+
+		p3	QFN		Quad Flat No-lead (see RTE)
+		p3	RTE		TI Package Drawing; see QFN (ReelTape Elements?)
+		p3	WQFN	VeryVery Thin Quad Flat, No-lead (see RTE name)
+]
+
+project	[ projects, connecting, commands, git, programs, boxes
+
+	projects	[ startup, MAT, sound, sensehat, emulators
+
+		startup 	[ goto browser > router > admin > q_1_Z__NG > attached > ip address >> | links
+
+			* goto browser > router > admin > q_1_Z__NG > attached > ip address >
+				> Putty > pi, s4_m2 >
+					$ sudo apt-get update -y
+					$ sudo apt-get upgrade -y
+
+			* links [ docs: electronics, hardware_list, hardware_motors, simple, blinkstick
+
+				see: "/5Personal/Technology/raspberryPi/docs/electronics.txt"				for abbreviations
+				see: "/5Personal/Technology/raspberryPi/docs/hardware/hardware_list.txt"	> strutural > flanges (for gearing)
+				see: "/5Personal/Technology/raspberryPi/docs/hardware/hardware_motors.txt"	> controllers > servo > PCA9685
+				see: "/5Personal/Technology/raspberryPi/python/simple.py"					basic python
+				see: "/workspace/github/nodeSamples/samples/blinkstick.js"
+				see: "https://pinout.xyz"
+			]
 		]
 
-		MAT [ on RPI0wf, 22
+		MAT			[ tractor, articulation, expressoMAT, camera, speech
 
+			tractor		[ Chassis, Gearbox, Motor, Battery, Shield, pinout
 
-		tractor [
+				* Tamiya 70108 Tracked Vehicle Chassis
+				* Tamiya 70168 Double Gearbox 4-Speed
+				* Tamiya 980112M Mabuchi FA-130 Motor (2)
+				* Rechargeable Battery, In&Out: 5V ~ 2.5A [ 5200 mAh, TPLink MN: TL-PB5200 ]
 
-			* Tamiya 70108 Tracked Vehicle Chassis
-			* Tamiya 70168 Double Gearbox 4-Speed
-			* Tamiya 980112M Mabuchi FA-130 Motor (2)
-			* Rechargeable Battery, In&Out: 5V ~ 2.5A [ 5200 mAh, TPLink MN: TL-PB5200 ]
-			* Motor Drive Shield, HBridge L293D Analog Controller
-				see: "\\raspberryPi\docs\hardware\hardware_motors.txt"
+				x Motor Drive Shield, HBridge L293D Analog Controller
+					see: "//raspberryPi/docs/hardware/hardware_motors.txt"
 
-			x pinout [ "\\raspberryPi\docs\hardware\hardware_gpio_pinout.txt"
+					https://www.youtube.com/watch?v=vWXzXqSCBMg
 
-				#5 wires
+				x pinout [ "//raspberryPi/docs/hardware/hardware_gpio_pinout.txt"
 
-				1		RED	p01 > BRDp02=5Vpwr
-				2		WHT p02 > BRDp37=GPIO26
-					G	RED p03 > M1+
-						xxx p04 ┐ p39, neg grnd
-						xxx p05 ┘
-					R	GRN p06 > M1-
-				3		GRN p07 > BRDp35=GPIO19
-						RED p08 > POWER+
-						#######################
-						RED p16 > p01 > p09
-				4		BLU p15 > BRDp38=GPIO20
-					B	BLU p14 > M2+
-						xxx p13 ┐ p39, neg grnd
-						xxx p12 ┘
-					Y	YLW p11 > M2-
-				5		YLW	p10 > BRDp36=GPIO16
-						RED p09 > p01 > p16
+					#5 wires
 
-						┌───┐┌───┐
-						│	└┘	 │
-				5v+	p02	│ 01  16 │ +5v (logic)
-			 WHT p37/26 │ 02  15 │ p38/20 BLU
-				 	M1+	│ 03  14 │ M2+
-					  ┌─│ 04  13 │─┐
-				 p39 ─┤	│		 │ ├─ p39, neg grnd
-					  └─│ 05  12 │─┘
-				 	M1-	│ 06  11 │ M2-
-			 GRN p35/19	│ 07  10 │ p36/16 YLW
-				12v+ ───│ 08  09 │ +5v
-						│		 │
-						└────────┘
+					1		RED	p01 > BRDp02=5Vpwr
+					2		WHT p02 > BRDp37=GPIO26
+						G	RED p03 > M1+
+							xxx p04 ┐ p39, neg grnd
+							xxx p05 ┘
+						R	GRN p06 > M1-
+					3		GRN p07 > BRDp35=GPIO19
+							RED p08 > POWER+
+							#######################
+							RED p16 > p01 > p09
+					4		BLU p15 > BRDp38=GPIO20
+						B	BLU p14 > M2+
+							xxx p13 ┐ p39, neg grnd
+							xxx p12 ┘
+						Y	YLW p11 > M2-
+					5		YLW	p10 > BRDp36=GPIO16
+							RED p09 > p01 > p16
 
-						├////////┤
-						│		 │
-						│[_]  [_]│
-				  19grn │p35  p36│ ylw16
-				  26wht │p37  p38│ blu20
-					blk	│p39  [_]│
-						└────────┘
+							┌───┐┌───┐
+							│	└┘	 │
+					5v+	p02	│ 01  16 │ +5v (logic)
+				 WHT p37/26 │ 02  15 │ p38/20 BLU
+						M1+	│ 03  14 │ M2+
+						  ┌─│ 04  13 │─┐
+					 p39 ─┤	│		 │ ├─ p39, neg grnd
+						  └─│ 05  12 │─┘
+						M1-	│ 06  11 │ M2-
+				 GRN p35/19	│ 07  10 │ p36/16 YLW
+					12v+ ───│ 08  09 │ +5v
+							│		 │
+							└────────┘
+
+							├////////┤
+							│		 │
+							│[_]  [_]│
+					  19grn │p35  p36│ ylw16
+					  26wht │p37  p38│ blu20
+						blk	│p39  [_]│
+							└────────┘
+				]
+
+				x $ python ./python/servos/motor_L293D.py
 			]
 
-			x $ python ./python/servos/motor_L293D.py
-		]
+			articulate	[ servos PCA9685
 
-		servos [ PCA9685
+				https://www.learnrobotics.org/blog/raspberry-pi-servo-motor/
+				https://maker.pro/raspberry-pi/projects/raspberry-pi-pico-simulator-driving-servo-motor-using-pi-pico
 
-			https://www.learnrobotics.org/blog/raspberry-pi-servo-motor/
-			https://maker.pro/raspberry-pi/projects/raspberry-pi-pico-simulator-driving-servo-motor-using-pi-pico
+				menu [ $ ./raspberryPi/menu.sh ]
 
-			menu [ $ ./raspberryPi/menu.sh ]
+					// raspberryPi/python/servos/servo_PCA9685.py
+					// plug RPi into powerSource
+					// plug motors battery
+					5d, 2 (grppr) , 1 (left)	/ 16 (right)
+					5d, 6 (elbow) , 2 (left)	/ 15 (right)
+					5d, 6 (shldr) , 3 (left)	/ 14 (right)
 
-				\\raspberryPi/python/servos/servo_PCA9685.py
-				// plug RPi into powerSource
-				// plug motors battery
-				5d, 2 (grppr) , 1 (left)	/ 16 (right)
-				5d, 6 (elbow) , 2 (left)	/ 15 (right)
-				5d, 6 (shldr) , 3 (left)	/ 14 (right)
+				$ sudo nano python/servos/servo_acts.py
 
-			$ sudo nano python/servos/servo_acts.py
-
-				$ python python/servos/servo_keys.py	// based on keyboard
-				$ python python/servos/servo_loop.py	// continuous
-				$ python python/servos/servo_once.py
-		]
-
+					$ python python/servos/servo_keys.py	// based on keyboard
+					$ python python/servos/servo_loop.py	// continuous
+					$ python python/servos/servo_once.py
+			]
 
 			see: "MAT.txt" // $ node /home/pi/servers/node/expressoMAT.js
 
@@ -119,24 +255,32 @@ common	[ projects, connecting, commmands, updating, programs
 
 			greet speech [
 
-				see: "\\raspberryPi\docs\bluetooth.txt"
+					see: "\\raspberryPi\docs\bluetooth.txt"
 
-				$ sudo bluetoothctl > # power on > # agent on > # pairable on > # scan on > # devices
+					$ sudo bluetoothctl > # power on > # agent on > # pairable on > # scan on > # devices
 
-					[bluetooth]# pair > connect	> info > trust	68:F7:FA:DF:79:FB > exit`
+						[bluetooth]# pair > connect	> info > trust	68:F7:FA:DF:79:FB > exit`
 
-				menu [ $ ./raspberryPi/menu.sh ]
+					menu [ $ ./raspberryPi/menu.sh ]
 
-					4b (loads Insiq)
-					4d (aplay)
-					4e (espeak)
-					4g (google)
-			]
+						4b (loads Insiq)
+						4d (aplay)
+						4e (espeak)
+						4g (google)
+				]
 		]
 
-		sensehat [ $ python python/sensehat/sens_samples.py | (on RPI2B, 13) ]
+		sound		[ USB: RPI_setup, STT
 
-		emulators [ EDA, simulators
+			see: "sound.txt": RPI_setup
+				use "USB Virtual Sound Adapter", speaker, alsamixer, espeak "HI!"
+
+			see: "speakers.txt" > STT
+		]
+
+		sensehat	[ $ python python/sensehat/sens_samples.py | (on RPI2B, 13) ]
+
+		emulator	[ EDA, simulators
 
 			https://en.wikipedia.org/wiki/Comparison_of_EDA_software
 
@@ -150,19 +294,33 @@ common	[ projects, connecting, commmands, updating, programs
 		]
 	]
 
-	connecting [ wifi, SSH
+	connecting	[ wifi, SSH
 
 		wifi thru ips [
 
 			see: "\\raspberryPi\docs\network.txt" > network_SSH > Putty_Configuration
 
-				http://192.168.1.1 , admin , q-1-Z-TP
+				http://192.168.1.1 > admin > q_1_Z__NG
 
-				RPI0			 pi, s4_m2 | ip 192.168.1.xx |?B8:27:EB:D4:F0:6E?
-				RPI0_WH robot	 pi, s4_m2 | ip 192.168.1.17 | B8:27:EB:2B:0F:91
-				RPI0_WH	male	 pi, s4_m2 | ip 192.168.1.xx | B8:27:EB:fc:a5:72
-				RPI2 sensehat	 pi, s4_m2 | ip 192.168.1.xx | 00:0F:60:05:51:1D, 169.254.62.195
-				RPI4 1.5GZ 8GB	 pi, s4_m2 | ip 192.168.1.16 | DC:A6:32:DB:19:F9
+			Connection Type	Device Name	IP Address	MAC Address
+
+			5GHz Wireless	 TV Qingdao Intelligent&Precise Electronics	192.168.1.02	C0:E5:DA:ED:4C:66
+			5GHz Wireless	 Smart Phone (Generic) iPhone iPhone		192.168.1.03	F6:03:A1:34:09:C4
+			5GHz Wireless	 Smart Phone (Generic) iPhone Marys-IPhone	192.168.1.13	58:36:53:0B:3A:A6
+			5GHz Wireless	 Laptop Chromebook LAPTOP-RGMSEN4K			192.168.1.22	A8:41:F4:11:BC:9D
+			2.4GHz Wireless	 Laptop -- 2021-MARTIN						192.168.1.04	64:BC:58:6A:6E:9F
+			2.4GHz Wireless	 Printer WF-4720 Z_EPSONCE11E6				192.168.1.15	9C:AE:D3:CE:11:E6
+			2.4GHz Wireless	 Smart Phone (Generic) -- Apple				192.168.1.31	C6:43:B9:0B:EF:1E
+
+			2.4GHz Wireless	 Network (Generic) Raspberry Pi raspberrypi 192.168.1.33	B8:27:EB:2B:0F:91
+
+			2.4GHz Wireless	 IoT (Generic) Wyze Cam Kitchen_Cam			192.168.1.05	D0:3F:27:12:16:42
+			2.4GHz Wireless	 IoT (Generic) Wyze Cam AtticEast			192.168.1.06	D0:3F:27:4A:D6:77
+			2.4GHz Wireless	 IoT (Generic) Wyze Cam AtticWest			192.168.1.07	D0:3F:27:99:46:28
+			2.4GHz Wireless	 IoT (Generic) Wyze Cam PetCam				192.168.1.08	7C:78:B2:99:2D:60
+			2.4GHz Wireless	 IoT (Generic) Wyze Cam Library_Cam			192.168.1.09	D0:3F:27:04:A9:9E
+			2.4GHz Wireless	 IoT (Generic) Wyze Cam Basement_Cam		192.168.1.10	D0:3F:27:AA:18:91
+			2.4GHz Wireless	 Smart Speaker -- EPSONCE11E6				192.168.1.17	E8:D8:7E:DF:35:D4
 
 			c:>	arp -a -v							// ARP: Address Resolution Protocol, -a shows arp entries , -v verbose
 
@@ -189,7 +347,7 @@ common	[ projects, connecting, commmands, updating, programs
 
 			4 plug in pi at usb (using USB C adaptor)
 
-				// appears to work if using USB C adaptor on connected network: s4_m2
+				// appears to work if using USB C adaptor on connected network: s4_m2 raspberry
 
 			5 shell into RPi: "ssh pi@raspberrypi.local" [
 
@@ -273,7 +431,7 @@ common	[ projects, connecting, commmands, updating, programs
 		]
 	]
 
-	commmands [ "https://ss64.com"
+	commands	[ "https://ss64.com"
 
 		https://ss64.com
 		https://www.circuitbasics.com/useful-raspberry-pi-commands/
@@ -290,9 +448,10 @@ common	[ projects, connecting, commmands, updating, programs
 		$ sudo shutdown -h now					// shutdown
 		$ sudo reboot							// reboot
 
-		$ sudo raspi-config						// basic config
 		$ sudo apt-get update -y				// 1st super user do advanced packaging tool update
 		$ sudo apt-get upgrade -y				// 2nd super user do advanced packaging tool upgrade
+
+		$ sudo raspi-config						// basic config
 		$ sudo apt full-upgrade	-y				// 2nd sudo apt command to pick up dependencies
 		$ sudo apt-get autoremove -y			// cleanup
 
@@ -305,6 +464,7 @@ common	[ projects, connecting, commmands, updating, programs
 		$ iwgetid								// wlan0 ESSID:"xxxx"
 		$ df -h									// /dev/root 14G ...
 		$ free -m								// Mem: 732 ...
+		$ htop									// memory useage overview
 
 		$ sudo nano /etc/network/interfaces		// update password , etc
 		$ raspi-gpio get						// pins list
@@ -312,7 +472,7 @@ common	[ projects, connecting, commmands, updating, programs
 		$ pinout								// printout gpio cooler
 	]
 
-	updating [ subst, "git"
+	git updates	[ subst, "git"
 
 		// https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings
 
@@ -340,7 +500,7 @@ common	[ projects, connecting, commmands, updating, programs
 		$ git status
 	]
 
-	programs [ Rasbpian, bash, Python, gcc, etc
+	programs	[ Rasbpian, bash, Python, gcc, etc
 
 		Rasbpian (Unix > Linux > Debian 7 Wheezy > Raspbian) [
 
@@ -381,6 +541,31 @@ common	[ projects, connecting, commmands, updating, programs
 			https://www.osboxes.org/raspbian/#raspbian-2019-04-vmware
 			vmware_Raspbian_20190411_32bit.7z
 			C:\Program Files\Microsoft VS Code\resources
+	]
+
+	components	[ boxes: electronics, connectors
+
+		electronics containers
+
+			1 red	| electronics, flanges box			oscilloscope, led box, chip box (Pico_WH), lasers, grommet box, PCA9685
+			2 blu	| grippers & servos, resistor box	keyboard, battery holders, white speaker, small PCB boards, Zip_Ties
+			3 grn	| stepper_motors, ultrasonics		small monitor, RPi2
+			4 ylw	| servo parts, gears, sized wire	smaller wires, shrink wrap,
+			5 red	| can wire, RS232 cable				usb_wires, usb_hub, 3 power packs, 2 power sticks
+			6 blu	| usb_wire, usb_power				speaker, usb_connectors, usb_adaptors
+
+			7 chest	| nuts, bolts, screws				bolting, usb_camera
+			8 book	| random parts > RPi4, RPi0_WHm		tracks, SenseHat, I2C_Driver, Servo_RS81, LEDs, wires
+
+		connectors, etc.
+
+			09 M | MAT RPi0_WHf	 		RPi0_WHf, cam, speaker, battery / 2 grippers, 4 servos, 2 flanges, PCA9685 / controller, PCB, gearbox, beams, base, battery
+			10 S | large meccano_set	steel beams, plates, angles, screws, pulleys
+			11 P | large plastic_set	8 wheels, motor, gears, plating, connectors
+			12 T | shrink_tubes box		45 mm: 1, 1.5, 2, 2.5, 3, 3.5, 4, 5, 6, 7, 10, 13; multiple colors
+			13 W | welding_toolbox		welder, tips, solder, flux, stand, wirepad
+
+			sdCard memory (see: "hardware_detailed.txt")
 	]
 ]
 
@@ -429,6 +614,11 @@ system [
 ]
 
 executables [
+
+	$ sudo nano temp.sh				// begin file with: #!/bin/bash
+	$ ls-lSX temp.sh				// show file
+	$ chmod +x temp.sh				// change file permissions to make executable
+	$ ./temp.sh						// run file , execute a shell script
 
 	$ sudo nano temp.sh				// begin file with: #!/bin/bash
 	$ ls-lSX temp.sh				// show file
@@ -628,7 +818,7 @@ network [
 	$ sudo iwlist wlan0 scan			// shows all available WiFi networks
 	$ sudo ifconfig						// gets network info & IP address
 	$ sudo ifconfig wlan0				// gets network info
-	$ sudo service --status-all		// list all running services
+	$ sudo service --status-all			// list all running services
 
 	$ ping -q -t 5 -w1 -c1 8.8.8.8 t	// shows internet connection
 ]
@@ -1017,6 +1207,27 @@ nodejs python [
 ]
 ]
 
+pico	[ Pico_WH, emulators
+
+	RaspberryPi Pico_WH (launched in Jun 2022)
+
+		RP2040 microcontroller chip			launched in Jan 2021
+		Dual-core Arm Cortex M0+ processor	flexible clock running up to 133 MHz
+		264kB of SRAM, and 2MB on-board		2MB is flash memory
+		Infineon CYW43439 wireless chip		supporting Wireless 802.11n, single-band 2.4 GHz
+		26 multi-function GPIO pins			2 SPI, 2 I2C, 2 UART, 3 ADC 12bit, 16 PWM channels
+
+		Raspberry Pi Pico and Pico W:
+			"https://www.raspberrypi.com/documentation/microcontrollers/raspberry-pi-pico.html"
+			>
+
+	emulators
+
+		TinkerCad	q_1_Z_TC
+		WokWi		"https://docs.wokwi.com/parts/wokwi-pi-pico"
+		Fritzing	(paid)
+]
+
 ERRORS	[ updating, booting
 
 	ERROR: trouble updating/upgrading
@@ -1074,9 +1285,11 @@ ERRORS	[ updating, booting
 	]
 ]
 
-install	[ SDcard, NOOBs, configure, extras
+install	[ sdCard, NOOBs, configure, extras
 
-	SDcard prepare [ card download format SSH
+	see: "//raspberryPi/hardware/hardware_detailed.txt" > sdCards for memory
+
+	sdCard prep	[ card download format SSH
 
 		SD card
 
@@ -1104,7 +1317,7 @@ install	[ SDcard, NOOBs, configure, extras
 			Create a blank text file called "ssh" on the root of the SD card using your laptop.
 	]
 
-	download OS [ extract download copy load
+	download OS	[ extract download copy load
 
 		extract OS using NOOBs (New Out Of the Box software)
 
@@ -1119,7 +1332,7 @@ install	[ SDcard, NOOBs, configure, extras
 		load SD card onto RPi , and run
 	]
 
-	configure [ bootup remote
+	configure	[ bootup remote
 
 		if "NOOBS" is the setup, THEN A KEYBOARD AND MONITOR IS NEEDED
 
@@ -1148,7 +1361,7 @@ install	[ SDcard, NOOBs, configure, extras
 			see: "network.txt":network_SSH	for remote shell access
 	]
 
-	extras [ speakers images sqlite3 git node gpio other
+	extras		[ speakers images sqlite3 git node gpio other
 
 		$ sudo dpkg -l | grep -i  xxx
 			// dpkg -l | grep -i "ii  sql"
@@ -1331,5 +1544,17 @@ install	[ SDcard, NOOBs, configure, extras
 			]
 		]
 	]
+
+	updating	[ OS Versions
+
+		latest release for RPi0_2 is RPi_OS "Bullseye"
+			access thru RPi Imager
+			NOT recommended to migrate from Stretch to Bullseye without full reimage
+
+		$ cat /etc/os-release					// PRETTY_NAME="Raspbian GNU/Linux 9 (stretch)"
+		$ sudo apt update
+		$ sudo apt full-upgrade
+	]
 ]
 ----
+

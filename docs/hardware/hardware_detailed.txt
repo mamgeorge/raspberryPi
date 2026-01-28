@@ -1,8 +1,10 @@
-\\5Personal\Technology\raspberryPi\hardware\hardware_detailed.txt
+//raspberryPi/hardware/hardware_detailed.txt
 
-	this is for detailed explanations behind parts
+	this is for detailed explanations behind parts: kits, connectors, sdCards, power, monitors
+	for boards see: "//raspberryPi/docs/hardware/hardware_boards.txt"
+	for motors see: "//raspberryPi/docs/hardware/hardware_motors.txt"
 
-kits [ CanaKit...
+kits	[ CanaKit...
 
 	[ * ] kit		/ $xx / CanaKit Pi 2 Ultimate Starter Kit 2015/06/20
 	[ * ] book		/ $40 / 9781449365226 / Raspberry Pi Cookbook / Simon Monk, 414 pp, OReilly, 2014
@@ -22,7 +24,7 @@ kits [ CanaKit...
 	camera specs: http://elinux.org/Rpi_Camera_Module#Technical_Parameters_.28v.1_board.29
 ]
 
-connectors [ 4P4C, Molex, JST, Tamiya
+connect	[ connectors: 4P4C, Molex, JST, Tamiya
 
 	[ _ ] 4P4C or RJ9		(4 position 4 contact or registered jack) handset connectors
 	[ _ ] Molex connectors	(common PC DC power; can be clamped down)
@@ -30,11 +32,12 @@ connectors [ 4P4C, Molex, JST, Tamiya
 	[ _ ] Tamiya connectors	(common on RC vehicles)
 ]
 
-sdCards [ info, MicroSD, BusInterface, SpeedClasses
+sdCards	[ memory: info, MicroSD, busInterface, speedClasses, RPI_sdCards
 
-	info
+	info [ Best RPi cards, class 6
 
-		https://reprage.com/post/what-are-the-best-sd-cards-to-use-in-a-raspberry-pi
+		Best RPi cards
+			"https://reprage.com/post/what-are-the-best-sd-cards-to-use-in-a-raspberry-pi"
 
 		NOOBS minimum recommended card size is 8 GB SDHC
 		recommended class 6 (should attain 6 MB/s)
@@ -43,14 +46,16 @@ sdCards [ info, MicroSD, BusInterface, SpeedClasses
 		issues can result from insufficient power supply voltage
 
 		should have wear leveling
+	]
 
-	MicroSD HC
+	microSD HC [ terms: sdCards, microdisks, memory
 
-		xxxx Micro SDSC 02 GB (Secure Digital Standard Capacity)
-		2006 Micro SDHC 32 GB (High-Capacity) storage & support for FAT32 files
-		2009 Micro SDXC 02 TB (eXtended-Capacity)storage & support for exFAT files
+		xxxx Micro SDSC 02GB (Secure Digital Standard Capacity)
+		2006 Micro SDHC 32GB (High-Capacity) storage & support for FAT32 files
+		2009 Micro SDXC 02TB (eXtended-Capacity)storage & support for exFAT files
+	]
 
-	BusInterface
+	busInterface [ v1 TO v6, UHS, FD: FullDuplex, HD: HalfDuplex
 
 		v1.01	12.5 MB/s		(default)
 		v2.00	25.0 MB/s		(high speed)
@@ -61,12 +66,15 @@ sdCards [ info, MicroSD, BusInterface, SpeedClasses
 		v3.01	50.0 MB/s		(UHS I) SDR50
 		v3.01	104. MB/s		(UHS I) SDR104
 
-		v4.00	156-312 MB/s	(UHS II)	FD156-HD312, FD: FullDuplex, HD: HalfDuplex
-		v6.00	312-624 MB/s	(UHS III)	FD312-FD624, FD: FullDuplex
+		v4.00	156-312 MB/s	(UHS 2)	FD156-HD312, FD: FullDuplex, HD: HalfDuplex
+		v6.00	312-624 MB/s	(UHS 3)	FD312-FD624, FD: FullDuplex
+	]
 
-	SpeedClasses
+	speedClasses [ speed: C10, uhs: U1, video: V10
 
-		Speed	UHS	Video
+		// UHS: Ultra High Speed
+
+		speed	UHS	video
 
 		C2		-	-
 		C4		-	-
@@ -75,9 +83,43 @@ sdCards [ info, MicroSD, BusInterface, SpeedClasses
 		-		U3	V30
 		-		-	V60
 		-		-	V90
+	]
+
+	sdCards [ RPI sdCard numbers relate to container box
+
+		RPI recommended class 6 (should attain 6 MB/s)
+
+			ALL MEMORY CARDS IN RPIs (not stored outside of PIs)
+			RPI sdCard numbers relate to container boxes; M = MAT, S = SAG
+
+			[ S ] mem RPi2B+1.2	| Micro SDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD_adapter / Samsung EVO MP-MB16D
+			[ M ] mem RPi0w 1.1	| Micro SDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD_adapter / Samsung EVO MP-MB32D
+			[ 8 ] mem RPi0v 1.3	| Micro SDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD_adapter / Samsung EVO MP-MB16D
+			[ 3 ] mem RPi2B 1.1	| Micro SDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD_adapter / Samsung EVO MP-MB16D
+			[ 8 ] mem RPi4B		| Micro SDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I
+
+			[ x ] sdCard SDHC 08GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I
+			[ x ] sdCard SDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I
+			[ x ] sdCard SDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I
+
+			ASIN: B08J4HJ98L, Brand: Sandisk, Model: SDSQUA4-032G-GN6MT, SDHC 32GB, C10, UHS1
+
+		WyzeCam v3 can use a microSD card max capacity of 256GB
+			formatted in either FAT32 for smaller cards (up to 32GB) or exFAT for larger cards (64GB and above)
+			For optimal performance, look for a card with a "Class 10" rating (10MB/s)
+			kt: kitchen, lr: livingRoom, bm: basement, lb: library, ae: atticEast, aw: atticWest
+
+			[ kt ] Wyze	/ Micro SDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I, Samsung EVO MP-MB32D
+
+			[ lr ] Wyze Expandable Storage 128GB MicroSDXC Card Class 10, Black
+
+			[ xx ] Wyze Expandable Storage 128GB MicroSDXC Card Class 10, Black
+
+			ASIN: B09TFZKGHT, Brand: WYZE, Model: WYZEMSD128C10, 128 GB Class 10 and UHS-3 (U3)
+	]
 ]
 
-power [ requirements, portable, other
+power	[ requirements, portable, other
 
 	requirements
 
@@ -93,12 +135,14 @@ power [ requirements, portable, other
 
 	portable smartphone battery
 
-		$$	mAh		weight	dimensions		ASIN		description
-		--	---		--		----------		----		-----------
-	*	15	05200	4.80 oz	1.0 x 2.1 x 3.6	B014ULADTM	TPLink PowerBank / TL-PB5200
-		22	10400	8.50 oz	1.7 x 1.7 x 3.6	B014ULADTM	TPLink PowerBank / TL-PB10400
-		66	26800	12.6 oz	0.9 x 2.3 x 6.5	B01JIWQPMW	Anker PowerCore / AK-A1277011
-		136	50000	2.8 lb	1.3 x 5.3 x 8.3	B00YP823NA	MAXOAK Laptop Power Bank / K2-50000mAh / 185Wh
+		$$$$	mAh		weight	dimensions		ASIN		description
+		----	---		--		----------		----		-----------
+	*	015$	05200	4.80 oz	1.0 x 2.1 x 3.6	B014ULADTM	TPLink PowerBank / TL-PB5200
+		022$	10400	8.50 oz	1.7 x 1.7 x 3.6	B014ULADTM	TPLink PowerBank / TL-PB10400
+		060$	20000	1.0 lb	1.0 X 2.9 x 6.2	B0CXDXP8VR	Anker PowerBank / A1383 / 87W, 2 port
+		066$	26800	12.6 oz	0.9 x 2.3 x 6.5	B01JIWQPMW	Anker PowerCore / AK-A1277011
+		136$	50000	2.8 lb	1.3 x 5.3 x 8.3	B00YP823NA	MAXOAK Laptop PowerBank / K2-50000mAh / 185Wh
+		180$	27650	1.5 lb	2.0 x 2.2 x 6.4	B0BYP2F3SG	Anker Prime PowerBank / A1340 / 3-Port 250W, 100Wh
 
 	other
 
@@ -115,7 +159,7 @@ power [ requirements, portable, other
 			13$ 6 AA Size Cell Battery Holder Box; 9V Case With Snap Connector Wire Lead / 58mm x 48mm x 28mm / B01D1IURU0
 ]
 
-monitors [ (screen sizes)
+monitor	[ (screen sizes)
 
 	[ * ] screen TFT	/ $70, PiTFT 800x480, 7.0 inch TouchScreen with DSI [
 
@@ -173,6 +217,4 @@ monitors [ (screen sizes)
 
 	[ _ ] screen 2.8	/ $35, PiTFT 320x240 2.8 inch TFT Plus Resistive Touchscreen, not in case but compact
 ]
-
-SBC & SOC [ see: "hardware_boards.txt" ]
 ----

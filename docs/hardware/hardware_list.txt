@@ -1,9 +1,10 @@
-\\5Personal\Technology\raspberryPi\hardware\hardware_list.txt
+//raspberryPi/docs/hardware/hardware_list.txt
 
-	FOR RPI DETAIL
-	see: "\\5Personal\Technology\raspberryPi\hardware\hardware_details.txt"
+	see: "//raspberryPi/docs/hardware/hardware_boards.txt"
+	see: "//raspberryPi/hardware/hardware_detailed.txt" (boards, kits, connectors, sdCards, power, monitors)
+	// boxes, suppliers, boards, strutural, I/O, components, basics
 
-suppliers (raspberryPi, robotics, tooling) [
+suppliers	[ raspberryPi, robotics, tooling
 
 	raspberryPi
 
@@ -17,6 +18,8 @@ suppliers (raspberryPi, robotics, tooling) [
 
 		extra: Sparkfun, Texas_Instruments, DigiKey, Mouser
 
+	electronics
+
 		Sparkfun		USA: motor controller and Tamiya parts
 		TexasInstr.		USA: Texas_Instruments
 		DigiKey			USA
@@ -27,14 +30,15 @@ suppliers (raspberryPi, robotics, tooling) [
 		Techbotics		UK: Tamiya parts – cheaper than Sparkfun/ Pololu
 		Active robots	UK: motors, SRF05 expensive
 
-
 	tooling
 
 		Enkay			tools,springs
 		Vellman 		boxes
 ]
 
-strutural (structures, plastic, connectors) [
+boards		[ see "\\raspberryPi\docs\hardware\hardware_boards.txt" ]
+
+strutural	[ structures, plastic, connectors
 
 	structures [ screwSets, Schylling, Loongon, Meccano, metal
 
@@ -127,9 +131,9 @@ strutural (structures, plastic, connectors) [
 	connectors [ shaft, bolting, flanges, coupling
 
 		# shaft
-		
-		[ 1 ] (07$) 1/4 inch dia x 36 inch, Solid Round Rod, aluminum [ PN: 11407	
-		
+
+		[ 1 ] (07$) 1/4 inch dia x 36 inch, Solid Round Rod, aluminum [ PN: 11407
+
 			1/4" x 36", Solid Round Rod, Aluminum 6063-T5, Hillman MN: 11407, Menards SKU: 2278280
 			for use as: 1/4 inch dia x 3 1/4 (81.5mm) inch long shaft
 		]
@@ -171,12 +175,12 @@ strutural (structures, plastic, connectors) [
 		[ _ ] (xx$) SLOTTED/SOCKET set screw, 1/4" dia, 1" length [ M6 x 25mm+
 
 			// 2 gage, #13/#14, 6.0/6.3mm, 1/4in x 19mm+|3/4in+
-			drill bit for a 1/4 inch 20 tap is a #7 if you’re using 75% thread or a 7/32 inch 
+			drill bit for a 1/4 inch 20 tap is a #7 if you’re using 75% thread or a 7/32 inch
 
 			SLOTTED
 
 			10$ (qty: 20) 1/4-20 x 1 inch slotted headless set screws, Stainless_Steel Grade 18-8, ASIN: B00L1KYIK6
-				PN: 014973312831 
+				PN: 014973312831
 
 			02$ (qty: 02) 1/4-20 x 3/4 inch slotted headless set screws, Steel, PN: 88324, LOT: LXW6325
 				Menards, LOT: LXW6325
@@ -274,17 +278,7 @@ strutural (structures, plastic, connectors) [
 	]
 ]
 
-SOC/SBCs (SystemOnChip / SingleBoardComputers) [
-
-	[ * ] RPi0v 1.3	headers none	/ 05$ / RaspberryPi Zero	/ BCM2835 1.0 GHz 32 bit single-core ARM1176JZF-S / 512MB RAM / 1 USB / 40 GPIO / microSDHC / ID: 2885
-	[ * ] RPi0w 1.1	headers male	/ 09$ / RaspberryPi Zero W	/ BCM2835 1.0 GHz 32 bit single-core ARM1176JZF-S / 512MB RAM / 1 USB / 40 GPIO / microSDHC / Wireless: 2.4GHz 802.11n wireless LAN / Bluetooth: Bluetooth Classic 4.1 and Bluetooth LE / ID: KN3G
-	[ * ] RPi0w 1.1	headers female	/ 09$ / RaspberryPi Zero W	/ BCM2835 1.0 GHz 32 bit single-core ARM1176JZF-S / 512MB RAM / 1 USB / 40 GPIO / microSDHC / Wireless: 2.4GHz 802.11n wireless LAN / Bluetooth: Bluetooth Classic 4.1 and Bluetooth LE / ID: KN3G
-	[ * ] RPi RPi2B+1.1				/ 35$ / RaspberryPi2 ModelB	/ BCM2836 900 MHz 32 bit quad - core ARMCortex-7A / 1.0GB RAM / 4 USB / 40 GPIO / microSDHC / Ethernet
-	[SAG] RPi RPi2B+1.2				/ 35$ / RaspberryPi2 ModelB	/ BCM2837 900 MHz 64 bit quad - core ARMCortex-8A / 1.0GB RAM / 4 USB / 40 GPIO / microSDHC / Ethernet
-	[ * ] RPi RPi4B+				/ 35$ / RaspberryPi4 ModelB	/
-]
-
-I/O (I/O: inputs, screens, camera, speakers) [
+I/O			[ inputs, screens, camera, speakers, microphone
 
 	[ * ] keyboard		/ 29$ / Logitech Wireless Combo MK270 Keyboard & Mouse / with dongle / 2015/07/29
 	[ * ] keyboard		/ 30$ / Logitech Wireless Touch Keyboard K400 Plus with Built-In Touchpad / with dongle / 2016/06/08
@@ -341,6 +335,11 @@ I/O (I/O: inputs, screens, camera, speakers) [
 							volume of over >90DB, bluetooth version 4.1, range of 30+ feet
 							code: INSIQBS1
 						]
+	[ _ ] buzzer		/ xx$ / Electronic Piezo Transducer		/ Sonalert	, B00OVELP50, MN: PK-20A35EWQ	, 3-24Vdc, 3.5Khz @ 95dB , see: Mallory Sonalert MAS803Q piezo 2800 Hz @ 105 db
+	[ _ ] buzzer		/ xx$ / Electronic Piezo Buzzer Tone	/ Akozon	, B07H84SF83, UPC: 798382922026	, 3-24V, xxxKhz @ 95dB, 100mm Cable Length
+	[ _ ] buzzer		/ xx$ / Electronic Piezo Buzzer Alarm	/ Hahiyo	, B09H7RYFQ6, UPC: 762102405694	, 3-12Vdc, 400Hz @ xxdB
+	[ _ ] buzzer		/ xx$ / Electronic Piezo Buzzer Mini	/ Zhipaiji	, B0CC2F12TF, UPC: 883343486478MN, 5Vdc, xxxkHz @ 110dB, also see: B07XN4NCQL
+	[ _ ] buzzer		/ xx$ / Electronic Piezo Buzzer	Tiny	/ TDK_Corp	, B0DQLGX581, MN: PS1440P02BT	, 3Vdc, 4kHz @ 75dB
 	[ * ] headset		/ 10$ / microphone headset audio / Microsoft LifeChat LX-1000
 	[ * ] headset		/ 30$ / microphone headset USB / Logitech ClearChat H390
 	[ * ] microphone	/ 05$ / microphone analog / -
@@ -367,20 +366,9 @@ I/O (I/O: inputs, screens, camera, speakers) [
 	[ _ ] microamp		/ 08$ / Plugable USB Audio Adapter / with 3.5mm Speaker Headphone Microphone Jacks, Black Aluminum, C-Media HS 100B Chip / Plugable
 ]
 
-components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
+components	[ circuitry (leds, etc.), comm (I2C SPI), wifi, HATs+
 
-	wifi [ usbhub wifi bluetooth
-
-	[ * ] usbhub		/ 08$ / GE 4-Port USB Hub / H097958 USB 1.1 Portable Hub / 12 Mbps / LED, Built-in Cable
-	[ * ] wifi			/ 10$ / TP-Link TL-WN725N / 150 Mbps / 64/128 WEP, WPA/WPA2, WPA-PSK/WPA2-PSK
-	[ * ] wifi			/ 10$ / CanaKit Wireless_Adapter: 150 Mbps 802.11n/g/b Mini USB 2.0 Wireless Adapter / Ralink 5370 Chipset
-	[ * ] wifi			/ 10$ / CanaKit Wireless_Adapter: 150 Mbps 802.11n/g/b Mini USB 2.0 Wireless Adapter / Ralink 5370 Chipset
-	[ * ] bluetooth		/ 12$ / bluetooth 4.0 USB / IOGEAR - GBU521 / 2.4GHz ISM Band / max transfer 3Mbps
-	[ * ] bluetooth		/ 12$ / bluetooth 4.0 USB / CSR 4.0 / 2.4GHz ISM Band / SSP (Secure Simple Pairing) / RtTech
-	[ * ] adaptor		/ 16$ / LAN Network Adaptor / USB 3.1 type C male to RJ45 female 8P/8C Gigabit Ethernet / CableMatters model: 201013
-	]
-
-	circuitry [ relay resistor capacitor leds lasers sensor
+	circuit	[ relay, resistor, capacitor, leds, lasers, sensor
 
 	[ * ] relay			/ 01$ / SRD relay / 10A 250-125 VAC, 10A 30-28 VDC / Songle PN: SRD 5VDC SL C
 	[ * ] resistor		/ 06$ / [ 025 ] resistors 230 ohms @ 5%, 1/4 W; EProjects 25EP514220K
@@ -420,7 +408,7 @@ components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
 	]
 	]
 
-	comm [ I2C, SPI
+	comm	[ I2C, SPI
 
 	[ 5 ] I2C distance	/ 10$ / I2C SRF08 Ultra sonic range finder [
 
@@ -589,7 +577,18 @@ components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
 	]
 	]
 
-	HATs+ [ SenseHat, PiBrella, PiTraffic
+	wifi	[ usbhub wifi bluetooth
+
+	[ * ] usbhub		/ 08$ / GE 4-Port USB Hub / H097958 USB 1.1 Portable Hub / 12 Mbps / LED, Built-in Cable
+	[ * ] wifi			/ 10$ / TP-Link TL-WN725N / 150 Mbps / 64/128 WEP, WPA/WPA2, WPA-PSK/WPA2-PSK
+	[ * ] wifi			/ 10$ / CanaKit Wireless_Adapter: 150 Mbps 802.11n/g/b Mini USB 2.0 Wireless Adapter / Ralink 5370 Chipset
+	[ * ] wifi			/ 10$ / CanaKit Wireless_Adapter: 150 Mbps 802.11n/g/b Mini USB 2.0 Wireless Adapter / Ralink 5370 Chipset
+	[ * ] bluetooth		/ 12$ / bluetooth 4.0 USB / IOGEAR - GBU521 / 2.4GHz ISM Band / max transfer 3Mbps
+	[ * ] bluetooth		/ 12$ / bluetooth 4.0 USB / CSR 4.0 / 2.4GHz ISM Band / SSP (Secure Simple Pairing) / RtTech
+	[ * ] adaptor		/ 16$ / LAN Network Adaptor / USB 3.1 type C male to RJ45 female 8P/8C Gigabit Ethernet / CableMatters model: 201013
+	]
+
+	HATs+	[ SenseHat, PiBrella, PiTraffic
 
 		OTHER: gearbox, articulation, lighting, IC chips, controllers
 
@@ -601,145 +600,138 @@ components (wifi, circuitry (leds, etc.), comm (I2C SPI), HATs+) [
 	]
 ]
 
-capacity (power, memory, books) [
+basics		[ power, common, containers, books
 
-	power supplies (all input: AC 100-240v 50hz-60hz, 200mA ~ 500Ma)
+	power	[ power_supplies, all input: AC 100-240v 50hz-60hz, 200mA ~ 500Ma
 
-	[ * ] power	rPi		/ 09$ / DC 5.0V ~3.5A / USB C		/ CanaKit		MN: DCAR-RSP-3A5C
-	[ * ] power	rPi		/ 11$ / DC 5.0V ~2.5A / USB MicroB	/ QOS			MN: xxxx
-	[ * ] power	rPi		/ 08$ / DC 5.0V ~2.5A / USB MicroB	/ CanaKit		MN: DCAR-052A5
-	[ * ] power	USBHub	/ XX$ / DC 5.0V ~2.5A / DC connect.	/ GE			MN: PSO526; DC Cylindrical connectors: https://en.wikipedia.org/wiki/Coaxial_power_connector
-	[ * ] power	rPi		/ 08$ / DC 5.0V ~2.0A / USB MicroB	/ QVS			MN: ARUSB-2A
-	[ * ] power spkrHT	/ xx$ / DC 5.0V ~0.7A / USB MicroB	/ ZTE			MN: STC-A22O501700M5-C
-	[ * ] power	Kindle	/ xx$ / DC 5.0V ~0.8A / USB MicroB	/ Kyocera		MN: SCP-38ADT
-	[ * ] power	Drill	/ xx$ / DC 5.0V ~0.6A / USB MicroB	/ BlackDecker	MN: SSA-5CVI-05
+		[ * ] power	rPi		/ 09$ / DC 5.0V ~3.5A / USB C		/ CanaKit		MN: DCAR-RSP-3A5C
+		[ * ] power	rPi		/ 11$ / DC 5.0V ~2.5A / USB MicroB	/ QOS			MN: xxxx
+		[ * ] power	rPi		/ 08$ / DC 5.0V ~2.5A / USB MicroB	/ CanaKit		MN: DCAR-052A5
+		[ * ] power	USBHub	/ XX$ / DC 5.0V ~2.5A / DC connect.	/ GE			MN: PSO526; DC Cylindrical connectors: https://en.wikipedia.org/wiki/Coaxial_power_connector
+		[ * ] power	rPi		/ 08$ / DC 5.0V ~2.0A / USB MicroB	/ QVS			MN: ARUSB-2A
+		[ * ] power spkrHT	/ xx$ / DC 5.0V ~0.7A / USB MicroB	/ ZTE			MN: STC-A22O501700M5-C
+		[ * ] power	Kindle	/ xx$ / DC 5.0V ~0.8A / USB MicroB	/ Kyocera		MN: SCP-38ADT
+		[ * ] power	Drill	/ xx$ / DC 5.0V ~0.6A / USB MicroB	/ BlackDecker	MN: SSA-5CVI-05
 
-	[ * ] battery		/ 35$ / rechargeable battery / 10400 mAh/ In&Out: 5V ~ 2.5A [ TPLink MN: TL-PB10400
+		[ * ] battery		/ 35$ / rechargeable battery / 10400 mAh/ In&Out: 5V ~ 2.5A [ TPLink MN: TL-PB10400
 
-		241g, 44.3 x 44.3 x 88.8 mm / B00G0AMUE8
-	]
-	[ * ] battery		/ 15$ / rechargeable battery / 5200 mAh / In&Out: 5V ~ 2.5A [ TPLink MN: TL-PB5200
+			241g, 44.3 x 44.3 x 88.8 mm / B00G0AMUE8
+		]
+		[ * ] battery		/ 15$ / rechargeable battery / 5200 mAh / In&Out: 5V ~ 2.5A [ TPLink MN: TL-PB5200
 
-		135g, 23 x 53.5 x 92.7 mm / B014ULADTM
-	]
-	[ 2 ] battery		/ 05$ / rechargeable battery / 2600 mAh / In&Out: 5V ~ 0.8A [ TPLink MN: TL-PB2600
+			135g, 23 x 53.5 x 92.7 mm / B014ULADTM
+		]
+		[ 2 ] battery		/ 05$ / rechargeable battery / 2600 mAh / In&Out: 5V ~ 0.8A [ TPLink MN: TL-PB2600
 
-		68g, 25.6 x 25.6 x 93.5 mm
-	]
-	[ _ ] switch		/ 36$ / 5VDC switch for 120VAC / PowerSwitch Tail II
-
-	memory
-
-	[ * ] mem RPi0w 1.1	/ 13$ / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB32D
-	[ * ] mem RPi0w 1.1	/ 13$ / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB32D
-	[ * ] mem RPi0v 1.3	/ 09$ / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
-	[SAG] mem RPi2B+1.2	/ 10$ / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
-	[ * ] mem RPi2B 1.1	/ 10$ / MicroSDHC 16GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I / with SD adapter / Samsung EVO MP-MB16D
-	[ * ] mem RPi4B		/ xx$ / MicroSDHC 32GB, Class 10 (UHS Speed Class 1), Bus Interface: UHS I
-
-	book
-
-	[ * ] book			/ 20$ / B01FV5OTRI / Raspberry Pi Cookbook	/ 2014 / Simon Monk		/ 414 pp, OReilly
-	[ _ ] book			/ xx$ / B00DRC96TE / Raspberry Pi Projects	/ 2013 / Donald Norris	/ for the Evil Genius
-	[ _ ] book			/ xx$ / B01H2KNGX8 / Exploring Raspberry Pi	/ 2016 / Derek Molloy	/Interfacing to the Real World with Embedded Linux
-	[ _ ] book			/ xx$ / B01740K0F8 / Raspberry Pi Projects	/ 2015 / Mike Cook		/ For Dummies
-]
-
-basics (breadboard, wires, adapters, cable, solder) [
-
-	[ * ] breadboard	/ 10$ / GPIO J8 40-pin pinout board & cable
-	[ * ] breadboard	/ 10$ / breadboard 14x60
-	[ * ] breadboard	/ 05$ / breadboard 14x30 / J*30 breadboard
-	[ 6 ] breadboard	/ 09$ / breadboard 10x17 / 170 Tie Points / by: Chanzon, PN: SYB-170
-	[ * ] breakouts		/ 19$ / RasPiO Pro breakout
-	[ _ ] breakouts		/ 13$ / Pimoroni Explorer pHAT for RPi0 / AdaFruit 3018
-	[ _ ] breakouts		/ 23$ / Pimoroni Explorer HAT Pro / AdaFruit 2427
-
-	[ * ] header		/ 02$ / ID: 2222 / GPIO 2x20 Female Header for Raspberry Pi A+/B+/Pi 2
-	[ * ] header		/ 02$ / ID: 2823 / GPIO 2x20 Female Header RightAngle at 0.1 inch
-	[ * ] header		/ 11$ / 10 pcs 2 x 40 Pin 2.54mm 2 Row Breakaway Male Pin Header / EK1531 / Gikfun
-	[ * ] header		/ xx$ / Solderless Connectors (GPIO Hammer Headers) / RPi M/F Solderless Connectors + Jig / PID: 3413
-	[ * ] wires			/ 16$ / 350 pcs pre formed jumper wire kit / Elenco / AWG: 22, dia: 0.644 mm, common for breadboards, turns: 15.5 cm, area: 0.326 mm², resistance: 52.96 Omega/km, max: 7 amps
-
-	[ * ] adapter		/ 06$ / Generic 1 Pair Right Left Angle Micro USB Male 90 Degree USB Male to Micro Female Plug Adapters
-	[ * ] adapter		/ 06$ / Micro-B USB male to USB A female OTG Host Adapter / SIIG CB-US0G11-S1
-	[ * ] adapter		/ 04$ / Micro-B USB male to USB A female Adapter / SANOXY 325582 / B0027YYMU6
-	[ * ] adapter		/ 09$ / USB-C male to USB 3.0 female Adapter / 2 items / AUKEY CB-A1-2 / B01AUKU1OO
-
-	[ * ] cable			/ 03$ / ID: 1099 / USB OTG Host Cable - MicroB OTG male to A female (OTG = On the Go)
-	[ * ] cable			/ 07$ / ID: 2029 / Assembled Pi Cobbler Plus - Breakout Cable for Pi B+/A+/Pi 2
-	[ * ] cable			/ 10$ / ID: 0954 / USB to TTL Serial Cable - Debug / Console Cable for Raspberry Pi
-	[ * ] leads			/ xx$ / leads (all male)
-	[ * ] heatSink		/ xx$ / heatSink
-
-	[ * ] solder kit	/ 20$ / solder kit with adjustable heat / 50w, 370F-900F / Velleman PN#: VTSS5U
-	[ * ] solder sponge	/ 07$ / solder tip cleaner (brass)
-	[ * ] solder		/ 04$ / rosin core solder / Aven PN#: 17551
-]
-
-containers (container, bumpers, nylon) [
-
-	[ * ] container		/ 25$ / storage box, flip top		/ 4.5 x 6.5 x 7.6 inches	[ PN: B005H3GAM2, 12 parts
-
-		clear flip top box
-		12 parts
-		Sterilite PN#: 18038612
+			68g, 25.6 x 25.6 x 93.5 mm
+		]
+		[ _ ] switch		/ 36$ / 5VDC switch for 120VAC / PowerSwitch Tail II
 	]
 
-	[ _ ] container		/ 11$ / storage box, movable slots	/ 0.9 x 2.4 x 4.7 inches	[ PN: B00SSLLZES, 4 parts
+	common	[ breadboard, wires, adapters, cable, solder
 
-		clear plastic tray
-		adjustable dividers: 2x10 2x15 grids
-		dimensions 	4.72 x 2.36 x 0.9 inches
-		4 parts
+		[ * ] breadboard	/ 10$ / GPIO J8 40-pin pinout board & cable
+		[ * ] breadboard	/ 10$ / breadboard 14x60
+		[ * ] breadboard	/ 05$ / breadboard 14x30 / J*30 breadboard
+		[ 6 ] breadboard	/ 09$ / breadboard 10x17 / 170 Tie Points / by: Chanzon, PN: SYB-170
+		[ * ] breakouts		/ 19$ / RasPiO Pro breakout
+		[ _ ] breakouts		/ 13$ / Pimoroni Explorer pHAT for RPi0 / AdaFruit 3018
+		[ _ ] breakouts		/ 23$ / Pimoroni Explorer HAT Pro / AdaFruit 2427
+
+		[ * ] header		/ 02$ / ID: 2222 / GPIO 2x20 Female Header for Raspberry Pi A+/B+/Pi 2
+		[ * ] header		/ 02$ / ID: 2823 / GPIO 2x20 Female Header RightAngle at 0.1 inch
+		[ * ] header		/ 11$ / 10 pcs 2 x 40 Pin 2.54mm 2 Row Breakaway Male Pin Header / EK1531 / Gikfun
+		[ * ] header		/ xx$ / Solderless Connectors (GPIO Hammer Headers) / RPi M/F Solderless Connectors + Jig / PID: 3413
+		[ * ] wires			/ 16$ / 350 pcs pre formed jumper wire kit / Elenco / AWG: 22, dia: 0.644 mm, common for breadboards, turns: 15.5 cm, area: 0.326 mm², resistance: 52.96 Omega/km, max: 7 amps
+
+		[ * ] adapter		/ 06$ / Generic 1 Pair Right Left Angle Micro USB Male 90 Degree USB Male to Micro Female Plug Adapters
+		[ * ] adapter		/ 06$ / Micro-B USB male to USB A female OTG Host Adapter / SIIG CB-US0G11-S1
+		[ * ] adapter		/ 04$ / Micro-B USB male to USB A female Adapter / SANOXY 325582 / B0027YYMU6
+		[ * ] adapter		/ 09$ / USB-C male to USB 3.0 female Adapter / 2 items / AUKEY CB-A1-2 / B01AUKU1OO
+
+		[ * ] cable			/ 03$ / ID: 1099 / USB OTG Host Cable - MicroB OTG male to A female (OTG = On the Go)
+		[ * ] cable			/ 07$ / ID: 2029 / Assembled Pi Cobbler Plus - Breakout Cable for Pi B+/A+/Pi 2
+		[ * ] cable			/ 10$ / ID: 0954 / USB to TTL Serial Cable - Debug / Console Cable for Raspberry Pi
+		[ * ] leads			/ xx$ / leads (all male)
+		[ * ] heatSink		/ xx$ / heatSink
+
+		[ * ] solder kit	/ 20$ / solder kit with adjustable heat / 50w, 370F-900F / Velleman PN#: VTSS5U
+		[ * ] solder sponge	/ 07$ / solder tip cleaner (brass)
+		[ * ] solder		/ 04$ / rosin core solder / Aven PN#: 17551
 	]
 
-	[ * ] container		/ 11$ / storage box, movable slots	/ 0.9 x 2.7 x 5 inches 		[ PN: B07GJ3HKX5, 5 parts
+	containers	[ container, bumpers, nylon
 
-		rectangle plastic storage box
-		movable dividers, 10 grids
-		PandaHall
-		5 parts
-		10 Grids
-		0.8 x 2.6 x 5 inches
+		[ * ] container	/ 25$ / storage box, flip top		/ 4.5 x 6.5 x 7.6 inches	[ PN: B005H3GAM2, 12 parts
+
+			clear flip top box
+			12 parts
+			Sterilite PN#: 18038612
+		]
+
+		[ _ ] container	/ 11$ / storage box, movable slots	/ 0.9 x 2.4 x 4.7 inches	[ PN: B00SSLLZES, 4 parts
+
+			clear plastic tray
+			adjustable dividers: 2x10 2x15 grids
+			dimensions 	4.72 x 2.36 x 0.9 inches
+			4 parts
+		]
+
+		[ * ] container	/ 11$ / storage box, movable slots	/ 0.9 x 2.7 x 5 inches 		[ PN: B07GJ3HKX5, 5 parts
+
+			rectangle plastic storage box
+			movable dividers, 10 grids
+			PandaHall
+			5 parts
+			10 Grids
+			0.8 x 2.6 x 5 inches
+		]
+
+		[ * ] container	/ 02$ / storage box, movable slots	/ 1.25 x 2.75 x 5.5 inches	[ "NA", see: Plano
+
+			Removable Divider Box
+			PN: Quantum QB200
+			dimension 1.25 x 2.75 x 5.5 inches
+		]
+
+		[ * ] container	/ NA$ / storage box, movable slots	/ 1.25 x 3.5 x 5.5 inches	[ "NA", see: Plano
+
+			Plastic Storage Box - 7 Compartments
+			PN: Velleman OCBR9, "Not Avaialble"
+			dimension: 1.25 x 3.5 x 5.5 inches
+		]
+
+		[ * ] bumpers	/ 03$ / 1/2 inch round clear self stick bumpers [ PN: B001WAK6DS, 12 parts
+
+			1/2 inch Round Clear Self Stick Bumpers
+			Waxman 4215395N
+		]
+
+		[ * ] nylon		/ 13$ / black nylon assorted screws kit [ PN: B01N3PX090, 280 parts
+
+			M2.5 Female-Female Black Nylon Hex Spacers, Standoffs, Screws, Nuts
+			manufacturer: HVAZI
+			parts: 280
+
+			01 top Spacer M2.5 - 20 mm 10pcs
+			02 top Spacer M2.5 - 25 mm 10pcs
+			03 top Screws M2.5 x 06 mm 70pcs
+			04 top Screws M2.5 x 12 mm 70pcs
+			05 top NutHex M2.5 - 70 pcs
+			06 btm Spacer M2.5 - 18 mm 10pcs
+			07 btm Spacer M2.5 - 15 mm 10pcs
+			08 btm Spacer M2.5 - 12 mm 10pcs
+			09 btm Spacer M2.5 - 10 mm 10pcs
+			10 btm Spacer M2.5 - 08 mm 10pcs
+		]
 	]
 
-	[ * ] container		/ 02$ / storage box, movable slots	/ 1.25 x 2.75 x 5.5 inches	[ "NA", see: Plano
+	books	[
 
-		Removable Divider Box
-		PN: Quantum QB200
-		dimension 1.25 x 2.75 x 5.5 inches
-	]
-
-	[ * ] container		/ NA$ / storage box, movable slots	/ 1.25 x 3.5 x 5.5 inches	[ "NA", see: Plano
-
-		Plastic Storage Box - 7 Compartments
-		PN: Velleman OCBR9, "Not Avaialble"
-		dimension: 1.25 x 3.5 x 5.5 inches
-	]
-
-	[ * ] bumpers		/ 03$ / 1/2 inch round clear self stick bumpers [ PN: B001WAK6DS, 12 parts
-
-		1/2 inch Round Clear Self Stick Bumpers
-		Waxman 4215395N
-	]
-
-	[ * ] nylon		/ 13$ / black nylon assorted screws kit [ PN: B01N3PX090, 280 parts
-
-		M2.5 Female-Female Black Nylon Hex Spacers, Standoffs, Screws, Nuts
-		manufacturer: HVAZI
-		parts: 280
-
-		01 top Spacer M2.5 - 20 mm 10pcs
-		02 top Spacer M2.5 - 25 mm 10pcs
-		03 top Screws M2.5 x 06 mm 70pcs
-		04 top Screws M2.5 x 12 mm 70pcs
-		05 top NutHex M2.5 - 70 pcs
-		06 btm Spacer M2.5 - 18 mm 10pcs
-		07 btm Spacer M2.5 - 15 mm 10pcs
-		08 btm Spacer M2.5 - 12 mm 10pcs
-		09 btm Spacer M2.5 - 10 mm 10pcs
-		10 btm Spacer M2.5 - 08 mm 10pcs
+		[ * ] book			/ 20$ / B01FV5OTRI / Raspberry Pi Cookbook	/ 2014 / Simon Monk		/ 414 pp, OReilly
+		[ _ ] book			/ xx$ / B00DRC96TE / Raspberry Pi Projects	/ 2013 / Donald Norris	/ for the Evil Genius
+		[ _ ] book			/ xx$ / B01H2KNGX8 / Exploring Raspberry Pi	/ 2016 / Derek Molloy	/Interfacing to the Real World with Embedded Linux
+		[ _ ] book			/ xx$ / B01740K0F8 / Raspberry Pi Projects	/ 2015 / Mike Cook		/ For Dummies
 	]
 ]
 ----

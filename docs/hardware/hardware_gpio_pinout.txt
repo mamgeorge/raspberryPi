@@ -1,8 +1,8 @@
-\\raspberryPi\docs\hardware\hardware_gpio_pinout.txt
+//raspberryPi/docs/hardware/hardware_gpio_pinout.txt
 
 	see: "http://pinout.xyz"
 
-MAT [
+MAT	[
 
 					40 o* 39 L293D blk grnd
 	M1+ wht L293D	38 ** 37 L293D blu M2+
@@ -26,7 +26,7 @@ MAT [
 		L293D (5V)	02 *o 01 (3.3V)
 ]
 
-raspberryPI 2 Model B [
+raspberryPI [ RPi 2 Model B
 
 	40 pin ( aka J8 ) pinout board
 	26 pin is P1 pinout
@@ -55,74 +55,68 @@ raspberryPI 2 Model B [
 						└─────────┘
 ]
 
-controller L293D [ or SN754410 pinout
+controller	[ L293D pinout, SN754410
 
-	L293D supplies max 0.6A (600mA)
+	for overviews, see: "//raspberryPi/docs/electronics.txt"
+	for physical, see: "//raspberryPi/docs/hardware/hardware_motors.txt"
 
-		SN754410 is newer, supplies 1A, but requires external diodes
-		DRV8837 2-Channel H-Bridge DC 11V
 		$ python mamgeorge/python/mat/L293D_temp.py
 
 	facing top near camera ( J8-GPIO )
 
-				┌───┐┌───┐
-				│	└┘	 │
-		5v+	p02	│ 01  16 │ +5v (logic)
-		WHT	p37 │ 02  15 │ p38 BLU
-		RED	M1+	│ 03  14 │ M2+ BLU
-			  ┌	│ 04  13 │ ┐
-		p39? ─┤	│		 │ ├─ neg ground; p39
-			  └	│ 05  12 │ ┘
-		GRN	M1-	│ 06  11 │ M2- YLW
-		GRN	p35	│ 07  10 │ p36 YLW
-		12v+ ───┤ 08  09 │ +5v
-				│		 │
-				└────────┘
+				┌───▄───┐
+		5v+	p02	┤ 01 16 ├ +5v (logic)
+		WHT	p37	┤ 02 15 ├ p38 BLU
+		RED	M1+	┤ 03 14 ├ M2+ BLU
+		gnd p39	┤ 04 13 ├ p39 gnd
+		gnd p39	┤ 05 12 ├ p39 gnd
+		GRN	M1-	┤ 06 11 ├ M2- YLW
+		GRN	p35	┤ 07 10 ├ p36 YLW
+		12v+	┤ 08 09 ├ +5v
+				└───────┘
+			01 enablement	16 VCC1 Logic > 5V
+			02 pwm p37		15 pwm p38
+			03 Motor_1+		14 Motor_2-
+			04 gnd			13 gnd
+			05 gnd			12 gnd
+			06 Motor_1-		11 Motor_2+
+			07 pwm p35		10 pwm p36 YLW
+			08 VCC2 Motor	09 enablement
 
-				│_ _ _ _ │
+		notes:
+
+			MacDonald	"https://www.youtube.com/watch?v=W7cV9_W12sM", L293D
+			Kelleher	"https://www.youtube.com/watch?v=vWXzXqSCBMg", SN754410
+
+			* motors must run at 5V under 500 mAmps
+				Gavin says keep current stays under 200mA
+
+			* 3,4,14,11 have no polarity
+
+			* may need 10 to 100µf decoupling capacitor
+				to reduce electrical noise and voltage dips
+
+			* EMF flyback diodes, in4001 diode rectifiers upto 50 volts
+				to reduce electrical noise
+
+			EN	1A	2A	3A	4A	Func
+			H	L	H	H	L	right
+			H	H	L	H	L	left
+			H	L	L	L	L	stop
+			H	H	H	H	H	stop
+			L	X	X	X	X	stop
+
+		RPi
+				│─ ─ ─ ─ ┤
 				│	     │
 				│[_]  [_]│
 			grn │p35  p36│ ylw
 			wht │p37  p38│ blu
 			blk	│p39  [_]│
 				└────────┘
-
-	*	RED	L293D_p01 > BRDp02=5v_pwr		<<
-	*	WHT L293D_p02 > BRDp37=gpio26		<<
-	*	RED L293D_p03 > M1+
-	x	xxx L293D_p04 o L293D_p05
-	x	GRN L293D_p06 > M1-
-	x	GRN L293D_p07 > BRDp35=gpio19		<<
-	x	RED L293D_p08 > power+
-
-	x	RED L293D_p16 > L293D_p01 > L293D_p09
-	x	BLU L293D_p15 > BRDp38=gpio20		<<
-	x	BLU L293D_p14 > M2+
-	x	xxx L293D_p13 o L293D_p12
-	x	BLK L293D_p13 > BRDp39=ground-		<<
-	x	YLW L293D_p11 > M2-
-	x	YLW	L293D_p10 > BRDp36=gpio16		<<
 ]
 
-controller L298N pinout [
-
-	01 DC stepper motor A+
-	02 DC stepper motor A-
-	03 12V jumper ( enables power to 5V regulator ; remove if V > 12V )
-	04 supply voltage ( max 35V DC ; use jumper if > 12V )
-	05 GND
-	06 5V output ( use if 12V jumper in place , ideal for powering SOC or SBC )
-	07 DC motor A jumper for stepper motor ; use PWM output for speed control
-	08 IN1
-	09 IN2
-	10 IN3
-	11 IN4
-	12 DC motor B jumper for stepper motor ; use PWM output for speed control
-	13 DC stepper motor B+
-	14 DC stepper motor B-
-]
-
-sensehat [
+sensehat	[
 
 					X	01	02	X
 					X	03	04	X
@@ -137,7 +131,7 @@ sensehat [
 					X	21	22	X
 					X	23	24	X
 					X	25	26	GPIO07	SPI_CE1_N
-	---------------------------------------------
+					-------------
 					X	27	28	X
 		GCLK1	GPIO05	29	30	X
 		GCLK2	GPIO06	31	32	GPIO12 , PWM0
